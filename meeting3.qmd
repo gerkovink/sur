@@ -17,7 +17,7 @@ format:
     number-sections: false
     toc: true
     toc-depth: 3
-    code_folding: hide
+    code-fold: true
 editor_options: 
   markdown: 
     wrap: 60

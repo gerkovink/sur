@@ -18,7 +18,7 @@ format:
     number-sections: false
     toc: true
     toc-depth: 3
-    code_folding: hide
+    code-fold: true
 --- 
 
 ::: callout-tip
@@ -59,11 +59,11 @@ set.seed(123)
 
 ---
 
-18. **Function `plot()` is the core plotting function in `R`. Find out more about `plot()`: Try both the help in the help-pane and `?plot` in the console. Look at the examples by running `example(plot)`.**
+1. **Function `plot()` is the core plotting function in `R`. Find out more about `plot()`: Try both the help in the help-pane and `?plot` in the console. Look at the examples by running `example(plot)`.**
 
 The help tells you all about a functions arguments (the input you can specify), as well as the element the function returns to the Global Environment. There are strict rules for publishing packages in R. For your packages to appear on the Comprehensive R Archive Network (CRAN), a rigorous series of checks have to be passed. As a result, all user-level components (functions, datasets, elements) that are published, have an acompanying documentation that elaborates how the function should be used, what can be expected, or what type of information a data set contains. Help files often contain example code that can be run to demonstrate the workings. 
 
-```{r}
+```{r evaluate=TRUE, message=FALSE}
 ?plot
 example(plot)
 ```

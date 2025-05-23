@@ -114,3 +114,20 @@ De module belasting telt in totaal 6 ECTs (SP) wat gemiddeld neerkomt op het res
 : STUDIEPUNTEN UITGEWERKT IN CONTACT EN ZELF-STUDIEUREN
 
 Totaal aantal uren: 168 uren (6 ECTs: 6 x 28 = 168 uren )
+
+## Wijze van toetsen en vaststellen eindcijfer
+
+Het tentamen van Module 5 wordt voor 100% getoetst op basis van opdrachten die fysiek en individueel worden afgenomen in 3-uren tijd. Het toetswerk is een Statistische Analyse kennis- en vaardigheidstoets waarbij de focus gelegd wordt op het uitvoeren van analyses op gecombineerde en bewerkte datafiles (met incomplete informatie). Deze datafiles worden gebruikt voor het beantwoorden van de probleemstellingen van gegeven casussen waarbij ook kennis m.b.t. interpretatie van resultaten getoetst zal worden. Beoordeling geschiedt d.m.v. een antwoordmodel.
+
+### Cesuur
+De student haalt deze module met een cijfer van 5.5 of meer. Indien een student de toets niet heeft gehaald, dan komt die in aanmerking voor een herkansing. Voor het deelnemen zijn er geen bijkomende voorwaarden dan die vermeld zijn in de OER waaronder het tijdig intekenen voor deelname.
+
+
+
+
+## Collegemateriaal
+
+-	Collegeslides, gepubliceerd op www.gerkovink.com/sur
+-	Wickham, H., Çetinkaya-Rundel, M., & Grolemund, G. (2023, 2nd edition). R for data science. " O'Reilly Media, Inc.”. Open Access Book freely available from https://r4ds.hadley.nz/.
+-	James, G., Witten, D., Hastie, T., & Tibshirani, R. (2023, 2nd edition, corrected print). An introduction to statistical learning with applications in R. New York: springer. Open Access Book freely available from https://www.statlearning.com/
+-	Van Buuren, S. (2018). Flexible Imputation of Missing Data. CRC Press. Book freely available from https://stefvanbuuren.name/fimd/ 
