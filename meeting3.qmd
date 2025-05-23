@@ -442,7 +442,7 @@ Here are the 2 options:
 1. Quit RStudio using RStudio -> Quit RStudio. This will close the RStudio application but keep the current RStudio Project active. This means that when you open RStudio the next time, it will automatically open with the current RStudio Project. 
 2. Close the RStudio Project using File -> Close Project. This will only close the current RStudio Project, but it will not close the RStudio application.
 
-[^labcredits]: The exercises in this lab are inspired by the exercises made by Stephen Turner, see [here](https://seandavi.github.io/ITR/dplyr_intro_msleep.html#%E2%80%9CPiping%E2%80%9D%E2%80%9D_with_%%).
+[^labcredits]: The exercises in this lab are inspired by the exercises made by Stephen Turner, see [here](https://seandavi.github.io/ITR/dplyr_intro_msleep.html).
 
 [^msleep]: A quantitative, theoretical framework for understanding mammalian sleep. Van M. Savage, Geoffrey B. West. Proceedings of the National Academy of Sciences Jan 2007, 104 (3) 1051-1056; DOI: [10.1073/pnas.0610080104](https://doi.org/10.1073/pnas.0610080104)
 

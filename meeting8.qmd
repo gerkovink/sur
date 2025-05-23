@@ -1,7 +1,7 @@
 # Ontwikkelen en programmeren in R {#sec-mt8}
 
 ::: callout-tip
-## Hoorcollege 13 Juni 2025
+## Hoorcollege 13 juni 2025
 Vandaag gaan we leren wat het is om een echte ontwikkelaar in `R` te zijn. We zullen aandacht besteden aan het maken van ons eigen `R` package en we gaan dit package ook zelf *publiceren* op een repository en archiveren met een DOI, een zogenaamde *persistent identifier*. Dit maakt het mogelijk om overal ter wereld samen te werken aan dezelfde `R` code op ieder moment in het heden en verleden. We zullen tijdens dit hoorcollege ook een aantal *tools* bespreken die het leven van een ontwikkelaar makkelijker maken. We zullen ook aandacht besteden aan de *ethiek* van softwareontwikkeling. We zullen ook veel aandacht besteden aan alles wat er komt kijken wanneer we met elkaar dezelfde *taal* willen spreken. De collegeslides voor vandaag kunt u [hier vinden](slides/lec-8.html)
 
 Een opname van het `R`-package maken en publiceren, kunt u [hier vinden](https://www.dropbox.com/scl/fi/hscfsrh30slk23k7z6d1d/wk6_recording.mp4?rlkey=yhy7wt8ldfmsybbb3000z1hl0&dl=0) (download voor de gehele (1h+) recording)

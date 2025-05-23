@@ -22,7 +22,7 @@ format:
 --- 
 
 ::: callout-tip
-## Lecture 12 June 2025
+## Hoorcollege 12 juni 2025
 
 > A picture says more than a thousand words
 
