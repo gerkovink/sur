@@ -1,0 +1,7 @@
+# Functioneel Programmeren {#sec-mt5}
+
+::: callout-tip
+## Hoorcollege 9 juni 2025
+Functioneel programmeren is misschien wel de belangrijkste vaardigheid die een statistisch programmeur zich eigen kan maken. Soms kost het draaien van een statistisch model of een simulatiestudie enorm veel rekenkracht. Efficient programmeren is dan essentieel. Daarnaast is het handig als het rekenwerk verdeeld kan worden over verschillende streams. We gaan daarom vandaag ook aandacht besteden aan het *parallel computing* en zullen ons de `map-reduce` workflow eigen maken. De collegeslides voor vandaag kun u [hier vinden](slides/lec-5.html)
+:::
+

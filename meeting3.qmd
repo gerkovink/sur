@@ -1,0 +1,7 @@
+# Data manipulatie {#sec-mt3}
+
+::: callout-tip
+## Hoorcollege 5 juni 2025
+Vandaag gaan we aan de slag met heel veel vormen van data manipulatie. Een goede troughput strategie is essentieel om van de ruwe data naar een correcte data set voor de uiteindelijke analyse te gaan. We gebruiken hiervoor het [`tidyverse`](https://www.tidyverse.org) framework en zullen verder leren om nog efficienter met `pipes` te gaan werken, zodat het proces om van ruwe data naar analyseresultaten te gaan uiterst inzichtelijk blijft. De slides voor het hoorcollege kun u [hier vinden](slides/lec-3.html)
+:::
+

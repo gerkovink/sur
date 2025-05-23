@@ -1,0 +1,7 @@
+# Statistiche Analyse {#sec-mt4}
+
+::: callout-tip
+## Hoorcollege 6 juni 2025
+Vandaag gaan we de diepte in. We zullen leren hoe we uit data een model kunnen halen, en hoe we dat model kunnen gebruiken om voorspellingen te doen. We zullen ook leren hoe we de kwaliteit van ons model kunnen beoordelen. Dit is een belangrijke stap in het proces van data-analyse, en een goed begrip hiervan zal ons in staat stellen om betere beslissingen te nemen op basis van onze data. Veel van de modellen vandaag zullen betrekking hebben op marginale (één dimensie), conditionele (twee dimensies) of joint verdelingen (meerdere dimensies tegelijkertijd). Stiekem zullen ze allemaal in meer of mindere mate terugvoeren op *least squares* methodologie - de methoden die gebruik maken van de kleinste gekwadrateerde verschillen om een schatting te kunnen verkrijgen. De slides voor het hoorcollege kunt u [hier vinden](slides/lec-4.html)
+:::
+

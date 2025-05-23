@@ -1,0 +1,24 @@
+# Studieprogramma {.unnumbered}
+
+Dit [Quarto](https://quarto.org) boek bevat het cursusmateriaal en de informatie voor **Module 6: Inleiding tot Gegevensverwerking & Programmeren in `R`**. De genummerde hoofdstukken in dit boek komen overeen met de hoorcolleges en practica, waarbij elk gecombineerd hoorcollege en practicum wordt weergegeven als één hoofdstuk.
+
+| Week 1                 | Date   | Location         |
+|------------------------|--------|------------------|
+| @sec-mt1               | 02 Juni  |  TBD    |
+| @sec-mt2               | 03 Juni  |  TBD      |
+| Geen hoorcollege       | 04 Juni  |  TBD      |
+| @sec-mt3               | 05 Juni  |  TBD      |
+| @sec-mt4               | 06 Juni  |  TBD      |
+
+: {tbl-colwidths="[60,20,20]"}
+
+| Week 2                 | Date   | Location         |
+|------------------------|--------|------------------|
+| @sec-mt5               | 09 Juni  |  TBD      |
+| @sec-mt6               | 10 Juni  |  TBD      |
+| Geen Hoorcollege       | 11 Juni  |  TBD      |
+| @sec-mt7               | 12 Juni  |  TBD      |
+| @sec-mt8               | 13 Juni  |  TBD      |
+
+: {tbl-colwidths="[60,20,20]"}
+

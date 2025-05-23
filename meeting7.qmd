@@ -1,0 +1,10 @@
+# Data visualizatie {#sec-mt7}
+
+::: callout-tip
+## Lecture 12 June 2025
+
+> A picture says more than a thousand words
+
+Aan het bovenstaande adage zullen we vandaag veel aandacht besteden. We duiken in de rationale achter de *gramatica van afbeeldingen* en zullen dit ons eigen gaan maken. We behandelen verschillende visualizatie benaderingen en zullen zien dat *less is more* een goed uitgangspunt is. De collegeslides voor deze week kunt u [hier vinden](slides/lec-7.html)
+:::
+

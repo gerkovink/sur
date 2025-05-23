@@ -1,0 +1,116 @@
+# Module handleiding {.unnumbered}
+
+## Cursusgegevens
+|          |                            |
+|----------------------------------|--------------------------------------------------------------------------------|
+| Vakcode                          | AS_06                                                                          |
+| Opleiding                        | Master Applied Statistics                                                      |
+| Leerlijn/Vakgroep/Discipline     | Data-Analyse                                                                   |
+| Aantal studiepunten              | 6 ECTs                                                                         |
+| Semester en studiefase           | Jaar 1, semester 2                                                             |
+| Contacturen per semester         | 40                                                                             |
+| College periode                  | 2 juni – 13 juni 2025                                                          |
+| Werkcolleges+studievrije periode | 16 juni – 10 juli 2025                                                         |
+| Tentamen                         | 11 juli 2025                                                                   |
+| Hertentamenperiode               | 25 augustus – 5 september 2025                                                 |
+| Vereiste voorkennis              | Afgeronde Wetenschappelijke Bachelor/ Premaster Wetenschappelijke Vorming IGSR |
+| Docent(en) + contactgegevens     | Gerko Vink, g.vink@uu.nl                                                       |
+| Spreekuur docent(en)             | Op afspraak                                                                    |
+## Inleiding
+Dit is de handleiding voor de module Introduction to Data Processing & Programming in R van de Masteropleiding Applied Statistics. Het doel van deze module is om inzicht te bieden in zowel de basisprincipes als de basis dataverwerking- en analysetechnieken in R.  
+Deze module richt zich op het ontwikkelen van praktische vaardigheden in R, een statistisch softwarepakket, dat breed wordt ingezet binnen de academische wereld en de beroepspraktijk bij het uitvoeren van statistische analyses. De module biedt daarnaast verdiepende inzichten in de belangrijkste functies bij het programmeren in R, variërend van het importeren en beheren van datasets tot fundamentele analyses en visualisaties en presentatie van documenten. 
+De leerdoelen van de module worden ook in deze handleiding opgenomen evenals een uitgebreide omschrijving van de vakinhoud, het programmaoverzicht en de lesonderdelen. Tenslotte volgt er een uitwerking van de wijze van toetsen en de vaststelling van het eindcijfer.
+
+## Eindkwalificaties & Leerdoelen
+Dit vak draagt bij aan de volgende eindkwalificaties van de Masteropleiding:
+
+I. 	Kennis en inzicht
+
+- EK3. Verdiepende kennis over statistische softwarepakketten en de standaard terminologie horende bij calculatie-en programeer vaardigheden in R 
+
+II.	Toepassen kennis en inzicht
+De afgestudeerde is in staat om:
+
+- EK5.  Secundaire of primaire data van geavanceerde statistische technieken in R te combineren en bewerken.
+
+III.	Communicatie
+De afgestudeerde is in staat om:
+
+- EK9. Als statisticus binnen multidisciplinaire teams te werken en te communiceren.
+
+
+## Leerdoelen
+Leerdoelen voor deze cursus zijn aangegeven met tussen haakjes aan welke eindkwalificatie die gerelateerd zijn.
+
+Aan het eind van deze module kan de student: 
+- de software R gebruiken voor reproduceerbare statistische analyse van gegevens en programmeren (EK3)
+- 	met behulp van syntax en code grafieken te (re)produceren, verwerken en aanpassen (EK5)
+- 	in georganiseerd teamverband werken om data uit verschillende bronnen te verkennen, samen te voegen en aan te passen, en inferentiële, predictieve en beschrijvende data-analyse projectmatig te presenteren en uit te voeren (EK9)
+
+
+## Omschrijving van de vakinhoud
+De hoofdonderwerpen die hierbij aan de orde komen zijn: 
+
+- databestanden beheren, data uit verschillende softwarebronnen exporteren en inlezen (importeren)
+- databeheer en -hercodering, data mutaties en data throughput
+- creëren  van grafieken en visualisaties (visual storytelling) 
+- syntax en code  lezen en schrijven (programmeren)
+- tools om data te verkennen
+- bestanden en gegevens uit verschillende bronnen samenvoegen (mergen)
+- reproduceerbare codes schrijven om inferentiële, predictieve en beschrijvende statistieken en visualisaties te produceren voor twee of meer variabelen.
+
+## Programmaoverzicht
+Een overzicht van het studieprogramma staat op temporale volgorde in de hoofdstukken van dit boek. Een tabel met duidelijke weergave van welk hoofdstuk op welke dag behandeld wordt, is hieronder te vinden. De hoofdstukken met lesstof bevatten een overzicht van de behandelde onderwerpen, leerdoelen, benodigde voorbereiding en cursusmaterialen voor ieder gecombineerd hoor/werkcollege. 
+
+| Collegedag (=4 uren)  | Datum                             |
+|-----------------------|-----------------------------------|
+| **Gecombineerde HC & WC** | Periode: 2 juni – 13 juni 2025    |
+| @sec-mt1               | Maandag 2 Juni 2025  |
+| @sec-mt2               | Dinsdag 3 Juni 2025 |
+| Geen hoorcollege       | Woensdag 4 Juni 2025  |
+| @sec-mt3               | Donderdag 5 Juni 2025 |
+| @sec-mt4               | Vrijdag 6 Juni 2025 |
+| @sec-mt5               | Maandag 09 Juni  |  
+| @sec-mt6               | Dinsdag 10 Juni  |  
+| Geen Hoorcollege       | Woensdag 11 Juni  |  
+| @sec-mt7               | Donderdag 12 Juni  |  
+| @sec-mt8               | Vrijdag 13 Juni  |  
+| **Werkcolleges**          | Ma 16 – Vr 27 juni 2025           |
+| **Onderwijsvrij**         | 30 juni – 10 juli 2025            |
+| **Tentamen**              | Vrijdag 11 juli 2025              |
+: Programmaoverzicht en lesonderdelen
+
+## Onderwijsvormgeving
+De leeractiviteiten in deze module zijn: Hoorcolleges (HC): Theorie en voorbeelden (studenten bestuderen de slides vóór de colleges); Werkcolleges (WC): Tijdens de werkcolleges krijgen studenten verdere instructies/begeleiding voor het maken van de opdrachten; Zelfstudie: Het uitwerken van de gegeven opdrachten en analyses als voorbereiding op de WC (individueel of als groep). 
+In deze module wordt gewerkt met ‘samenwerkend leren’ als didactische werkvorm. Hierbij worden de studenten in groepen ingedeeld waarbij ze, in dit geval, complementair zelfstandig aan de opdrachten werken. Tijdens de werkcolleges worden de opdrachten gepresenteerd en bediscussieerd in groepsverband volgens een beurtensysteem. Na het college wordt door de groep de uitgewerkte opdrachten en aantekeningen geüpload op Moodle in de hiervoor aangemaakte mappen. Deze werkvorm stelt de studenten in staat kennis met elkaar te delen en vaardigheden en inzichten op te doen, tijdens zowel het groepswerk als de presentaties.
+
+## Verwachtingen van studenten en voorkennis
+Van de studenten wordt verwacht dat ze zich voorbereiden op de werkcolleges. De studenten dienen ook een actieve en zelfsturende leer houding te demonstreren waarbij ze nieuwe kennis willen/kunnen uitzoeken. Verder wordt er verwacht dat ze naast de colleges wekelijks gemiddeld 20 uur aan het vak besteden (zie Module belasting).
+
+De verwachtingen van de student voor het goed doorlopen van deze module zijn verder:
+
+1.	Basiskennis wiskunde en statistiek (BSc niveau)  
+2.	Het tijdig downloaden van college slides, documenten (via Moodle) voor zelfstudie, collegevoorbereiding en het maken van de opdrachten
+3.	Controleren van de Module/cursus Moodle page voor aankondigingen over colleges en toetsing 
+4.	Het hebben van een Laptop of PC/ microfoon / webcam (eventueel) / Goede Internetverbinding voor het volgen van sommige colleges
+
+## Module belasting
+De module belasting telt in totaal 6 ECTs (SP) wat gemiddeld neerkomt op het reserveren van 168 studieuren. In de onderstaande tabel vind je de spreiding van de uren over de diverse activiteiten die betrokken zijn bij het behalen van dit vak met een opsplitsing van contacturen, zelfstudie uren en het tentamen.
+
+| Activiteit                                                             | Aantal weken/dagen | Totaal aantal uren         |
+|------------------------------------------------------------------------|--------------------|----------------------------|
+| **Contacturen**                                                            |                    |                            |
+| Gecombineerde hoor- en werkcolleges                                    | 2 weken            | 8 dagen x 4 uren = 40 uren |
+| Werkcolleges                                                           | 2 dagen            | 2 dagen x 4 uren= 8uren    |
+| Responsiecollege                                                       | 1 dag              | 3,5 uren                   |
+| **Zelfstudie uren**                                                       |                    |                            |
+| Studieplanning maken                                                   | 2 weken            | 2 uren/week = 4 uren       |
+| Literatuurstudie                                                       | 2 weken            | 8 uren/week = 16 uren      |
+| Uitwerken van vraagstukken/opdrachten                                  | 2 weken            | 20 uren/week = 40 uren     |
+| Voorbereiding middels ondersteunend materiaal (collegeslides, video's) | 2 weken            | 15 uren/week = 30 uren     |
+| Herhaling                                                              | 2 weken            | 7,5 uren/week = 15 uren    |
+| Tentamen                                                               | 1 dag              | 3,5 uren                   |
+
+: STUDIEPUNTEN UITGEWERKT IN CONTACT EN ZELF-STUDIEUREN
+
+Totaal aantal uren: 168 uren (6 ECTs: 6 x 28 = 168 uren )

@@ -1,0 +1,7 @@
+# Geavanceerde data technieken {#sec-mt6}
+
+::: callout-tip
+## Hoorcollege 10 juni 2025
+Vandaag gaan we zelf data maken. Op het eerste gezicht klinkt dat misschien een beetje frauduleus - hoe komen we aan die data en waarom zou deze data goed zijn? We zullen zien dat we data-gebaseerde en informatie-gebaseerde modellen kunnen gebruiken om valide inferentie (gevolgtrekkingen) te kunnen trekken op basis van bestaande - al dan niet compleet geobserveerde - data. We gebruiken daarvoor veel van de technieken en theorie die we tot nu toe hebben geleerd. Eigenlijk komt alles wat we tot nu toe hebben besproken samen in dit college. De collegeslides kunt u [hier vinden](slides/lec-6.html)
+:::
+
