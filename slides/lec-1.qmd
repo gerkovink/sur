@@ -39,6 +39,13 @@ You **may use** any and all content in this presentation - including my name - a
 - You must ensure that the content is not used for further training of the model
 :::
 
+## Slide materials and source code
+::: callout-tip
+# Materials
+- course page: [www.gerkovink.com/sur](https://www.gerkovink.com/sur)
+- source: [github.com/gerkovink/sur](https://github.com/gerkovink/sur)
+:::
+
 ## RStudio
 
 ![](img/lec1/Rstudio.png){width="70%"}

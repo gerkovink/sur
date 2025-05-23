@@ -6,8 +6,10 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="Laurence Frank">
+<meta name="author" content="Gerko Vink">
 
-<title>3&nbsp; Data manipulatie – Module 6: Introduction to Data Processing &amp; Programming in R</title>
+<title>Data manipulatie – Module 6: Introduction to Data Processing &amp; Programming in R</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -19,6 +21,40 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -160,7 +196,7 @@ ul.task-list li input[type="checkbox"] {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./meeting4.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Statistiche Analyse</span></span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Statistische Analyse</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -178,7 +214,7 @@ ul.task-list li input[type="checkbox"] {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./meeting7.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Data visualizatie</span></span></a>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Data visualisatie</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -192,22 +228,92 @@ ul.task-list li input[type="checkbox"] {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#practicallabcredits" id="toc-practicallabcredits" class="nav-link active" data-scroll-target="#practicallabcredits">Practical</a>
+  <ul class="collapse">
+  <li><a href="#use-dplyrglimpse-to-inspect-the-data" id="toc-use-dplyrglimpse-to-inspect-the-data" class="nav-link" data-scroll-target="#use-dplyrglimpse-to-inspect-the-data">Use <code>dplyr::glimpse()</code> to inspect the data</a></li>
+  <li><a href="#use-base-r-function-summary-to-obtain-descriptives" id="toc-use-base-r-function-summary-to-obtain-descriptives" class="nav-link" data-scroll-target="#use-base-r-function-summary-to-obtain-descriptives">Use base R function <code>summary()</code> to obtain descriptives</a></li>
+  </ul></li>
+  <li><a href="#selecting-columns-with-dplyrselect" id="toc-selecting-columns-with-dplyrselect" class="nav-link" data-scroll-target="#selecting-columns-with-dplyrselect">Selecting columns with <code>dplyr::select()</code></a>
+  <ul class="collapse">
+  <li><a href="#select-columns-by-name-and-save-under-a-different-name" id="toc-select-columns-by-name-and-save-under-a-different-name" class="nav-link" data-scroll-target="#select-columns-by-name-and-save-under-a-different-name">Select columns by name and save under a different name</a></li>
+  <li><a href="#select-columns-with-operators" id="toc-select-columns-with-operators" class="nav-link" data-scroll-target="#select-columns-with-operators">Select columns with operators</a></li>
+  <li><a href="#select-a-range-of-columns" id="toc-select-a-range-of-columns" class="nav-link" data-scroll-target="#select-a-range-of-columns">Select a range of columns</a></li>
+  <li><a href="#select-columns-based-on-letters" id="toc-select-columns-based-on-letters" class="nav-link" data-scroll-target="#select-columns-based-on-letters">Select columns based on letters</a></li>
+  <li><a href="#select-variables-columns-with-where" id="toc-select-variables-columns-with-where" class="nav-link" data-scroll-target="#select-variables-columns-with-where">Select variables (columns) with <code>where()</code></a></li>
+  </ul></li>
+  <li><a href="#select-rows-with-dplyrfilter" id="toc-select-rows-with-dplyrfilter" class="nav-link" data-scroll-target="#select-rows-with-dplyrfilter">Select rows with <code>dplyr::filter()</code></a>
+  <ul class="collapse">
+  <li><a href="#selecting-rows-based-on-a-selection-rule" id="toc-selecting-rows-based-on-a-selection-rule" class="nav-link" data-scroll-target="#selecting-rows-based-on-a-selection-rule">Selecting rows based on a selection rule</a></li>
+  <li><a href="#filter-rows-based-on-2-selection-rules" id="toc-filter-rows-based-on-2-selection-rules" class="nav-link" data-scroll-target="#filter-rows-based-on-2-selection-rules">Filter rows based on 2 selection rules</a></li>
+  <li><a href="#select-rows-with-the-in-operator" id="toc-select-rows-with-the-in-operator" class="nav-link" data-scroll-target="#select-rows-with-the-in-operator">Select rows with the `%in% operator</a></li>
+  </ul></li>
+  <li><a href="#arrange-rows-using-dplyrrarrange-and" id="toc-arrange-rows-using-dplyrrarrange-and" class="nav-link" data-scroll-target="#arrange-rows-using-dplyrrarrange-and">Arrange rows using <code>dplyrr::arrange()</code> and <code>%&gt;%</code></a>
+  <ul class="collapse">
+  <li><a href="#multiple-transformations-with" id="toc-multiple-transformations-with" class="nav-link" data-scroll-target="#multiple-transformations-with">Multiple transformations with <code>%&gt;%</code></a>
+  <ul class="collapse">
+  <li><a href="#create-new-columns-using-dplyrmutate" id="toc-create-new-columns-using-dplyrmutate" class="nav-link" data-scroll-target="#create-new-columns-using-dplyrmutate">Create new columns using <code>dplyr::mutate()</code></a></li>
+  <li><a href="#pipe-operator-and-model-formula" id="toc-pipe-operator-and-model-formula" class="nav-link" data-scroll-target="#pipe-operator-and-model-formula">Pipe operator and model formula</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#create-summaries-with-dplyrsummarise" id="toc-create-summaries-with-dplyrsummarise" class="nav-link" data-scroll-target="#create-summaries-with-dplyrsummarise">Create summaries with <code>dplyr::summarise()</code></a></li>
+  <li><a href="#dealing-with-missing-data" id="toc-dealing-with-missing-data" class="nav-link" data-scroll-target="#dealing-with-missing-data">Dealing with missing data</a>
+  <ul class="collapse">
+  <li><a href="#grouping-data-dplyrgroup_by" id="toc-grouping-data-dplyrgroup_by" class="nav-link" data-scroll-target="#grouping-data-dplyrgroup_by">Grouping data: <code>dplyr::group_by()</code></a></li>
+  <li><a href="#save-the-msleep-data-as-.rdata" id="toc-save-the-msleep-data-as-.rdata" class="nav-link" data-scroll-target="#save-the-msleep-data-as-.rdata">Save the <code>msleep</code> data as .Rdata</a></li>
+  <li><a href="#close-the-project" id="toc-close-the-project" class="nav-link" data-scroll-target="#close-the-project">Close the project</a></li>
+  </ul></li>
+  <li><a href="#advanced-exercises" id="toc-advanced-exercises" class="nav-link" data-scroll-target="#advanced-exercises">Advanced exercises</a>
+  <ul class="collapse">
+  <li><a href="#create-new-variables-based-on-conditions-with-dplyrmutate" id="toc-create-new-variables-based-on-conditions-with-dplyrmutate" class="nav-link" data-scroll-target="#create-new-variables-based-on-conditions-with-dplyrmutate">Create new variables based on conditions with <code>dplyr::mutate()</code></a></li>
+  <li><a href="#use-case_when-to-recode-variables" id="toc-use-case_when-to-recode-variables" class="nav-link" data-scroll-target="#use-case_when-to-recode-variables">Use <code>case_when</code> to recode variables</a>
+  <ul class="collapse">
+  <li><a href="#change-the-levels-of-a-categorical-variable-with-dplyr-and-case_when" id="toc-change-the-levels-of-a-categorical-variable-with-dplyr-and-case_when" class="nav-link" data-scroll-target="#change-the-levels-of-a-categorical-variable-with-dplyr-and-case_when">Change the levels of a categorical variable with <code>dplyr</code> and <code>case_when</code></a></li>
+  <li><a href="#exclude-a-few-animals-from-the-data-set-with-base-r-code-and-with-dplyr" id="toc-exclude-a-few-animals-from-the-data-set-with-base-r-code-and-with-dplyr" class="nav-link" data-scroll-target="#exclude-a-few-animals-from-the-data-set-with-base-r-code-and-with-dplyr">Exclude a few animals from the data set with base R code and with <code>dplyr</code></a></li>
+  <li><a href="#close-the-project-1" id="toc-close-the-project-1" class="nav-link" data-scroll-target="#close-the-project-1">Close the project</a></li>
+  </ul></li>
+  </ul></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/gerkovink/sur/edit/book/meeting3.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/gerkovink/sur/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span id="sec-mt3" class="quarto-section-identifier"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Data manipulatie</span></span></h1>
+<h1 class="title"><span id="sec-mt3" class="quarto-section-identifier"><span class="chapter-title">Data manipulatie</span></span></h1>
 </div>
 
 
+<div class="quarto-title-meta-author">
+  <div class="quarto-title-meta-heading">Authors</div>
+  <div class="quarto-title-meta-heading">Affiliation</div>
+  
+    <div class="quarto-title-meta-contents">
+    <p class="author">Laurence Frank <a href="https://orcid.org/0000-0002-4075-8129" class="quarto-title-author-orcid"> <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMjA4MDI1MjA2ODExOTk0QzkzNTEzRjZEQTg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozM0NDOEJGNEZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozM0NDOEJGM0ZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZDN0YxMTc0MDcyMDY4MTE5NUZFRDc5MUM2MUUwNEREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU3Q0QyMDgwMjUyMDY4MTE5OTRDOTM1MTNGNkRBODU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+84NovQAAAR1JREFUeNpiZEADy85ZJgCpeCB2QJM6AMQLo4yOL0AWZETSqACk1gOxAQN+cAGIA4EGPQBxmJA0nwdpjjQ8xqArmczw5tMHXAaALDgP1QMxAGqzAAPxQACqh4ER6uf5MBlkm0X4EGayMfMw/Pr7Bd2gRBZogMFBrv01hisv5jLsv9nLAPIOMnjy8RDDyYctyAbFM2EJbRQw+aAWw/LzVgx7b+cwCHKqMhjJFCBLOzAR6+lXX84xnHjYyqAo5IUizkRCwIENQQckGSDGY4TVgAPEaraQr2a4/24bSuoExcJCfAEJihXkWDj3ZAKy9EJGaEo8T0QSxkjSwORsCAuDQCD+QILmD1A9kECEZgxDaEZhICIzGcIyEyOl2RkgwAAhkmC+eAm0TAAAAABJRU5ErkJggg=="></a></p>
+  </div>
+  <div class="quarto-title-meta-contents">
+        <p class="affiliation">
+            Methodology &amp; Statistics @ Utrecht University
+          </p>
+      </div>
+    <div class="quarto-title-meta-contents">
+    <p class="author">Gerko Vink <a href="mailto:g.vink@uu.nl" class="quarto-title-author-email"><i class="bi bi-envelope"></i></a> <a href="https://orcid.org/0000-0001-9767-1924" class="quarto-title-author-orcid"> <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMjA4MDI1MjA2ODExOTk0QzkzNTEzRjZEQTg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozM0NDOEJGNEZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozM0NDOEJGM0ZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZDN0YxMTc0MDcyMDY4MTE5NUZFRDc5MUM2MUUwNEREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU3Q0QyMDgwMjUyMDY4MTE5OTRDOTM1MTNGNkRBODU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+84NovQAAAR1JREFUeNpiZEADy85ZJgCpeCB2QJM6AMQLo4yOL0AWZETSqACk1gOxAQN+cAGIA4EGPQBxmJA0nwdpjjQ8xqArmczw5tMHXAaALDgP1QMxAGqzAAPxQACqh4ER6uf5MBlkm0X4EGayMfMw/Pr7Bd2gRBZogMFBrv01hisv5jLsv9nLAPIOMnjy8RDDyYctyAbFM2EJbRQw+aAWw/LzVgx7b+cwCHKqMhjJFCBLOzAR6+lXX84xnHjYyqAo5IUizkRCwIENQQckGSDGY4TVgAPEaraQr2a4/24bSuoExcJCfAEJihXkWDj3ZAKy9EJGaEo8T0QSxkjSwORsCAuDQCD+QILmD1A9kECEZgxDaEZhICIzGcIyEyOl2RkgwAAhkmC+eAm0TAAAAABJRU5ErkJggg=="></a></p>
+  </div>
+  <div class="quarto-title-meta-contents">
+        <p class="affiliation">
+            Methodology &amp; Statistics @ Utrecht University
+          </p>
+      </div>
+  </div>
 
 <div class="quarto-title-meta">
 
-    
+      
   
     
   </div>
@@ -230,8 +336,703 @@ Hoorcollege 5 juni 2025
 <p>Vandaag gaan we aan de slag met heel veel vormen van data manipulatie. Een goede troughput strategie is essentieel om van de ruwe data naar een correcte data set voor de uiteindelijke analyse te gaan. We gebruiken hiervoor het <a href="https://www.tidyverse.org"><code>tidyverse</code></a> framework en zullen verder leren om nog efficienter met <code>pipes</code> te gaan werken, zodat het proces om van ruwe data naar analyseresultaten te gaan uiterst inzichtelijk blijft. De slides voor het hoorcollege kun u <a href="slides/lec-3.html">hier vinden</a></p>
 </div>
 </div>
+<section id="practicallabcredits" class="level2">
+<h2 class="anchored" data-anchor-id="practicallabcredits">Practical<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></h2>
+<section id="load-the-tidyverse-package" class="level4">
+<h4 class="anchored" data-anchor-id="load-the-tidyverse-package">Load the <code>tidyverse</code> package</h4>
+<p>Load the <code>tidyverse</code> package to be able to use the functions in the <code>dplyr</code> and <code>readr</code> packages.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
+✔ dplyr     1.1.4     ✔ readr     2.1.5
+✔ forcats   1.0.0     ✔ stringr   1.5.1
+✔ ggplot2   3.5.2     ✔ tibble    3.2.1
+✔ lubridate 1.9.4     ✔ tidyr     1.3.1
+✔ purrr     1.0.4     
+── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+✖ dplyr::filter() masks stats::filter()
+✖ dplyr::lag()    masks stats::lag()
+ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
+</div>
+</div>
+</section>
+<section id="download-overview-of-dplyr-functions" class="level4">
+<h4 class="anchored" data-anchor-id="download-overview-of-dplyr-functions">Download overview of <code>dplyr</code> functions</h4>
+<p>Download the <strong><code>dplyr</code> cheat sheet</strong> <a href="https://rstudio.github.io/cheatsheets/data-transformation.pdf">here</a></p>
+</section>
+<section id="import-the-data" class="level4">
+<h4 class="anchored" data-anchor-id="import-the-data">Import the data</h4>
+<p>The Mammals Sleep data set<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> contains the sleep times and weights for a set of mammals. This data set contains 83 rows (the animals) and 11 variables (the characteristics of the animals).</p>
+<p>Be sure to place the data set <a href="documents/mt3/msleep.csv"><code>msleep.csv</code></a> in <strong>the same folder as the R Markdown template you are working on</strong>. Use the function <code>read_csv</code> from the <code>readr</code> package to import the data and save it as <code>msleep</code> (using the assignment <code>&lt;-</code> operator).</p>
+<div class="cell">
+<div class="cell-output cell-output-stderr">
+<pre><code>Rows: 83 Columns: 11
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+chr (5): name, genus, vore, order, conservation
+dbl (6): sleep_total, sleep_rem, sleep_cycle, awake, brainwt, bodywt
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>msleep <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_csv</span>(<span class="st">"msleep.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="inspect-the-data-with-view" class="level4">
+<h4 class="anchored" data-anchor-id="inspect-the-data-with-view">Inspect the data with <code>view()</code></h4>
+<p>You will see that the data <code>msleep</code> is now in the “Data” window in the “Environment” tab. If you click on the blue arrow of the data set, you will see the list of variables in the data. Clicking on the spreadsheet symbol will open a new window where you can have a look at the data. The same can be achieved with the <code>view()</code>function. Use this function to have a look at the data</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">view</span>(msleep)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Here is the description of the variables in the data set:</p>
+<ul>
+<li><em>name</em>: common name</li>
+<li><em>genus</em>: taxonomic rank</li>
+<li><em>vore</em>: carnivore, omnivore or herbivore</li>
+<li><em>order</em>: taxonomic rank</li>
+<li><em>conservation</em>: the conservation status of the mammal</li>
+<li><em>sleep_total</em>: total amount of sleep, in hours</li>
+<li><em>sleep_rem</em>: rem sleep, in hours</li>
+<li><em>sleep_cycle</em>: length of sleep cycle, in hours</li>
+<li><em>awake</em>: amount of time spent awake, in hours</li>
+<li><em>brainwt</em>: brain weight in kilograms</li>
+<li><em>bodywt</em>: body weight in kilograms</li>
+</ul>
+</section>
+<section id="use-dplyrglimpse-to-inspect-the-data" class="level3">
+<h3 class="anchored" data-anchor-id="use-dplyrglimpse-to-inspect-the-data">Use <code>dplyr::glimpse()</code> to inspect the data</h3>
+<p>Use <code>dplyr::glimpse()</code> to inspect the <code>msleep</code> data and compare it with <code>str()</code> on the same data. What information do you obtain? What are the differences?</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>dplyr<span class="sc">::</span><span class="fu">glimpse</span>(msleep)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 83
+Columns: 11
+$ name         &lt;chr&gt; "Cheetah", "Owl monkey", "Mountain beaver", "Greater shor…
+$ genus        &lt;chr&gt; "Acinonyx", "Aotus", "Aplodontia", "Blarina", "Bos", "Bra…
+$ vore         &lt;chr&gt; "carni", "omni", "herbi", "omni", "herbi", "herbi", "carn…
+$ order        &lt;chr&gt; "Carnivora", "Primates", "Rodentia", "Soricomorpha", "Art…
+$ conservation &lt;chr&gt; "lc", NA, "nt", "lc", "domesticated", NA, "vu", NA, "dome…
+$ sleep_total  &lt;dbl&gt; 12.1, 17.0, 14.4, 14.9, 4.0, 14.4, 8.7, 7.0, 10.1, 3.0, 5…
+$ sleep_rem    &lt;dbl&gt; NA, 1.8, 2.4, 2.3, 0.7, 2.2, 1.4, NA, 2.9, NA, 0.6, 0.8, …
+$ sleep_cycle  &lt;dbl&gt; NA, NA, NA, 0.1333333, 0.6666667, 0.7666667, 0.3833333, N…
+$ awake        &lt;dbl&gt; 11.9, 7.0, 9.6, 9.1, 20.0, 9.6, 15.3, 17.0, 13.9, 21.0, 1…
+$ brainwt      &lt;dbl&gt; NA, 0.01550, NA, 0.00029, 0.42300, NA, NA, NA, 0.07000, 0…
+$ bodywt       &lt;dbl&gt; 50.000, 0.480, 1.350, 0.019, 600.000, 3.850, 20.490, 0.04…</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(msleep)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>spc_tbl_ [83 × 11] (S3: spec_tbl_df/tbl_df/tbl/data.frame)
+ $ name        : chr [1:83] "Cheetah" "Owl monkey" "Mountain beaver" "Greater short-tailed shrew" ...
+ $ genus       : chr [1:83] "Acinonyx" "Aotus" "Aplodontia" "Blarina" ...
+ $ vore        : chr [1:83] "carni" "omni" "herbi" "omni" ...
+ $ order       : chr [1:83] "Carnivora" "Primates" "Rodentia" "Soricomorpha" ...
+ $ conservation: chr [1:83] "lc" NA "nt" "lc" ...
+ $ sleep_total : num [1:83] 12.1 17 14.4 14.9 4 14.4 8.7 7 10.1 3 ...
+ $ sleep_rem   : num [1:83] NA 1.8 2.4 2.3 0.7 2.2 1.4 NA 2.9 NA ...
+ $ sleep_cycle : num [1:83] NA NA NA 0.133 0.667 ...
+ $ awake       : num [1:83] 11.9 7 9.6 9.1 20 9.6 15.3 17 13.9 21 ...
+ $ brainwt     : num [1:83] NA 0.0155 NA 0.00029 0.423 NA NA NA 0.07 0.0982 ...
+ $ bodywt      : num [1:83] 50 0.48 1.35 0.019 600 ...
+ - attr(*, "spec")=
+  .. cols(
+  ..   name = col_character(),
+  ..   genus = col_character(),
+  ..   vore = col_character(),
+  ..   order = col_character(),
+  ..   conservation = col_character(),
+  ..   sleep_total = col_double(),
+  ..   sleep_rem = col_double(),
+  ..   sleep_cycle = col_double(),
+  ..   awake = col_double(),
+  ..   brainwt = col_double(),
+  ..   bodywt = col_double()
+  .. )
+ - attr(*, "problems")=&lt;externalptr&gt; </code></pre>
+</div>
+</div>
+</section>
+<section id="use-base-r-function-summary-to-obtain-descriptives" class="level3">
+<h3 class="anchored" data-anchor-id="use-base-r-function-summary-to-obtain-descriptives">Use base R function <code>summary()</code> to obtain descriptives</h3>
+<p>The base R function <code>summary()</code> gives descriptive statistics for all the variables in a data frame. It takes into account the data type (class) of each variable. Run the code below. What information do you get about the data? And how does this differ depending on the class (data type) of the variable?</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(msleep)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     name              genus               vore              order          
+ Length:83          Length:83          Length:83          Length:83         
+ Class :character   Class :character   Class :character   Class :character  
+ Mode  :character   Mode  :character   Mode  :character   Mode  :character  
+                                                                            
+                                                                            
+                                                                            
+                                                                            
+ conservation        sleep_total      sleep_rem      sleep_cycle    
+ Length:83          Min.   : 1.90   Min.   :0.100   Min.   :0.1167  
+ Class :character   1st Qu.: 7.85   1st Qu.:0.900   1st Qu.:0.1833  
+ Mode  :character   Median :10.10   Median :1.500   Median :0.3333  
+                    Mean   :10.43   Mean   :1.875   Mean   :0.4396  
+                    3rd Qu.:13.75   3rd Qu.:2.400   3rd Qu.:0.5792  
+                    Max.   :19.90   Max.   :6.600   Max.   :1.5000  
+                                    NA's   :22      NA's   :51      
+     awake          brainwt            bodywt        
+ Min.   : 4.10   Min.   :0.00014   Min.   :   0.005  
+ 1st Qu.:10.25   1st Qu.:0.00290   1st Qu.:   0.174  
+ Median :13.90   Median :0.01240   Median :   1.670  
+ Mean   :13.57   Mean   :0.28158   Mean   : 166.136  
+ 3rd Qu.:16.15   3rd Qu.:0.12550   3rd Qu.:  41.750  
+ Max.   :22.10   Max.   :5.71200   Max.   :6654.000  
+                 NA's   :27                          </code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="selecting-columns-with-dplyrselect" class="level1">
+<h1>Selecting columns with <code>dplyr::select()</code></h1>
+<section id="select-columns-by-name-and-save-under-a-different-name" class="level3">
+<h3 class="anchored" data-anchor-id="select-columns-by-name-and-save-under-a-different-name">Select columns by name and save under a different name</h3>
+<p>Use <code>dplyr::select()</code> to select two variables from <code>msleep</code>: the variables <code>name</code> and <code>sleep_total</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>dplyr<span class="sc">::</span><span class="fu">select</span>(msleep, name, sleep_total)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 83 × 2
+   name                       sleep_total
+   &lt;chr&gt;                            &lt;dbl&gt;
+ 1 Cheetah                           12.1
+ 2 Owl monkey                        17  
+ 3 Mountain beaver                   14.4
+ 4 Greater short-tailed shrew        14.9
+ 5 Cow                                4  
+ 6 Three-toed sloth                  14.4
+ 7 Northern fur seal                  8.7
+ 8 Vesper mouse                       7  
+ 9 Dog                               10.1
+10 Roe deer                           3  
+# ℹ 73 more rows</code></pre>
+</div>
+</div>
+<p>If you do not want to have the entire data printed, you can use the base R function <code>head()</code> to display the first 6 rows of a data frame. You can specify the number of rows you want to see by adding a number between the parentheses e.g.&nbsp;<code>(5)</code>.</p>
+<p>Perform the same selection of the variables <code>name</code> and <code>sleep_total</code> and then show the first 5 rows of the result. Hint: use the pipe <code>%&gt;%</code> operator.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>dplyr<span class="sc">::</span><span class="fu">select</span>(msleep, name, sleep_total) <span class="sc">%&gt;%</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>(<span class="at">n=</span><span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 5 × 2
+  name                       sleep_total
+  &lt;chr&gt;                            &lt;dbl&gt;
+1 Cheetah                           12.1
+2 Owl monkey                        17  
+3 Mountain beaver                   14.4
+4 Greater short-tailed shrew        14.9
+5 Cow                                4  </code></pre>
+</div>
+</div>
+</section>
+<section id="select-columns-with-operators" class="level3">
+<h3 class="anchored" data-anchor-id="select-columns-with-operators">Select columns with operators</h3>
+<p>To select all the columns <em>except</em> a specific column, we can use the <code>!</code> operator (this means “not”).</p>
+<p>Write code using <code>dplyr::select()</code> with piping (<code>%&gt;%</code>) that:</p>
+<ol type="1">
+<li>excludes the variable <code>vore</code></li>
+<li>shows the first 7 rows of the result</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>dplyr<span class="sc">::</span><span class="fu">select</span>(msleep, <span class="sc">!</span>vore) <span class="sc">%&gt;%</span> </span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">head</span>(<span class="at">n=</span><span class="dv">7</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 7 × 10
+  name          genus order conservation sleep_total sleep_rem sleep_cycle awake
+  &lt;chr&gt;         &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;              &lt;dbl&gt;     &lt;dbl&gt;       &lt;dbl&gt; &lt;dbl&gt;
+1 Cheetah       Acin… Carn… lc                  12.1      NA        NA      11.9
+2 Owl monkey    Aotus Prim… &lt;NA&gt;                17         1.8      NA       7  
+3 Mountain bea… Aplo… Rode… nt                  14.4       2.4      NA       9.6
+4 Greater shor… Blar… Sori… lc                  14.9       2.3       0.133   9.1
+5 Cow           Bos   Arti… domesticated         4         0.7       0.667  20  
+6 Three-toed s… Brad… Pilo… &lt;NA&gt;                14.4       2.2       0.767   9.6
+7 Northern fur… Call… Carn… vu                   8.7       1.4       0.383  15.3
+# ℹ 2 more variables: brainwt &lt;dbl&gt;, bodywt &lt;dbl&gt;</code></pre>
+</div>
+</div>
+</section>
+<section id="select-a-range-of-columns" class="level3">
+<h3 class="anchored" data-anchor-id="select-a-range-of-columns">Select a range of columns</h3>
+<p>Write code to select the variables <code>genus</code> to <code>sleep-total</code> and view the first 5 rows of the selected data. To select a range of columns by the variable names, use the “:” operator.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>dplyr<span class="sc">::</span><span class="fu">select</span>(msleep, genus<span class="sc">:</span>sleep_total) <span class="sc">%&gt;%</span> </span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">head</span>(<span class="at">n=</span><span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 5 × 5
+  genus      vore  order        conservation sleep_total
+  &lt;chr&gt;      &lt;chr&gt; &lt;chr&gt;        &lt;chr&gt;              &lt;dbl&gt;
+1 Acinonyx   carni Carnivora    lc                  12.1
+2 Aotus      omni  Primates     &lt;NA&gt;                17  
+3 Aplodontia herbi Rodentia     nt                  14.4
+4 Blarina    omni  Soricomorpha lc                  14.9
+5 Bos        herbi Artiodactyla domesticated         4  </code></pre>
+</div>
+</div>
+</section>
+<section id="select-columns-based-on-letters" class="level3">
+<h3 class="anchored" data-anchor-id="select-columns-based-on-letters">Select columns based on letters</h3>
+<p>To select all columns that start with the character string “sl”, use the function <code>starts_with()</code> in combination with <code>select()</code>. Write code to select all variables starting with “sl” and view the first 5 rows of the selected data set.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>dplyr<span class="sc">::</span><span class="fu">select</span>(msleep, <span class="fu">starts_with</span>(<span class="st">"sl"</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">head</span>(<span class="at">n=</span><span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 5 × 3
+  sleep_total sleep_rem sleep_cycle
+        &lt;dbl&gt;     &lt;dbl&gt;       &lt;dbl&gt;
+1        12.1      NA        NA    
+2        17         1.8      NA    
+3        14.4       2.4      NA    
+4        14.9       2.3       0.133
+5         4         0.7       0.667</code></pre>
+</div>
+</div>
+</section>
+<section id="select-variables-columns-with-where" class="level3">
+<h3 class="anchored" data-anchor-id="select-variables-columns-with-where">Select variables (columns) with <code>where()</code></h3>
+<p>Write code that selects only the numeric variables using <code>dplyr::select()</code> and display the first 5 observations of the data set.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>dplyr<span class="sc">::</span><span class="fu">select</span>(msleep, <span class="fu">where</span>(is.numeric)) <span class="sc">%&gt;%</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">slice_head</span>(<span class="at">n=</span><span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 5 × 6
+  sleep_total sleep_rem sleep_cycle awake  brainwt  bodywt
+        &lt;dbl&gt;     &lt;dbl&gt;       &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;   &lt;dbl&gt;
+1        12.1      NA        NA      11.9 NA        50    
+2        17         1.8      NA       7    0.0155    0.48 
+3        14.4       2.4      NA       9.6 NA         1.35 
+4        14.9       2.3       0.133   9.1  0.00029   0.019
+5         4         0.7       0.667  20    0.423   600    </code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="select-rows-with-dplyrfilter" class="level1">
+<h1>Select rows with <code>dplyr::filter()</code></h1>
+<section id="selecting-rows-based-on-a-selection-rule" class="level3">
+<h3 class="anchored" data-anchor-id="selecting-rows-based-on-a-selection-rule">Selecting rows based on a selection rule</h3>
+<p>The <code>dplyr::filter()</code> function allows to filter rows to include only those rows that <em>match</em> the criteria of the filter. Write code that filters the rows for mammals that have a total number of hours sleep equal to 18 hours or more. How many mammals meet this criterion?</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>dplyr<span class="sc">::</span><span class="fu">filter</span>(msleep, sleep_total <span class="sc">&gt;=</span> <span class="dv">18</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 5 × 11
+  name    genus vore  order conservation sleep_total sleep_rem sleep_cycle awake
+  &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;              &lt;dbl&gt;     &lt;dbl&gt;       &lt;dbl&gt; &lt;dbl&gt;
+1 North … Dide… omni  Dide… lc                  18         4.9       0.333   6  
+2 Big br… Epte… inse… Chir… lc                  19.7       3.9       0.117   4.3
+3 Thick-… Lutr… carni Dide… lc                  19.4       6.6      NA       4.6
+4 Little… Myot… inse… Chir… &lt;NA&gt;                19.9       2         0.2     4.1
+5 Giant … Prio… inse… Cing… en                  18.1       6.1      NA       5.9
+# ℹ 2 more variables: brainwt &lt;dbl&gt;, bodywt &lt;dbl&gt;</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 5 mammals sleep more than 18 hours.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="filter-rows-based-on-2-selection-rules" class="level3">
+<h3 class="anchored" data-anchor-id="filter-rows-based-on-2-selection-rules">Filter rows based on 2 selection rules</h3>
+<p>Write code to filter the rows for mammals that sleep a total of more than 18 hours <em>and</em> have a body weight of greater than 1 kilogram. How many mammals match these criteria?</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>dplyr<span class="sc">::</span><span class="fu">filter</span>(msleep, sleep_total <span class="sc">&gt;=</span> <span class="dv">18</span>, bodywt <span class="sc">&gt;=</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 11
+  name    genus vore  order conservation sleep_total sleep_rem sleep_cycle awake
+  &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;              &lt;dbl&gt;     &lt;dbl&gt;       &lt;dbl&gt; &lt;dbl&gt;
+1 North … Dide… omni  Dide… lc                  18         4.9       0.333   6  
+2 Giant … Prio… inse… Cing… en                  18.1       6.1      NA       5.9
+# ℹ 2 more variables: brainwt &lt;dbl&gt;, bodywt &lt;dbl&gt;</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Two mammals meet both criteria.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="select-rows-with-the-in-operator" class="level3">
+<h3 class="anchored" data-anchor-id="select-rows-with-the-in-operator">Select rows with the `%in% operator</h3>
+<p>To filter the rows for mammals in the Artiodactyla and Proboscidea taxonomic order, you can use the <code>%in%</code> operator. This logical operator returns <code>TRUE</code> for values of a vector that are present <em>in</em> a second vector. Run the code and find out how it works. Why do we need to use quotes for the names of the order (“Artiodactyla”, “Proboscidea”)? How many mammals match the criteria?</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>dplyr<span class="sc">::</span><span class="fu">filter</span>(msleep, order <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"Artiodactyla"</span>, <span class="st">"Proboscidea"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 8 × 11
+  name    genus vore  order conservation sleep_total sleep_rem sleep_cycle awake
+  &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;              &lt;dbl&gt;     &lt;dbl&gt;       &lt;dbl&gt; &lt;dbl&gt;
+1 Cow     Bos   herbi Arti… domesticated         4         0.7       0.667  20  
+2 Roe de… Capr… herbi Arti… lc                   3        NA        NA      21  
+3 Goat    Capri herbi Arti… lc                   5.3       0.6      NA      18.7
+4 Asian … Elep… herbi Prob… en                   3.9      NA        NA      20.1
+5 Giraffe Gira… herbi Arti… cd                   1.9       0.4      NA      22.1
+6 Africa… Loxo… herbi Prob… vu                   3.3      NA        NA      20.7
+7 Sheep   Ovis  herbi Arti… domesticated         3.8       0.6      NA      20.2
+8 Pig     Sus   omni  Arti… domesticated         9.1       2.4       0.5    14.9
+# ℹ 2 more variables: brainwt &lt;dbl&gt;, bodywt &lt;dbl&gt;</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="co"># The code selects rows based on the taxonomic order of the mammals. The order names are character values and therefore quotes are needed to select order names. There are 8 mammals that meet the criteria.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+</section>
+<section id="arrange-rows-using-dplyrrarrange-and" class="level1">
+<h1>Arrange rows using <code>dplyrr::arrange()</code> and <code>%&gt;%</code></h1>
+<p>Use the function <code>dplyrr::arrange()</code> to write code that:</p>
+<ol type="1">
+<li>Selects the variables <code>name</code> and <code>sleep_total</code>.</li>
+<li>Orders the animals by total hours of sleep (highest to lowest).</li>
+<li>Shows the first 5 rows of the result.</li>
+</ol>
+<p>See <code>dplyr</code> cheat sheet how to work with <code>dplyrr::arrange()</code>. Now that we need to do more operations on the data, it is best to start with the data name and then start piping for the multiple operations (see also example in the lecture slides).</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>msleep <span class="sc">%&gt;%</span></span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">select</span>(name, sleep_total) <span class="sc">%&gt;%</span></span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">arrange</span>(<span class="fu">desc</span>(sleep_total)) <span class="sc">%&gt;%</span></span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">head</span>(<span class="at">n=</span><span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 5 × 2
+  name                   sleep_total
+  &lt;chr&gt;                        &lt;dbl&gt;
+1 Little brown bat              19.9
+2 Big brown bat                 19.7
+3 Thick-tailed opposum          19.4
+4 Giant armadillo               18.1
+5 North American Opossum        18  </code></pre>
+</div>
+</div>
+<section id="multiple-transformations-with" class="level2">
+<h2 class="anchored" data-anchor-id="multiple-transformations-with">Multiple transformations with <code>%&gt;%</code></h2>
+<p>Write code to perform the following operations using <code>dplyr</code> functions and pipes:</p>
+<ol type="1">
+<li>Select three columns from <code>msleep</code> (the variables “name”, “order” and “sleep_total”)</li>
+<li>Arrange the rows by <code>order</code> and by <code>sleep_total</code> in descending order.</li>
+<li>Filter the rows for mammals that sleep 16 or more hours.</li>
+<li>Show the first 5 lines of the resulting transformation.</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>msleep <span class="sc">%&gt;%</span> </span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">select</span>(name, order, sleep_total) <span class="sc">%&gt;%</span></span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">arrange</span>(order, <span class="fu">desc</span>(sleep_total)) <span class="sc">%&gt;%</span> </span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">filter</span>(sleep_total <span class="sc">&gt;=</span> <span class="dv">16</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">head</span>(<span class="at">n=</span><span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 5 × 3
+  name                 order           sleep_total
+  &lt;chr&gt;                &lt;chr&gt;                 &lt;dbl&gt;
+1 Little brown bat     Chiroptera             19.9
+2 Big brown bat        Chiroptera             19.7
+3 Giant armadillo      Cingulata              18.1
+4 Long-nosed armadillo Cingulata              17.4
+5 Thick-tailed opposum Didelphimorphia        19.4</code></pre>
+</div>
+</div>
+<section id="create-new-columns-using-dplyrmutate" class="level3">
+<h3 class="anchored" data-anchor-id="create-new-columns-using-dplyrmutate">Create new columns using <code>dplyr::mutate()</code></h3>
+<p>The <code>dplyr::mutate()</code> function will add new columns to the data frame. Create a new column called <code>rem_proportion</code>, which is calculated as the following ratio: <code>rem_proportion = sleep_rem / sleep_total</code>. Show the first 5 rows of the result.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>msleep <span class="sc">%&gt;%</span> </span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">rem_proportion =</span> sleep_rem <span class="sc">/</span> sleep_total) <span class="sc">%&gt;%</span></span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">slice_head</span>(<span class="at">n=</span><span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 5 × 12
+  name    genus vore  order conservation sleep_total sleep_rem sleep_cycle awake
+  &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;              &lt;dbl&gt;     &lt;dbl&gt;       &lt;dbl&gt; &lt;dbl&gt;
+1 Cheetah Acin… carni Carn… lc                  12.1      NA        NA      11.9
+2 Owl mo… Aotus omni  Prim… &lt;NA&gt;                17         1.8      NA       7  
+3 Mounta… Aplo… herbi Rode… nt                  14.4       2.4      NA       9.6
+4 Greate… Blar… omni  Sori… lc                  14.9       2.3       0.133   9.1
+5 Cow     Bos   herbi Arti… domesticated         4         0.7       0.667  20  
+# ℹ 3 more variables: brainwt &lt;dbl&gt;, bodywt &lt;dbl&gt;, rem_proportion &lt;dbl&gt;</code></pre>
+</div>
+</div>
+<p>You can add several new columns using <code>dplyr::mutate()</code> (separated by commas).</p>
+<p>Write code to:</p>
+<ol type="1">
+<li>Create two new variables in <code>msleep</code>:
+<ul>
+<li><code>rem_proportion = sleep_rem / sleep_total</code></li>
+<li><code>brain_body = brainwt / bodywt</code></li>
+</ul></li>
+<li>Save the <code>msleep</code> data with these new variables as <code>sleepdata</code>.</li>
+<li>Verify that <code>sleepdata</code> indeed contains the two new variables.</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>sleepdata <span class="ot">&lt;-</span> msleep <span class="sc">%&gt;%</span> </span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">rem_proportion =</span> sleep_rem <span class="sc">/</span> sleep_total, </span>
+<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a>           <span class="at">brain_body =</span> brainwt <span class="sc">/</span> bodywt) <span class="sc">%&gt;%</span> </span>
+<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">glimpse</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 83
+Columns: 13
+$ name           &lt;chr&gt; "Cheetah", "Owl monkey", "Mountain beaver", "Greater sh…
+$ genus          &lt;chr&gt; "Acinonyx", "Aotus", "Aplodontia", "Blarina", "Bos", "B…
+$ vore           &lt;chr&gt; "carni", "omni", "herbi", "omni", "herbi", "herbi", "ca…
+$ order          &lt;chr&gt; "Carnivora", "Primates", "Rodentia", "Soricomorpha", "A…
+$ conservation   &lt;chr&gt; "lc", NA, "nt", "lc", "domesticated", NA, "vu", NA, "do…
+$ sleep_total    &lt;dbl&gt; 12.1, 17.0, 14.4, 14.9, 4.0, 14.4, 8.7, 7.0, 10.1, 3.0,…
+$ sleep_rem      &lt;dbl&gt; NA, 1.8, 2.4, 2.3, 0.7, 2.2, 1.4, NA, 2.9, NA, 0.6, 0.8…
+$ sleep_cycle    &lt;dbl&gt; NA, NA, NA, 0.1333333, 0.6666667, 0.7666667, 0.3833333,…
+$ awake          &lt;dbl&gt; 11.9, 7.0, 9.6, 9.1, 20.0, 9.6, 15.3, 17.0, 13.9, 21.0,…
+$ brainwt        &lt;dbl&gt; NA, 0.01550, NA, 0.00029, 0.42300, NA, NA, NA, 0.07000,…
+$ bodywt         &lt;dbl&gt; 50.000, 0.480, 1.350, 0.019, 600.000, 3.850, 20.490, 0.…
+$ rem_proportion &lt;dbl&gt; NA, 0.10588235, 0.16666667, 0.15436242, 0.17500000, 0.1…
+$ brain_body     &lt;dbl&gt; NA, 0.032291667, NA, 0.015263158, 0.000705000, NA, NA, …</code></pre>
+</div>
+</div>
+<p>Check whether there is a relationship between the total amount of sleep (<code>sleep_total</code>) mammals need, and the ratio of the brain weight compared to the body weight (<code>brain_body</code>). Do mammals with relatively larger brains need more sleep? Make the plot with the following code. What do you conclude from the plot?</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(sleepdata<span class="sc">$</span>brain_body, sleepdata<span class="sc">$</span>sleep_total)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="meeting3_files/figure-html/unnamed-chunk-21-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="pipe-operator-and-model-formula" class="level3">
+<h3 class="anchored" data-anchor-id="pipe-operator-and-model-formula">Pipe operator and model formula</h3>
+<p>A step further would be to fit a linear regression model, with total hours of sleep as outcome variable (<code>y = sleep_total</code>) and the ratio between brain weight and body weight as independent variable (<code>x = brain_body</code>).</p>
+<p>In R we fit linear regression models with: <code>lm(y ~ x, data = data_frame)</code>.</p>
+<p>Look at the code below and see if you understand what it does. Why do we need to use <code>data = .</code> as an argument in the <code>lm()</code> function?</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>msleep <span class="sc">%&gt;%</span> </span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">rem_proportion =</span> sleep_rem <span class="sc">/</span> sleep_total, </span>
+<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a>           <span class="at">brain_body =</span> brainwt <span class="sc">/</span> bodywt) <span class="sc">%&gt;%</span> </span>
+<span id="cb42-4"><a href="#cb42-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">lm</span>(sleep_total <span class="sc">~</span> brain_body, <span class="at">data =</span> .) <span class="sc">%&gt;%</span></span>
+<span id="cb42-5"><a href="#cb42-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summary</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = sleep_total ~ brain_body, data = .)
+
+Residuals:
+   Min     1Q Median     3Q    Max 
+-6.606 -3.420 -0.477  2.107  9.297 
+
+Coefficients:
+            Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)   8.5973     0.8529  10.080 5.16e-14 ***
+brain_body  152.0003    61.6672   2.465   0.0169 *  
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 4.231 on 54 degrees of freedom
+  (27 observations deleted due to missingness)
+Multiple R-squared:  0.1011,    Adjusted R-squared:  0.08449 
+F-statistic: 6.075 on 1 and 54 DF,  p-value: 0.01692</code></pre>
+</div>
+</div>
+</section>
+</section>
+</section>
+<section id="create-summaries-with-dplyrsummarise" class="level1">
+<h1>Create summaries with <code>dplyr::summarise()</code></h1>
+<p>The <code>summarise()</code> function creates summary statistics for a given column in the data frame such as the mean. Write code that calculates the following statistics on the variable <code>sleep_total</code> and give the values useful names:</p>
+<ul>
+<li>average</li>
+<li>minimum</li>
+<li>maximum</li>
+<li>total number of observations</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>msleep <span class="sc">%&gt;%</span> </span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">summarise</span>(<span class="at">avg_sleep =</span> <span class="fu">mean</span>(sleep_total), </span>
+<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a>              <span class="at">min_sleep =</span> <span class="fu">min</span>(sleep_total),</span>
+<span id="cb44-4"><a href="#cb44-4" aria-hidden="true" tabindex="-1"></a>              <span class="at">max_sleep =</span> <span class="fu">max</span>(sleep_total),</span>
+<span id="cb44-5"><a href="#cb44-5" aria-hidden="true" tabindex="-1"></a>              <span class="at">total =</span> <span class="fu">n</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 4
+  avg_sleep min_sleep max_sleep total
+      &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt; &lt;int&gt;
+1      10.4       1.9      19.9    83</code></pre>
+</div>
+</div>
+</section>
+<section id="dealing-with-missing-data" class="level1">
+<h1>Dealing with missing data</h1>
+<p>The variable <code>sleep_cycle</code> has missing values. If you use the code below to compute summary statistics for this variable, it will return <code>NA</code> (missing value) for the summary statistics.</p>
+<pre><code>msleep %&gt;% 
+    dplyr::summarise(avg_sleep_cycle = mean(sleep_cycle), 
+              min_sleep_cycle = min(sleep_cycle),
+              max_sleep_cycle = max(sleep_cycle),
+              total = n())</code></pre>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a>msleep <span class="sc">%&gt;%</span> </span>
+<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">summarise</span>(<span class="at">avg_sleep_cycle =</span> <span class="fu">mean</span>(sleep_cycle), </span>
+<span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a>              <span class="at">min_sleep_cycle =</span> <span class="fu">min</span>(sleep_cycle),</span>
+<span id="cb47-4"><a href="#cb47-4" aria-hidden="true" tabindex="-1"></a>              <span class="at">max_sleep_cycle =</span> <span class="fu">max</span>(sleep_cycle),</span>
+<span id="cb47-5"><a href="#cb47-5" aria-hidden="true" tabindex="-1"></a>              <span class="at">total =</span> <span class="fu">n</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 4
+  avg_sleep_cycle min_sleep_cycle max_sleep_cycle total
+            &lt;dbl&gt;           &lt;dbl&gt;           &lt;dbl&gt; &lt;int&gt;
+1              NA              NA              NA    83</code></pre>
+</div>
+</div>
+<p>Try the code in de chunk below and make necessary adjustments to the code to be able to compute summary statistics.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Solutions to deal with missing values: na.rm = TRUE</span></span>
+<span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a>msleep <span class="sc">%&gt;%</span> </span>
+<span id="cb49-3"><a href="#cb49-3" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">summarise</span>(<span class="at">avg_sleep_cycle =</span> <span class="fu">mean</span>(sleep_cycle, <span class="at">na.rm =</span> <span class="cn">TRUE</span>), </span>
+<span id="cb49-4"><a href="#cb49-4" aria-hidden="true" tabindex="-1"></a>              <span class="at">min_sleep_cycle =</span> <span class="fu">min</span>(sleep_cycle, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb49-5"><a href="#cb49-5" aria-hidden="true" tabindex="-1"></a>              <span class="at">max_sleep_cycle =</span> <span class="fu">max</span>(sleep_cycle, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb49-6"><a href="#cb49-6" aria-hidden="true" tabindex="-1"></a>              <span class="at">total =</span> <span class="fu">n</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 4
+  avg_sleep_cycle min_sleep_cycle max_sleep_cycle total
+            &lt;dbl&gt;           &lt;dbl&gt;           &lt;dbl&gt; &lt;int&gt;
+1           0.440           0.117             1.5    83</code></pre>
+</div>
+</div>
+<section id="grouping-data-dplyrgroup_by" class="level3">
+<h3 class="anchored" data-anchor-id="grouping-data-dplyrgroup_by">Grouping data: <code>dplyr::group_by()</code></h3>
+<p>Split the <code>msleep</code> data frame by the type of food the animals eat (the <code>vore</code> variable), then ask for the summary statistics average, minimum and maximum, plus the total number of observations in each <code>vore</code> category. The result should give a set of summary statistics for each <code>vore</code> type.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a>msleep <span class="sc">%&gt;%</span> </span>
+<span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">group_by</span>(vore) <span class="sc">%&gt;%</span></span>
+<span id="cb51-3"><a href="#cb51-3" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">summarise</span>(</span>
+<span id="cb51-4"><a href="#cb51-4" aria-hidden="true" tabindex="-1"></a>              <span class="at">avg_sleep =</span> <span class="fu">mean</span>(sleep_total), </span>
+<span id="cb51-5"><a href="#cb51-5" aria-hidden="true" tabindex="-1"></a>              <span class="at">min_sleep =</span> <span class="fu">min</span>(sleep_total), </span>
+<span id="cb51-6"><a href="#cb51-6" aria-hidden="true" tabindex="-1"></a>              <span class="at">max_sleep =</span> <span class="fu">max</span>(sleep_total),</span>
+<span id="cb51-7"><a href="#cb51-7" aria-hidden="true" tabindex="-1"></a>              <span class="at">total =</span> <span class="fu">n</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 5 × 5
+  vore    avg_sleep min_sleep max_sleep total
+  &lt;chr&gt;       &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt; &lt;int&gt;
+1 carni       10.4        2.7      19.4    19
+2 herbi        9.51       1.9      16.6    32
+3 insecti     14.9        8.4      19.9     5
+4 omni        10.9        8        18      20
+5 &lt;NA&gt;        10.2        5.4      13.7     7</code></pre>
+</div>
+</div>
+</section>
+<section id="save-the-msleep-data-as-.rdata" class="level3">
+<h3 class="anchored" data-anchor-id="save-the-msleep-data-as-.rdata">Save the <code>msleep</code> data as .Rdata</h3>
+<p>If you want to save your data, you can use the <code>R</code> native format of an <code>.Rdata</code> file. Use the following code to save the <code>msleep</code> data to your current project directory. Verify where the data have been saved.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="fu">save</span>(msleep, <span class="at">file=</span><span class="st">"msleep.RData"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="close-the-project" class="level2">
+<h2 class="anchored" data-anchor-id="close-the-project">Close the project</h2>
+<p>Close the RStudio Project using the option you prefer.</p>
+<p>Here are the 2 options:</p>
+<ol type="1">
+<li>Quit RStudio using RStudio -&gt; Quit RStudio. This will close the RStudio application but keep the current RStudio Project active. This means that when you open RStudio the next time, it will automatically open with the current RStudio Project.</li>
+<li>Close the RStudio Project using File -&gt; Close Project. This will only close the current RStudio Project, but it will not close the RStudio application.</li>
+</ol>
+</section>
+</section>
+<section id="advanced-exercises" class="level1">
+<h1>Advanced exercises</h1>
+<section id="create-new-variables-based-on-conditions-with-dplyrmutate" class="level3">
+<h3 class="anchored" data-anchor-id="create-new-variables-based-on-conditions-with-dplyrmutate">Create new variables based on conditions with <code>dplyr::mutate()</code></h3>
+<p>Create a new variable <code>sleep_length</code> with two levels: “long” when the animals sleeps equal to or more than 10 hours (variable <code>sleep_total</code>) and “normal” when the animals sleep less than 10 hours in total. Save the new data set with this extra variable under a new name. Ensure that the new variable is a factor with two levels. Verify the results with the <code>summary()</code> function for the new variable <code>sleep_length</code>. Hint: use the <code>dplyr</code> function <code>mutate()</code> in combination with <code>if_else</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a>newdata <span class="ot">&lt;-</span> msleep <span class="sc">%&gt;%</span></span>
+<span id="cb54-2"><a href="#cb54-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">sleep_length =</span> <span class="fu">if_else</span>(<span class="at">condition =</span> sleep_total <span class="sc">&gt;=</span> <span class="dv">10</span>, </span>
+<span id="cb54-3"><a href="#cb54-3" aria-hidden="true" tabindex="-1"></a>                        <span class="at">true =</span> <span class="st">"long"</span>, </span>
+<span id="cb54-4"><a href="#cb54-4" aria-hidden="true" tabindex="-1"></a>                        <span class="at">false =</span> <span class="st">"normal"</span>),</span>
+<span id="cb54-5"><a href="#cb54-5" aria-hidden="true" tabindex="-1"></a>         <span class="at">sleep_length =</span> <span class="fu">factor</span>(sleep_length))</span>
+<span id="cb54-6"><a href="#cb54-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb54-7"><a href="#cb54-7" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(newdata<span class="sc">$</span>sleep_length)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  long normal 
+    45     38 </code></pre>
+</div>
+</div>
+</section>
+<section id="use-case_when-to-recode-variables" class="level2">
+<h2 class="anchored" data-anchor-id="use-case_when-to-recode-variables">Use <code>case_when</code> to recode variables</h2>
+<p>Now create another variable <code>sleep_cat</code> based on <code>sleep_total</code> and this time using three categories: animals that sleep 6 hours or less are “short”, animals that sleep between 6 and 10 hours are “normal”, and animals that sleep more than 10 hours are “long”. Create a new data set with this new variable included as a factor. Use the function <code>case_when()</code> and save the data set with the new variable under a new name.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb56"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a>newdata2 <span class="ot">&lt;-</span> newdata <span class="sc">%&gt;%</span></span>
+<span id="cb56-2"><a href="#cb56-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">sleep_cat =</span> <span class="fu">case_when</span>(</span>
+<span id="cb56-3"><a href="#cb56-3" aria-hidden="true" tabindex="-1"></a>            sleep_total <span class="sc">&lt;=</span> <span class="dv">6</span> <span class="sc">~</span> <span class="st">"short"</span>,</span>
+<span id="cb56-4"><a href="#cb56-4" aria-hidden="true" tabindex="-1"></a>            sleep_total <span class="sc">&gt;</span> <span class="dv">10</span>  <span class="sc">~</span> <span class="st">"long"</span>,</span>
+<span id="cb56-5"><a href="#cb56-5" aria-hidden="true" tabindex="-1"></a>            <span class="cn">TRUE</span> <span class="sc">~</span> <span class="st">"normal"</span>),</span>
+<span id="cb56-6"><a href="#cb56-6" aria-hidden="true" tabindex="-1"></a> <span class="at">sleep_cat =</span> <span class="fu">factor</span>(sleep_cat)       </span>
+<span id="cb56-7"><a href="#cb56-7" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="cb56-8"><a href="#cb56-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb56-9"><a href="#cb56-9" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(newdata2<span class="sc">$</span>sleep_cat)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  long normal  short 
+    44     23     16 </code></pre>
+</div>
+</div>
+<section id="change-the-levels-of-a-categorical-variable-with-dplyr-and-case_when" class="level3">
+<h3 class="anchored" data-anchor-id="change-the-levels-of-a-categorical-variable-with-dplyr-and-case_when">Change the levels of a categorical variable with <code>dplyr</code> and <code>case_when</code></h3>
+<p>Create a new variable <code>vore_cat</code> that combines the two categories “carni” and “insecti” in the original variable <code>vore</code>. Save the new data set under a new name and ensure that the new variable <code>vore-cat</code> is converted to a factor variable.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb58"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a>newdata3 <span class="ot">&lt;-</span> msleep <span class="sc">%&gt;%</span></span>
+<span id="cb58-2"><a href="#cb58-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">vore_cat =</span> <span class="fu">case_when</span>(</span>
+<span id="cb58-3"><a href="#cb58-3" aria-hidden="true" tabindex="-1"></a>            vore <span class="sc">==</span> <span class="st">"carni"</span> <span class="sc">~</span> <span class="st">"carni"</span>,</span>
+<span id="cb58-4"><a href="#cb58-4" aria-hidden="true" tabindex="-1"></a>            vore <span class="sc">==</span> <span class="st">"insecti"</span> <span class="sc">~</span> <span class="st">"carni"</span>,</span>
+<span id="cb58-5"><a href="#cb58-5" aria-hidden="true" tabindex="-1"></a>            vore <span class="sc">==</span> <span class="st">"herbi"</span> <span class="sc">~</span> <span class="st">"herbi"</span>,</span>
+<span id="cb58-6"><a href="#cb58-6" aria-hidden="true" tabindex="-1"></a>            vore <span class="sc">==</span> <span class="st">"omni"</span> <span class="sc">~</span> <span class="st">"omni"</span>),</span>
+<span id="cb58-7"><a href="#cb58-7" aria-hidden="true" tabindex="-1"></a> <span class="at">vore_cat =</span> <span class="fu">factor</span>(vore_cat)       </span>
+<span id="cb58-8"><a href="#cb58-8" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="cb58-9"><a href="#cb58-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb58-10"><a href="#cb58-10" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(newdata3<span class="sc">$</span>vore_cat)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>carni herbi  omni  NA's 
+   24    32    20     7 </code></pre>
+</div>
+</div>
+</section>
+<section id="exclude-a-few-animals-from-the-data-set-with-base-r-code-and-with-dplyr" class="level3">
+<h3 class="anchored" data-anchor-id="exclude-a-few-animals-from-the-data-set-with-base-r-code-and-with-dplyr">Exclude a few animals from the data set with base R code and with <code>dplyr</code></h3>
+<p>Exclude the following animals from the <code>msleep</code> (variable ‘name’): Echidna, Lesser short-tailed shrew and Musk shrew. Save the data set as <code>msleep2</code>. Tip: use the square brackets to indicate [rows, columns] or use the function <code>filter()</code> from <code>dplyr</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb60"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a><span class="co"># The first approach uses the names</span></span>
+<span id="cb60-2"><a href="#cb60-2" aria-hidden="true" tabindex="-1"></a>exclude <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Bottle-nosed dolphin"</span>, <span class="st">"Lesser short-tailed shrew"</span>, <span class="st">"Musk shrew"</span>)</span>
+<span id="cb60-3"><a href="#cb60-3" aria-hidden="true" tabindex="-1"></a>which <span class="ot">&lt;-</span> msleep<span class="sc">$</span>name <span class="sc">%in%</span> exclude <span class="co">#Indicate the species that match the names in exclude</span></span>
+<span id="cb60-4"><a href="#cb60-4" aria-hidden="true" tabindex="-1"></a>which</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+[13] FALSE FALSE FALSE FALSE  TRUE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+[25] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+[37] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+[49] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+[61] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+[73]  TRUE FALSE FALSE FALSE FALSE FALSE FALSE  TRUE FALSE FALSE FALSE</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb62"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a>msleep2 <span class="ot">&lt;-</span> msleep[<span class="sc">!</span>which, ]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb63"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb63-1"><a href="#cb63-1" aria-hidden="true" tabindex="-1"></a><span class="co"># The second approach uses the row numbers directly (you would need to inquire about, or calculate the row numbers)</span></span>
+<span id="cb63-2"><a href="#cb63-2" aria-hidden="true" tabindex="-1"></a>msleep3 <span class="ot">&lt;-</span> msleep[<span class="sc">-</span><span class="fu">c</span>(<span class="dv">17</span>, <span class="dv">73</span>, <span class="dv">80</span>), ]</span>
+<span id="cb63-3"><a href="#cb63-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb63-4"><a href="#cb63-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Note that the numbered option requires less code, but the named option has a much lower probability for error. As the data set might change, or might get sorted differently, the second option may not be valid anymore. </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb64"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb64-1"><a href="#cb64-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Using dplyr and filter()</span></span>
+<span id="cb64-2"><a href="#cb64-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb64-3"><a href="#cb64-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr) </span>
+<span id="cb64-4"><a href="#cb64-4" aria-hidden="true" tabindex="-1"></a>exclude <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Bottle-nosed dolphin"</span>, <span class="st">"Lesser short-tailed shrew"</span>, <span class="st">"Musk shrew"</span>)</span>
+<span id="cb64-5"><a href="#cb64-5" aria-hidden="true" tabindex="-1"></a>msleep4 <span class="ot">&lt;-</span> dplyr<span class="sc">::</span><span class="fu">filter</span>(msleep, <span class="sc">!</span>msleep<span class="sc">$</span>name <span class="sc">%in%</span> exclude) <span class="co"># ! makes all TRUES into FALSE</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="close-the-project-1" class="level3">
+<h3 class="anchored" data-anchor-id="close-the-project-1">Close the project</h3>
+<p>Close the RStudio Project using the option you prefer.</p>
+<p>Here are the 2 options:</p>
+<ol type="1">
+<li>Quit RStudio using RStudio -&gt; Quit RStudio. This will close the RStudio application but keep the current RStudio Project active. This means that when you open RStudio the next time, it will automatically open with the current RStudio Project.</li>
+<li>Close the RStudio Project using File -&gt; Close Project. This will only close the current RStudio Project, but it will not close the RStudio application.</li>
+</ol>
 
 
+</section>
+</section>
+</section>
+<section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn1"><p>The exercises in this lab are inspired by the exercises made by Stephen Turner, see <a href="https://seandavi.github.io/ITR/dplyr_intro_msleep.html#%E2%80%9CPiping%E2%80%9D%E2%80%9D_with_%%">here</a>.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>A quantitative, theoretical framework for understanding mammalian sleep. Van M. Savage, Geoffrey B. West. Proceedings of the National Academy of Sciences Jan 2007, 104 (3) 1051-1056; DOI: <a href="https://doi.org/10.1073/pnas.0610080104">10.1073/pnas.0610080104</a><a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -661,8 +1462,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./meeting4.html" class="pagination-link" aria-label="Statistiche Analyse">
-        <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Statistiche Analyse</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./meeting4.html" class="pagination-link" aria-label="Statistische Analyse">
+        <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Statistische Analyse</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
@@ -671,4 +1472,4 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 
 
 
-<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions"><ul><li><a href="https://github.com/gerkovink/sur/edit/book/meeting3.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/gerkovink/sur/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div></div></footer></body></html>
+<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/gerkovink/sur/edit/book/meeting3.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/gerkovink/sur/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div></div></footer></body></html>

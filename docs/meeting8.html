@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>8&nbsp; Ontwikkelen en programmeren in R – Module 6: Introduction to Data Processing &amp; Programming in R</title>
+<title>Ontwikkelen en programmeren in R – Module 6: Introduction to Data Processing &amp; Programming in R</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -193,7 +193,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./meeting4.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Statistiche Analyse</span></span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Statistische Analyse</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -211,7 +211,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./meeting7.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Data visualizatie</span></span></a>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Data visualisatie</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -230,17 +230,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#r-packages" id="toc-r-packages" class="nav-link active" data-scroll-target="#r-packages"><span class="header-section-number">8.1</span> <code>R</code>-packages</a>
+  <li><a href="#r-packages" id="toc-r-packages" class="nav-link active" data-scroll-target="#r-packages"><code>R</code>-packages</a>
   <ul class="collapse">
-  <li><a href="#some-r-code" id="toc-some-r-code" class="nav-link" data-scroll-target="#some-r-code"><span class="header-section-number">8.1.1</span> Some R-code</a></li>
+  <li><a href="#some-r-code" id="toc-some-r-code" class="nav-link" data-scroll-target="#some-r-code">Some R-code</a></li>
   </ul></li>
-  <li><a href="#create-r-package-roundr" id="toc-create-r-package-roundr" class="nav-link" data-scroll-target="#create-r-package-roundr"><span class="header-section-number">8.2</span> Create <code>R</code>-package <code>roundR</code></a>
+  <li><a href="#create-r-package-roundr" id="toc-create-r-package-roundr" class="nav-link" data-scroll-target="#create-r-package-roundr">Create <code>R</code>-package <code>roundR</code></a>
   <ul class="collapse">
-  <li><a href="#steps-in-creating-an-r-package" id="toc-steps-in-creating-an-r-package" class="nav-link" data-scroll-target="#steps-in-creating-an-r-package"><span class="header-section-number">8.2.1</span> Steps in creating an <code>R</code>-package</a></li>
+  <li><a href="#steps-in-creating-an-r-package" id="toc-steps-in-creating-an-r-package" class="nav-link" data-scroll-target="#steps-in-creating-an-r-package">Steps in creating an <code>R</code>-package</a></li>
   </ul></li>
-  <li><a href="#installing-your-own-package-from-github" id="toc-installing-your-own-package-from-github" class="nav-link" data-scroll-target="#installing-your-own-package-from-github"><span class="header-section-number">8.3</span> Installing your own package from GitHub</a></li>
-  <li><a href="#advanced-topics" id="toc-advanced-topics" class="nav-link" data-scroll-target="#advanced-topics"><span class="header-section-number">8.4</span> Advanced topics</a></li>
-  <li><a href="#other-useful-sources" id="toc-other-useful-sources" class="nav-link" data-scroll-target="#other-useful-sources"><span class="header-section-number">8.5</span> Other useful sources</a></li>
+  <li><a href="#installing-your-own-package-from-github" id="toc-installing-your-own-package-from-github" class="nav-link" data-scroll-target="#installing-your-own-package-from-github">Installing your own package from GitHub</a></li>
+  <li><a href="#advanced-topics" id="toc-advanced-topics" class="nav-link" data-scroll-target="#advanced-topics">Advanced topics</a></li>
+  <li><a href="#other-useful-sources" id="toc-other-useful-sources" class="nav-link" data-scroll-target="#other-useful-sources">Other useful sources</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/gerkovink/sur/edit/book/meeting8.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/gerkovink/sur/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
@@ -249,22 +249,36 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span id="sec-mt8" class="quarto-section-identifier"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Ontwikkelen en programmeren in R</span></span></h1>
+<h1 class="title"><span id="sec-mt8" class="quarto-section-identifier"><span class="chapter-title">Ontwikkelen en programmeren in R</span></span></h1>
 <p class="subtitle lead">How to develop, test and publish <code>R</code>-packages</p>
 </div>
 
 
+<div class="quarto-title-meta-author">
+  <div class="quarto-title-meta-heading">Authors</div>
+  <div class="quarto-title-meta-heading">Affiliation</div>
+  
+    <div class="quarto-title-meta-contents">
+    <p class="author">Gerko Vink <a href="mailto:g.vink@uu.nl" class="quarto-title-author-email"><i class="bi bi-envelope"></i></a> <a href="https://orcid.org/0000-0001-9767-1924" class="quarto-title-author-orcid"> <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMjA4MDI1MjA2ODExOTk0QzkzNTEzRjZEQTg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozM0NDOEJGNEZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozM0NDOEJGM0ZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZDN0YxMTc0MDcyMDY4MTE5NUZFRDc5MUM2MUUwNEREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU3Q0QyMDgwMjUyMDY4MTE5OTRDOTM1MTNGNkRBODU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+84NovQAAAR1JREFUeNpiZEADy85ZJgCpeCB2QJM6AMQLo4yOL0AWZETSqACk1gOxAQN+cAGIA4EGPQBxmJA0nwdpjjQ8xqArmczw5tMHXAaALDgP1QMxAGqzAAPxQACqh4ER6uf5MBlkm0X4EGayMfMw/Pr7Bd2gRBZogMFBrv01hisv5jLsv9nLAPIOMnjy8RDDyYctyAbFM2EJbRQw+aAWw/LzVgx7b+cwCHKqMhjJFCBLOzAR6+lXX84xnHjYyqAo5IUizkRCwIENQQckGSDGY4TVgAPEaraQr2a4/24bSuoExcJCfAEJihXkWDj3ZAKy9EJGaEo8T0QSxkjSwORsCAuDQCD+QILmD1A9kECEZgxDaEZhICIzGcIyEyOl2RkgwAAhkmC+eAm0TAAAAABJRU5ErkJggg=="></a></p>
+  </div>
+  <div class="quarto-title-meta-contents">
+        <p class="affiliation">
+            Methodology &amp; Statistics @ Utrecht University
+          </p>
+      </div>
+    <div class="quarto-title-meta-contents">
+    <p class="author">Hanne Oberman <a href="mailto:h.i.oberman@uu.nl" class="quarto-title-author-email"><i class="bi bi-envelope"></i></a> <a href="https://orcid.org/0000-0003-3276-2141" class="quarto-title-author-orcid"> <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMjA4MDI1MjA2ODExOTk0QzkzNTEzRjZEQTg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozM0NDOEJGNEZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozM0NDOEJGM0ZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZDN0YxMTc0MDcyMDY4MTE5NUZFRDc5MUM2MUUwNEREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU3Q0QyMDgwMjUyMDY4MTE5OTRDOTM1MTNGNkRBODU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+84NovQAAAR1JREFUeNpiZEADy85ZJgCpeCB2QJM6AMQLo4yOL0AWZETSqACk1gOxAQN+cAGIA4EGPQBxmJA0nwdpjjQ8xqArmczw5tMHXAaALDgP1QMxAGqzAAPxQACqh4ER6uf5MBlkm0X4EGayMfMw/Pr7Bd2gRBZogMFBrv01hisv5jLsv9nLAPIOMnjy8RDDyYctyAbFM2EJbRQw+aAWw/LzVgx7b+cwCHKqMhjJFCBLOzAR6+lXX84xnHjYyqAo5IUizkRCwIENQQckGSDGY4TVgAPEaraQr2a4/24bSuoExcJCfAEJihXkWDj3ZAKy9EJGaEo8T0QSxkjSwORsCAuDQCD+QILmD1A9kECEZgxDaEZhICIzGcIyEyOl2RkgwAAhkmC+eAm0TAAAAABJRU5ErkJggg=="></a></p>
+  </div>
+  <div class="quarto-title-meta-contents">
+        <p class="affiliation">
+            Methodology &amp; Statistics @ Utrecht University
+          </p>
+      </div>
+  </div>
 
 <div class="quarto-title-meta">
 
-    <div>
-    <div class="quarto-title-meta-heading">Authors</div>
-    <div class="quarto-title-meta-contents">
-             <p>Gerko Vink <a href="https://orcid.org/0000-0001-9767-1924" class="quarto-title-author-orcid"> <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMjA4MDI1MjA2ODExOTk0QzkzNTEzRjZEQTg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozM0NDOEJGNEZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozM0NDOEJGM0ZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZDN0YxMTc0MDcyMDY4MTE5NUZFRDc5MUM2MUUwNEREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU3Q0QyMDgwMjUyMDY4MTE5OTRDOTM1MTNGNkRBODU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+84NovQAAAR1JREFUeNpiZEADy85ZJgCpeCB2QJM6AMQLo4yOL0AWZETSqACk1gOxAQN+cAGIA4EGPQBxmJA0nwdpjjQ8xqArmczw5tMHXAaALDgP1QMxAGqzAAPxQACqh4ER6uf5MBlkm0X4EGayMfMw/Pr7Bd2gRBZogMFBrv01hisv5jLsv9nLAPIOMnjy8RDDyYctyAbFM2EJbRQw+aAWw/LzVgx7b+cwCHKqMhjJFCBLOzAR6+lXX84xnHjYyqAo5IUizkRCwIENQQckGSDGY4TVgAPEaraQr2a4/24bSuoExcJCfAEJihXkWDj3ZAKy9EJGaEo8T0QSxkjSwORsCAuDQCD+QILmD1A9kECEZgxDaEZhICIzGcIyEyOl2RkgwAAhkmC+eAm0TAAAAABJRU5ErkJggg=="></a></p>
-             <p>Hanne Oberman <a href="https://orcid.org/0000-0003-3276-2141" class="quarto-title-author-orcid"> <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMjA4MDI1MjA2ODExOTk0QzkzNTEzRjZEQTg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozM0NDOEJGNEZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozM0NDOEJGM0ZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZDN0YxMTc0MDcyMDY4MTE5NUZFRDc5MUM2MUUwNEREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU3Q0QyMDgwMjUyMDY4MTE5OTRDOTM1MTNGNkRBODU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+84NovQAAAR1JREFUeNpiZEADy85ZJgCpeCB2QJM6AMQLo4yOL0AWZETSqACk1gOxAQN+cAGIA4EGPQBxmJA0nwdpjjQ8xqArmczw5tMHXAaALDgP1QMxAGqzAAPxQACqh4ER6uf5MBlkm0X4EGayMfMw/Pr7Bd2gRBZogMFBrv01hisv5jLsv9nLAPIOMnjy8RDDyYctyAbFM2EJbRQw+aAWw/LzVgx7b+cwCHKqMhjJFCBLOzAR6+lXX84xnHjYyqAo5IUizkRCwIENQQckGSDGY4TVgAPEaraQr2a4/24bSuoExcJCfAEJihXkWDj3ZAKy9EJGaEo8T0QSxkjSwORsCAuDQCD+QILmD1A9kECEZgxDaEZhICIzGcIyEyOl2RkgwAAhkmC+eAm0TAAAAABJRU5ErkJggg=="></a></p>
-          </div>
-  </div>
-    
+      
   
     
   </div>
@@ -301,11 +315,11 @@ Voorbereiding
 
 </div>
 </div>
-<section id="r-packages" class="level2" data-number="8.1">
-<h2 data-number="8.1" class="anchored" data-anchor-id="r-packages"><span class="header-section-number">8.1</span> <code>R</code>-packages</h2>
+<section id="r-packages" class="level2">
+<h2 class="anchored" data-anchor-id="r-packages"><code>R</code>-packages</h2>
 <p>It is much easier to create, manage and co-develop an R-package when you incorporate it into a distributed version control system like <a href="https://git-scm.com">Git</a>. The extension to a software development hosting service like <a href="https://github.com">GitHub</a> is then a natural one. Although there are other procedures, devops systems and hosting services that may lend itself for package development, we outline the workflow with <code>Git</code> and <code>GitHub</code>. We also assume that you have <a href="https://posit.co/products/open-source/rstudio/"><code>RStudio</code></a> installed.</p>
-<section id="recap-on-git" class="level4" data-number="8.1.0.1">
-<h4 data-number="8.1.0.1" class="anchored" data-anchor-id="recap-on-git"><span class="header-section-number">8.1.0.1</span> Recap on <code>Git</code></h4>
+<section id="recap-on-git" class="level4">
+<h4 class="anchored" data-anchor-id="recap-on-git">Recap on <code>Git</code></h4>
 <p><code>Git</code> is a free and open source version control system for text files. It can handle extensive change logging for you, no matter the size of the project. <code>Git</code> is fast and efficient, but its effectiveness depends also on the frequency you instruct it to log your project’s changes.</p>
 <p>You can see <code>Git</code> as a blank canvas that starts at a certain point in time. Every time you (or others) instruct <code>Git</code> to log any changes that have been made, <code>Git</code> adds the changes that are made to this canvas. We call the changes to the canvas <a href="https://help.github.com/articles/github-glossary/#commit"><code>commits</code></a>. With every <code>commit</code> an extensive log is created that includes at least the following information:</p>
 <ul>
@@ -317,8 +331,8 @@ Voorbereiding
 <p>The difference between two commits - or the changes between them - are called <a href="https://help.github.com/articles/github-glossary/#diff"><code>diffs</code></a>.</p>
 <p>If you’d like to know much more about <code>Git</code>, <a href="https://git-scm.com/book/en/v2">this online book</a> is a very good resource. If you’d like to practice with the command line interface <a href="https://learngitbranching.js.org">use this webpage</a> for a quick course. <a href="https://happygitwithr.com">This book</a> covers pretty much everything you need to marry <code>Git</code> and <code>R</code>.</p>
 </section>
-<section id="why-github" class="level4" data-number="8.1.0.2">
-<h4 data-number="8.1.0.2" class="anchored" data-anchor-id="why-github"><span class="header-section-number">8.1.0.2</span> Why GitHub</h4>
+<section id="why-github" class="level4">
+<h4 class="anchored" data-anchor-id="why-github">Why GitHub</h4>
 <p><code>GitHub</code> is the social and user interface to <code>Git</code> that allows you to work in <a href="https://help.github.com/articles/github-glossary/#repository">repositories</a>. These repositories can be seen as project folders in which you publish your work, but you can also use them as test sites for development, testing, etcetera. There is a distinction between <a href="https://help.github.com/articles/github-glossary/#private-repository">private repositories</a> (only for you and those you grant access) and public repositories (visible for everyone).</p>
 <p>Your public repositories can be viewed and <a href="https://help.github.com/articles/github-glossary/#fork">forked</a> by everyone. <code>Forking</code> is when other people create a copy of your repository on their own account. This allows them to work on a repository without affecting the <code>master</code>. You can also do this yourself, but then the process is called <a href="https://help.github.com/articles/github-glossary/#branch"><code>branching</code></a> instead of forking. If you create a copy of a repository that is offline, the process is called <a href="https://help.github.com/articles/github-glossary/#clone"><code>cloning</code></a>.</p>
 <p><code>GitHub</code>’s ability to branch, fork and clone is very useful as it allows other people and yourself to experiment on (the code in) a repository before any definitive changes are <a href="https://help.github.com/articles/github-glossary/#merge"><code>merged</code></a> with the <code>master</code>. If you’re working in a forked repository, you can submit a <a href="https://help.github.com/articles/github-glossary/#pull-request"><code>pull request</code></a> to the repository collaborators to accept (or reject) any suggested changes.</p>
@@ -329,12 +343,12 @@ Voorbereiding
 </div>
 <p>You can see that this process requires package <code>devtools</code> that expands the <code>R</code> functionality with essential development tools. Loading packages in <code>R</code> directly from their respective <code>GitHub</code> repositories, allows you to obtain the latest - often improved and less buggy - iteration of that software even before it is published on <a href="https://cran.r-project.org"><code>CRAN</code></a>.</p>
 </section>
-<section id="install-rstudio" class="level4" data-number="8.1.0.3">
-<h4 data-number="8.1.0.3" class="anchored" data-anchor-id="install-rstudio"><span class="header-section-number">8.1.0.3</span> Install <code>RStudio</code></h4>
+<section id="install-rstudio" class="level4">
+<h4 class="anchored" data-anchor-id="install-rstudio">Install <code>RStudio</code></h4>
 <p>Install <code>RStudio</code> from <a href="https://posit.co/products/open-source/rstudio/">Posit’s website</a>. The free edition will suffice.</p>
 </section>
-<section id="some-r-code" class="level3" data-number="8.1.1">
-<h3 data-number="8.1.1" class="anchored" data-anchor-id="some-r-code"><span class="header-section-number">8.1.1</span> Some R-code</h3>
+<section id="some-r-code" class="level3">
+<h3 class="anchored" data-anchor-id="some-r-code">Some R-code</h3>
 <p>In order to demonstrate the creation of an R-package, we will identify some odd behaviour by <code>R</code>:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
@@ -369,13 +383,13 @@ Voorbereiding
 </div>
 </section>
 </section>
-<section id="create-r-package-roundr" class="level2" data-number="8.2">
-<h2 data-number="8.2" class="anchored" data-anchor-id="create-r-package-roundr"><span class="header-section-number">8.2</span> Create <code>R</code>-package <code>roundR</code></h2>
+<section id="create-r-package-roundr" class="level2">
+<h2 class="anchored" data-anchor-id="create-r-package-roundr">Create <code>R</code>-package <code>roundR</code></h2>
 <p>The goal of this document is to create the code for the <code>rounder()</code> function into a stand-alone <code>R</code>-package with its referenceable <a href="https://www.doi.org">Digital Object Identifier</a></p>
-<section id="steps-in-creating-an-r-package" class="level3" data-number="8.2.1">
-<h3 data-number="8.2.1" class="anchored" data-anchor-id="steps-in-creating-an-r-package"><span class="header-section-number">8.2.1</span> Steps in creating an <code>R</code>-package</h3>
-<section id="packages-and-sources-needed" class="level4" data-number="8.2.1.1">
-<h4 data-number="8.2.1.1" class="anchored" data-anchor-id="packages-and-sources-needed"><span class="header-section-number">8.2.1.1</span> Packages and sources needed</h4>
+<section id="steps-in-creating-an-r-package" class="level3">
+<h3 class="anchored" data-anchor-id="steps-in-creating-an-r-package">Steps in creating an <code>R</code>-package</h3>
+<section id="packages-and-sources-needed" class="level4">
+<h4 class="anchored" data-anchor-id="packages-and-sources-needed">Packages and sources needed</h4>
 <p>We need the following packages to help us with building, testing and maintaining our package:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(devtools) <span class="co"># development tools</span></span>
@@ -383,8 +397,8 @@ Voorbereiding
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(testthat) <span class="co"># unit testing</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="preparing-the-package-structure" class="level4" data-number="8.2.1.2">
-<h4 data-number="8.2.1.2" class="anchored" data-anchor-id="preparing-the-package-structure"><span class="header-section-number">8.2.1.2</span> Preparing the package structure</h4>
+<section id="preparing-the-package-structure" class="level4">
+<h4 class="anchored" data-anchor-id="preparing-the-package-structure">Preparing the package structure</h4>
 <p>We need a location for our <code>R</code>-package. The simplest approach to creating the skeleton for an <code>R</code>-package is to use <code>RStudio</code>. The following gif outlines this procedure:</p>
 <center>
 <img src="images/mt6/packagefolder.gif" class="img-fluid" style="width:90.0%">
@@ -402,8 +416,8 @@ Voorbereiding
 <img src="images/mt6/build.gif" class="img-fluid" style="width:90.0%">
 </center>
 </section>
-<section id="add-the-description" class="level4" data-number="8.2.1.3">
-<h4 data-number="8.2.1.3" class="anchored" data-anchor-id="add-the-description"><span class="header-section-number">8.2.1.3</span> Add the description</h4>
+<section id="add-the-description" class="level4">
+<h4 class="anchored" data-anchor-id="add-the-description">Add the description</h4>
 <p>Open the file <code>DESCRIPTION</code> from the file pane. The following window opens:</p>
 <center>
 <img src="images/mt6/DESCRIPTION.png" class="img-fluid" style="width:90.0%">
@@ -429,8 +443,8 @@ Voorbereiding
 </div>
 <p>Don’t forget to save the updated DESCRIPTION file and change our names to your name.</p>
 </section>
-<section id="add-the-functional-code" class="level4" data-number="8.2.1.4">
-<h4 data-number="8.2.1.4" class="anchored" data-anchor-id="add-the-functional-code"><span class="header-section-number">8.2.1.4</span> Add the functional code</h4>
+<section id="add-the-functional-code" class="level4">
+<h4 class="anchored" data-anchor-id="add-the-functional-code">Add the functional code</h4>
 <p>Now it is time to extend the package with the functionality we promised in our updated <code>DESCRIPTION</code>. To do so, we start a new file names <code>rounder.R</code> by either manually creating it in the <code>R</code> sub folder, or by running the following code evaluation</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>usethis<span class="sc">::</span><span class="fu">use_r</span>(<span class="st">"rounder"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -504,16 +518,16 @@ Voorbereiding
 <p>just remove the <code>NAMESPACE</code> file and re-run the <code>document()</code> function.</p>
 <p>We can now remove the <code>R/hello.R</code> and <code>man/hello.Rd</code> files as they are not supposed to be part of our package</p>
 </section>
-<section id="building-and-checking" class="level4" data-number="8.2.1.5">
-<h4 data-number="8.2.1.5" class="anchored" data-anchor-id="building-and-checking"><span class="header-section-number">8.2.1.5</span> Building and checking</h4>
+<section id="building-and-checking" class="level4">
+<h4 class="anchored" data-anchor-id="building-and-checking">Building and checking</h4>
 <p>Let’s check the functionality of our package.</p>
 <center>
 <img src="images/mt6/check.gif" class="img-fluid" style="width:90.0%">
 </center>
 <p><br></p>
 <p>We can see under <code>build &gt; check</code> that our current package yields 1 error, 1 warning and 1 note.</p>
-<section id="error" class="level5" data-number="8.2.1.5.1">
-<h5 data-number="8.2.1.5.1" class="anchored" data-anchor-id="error"><span class="header-section-number">8.2.1.5.1</span> Error</h5>
+<section id="error" class="level5">
+<h5 class="anchored" data-anchor-id="error">Error</h5>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>❯ checking examples ... ERROR</span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>  Running examples <span class="cf">in</span> ‘roundR<span class="sc">-</span>Ex.R’ failed</span>
@@ -537,8 +551,8 @@ Voorbereiding
 <span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a><span class="co">#' c(0.5, 1.5, 2.5, 3.5) %&gt;% rounder()</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="warning" class="level5" data-number="8.2.1.5.2">
-<h5 data-number="8.2.1.5.2" class="anchored" data-anchor-id="warning"><span class="header-section-number">8.2.1.5.2</span> Warning</h5>
+<section id="warning" class="level5">
+<h5 class="anchored" data-anchor-id="warning">Warning</h5>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>❯ checking Rd cross<span class="sc">-</span>references ... WARNING</span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>  Missing link or links <span class="cf">in</span> documentation object <span class="st">'rounder.Rd'</span><span class="sc">:</span></span>
@@ -556,8 +570,8 @@ Voorbereiding
 <span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a><span class="co">#'\code{\link[base]{round}}.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="note" class="level5" data-number="8.2.1.5.3">
-<h5 data-number="8.2.1.5.3" class="anchored" data-anchor-id="note"><span class="header-section-number">8.2.1.5.3</span> Note</h5>
+<section id="note" class="level5">
+<h5 class="anchored" data-anchor-id="note">Note</h5>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>❯ checking R code <span class="cf">for</span> possible problems ... NOTE</span>
 <span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>  rounder<span class="sc">:</span> no visible global <span class="cf">function</span> definition <span class="cf">for</span> ‘<span class="sc">%&gt;%</span>’</span>
@@ -612,8 +626,8 @@ Voorbereiding
 </div>
 </section>
 </section>
-<section id="increasing-the-version" class="level4" data-number="8.2.1.6">
-<h4 data-number="8.2.1.6" class="anchored" data-anchor-id="increasing-the-version"><span class="header-section-number">8.2.1.6</span> Increasing the version</h4>
+<section id="increasing-the-version" class="level4">
+<h4 class="anchored" data-anchor-id="increasing-the-version">Increasing the version</h4>
 <p>Now that we have a working package with a succesfull <code>R CMD check</code>, we might think about updating the version of the package. After all, a lot has changed since the last version got defined at the start of our development journey.</p>
 <p>The easiest means to increasing the version to <code>0.2.0</code> (indicating a minor update) is to use</p>
 <div class="cell">
@@ -646,8 +660,8 @@ Voorbereiding
 </div>
 <p>The question <code>Is it ok to commit it?</code> is related to <code>Git</code>. Please click to commit the version increase. For reasons of brevity and simplicity, we will leave a thorough discussion of incremental <code>Git</code> commits for now and demonstrate to use of <code>Git</code> and <code>GitHub</code> at the end of this walkthrough.</p>
 </section>
-<section id="add-tests" class="level4" data-number="8.2.1.7">
-<h4 data-number="8.2.1.7" class="anchored" data-anchor-id="add-tests"><span class="header-section-number">8.2.1.7</span> Add tests</h4>
+<section id="add-tests" class="level4">
+<h4 class="anchored" data-anchor-id="add-tests">Add tests</h4>
 <p>The next step for a mature package is to include tests. Every function should have functional tests. The <code>testthat</code> package is geared to that. Make sure that you have the <code>rounder.R</code> file open in the <code>Source</code> pane and run:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>usethis<span class="sc">::</span><span class="fu">use_test</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -711,8 +725,8 @@ Voorbereiding
 </div>
 <p>Fortunately, our test all passed. Now rerun the <code>R CMD check</code>. If all is well you’ll receive confirmation of a successful check.</p>
 </section>
-<section id="publishing-to-github" class="level4" data-number="8.2.1.8">
-<h4 data-number="8.2.1.8" class="anchored" data-anchor-id="publishing-to-github"><span class="header-section-number">8.2.1.8</span> Publishing to GitHub</h4>
+<section id="publishing-to-github" class="level4">
+<h4 class="anchored" data-anchor-id="publishing-to-github">Publishing to GitHub</h4>
 <p><strong>This section assumes that you are logged into your GitHub account. If you have trouble realizing this, <a href="https://docs.github.com/en/desktop/installing-and-configuring-github-desktop/installing-and-authenticating-to-github-desktop">GitHub has a great step-by-step walkthrough</a></strong>.</p>
 <p>Let’s publish our <code>R</code>-package to <code>GitHub</code>. To do so, we need to perform two steps. First, we must log (commit) our changes to the <code>Git</code> distributed version control system. This stores the file changes to our own machine. Next we must link our local <code>Git</code> to a remote online repository on <code>GitHub</code>. Luckily, with <code>GitHub Desktop</code>, we can perform all these steps in a single window interface.</p>
 Let’s start by adding our <code>R</code>-package to <code>GitHub desktop</code>. Remember that we already started the package in <code>RStudio</code> as a <code>Git</code> repository, so we only have to point <code>GitHub desktop</code> to the correct directory.
@@ -742,16 +756,16 @@ When we commit the new <code>Readme</code> file to the <code>development</code> 
 </center>
 <p>When you go back to <code>GitHub desktop</code> and <code>fetch</code> the changes on teh remote (that would be GitHub online), you will see that you have now access to the <code>readme</code> file and the <code>development</code> branch.</p>
 </section>
-<section id="registering-a-doi" class="level4" data-number="8.2.1.9">
-<h4 data-number="8.2.1.9" class="anchored" data-anchor-id="registering-a-doi"><span class="header-section-number">8.2.1.9</span> Registering a <code>DOI</code></h4>
+<section id="registering-a-doi" class="level4">
+<h4 class="anchored" data-anchor-id="registering-a-doi">Registering a <code>DOI</code></h4>
 <p>Now that we have a proper and open source package online and the world as our user base, it would be wise to allow for proper referencing of our package.</p>
 <p><code>GitHub</code> and <code>Zenodo</code> have paired to facilitate this procedure. If you link your <code>Zenodo</code> account to <code>GitHub</code>, <a href="https://docs.github.com/en/repositories/archiving-a-github-repository/referencing-and-citing-content">as outlined here</a>, you only have to click, copy and paste to fully make your <code>GitHub</code> repo citeable.</p>
 <center>
 <img src="images/mt6/doi.gif" class="img-fluid" style="width:90.0%">
 </center>
 </section>
-<section id="add-citation" class="level4" data-number="8.2.1.10">
-<h4 data-number="8.2.1.10" class="anchored" data-anchor-id="add-citation"><span class="header-section-number">8.2.1.10</span> Add citation</h4>
+<section id="add-citation" class="level4">
+<h4 class="anchored" data-anchor-id="add-citation">Add citation</h4>
 <p><code>Zenodo</code> prepares the repository citation for us. We can simply grab the info, change our personal information and submit it to <code>GitHub</code>.</p>
 <center>
 <img src="images/mt6/citation.gif" class="img-fluid" style="width:90.0%">
@@ -789,8 +803,8 @@ When we commit the new <code>Readme</code> file to the <code>development</code> 
 </section>
 </section>
 </section>
-<section id="installing-your-own-package-from-github" class="level2" data-number="8.3">
-<h2 data-number="8.3" class="anchored" data-anchor-id="installing-your-own-package-from-github"><span class="header-section-number">8.3</span> Installing your own package from GitHub</h2>
+<section id="installing-your-own-package-from-github" class="level2">
+<h2 class="anchored" data-anchor-id="installing-your-own-package-from-github">Installing your own package from GitHub</h2>
 <p>Go to <code>GitHub desktop</code>, and commit and push the changes to <code>GitHub</code>. Then run the following code block:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>devtools<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">"gerkovink/roundR"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -800,8 +814,8 @@ When we commit the new <code>Readme</code> file to the <code>development</code> 
 <img src="images/mt6/install_github.gif" class="img-fluid" style="width:90.0%">
 </center>
 </section>
-<section id="advanced-topics" class="level2" data-number="8.4">
-<h2 data-number="8.4" class="anchored" data-anchor-id="advanced-topics"><span class="header-section-number">8.4</span> Advanced topics</h2>
+<section id="advanced-topics" class="level2">
+<h2 class="anchored" data-anchor-id="advanced-topics">Advanced topics</h2>
 <div class="columns">
 <div class="column" style="width:30%;">
 <p><img src="images/mt6/hex.png" class="img-fluid" style="width:90.0%"></p>
@@ -819,8 +833,8 @@ When we commit the new <code>Readme</code> file to the <code>development</code> 
 </div>
 </div>
 </section>
-<section id="other-useful-sources" class="level2" data-number="8.5">
-<h2 data-number="8.5" class="anchored" data-anchor-id="other-useful-sources"><span class="header-section-number">8.5</span> Other useful sources</h2>
+<section id="other-useful-sources" class="level2">
+<h2 class="anchored" data-anchor-id="other-useful-sources">Other useful sources</h2>
 <ul>
 <li><a href="https://r-pkgs.org">The <code>R Packages</code> book by Hadley Wickham and Jenny Bryan</a></li>
 </ul>
@@ -1251,8 +1265,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./meeting7.html" class="pagination-link" aria-label="Data visualizatie">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Data visualizatie</span></span>
+      <a href="./meeting7.html" class="pagination-link" aria-label="Data visualisatie">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Data visualisatie</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">

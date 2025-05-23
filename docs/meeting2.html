@@ -6,8 +6,9 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="Gerko Vink">
 
-<title>2&nbsp; Data Management – Module 6: Introduction to Data Processing &amp; Programming in R</title>
+<title>Data Management – Module 6: Introduction to Data Processing &amp; Programming in R</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -19,6 +20,40 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -69,6 +104,35 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
@@ -160,7 +224,7 @@ ul.task-list li input[type="checkbox"] {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./meeting4.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Statistiche Analyse</span></span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Statistische Analyse</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -178,7 +242,7 @@ ul.task-list li input[type="checkbox"] {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./meeting7.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Data visualizatie</span></span></a>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Data visualisatie</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -192,22 +256,51 @@ ul.task-list li input[type="checkbox"] {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#practical-1-data-management" id="toc-practical-1-data-management" class="nav-link active" data-scroll-target="#practical-1-data-management">Practical 1: Data Management</a>
+  <ul class="collapse">
+  <li><a href="#exercise-1-5" id="toc-exercise-1-5" class="nav-link" data-scroll-target="#exercise-1-5">Exercise 1-5</a></li>
+  <li><a href="#exercise-6-10" id="toc-exercise-6-10" class="nav-link" data-scroll-target="#exercise-6-10">Exercise 6-10</a></li>
+  <li><a href="#todo-read-in-the-following-files-with-haven" id="toc-todo-read-in-the-following-files-with-haven" class="nav-link" data-scroll-target="#todo-read-in-the-following-files-with-haven">TODO: READ IN THE FOLLOWING FILES WITH HAVEN</a></li>
+  <li><a href="#useful-links-for-practical-1" id="toc-useful-links-for-practical-1" class="nav-link" data-scroll-target="#useful-links-for-practical-1">Useful links for Practical 1</a></li>
+  </ul></li>
+  <li><a href="#practical-2-pipes" id="toc-practical-2-pipes" class="nav-link" data-scroll-target="#practical-2-pipes">Practical 2: Pipes</a>
+  <ul class="collapse">
+  <li><a href="#useful-references-for-practical-2" id="toc-useful-references-for-practical-2" class="nav-link" data-scroll-target="#useful-references-for-practical-2">Useful References for Practical 2</a></li>
+  </ul></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/gerkovink/sur/edit/book/meeting2.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/gerkovink/sur/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span id="sec-mt2" class="quarto-section-identifier"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Data Management</span></span></h1>
+<h1 class="title"><span id="sec-mt2" class="quarto-section-identifier"><span class="chapter-title">Data Management</span></span></h1>
 </div>
 
 
+<div class="quarto-title-meta-author">
+  <div class="quarto-title-meta-heading">Author</div>
+  <div class="quarto-title-meta-heading">Affiliation</div>
+  
+    <div class="quarto-title-meta-contents">
+    <p class="author">Gerko Vink <a href="mailto:g.vink@uu.nl" class="quarto-title-author-email"><i class="bi bi-envelope"></i></a> <a href="https://orcid.org/0000-0001-9767-1924" class="quarto-title-author-orcid"> <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMjA4MDI1MjA2ODExOTk0QzkzNTEzRjZEQTg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozM0NDOEJGNEZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozM0NDOEJGM0ZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZDN0YxMTc0MDcyMDY4MTE5NUZFRDc5MUM2MUUwNEREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU3Q0QyMDgwMjUyMDY4MTE5OTRDOTM1MTNGNkRBODU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+84NovQAAAR1JREFUeNpiZEADy85ZJgCpeCB2QJM6AMQLo4yOL0AWZETSqACk1gOxAQN+cAGIA4EGPQBxmJA0nwdpjjQ8xqArmczw5tMHXAaALDgP1QMxAGqzAAPxQACqh4ER6uf5MBlkm0X4EGayMfMw/Pr7Bd2gRBZogMFBrv01hisv5jLsv9nLAPIOMnjy8RDDyYctyAbFM2EJbRQw+aAWw/LzVgx7b+cwCHKqMhjJFCBLOzAR6+lXX84xnHjYyqAo5IUizkRCwIENQQckGSDGY4TVgAPEaraQr2a4/24bSuoExcJCfAEJihXkWDj3ZAKy9EJGaEo8T0QSxkjSwORsCAuDQCD+QILmD1A9kECEZgxDaEZhICIzGcIyEyOl2RkgwAAhkmC+eAm0TAAAAABJRU5ErkJggg=="></a></p>
+  </div>
+  <div class="quarto-title-meta-contents">
+        <p class="affiliation">
+            Methodology &amp; Statistics @ Utrecht University
+          </p>
+      </div>
+  </div>
 
 <div class="quarto-title-meta">
 
-    
+      
   
     
   </div>
@@ -230,8 +323,559 @@ Hoorcollege 3 juni 2025
 <p>Vandaag gaan we dwars door <code>R</code> heen om ons snel bekend te maken met de onderliggende machinery van het systeem. We gaan leren hoe je een simpele functie maakt en hoe je die snel en efficient kunt toepassen op verschillende data objecten. In de breedste zin zullen we vandaag al leren hoe je op een efficiente wijze dwars door environments, frames en data containers heen kunt gaan om uiteindelijk de data op een juiste manier te managen. De slides voor het hoorcollege kun u <a href="slides/lec-2.html">hier vinden</a></p>
 </div>
 </div>
+<section id="practical-1-data-management" class="level2">
+<h2 class="anchored" data-anchor-id="practical-1-data-management">Practical 1: Data Management</h2>
+<p>Begin this practical exercise by setting the maximum line length in <code>R-Studio</code> to 80 characters. Go to <code>RStudio</code>’s <code>Preferences</code> (or <code>Global Options</code> under <code>Tools</code>) –&gt; <code>Code</code> –&gt; <code>Display</code>, and tick the <code>show margin</code> box. Make sure that the <code>margin column</code> is set to <code>80</code></p>
+<hr>
+<section id="exercise-1-5" class="level3">
+<h3 class="anchored" data-anchor-id="exercise-1-5">Exercise 1-5</h3>
+<hr>
+<ol type="1">
+<li><strong>Install package <code>mice</code>. </strong></li>
+</ol>
+<p>Go to <code>Tools</code> &gt; <code>Install Packages</code> in <code>RStudio</code>. If you are connected to the internet, select <code>Repository</code> under <code>Install From</code> and type <code>mice</code> under <code>Packages</code>. Leave the <code>Install to Library</code> at default and make sure that <code>Install Dependencies</code> is selected. Click install. If you are not connected to the internet, select <code>Package Archive File</code> under “Install from” and navigate to the respective file on your drive.</p>
+<p>Some packages depend on other packages, meaning that their functionality may be limited if their dependencies are not installed. Installing dependencies is therefor recommended, but internet connectivity is required.</p>
+<p>If all is right, you will receive a message in the console that the package has been installed (as well as its dependencies).</p>
+<p>ALternatively, if you know the name of the package you would like to install - in this case <code>mice</code> - you can also call <code>install.packages("mice")</code> in the console window.</p>
+<hr>
+<ol start="2" type="1">
+<li><strong>Load package <code>mice</code>. </strong> Loading packages can be done through functions <code>library()</code> and <code>require()</code>.</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(mice)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Attaching package: 'mice'</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following object is masked from 'package:stats':
+
+    filter</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following objects are masked from 'package:base':
+
+    cbind, rbind</code></pre>
+</div>
+</div>
+<p>If you use <code>require()</code> within a function, and the required package is not available, <code>require()</code> will yield a warning and the remainder of the function is still executed, whereas <code>library()</code> will yield an error and terminate all executions. The use of <code>library()</code> when not doing too complicated things is preferred - <code>require()</code> would result in more computational overhead because it calls <code>library()</code> itself.</p>
+<hr>
+<ol start="3" type="1">
+<li><strong>Most packages have datasets included. Open the <code>mammalsleep</code> dataset from package <code>mice</code> by typing <code>mammalsleep</code> in the console, and subsequently by using the function <code>View()</code>. </strong></li>
+</ol>
+<p>Using <code>View()</code> is preferred for inspecting datasets that are large. <code>View()</code> opens the dataset in a spreadsheet-like window (conform MS Excel, or SPSS). If you <code>View()</code> your own datasets, you can even edit the datasets’ contents.</p>
+<hr>
+<ol start="4" type="1">
+<li><strong>Write the mammalsleep dataset from package <code>mice</code> to the work directory (= the directory of your R project) as a tab-delimited text file with <code>.</code> as a decimal separator. Use the function <code>write.table()</code> and name the file <code>mammalsleep.txt</code>.</strong></li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">write.table</span>(mammalsleep, <span class="st">"mammalsleep.txt"</span>, <span class="at">sep =</span> <span class="st">"</span><span class="sc">\t</span><span class="st">"</span>, <span class="at">dec =</span> <span class="st">"."</span>, <span class="at">row.names =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>The command <code>sep = "\t"</code> indicates that the file is tabulated and the command <code>dec = "."</code> indicates that a point is used as the decimal separator (instead of a comma). <code>row.names = FALSE</code> tells <code>R</code> that row names are not to be included in the exported file.</p>
+<hr>
+<ol start="5" type="1">
+<li><strong>Import the <code>mammalsleep.txt</code> file with <code>read.table()</code>. </strong></li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>sleepdata <span class="ot">&lt;-</span> <span class="fu">read.table</span>(<span class="st">"mammalsleep.txt"</span>, <span class="at">sep =</span> <span class="st">"</span><span class="sc">\t</span><span class="st">"</span>, <span class="at">dec =</span> <span class="st">"."</span>, <span class="at">header =</span> <span class="cn">TRUE</span>, <span class="at">stringsAsFactors =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>The command <code>sep = "\t"</code> indicates that the file is tabulated and the command <code>dec = "."</code> indicates that a point is used as the decimal separator (instead of a comma). <code>header = TRUE</code> tells <code>R</code> that variable names are included in the header.</p>
+<p>All files that are presented in the work directory of the current <code>R</code> project, can essentially be imported into the workspace (the space that contains all environments) directly. All other locations require you to specify the specific path from the root of your machine. To find out what the current work directory is, you can type <code>getwd()</code> and to change the work directory you can use <code>setwd()</code>. The beauty of using projects in RStudio is that you would never have to change the work directory, as the work directory is automatically set, relative to your projects’ <code>R</code>-scripts.</p>
+<p>There are many packages that facilitate importing data sets from other statistical software packages, such as SPSS (e.g.&nbsp;function <code>read_spss</code> from package <code>haven</code>), Mplus (package <code>MplusAutomation</code>), Stata (<code>read.dta()</code> in <code>foreign</code>), SAS (<code>sasxport.get()</code> from package <code>Hmisc</code>) and from spreadsheet software, such as MS Excel (function <code>read.xlsx()</code> from package <code>xlsx</code>). For a short guideline to import multiple formats into <code>R</code>, see e.g.&nbsp;http://www.statmethods.net/input/importingdata.html.</p>
+<hr>
+</section>
+<section id="exercise-6-10" class="level3">
+<h3 class="anchored" data-anchor-id="exercise-6-10">Exercise 6-10</h3>
+<hr>
+<ol start="6" type="1">
+<li><strong>The dataset we’ve just imported contains the sleepdata by Allison &amp; Cicchetti (1976). Inspect the sleepdata and make yourself familiar with it. </strong></li>
+</ol>
+<p>If you would like to know more about this dataset, you can open the help for the <code>mammalsleep</code> dataset in package <code>mice</code> through <code>?mammalsleep</code>.</p>
+<p>Inspecting the sleepdata could be done by</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># the data structure</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(sleepdata) <span class="co">#distributional summaries</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                      species         bw                brw         
+ African elephant         : 1   Min.   :   0.005   Min.   :   0.14  
+ African giant pouched rat: 1   1st Qu.:   0.600   1st Qu.:   4.25  
+ Arctic Fox               : 1   Median :   3.342   Median :  17.25  
+ Arctic ground squirrel   : 1   Mean   : 198.790   Mean   : 283.13  
+ Asian elephant           : 1   3rd Qu.:  48.203   3rd Qu.: 166.00  
+ Baboon                   : 1   Max.   :6654.000   Max.   :5712.00  
+ (Other)                  :56                                       
+      sws               ps              ts             mls         
+ Min.   : 2.100   Min.   :0.000   Min.   : 2.60   Min.   :  2.000  
+ 1st Qu.: 6.250   1st Qu.:0.900   1st Qu.: 8.05   1st Qu.:  6.625  
+ Median : 8.350   Median :1.800   Median :10.45   Median : 15.100  
+ Mean   : 8.673   Mean   :1.972   Mean   :10.53   Mean   : 19.878  
+ 3rd Qu.:11.000   3rd Qu.:2.550   3rd Qu.:13.20   3rd Qu.: 27.750  
+ Max.   :17.900   Max.   :6.600   Max.   :19.90   Max.   :100.000  
+ NA's   :14       NA's   :12      NA's   :4       NA's   :4        
+       gt               pi             sei             odi       
+ Min.   : 12.00   Min.   :1.000   Min.   :1.000   Min.   :1.000  
+ 1st Qu.: 35.75   1st Qu.:2.000   1st Qu.:1.000   1st Qu.:1.000  
+ Median : 79.00   Median :3.000   Median :2.000   Median :2.000  
+ Mean   :142.35   Mean   :2.871   Mean   :2.419   Mean   :2.613  
+ 3rd Qu.:207.50   3rd Qu.:4.000   3rd Qu.:4.000   3rd Qu.:4.000  
+ Max.   :645.00   Max.   :5.000   Max.   :5.000   Max.   :5.000  
+ NA's   :4                                                       </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fu">cor</span>(sleepdata[, <span class="sc">-</span><span class="dv">1</span>], <span class="at">use =</span> <span class="st">"pairwise.complete.obs"</span>), <span class="dv">2</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>       bw   brw   sws    ps    ts   mls    gt    pi   sei   odi
+bw   1.00  0.93 -0.38 -0.11 -0.31  0.30  0.65  0.06  0.34  0.13
+brw  0.93  1.00 -0.37 -0.11 -0.36  0.51  0.75  0.03  0.37  0.15
+sws -0.38 -0.37  1.00  0.51  0.96 -0.38 -0.59 -0.32 -0.54 -0.48
+ps  -0.11 -0.11  0.51  1.00  0.73 -0.30 -0.45 -0.45 -0.54 -0.58
+ts  -0.31 -0.36  0.96  0.73  1.00 -0.41 -0.63 -0.40 -0.64 -0.59
+mls  0.30  0.51 -0.38 -0.30 -0.41  1.00  0.61 -0.10  0.36  0.06
+gt   0.65  0.75 -0.59 -0.45 -0.63  0.61  1.00  0.20  0.64  0.38
+pi   0.06  0.03 -0.32 -0.45 -0.40 -0.10  0.20  1.00  0.62  0.92
+sei  0.34  0.37 -0.54 -0.54 -0.64  0.36  0.64  0.62  1.00  0.79
+odi  0.13  0.15 -0.48 -0.58 -0.59  0.06  0.38  0.92  0.79  1.00</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># above line yields bivariate correlations, variable 1 excluded. </span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(mammalsleep) <span class="co"># first six rows</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                    species       bw    brw sws  ps   ts  mls  gt pi sei odi
+1          African elephant 6654.000 5712.0  NA  NA  3.3 38.6 645  3   5   3
+2 African giant pouched rat    1.000    6.6 6.3 2.0  8.3  4.5  42  3   1   3
+3                Arctic Fox    3.385   44.5  NA  NA 12.5 14.0  60  1   1   1
+4    Arctic ground squirrel    0.920    5.7  NA  NA 16.5   NA  25  5   2   3
+5            Asian elephant 2547.000 4603.0 2.1 1.8  3.9 69.0 624  3   5   4
+6                    Baboon   10.550  179.5 9.1 0.7  9.8 27.0 180  4   4   4</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tail</span>(mammalsleep) <span class="co"># last six rows</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                 species    bw  brw  sws  ps   ts  mls  gt pi sei odi
+57                Tenrec 0.900  2.6 11.0 2.3 13.3  4.5  60  2   1   2
+58            Tree hyrax 2.000 12.3  4.9 0.5  5.4  7.5 200  3   1   3
+59            Tree shrew 0.104  2.5 13.2 2.6 15.8  2.3  46  3   2   2
+60                Vervet 4.190 58.0  9.7 0.6 10.3 24.0 210  4   3   4
+61         Water opossum 3.500  3.9 12.8 6.6 19.4  3.0  14  2   1   1
+62 Yellow-bellied marmot 4.050 17.0   NA  NA   NA 13.0  38  3   1   1</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>?mammalsleep <span class="co"># the help</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Note that the sleepdata dataset is automatically recognized as a dataframe. There is one factor (categorical variable) containing the animal names.</p>
+<p>The functions <code>head()</code> and <code>tail()</code> are very useful functions. As is function <code>str()</code> as it gives you a quick overview of the measurement levels in <code>mammalsleep</code>.</p>
+<p>Since <code>mammalsleep</code> is an <code>R</code>-data set, there should be a help file. Taking a look at <code>?mammalsleep</code> provides information about the measurements and origin of the variables.</p>
+<p>One thing that may have caught your attention is the relation between <code>ts</code>, <code>ps</code> and <code>sws</code>. This is a deterministic relation where total sleep (<code>ts</code>) is the sum of paradoxical sleep (<code>ps</code>) and short-wave sleep (<code>sws</code>). In the event that you would model the data, you need to take such relations into account.</p>
+<hr>
+<ol start="7" type="1">
+<li><strong>Save the current workspace. Name the workspace <code>Practical_C.RData</code>. Also, save the sleepdata file as a separate workspace called <code>Sleepdata.RData</code>. </strong></li>
+</ol>
+<p>Now that we have imported our data, it may be wise to save the current workspace, i.e.&nbsp;the current state of affairs. Saving the workspace will leave everything as is, so that we can continue from this exact state at a later time, by simply opening the workspace file. To save everything in the current workspace, type:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># To save the entire workspace:</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="fu">save.image</span>(<span class="st">"Practical_C.RData"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>To save just the data set <code>sleepdata</code>, and nothing else, type:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># To save the data set only.</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="fu">save</span>(sleepdata, <span class="at">file =</span> <span class="st">"Sleepdata.RData"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>With the save functions, any object in the work space can be saved.</p>
+<hr>
+<ol start="8" type="1">
+<li><strong>Some animals were not used in the calculations by Allison and Cicchetti. Exclude the following animals from the sleepdata data set: Echidna, Lesser short-tailed shrew and Musk shrew. Save the data set as <code>sleepdata2</code>.</strong> Tip: use the square brackets to indicate [rows, columns] or use the function <code>filter()</code> from <code>dplyr</code>.</li>
+</ol>
+<p>There are three ways to exclude the three animals from the data set. The first approach uses the names:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>exclude <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Echidna"</span>, <span class="st">"Lesser short-tailed shrew"</span>, <span class="st">"Musk shrew"</span>)</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Indicate the species that match the names in exclude</span></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>which <span class="ot">&lt;-</span> sleepdata<span class="sc">$</span>species <span class="sc">%in%</span> exclude </span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>which</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+[13] FALSE FALSE FALSE  TRUE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+[25] FALSE FALSE FALSE FALSE FALSE FALSE FALSE  TRUE FALSE FALSE FALSE FALSE
+[37] FALSE  TRUE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+[49] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+[61] FALSE FALSE</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>sleepdata2 <span class="ot">&lt;-</span> sleepdata[<span class="sc">!</span>which, ]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>and the second approach uses the row numbers directly (you would need to inquire about, or calculate the row numbers)</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>sleepdata2 <span class="ot">&lt;-</span> sleepdata[<span class="sc">-</span><span class="fu">c</span>(<span class="dv">16</span>, <span class="dv">32</span>, <span class="dv">38</span>), ]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Note that the numbered option requires less code, but the named option has a much lower probability for error. As the data set might change, or might get sorted differently, the second option may not be valid anymore.</p>
+<p>The third approach uses function <code>filter()</code> from package <code>dplyr</code>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr) <span class="co"># Data Manipulation</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Attaching package: 'dplyr'</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following objects are masked from 'package:stats':
+
+    filter, lag</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following objects are masked from 'package:base':
+
+    intersect, setdiff, setequal, union</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>dplyr<span class="sc">::</span><span class="fu">filter</span>(sleepdata, <span class="sc">!</span>sleepdata<span class="sc">$</span>species <span class="sc">%in%</span> exclude) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                     species       bw     brw  sws  ps   ts   mls  gt pi sei
+1           African elephant 6654.000 5712.00   NA  NA  3.3  38.6 645  3   5
+2  African giant pouched rat    1.000    6.60  6.3 2.0  8.3   4.5  42  3   1
+3                 Arctic Fox    3.385   44.50   NA  NA 12.5  14.0  60  1   1
+4     Arctic ground squirrel    0.920    5.70   NA  NA 16.5    NA  25  5   2
+5             Asian elephant 2547.000 4603.00  2.1 1.8  3.9  69.0 624  3   5
+6                     Baboon   10.550  179.50  9.1 0.7  9.8  27.0 180  4   4
+7              Big brown bat    0.023    0.30 15.8 3.9 19.7  19.0  35  1   1
+8            Brazilian tapir  160.000  169.00  5.2 1.0  6.2  30.4 392  4   5
+9                        Cat    3.300   25.60 10.9 3.6 14.5  28.0  63  1   2
+10                Chimpanzee   52.160  440.00  8.3 1.4  9.7  50.0 230  1   1
+11                Chinchilla    0.425    6.40 11.0 1.5 12.5   7.0 112  5   4
+12                       Cow  465.000  423.00  3.2 0.7  3.9  30.0 281  5   5
+13           Desert hedgehog    0.550    2.40  7.6 2.7 10.3    NA  NA  2   1
+14                    Donkey  187.100  419.00   NA  NA  3.1  40.0 365  5   5
+15     Eastern American mole    0.075    1.20  6.3 2.1  8.4   3.5  42  1   1
+16         European hedgehog    0.785    3.50  6.6 4.1 10.7   6.0  42  2   2
+17                    Galago    0.200    5.00  9.5 1.2 10.7  10.4 120  2   2
+18                     Genet    1.410   17.50  4.8 1.3  6.1  34.0  NA  1   2
+19           Giant armadillo   60.000   81.00 12.0 6.1 18.1   7.0  NA  1   1
+20                   Giraffe  529.000  680.00   NA 0.3   NA  28.0 400  5   5
+21                      Goat   27.660  115.00  3.3 0.5  3.8  20.0 148  5   5
+22            Golden hamster    0.120    1.00 11.0 3.4 14.4   3.9  16  3   1
+23                   Gorilla  207.000  406.00   NA  NA 12.0  39.3 252  1   4
+24                 Gray seal   85.000  325.00  4.7 1.5  6.2  41.0 310  1   3
+25                 Gray wolf   36.330  119.50   NA  NA 13.0  16.2  63  1   1
+26           Ground squirrel    0.101    4.00 10.4 3.4 13.8   9.0  28  5   1
+27                Guinea pig    1.040    5.50  7.4 0.8  8.2   7.6  68  5   3
+28                     Horse  521.000  655.00  2.1 0.8  2.9  46.0 336  5   5
+29                    Jaguar  100.000  157.00   NA  NA 10.8  22.4 100  1   1
+30                  Kangaroo   35.000   56.00   NA  NA   NA  16.3  33  3   5
+31          Little brown bat    0.010    0.25 17.9 2.0 19.9  24.0  50  1   1
+32                       Man   62.000 1320.00  6.1 1.9  8.0 100.0 267  1   1
+33                  Mole rat    0.122    3.00  8.2 2.4 10.6    NA  30  2   1
+34           Mountain beaver    1.350    8.10  8.4 2.8 11.2    NA  45  3   1
+35                     Mouse    0.023    0.40 11.9 1.3 13.2   3.2  19  4   1
+36       N. American opossum    1.700    6.30 13.8 5.6 19.4   5.0  12  2   1
+37     Nine-banded armadillo    3.500   10.80 14.3 3.1 17.4   6.5 120  2   1
+38                     Okapi  250.000  490.00   NA 1.0   NA  23.6 440  5   5
+39                Owl monkey    0.480   15.50 15.2 1.8 17.0  12.0 140  2   2
+40              Patas monkey   10.000  115.00 10.0 0.9 10.9  20.2 170  4   4
+41                Phanlanger    1.620   11.40 11.9 1.8 13.7  13.0  17  2   1
+42                       Pig  192.000  180.00  6.5 1.9  8.4  27.0 115  4   4
+43                    Rabbit    2.500   12.10  7.5 0.9  8.4  18.0  31  5   5
+44                   Raccoon    4.288   39.20   NA  NA 12.5  13.7  63  2   2
+45                       Rat    0.280    1.90 10.6 2.6 13.2   4.7  21  3   1
+46                   Red fox    4.235   50.40  7.4 2.4  9.8   9.8  52  1   1
+47             Rhesus monkey    6.800  179.00  8.4 1.2  9.6  29.0 164  2   3
+48    Rock hyrax (Hetero. b)    0.750   12.30  5.7 0.9  6.6   7.0 225  2   2
+49 Rock hyrax (Procavia hab)    3.600   21.00  4.9 0.5  5.4   6.0 225  3   2
+50                  Roe deer   14.830   98.20   NA  NA  2.6  17.0 150  5   5
+51                     Sheep   55.500  175.00  3.2 0.6  3.8  20.0 151  5   5
+52                Slow loris    1.400   12.50   NA  NA 11.0  12.7  90  2   2
+53           Star nosed mole    0.060    1.00  8.1 2.2 10.3   3.5  NA  3   1
+54                    Tenrec    0.900    2.60 11.0 2.3 13.3   4.5  60  2   1
+55                Tree hyrax    2.000   12.30  4.9 0.5  5.4   7.5 200  3   1
+56                Tree shrew    0.104    2.50 13.2 2.6 15.8   2.3  46  3   2
+57                    Vervet    4.190   58.00  9.7 0.6 10.3  24.0 210  4   3
+58             Water opossum    3.500    3.90 12.8 6.6 19.4   3.0  14  2   1
+59     Yellow-bellied marmot    4.050   17.00   NA  NA   NA  13.0  38  3   1
+   odi
+1    3
+2    3
+3    1
+4    3
+5    4
+6    4
+7    1
+8    4
+9    1
+10   1
+11   4
+12   5
+13   2
+14   5
+15   1
+16   2
+17   2
+18   1
+19   1
+20   5
+21   5
+22   2
+23   1
+24   1
+25   1
+26   3
+27   4
+28   5
+29   1
+30   4
+31   1
+32   1
+33   1
+34   3
+35   3
+36   1
+37   1
+38   5
+39   2
+40   4
+41   2
+42   4
+43   5
+44   2
+45   3
+46   1
+47   2
+48   2
+49   3
+50   5
+51   5
+52   2
+53   2
+54   2
+55   3
+56   2
+57   4
+58   1
+59   1</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ! makes all TRUES into FALSE --&gt; it takes the complement</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<hr>
+<ol start="9" type="1">
+<li><strong>Plot brain weight as a function of species. </strong></li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(brw <span class="sc">~</span> species, <span class="at">data =</span> sleepdata2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="meeting2_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<hr>
+<ol start="10" type="1">
+<li><strong>Some animals have much heavier brains than other animals. Find out the names of the animals that have a brain weight larger than 1 standard deviation above the mean brain weight. Replicate the plot from Question 9 with only these animals and do not plot any information about the other animals. </strong></li>
+</ol>
+<p>To find out which animals have a brain weight larger than 1 standard deviation above the mean brain weight:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>sd.brw <span class="ot">&lt;-</span> <span class="fu">sd</span>(sleepdata2<span class="sc">$</span>brw) <span class="co"># standard deviation  </span></span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>mean.brw <span class="ot">&lt;-</span> <span class="fu">mean</span>(sleepdata2<span class="sc">$</span>brw) <span class="co"># mean</span></span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>which <span class="ot">&lt;-</span> sleepdata2<span class="sc">$</span>brw <span class="sc">&gt;</span> (mean.brw <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">*</span> sd.brw)) <span class="co"># which are larger?</span></span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a><span class="fu">as.character</span>(sleepdata2<span class="sc">$</span>species[which]) <span class="co"># names of the animals with brw &gt; 1000</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "African elephant" "Asian elephant"   "Man"             </code></pre>
+</div>
+</div>
+<p>To plot these animals:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(brw <span class="sc">~</span> species, <span class="at">data =</span> sleepdata2[which, ])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="meeting2_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>The downside is that it still prints all the animals on the x-axis. This is due to the factor labels for <code>species</code> being copied to the smaller subset of the data. Plot automatically takes over the labels. For example,</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>sleepdata2<span class="sc">$</span>species[which]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] African elephant Asian elephant   Man             
+62 Levels: African elephant African giant pouched rat ... Yellow-bellied marmot</code></pre>
+</div>
+</div>
+<p>returns only 3 mammals, but still has 62 factor levels. To get rid of the unused factor levels, we can use function <code>factor()</code>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>sleepdata3 <span class="ot">&lt;-</span> sleepdata2[which, ]</span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>sleepdata3<span class="sc">$</span>species <span class="ot">&lt;-</span> <span class="fu">factor</span>(sleepdata3<span class="sc">$</span>species)</span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>sleepdata3<span class="sc">$</span>species</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] African elephant Asian elephant   Man             
+Levels: African elephant Asian elephant Man</code></pre>
+</div>
+</div>
+<p>To plot the graph that we wanted:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(brw <span class="sc">~</span> species, <span class="at">data =</span> sleepdata3)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="meeting2_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<hr>
+<p>If your current software-analysis platform is different from <code>R</code>, chances are that you prepare your data in the software of your choice. In <code>R</code> there are fantastic facilities for importing and exporting data and I would specifically like to pinpoint you to package <a href="https://haven.tidyverse.org/index.html"><code>haven</code></a> by <a href="http://hadley.nz">Hadley Wickham</a>. It provides wonderful functions to import and export many data types from software such as Stata, SAS and SPSS.</p>
+<hr>
+</section>
+<section id="todo-read-in-the-following-files-with-haven" class="level3">
+<h3 class="anchored" data-anchor-id="todo-read-in-the-following-files-with-haven">TODO: READ IN THE FOLLOWING FILES WITH HAVEN</h3>
+</section>
+<section id="useful-links-for-practical-1" class="level3">
+<h3 class="anchored" data-anchor-id="useful-links-for-practical-1">Useful links for Practical 1</h3>
+<ul>
+<li><a href="https://haven.tidyverse.org/index.html"><code>Package haven</code></a> for importing/exporting <code>SPSS</code>, <code>SAS</code> and <code>STATA</code> data.</li>
+</ul>
+<hr>
+</section>
+</section>
+<section id="practical-2-pipes" class="level2">
+<h2 class="anchored" data-anchor-id="practical-2-pipes">Practical 2: Pipes</h2>
+<hr>
+<p>The following packages are required for this practical:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(magrittr)</span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(mice)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>and if you’d like the same results as I have obtained, you can fix the random seed</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<hr>
+<ol type="1">
+<li><strong>Use a pipe to do the following:</strong></li>
+</ol>
+<ul>
+<li>draw 1000 values from a normal distribution with <code>mean = 5</code> and <code>sd = 1</code> - <span class="math inline">\(N(5, 1)\)</span>,</li>
+<li>create a matrix where the first 500 values are the first column and the second 500 values are the second column **</li>
+<li>make a scatterplot of these two columns</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rnorm</span>(<span class="dv">1000</span>, <span class="dv">5</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">matrix</span>(<span class="at">ncol =</span> <span class="dv">2</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="meeting2_files/figure-html/unnamed-chunk-19-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<hr>
+<ol start="2" type="1">
+<li><strong>Use a pipe to calculate the correlation matrix on the <code>anscombe</code> data set</strong></li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>anscombe <span class="sc">%&gt;%</span></span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cor</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>           x1         x2         x3         x4         y1         y2         y3
+x1  1.0000000  1.0000000  1.0000000 -0.5000000  0.8164205  0.8162365  0.8162867
+x2  1.0000000  1.0000000  1.0000000 -0.5000000  0.8164205  0.8162365  0.8162867
+x3  1.0000000  1.0000000  1.0000000 -0.5000000  0.8164205  0.8162365  0.8162867
+x4 -0.5000000 -0.5000000 -0.5000000  1.0000000 -0.5290927 -0.7184365 -0.3446610
+y1  0.8164205  0.8164205  0.8164205 -0.5290927  1.0000000  0.7500054  0.4687167
+y2  0.8162365  0.8162365  0.8162365 -0.7184365  0.7500054  1.0000000  0.5879193
+y3  0.8162867  0.8162867  0.8162867 -0.3446610  0.4687167  0.5879193  1.0000000
+y4 -0.3140467 -0.3140467 -0.3140467  0.8165214 -0.4891162 -0.4780949 -0.1554718
+           y4
+x1 -0.3140467
+x2 -0.3140467
+x3 -0.3140467
+x4  0.8165214
+y1 -0.4891162
+y2 -0.4780949
+y3 -0.1554718
+y4  1.0000000</code></pre>
+</div>
+</div>
+<hr>
+<ol start="3" type="1">
+<li><strong>Now use a pipe to calculate the correlation for the pair (<code>x4</code>, <code>y4</code>) on the <code>anscombe</code> data set</strong></li>
+</ol>
+<p>Using the standard <code>%&gt;%</code> pipe:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>anscombe <span class="sc">%&gt;%</span></span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">subset</span>(<span class="at">select =</span> <span class="fu">c</span>(x4, y4)) <span class="sc">%&gt;%</span></span>
+<span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cor</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>          x4        y4
+x4 1.0000000 0.8165214
+y4 0.8165214 1.0000000</code></pre>
+</div>
+</div>
+<p>Alternatively, we can use the <code>%$%</code> pipe from package <code>magrittr</code> to make this process much more efficient.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a>anscombe <span class="sc">%$%</span></span>
+<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cor</span>(x4, y4)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.8165214</code></pre>
+</div>
+</div>
+<hr>
+<ol start="4" type="1">
+<li><strong>Use a pipe to calculate the correlation between <code>hgt</code> and <code>wgt</code> in the <code>boys</code> data set from package <code>mice</code>.</strong></li>
+</ol>
+<p>Because <code>boys</code> has missing values for almost all variables, we must first select <code>wgt</code> and <code>hgt</code> and then omit the rows that have missing values, before we can calculate the correlation. Using the standard <code>%&gt;%</code> pipe, this would look like:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a>boys <span class="sc">%&gt;%</span></span>
+<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">subset</span>(<span class="at">select =</span> <span class="fu">c</span>(<span class="st">"wgt"</span>, <span class="st">"hgt"</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cor</span>(<span class="at">use =</span> <span class="st">"pairwise.complete.obs"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>          wgt       hgt
+wgt 1.0000000 0.9428906
+hgt 0.9428906 1.0000000</code></pre>
+</div>
+</div>
+<p>which is equivalent to</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a>boys <span class="sc">%&gt;%</span></span>
+<span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">subset</span>(<span class="at">select =</span> <span class="fu">c</span>(<span class="st">"wgt"</span>, <span class="st">"hgt"</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb49-3"><a href="#cb49-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">na.omit</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb49-4"><a href="#cb49-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cor</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>          wgt       hgt
+wgt 1.0000000 0.9428906
+hgt 0.9428906 1.0000000</code></pre>
+</div>
+</div>
+<p>Alternatively, we can use the <code>%$%</code> pipe:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a>boys <span class="sc">%$%</span> </span>
+<span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cor</span>(hgt, wgt, <span class="at">use =</span> <span class="st">"pairwise.complete.obs"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.9428906</code></pre>
+</div>
+</div>
+<p>The <code>%$%</code> pipe <em>unfolds</em> the listed dimensions of the <code>boys</code> data set, such that we can refer to them directly.</p>
+<hr>
+<ol start="5" type="1">
+<li><strong>In the <code>boys</code> data set, <code>hgt</code> is recorded in centimeters. Use a pipe to transform <code>hgt</code> in the <code>boys</code> dataset to height in meters and verify the transformation</strong></li>
+</ol>
+<p>Using the standard <code>%&gt;%</code> and the <code>%$%</code> pipes:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a>boys <span class="sc">%&gt;%</span></span>
+<span id="cb53-2"><a href="#cb53-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">transform</span>(<span class="at">hgt =</span> hgt <span class="sc">/</span> <span class="dv">100</span>) <span class="sc">%$%</span></span>
+<span id="cb53-3"><a href="#cb53-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mean</span>(hgt, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1.321518</code></pre>
+</div>
+</div>
+<hr>
+<section id="useful-references-for-practical-2" class="level3">
+<h3 class="anchored" data-anchor-id="useful-references-for-practical-2">Useful References for Practical 2</h3>
+<ul>
+<li><a href="https://magrittr.tidyverse.org"><code>magrittr</code></a></li>
+<li><a href="http://r4ds.had.co.nz"><code>R</code> for Data Science</a> - <a href="http://r4ds.had.co.nz/pipes.html">Chapter 18 on pipes</a></li>
+</ul>
+<hr>
+<p>End of Practical</p>
 
 
+</section>
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -671,4 +1315,4 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 
 
 
-<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions"><ul><li><a href="https://github.com/gerkovink/sur/edit/book/meeting2.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/gerkovink/sur/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div></div></footer></body></html>
+<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/gerkovink/sur/edit/book/meeting2.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/gerkovink/sur/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div></div></footer></body></html>
