@@ -1,0 +1,332 @@
+[
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Module 6: Introduction to Data Processing & Programming in R",
+    "section": "",
+    "text": "Studieprogramma\nDit Quarto boek bevat het cursusmateriaal en de informatie voor Module 6: Inleiding tot Gegevensverwerking & Programmeren in R. De genummerde hoofdstukken in dit boek komen overeen met de hoorcolleges en practica, waarbij elk gecombineerd hoorcollege en practicum wordt weergegeven als één hoofdstuk.\n\n\n\n\n\n\n\n\nWeek 1\nDate\nLocation\n\n\n\n\nIntroductie in R & RStudio\n02 Juni\nTBD\n\n\n2  Data Management\n03 Juni\nTBD\n\n\nGeen hoorcollege\n04 Juni\nTBD\n\n\n3  Data manipulatie\n05 Juni\nTBD\n\n\n4  Statistiche Analyse\n06 Juni\nTBD\n\n\n\n\n\n\n\n\n\n\n\nWeek 2\nDate\nLocation\n\n\n\n\n5  Functioneel Programmeren\n09 Juni\nTBD\n\n\n6  Geavanceerde data technieken\n10 Juni\nTBD\n\n\nGeen Hoorcollege\n11 Juni\nTBD\n\n\n7  Data visualizatie\n12 Juni\nTBD\n\n\n8  Ontwikkelen en programmeren in R\n13 Juni\nTBD",
+    "crumbs": [
+      "Studieprogramma"
+    ]
+  },
+  {
+    "objectID": "overview.html",
+    "href": "overview.html",
+    "title": "Module handleiding",
+    "section": "",
+    "text": "Cursusgegevens",
+    "crumbs": [
+      "Module handleiding"
+    ]
+  },
+  {
+    "objectID": "overview.html#cursusgegevens",
+    "href": "overview.html#cursusgegevens",
+    "title": "Module handleiding",
+    "section": "",
+    "text": "Vakcode\nAS_06\n\n\nOpleiding\nMaster Applied Statistics\n\n\nLeerlijn/Vakgroep/Discipline\nData-Analyse\n\n\nAantal studiepunten\n6 ECTs\n\n\nSemester en studiefase\nJaar 1, semester 2\n\n\nContacturen per semester\n40\n\n\nCollege periode\n2 juni – 13 juni 2025\n\n\nWerkcolleges+studievrije periode\n16 juni – 10 juli 2025\n\n\nTentamen\n11 juli 2025\n\n\nHertentamenperiode\n25 augustus – 5 september 2025\n\n\nVereiste voorkennis\nAfgeronde Wetenschappelijke Bachelor/ Premaster Wetenschappelijke Vorming IGSR\n\n\nDocent(en) + contactgegevens\nGerko Vink, g.vink@uu.nl\n\n\nSpreekuur docent(en)\nOp afspraak",
+    "crumbs": [
+      "Module handleiding"
+    ]
+  },
+  {
+    "objectID": "overview.html#inleiding",
+    "href": "overview.html#inleiding",
+    "title": "Module handleiding",
+    "section": "Inleiding",
+    "text": "Inleiding\nDit is de handleiding voor de module Introduction to Data Processing & Programming in R van de Masteropleiding Applied Statistics. Het doel van deze module is om inzicht te bieden in zowel de basisprincipes als de basis dataverwerking- en analysetechnieken in R.\nDeze module richt zich op het ontwikkelen van praktische vaardigheden in R, een statistisch softwarepakket, dat breed wordt ingezet binnen de academische wereld en de beroepspraktijk bij het uitvoeren van statistische analyses. De module biedt daarnaast verdiepende inzichten in de belangrijkste functies bij het programmeren in R, variërend van het importeren en beheren van datasets tot fundamentele analyses en visualisaties en presentatie van documenten. De leerdoelen van de module worden ook in deze handleiding opgenomen evenals een uitgebreide omschrijving van de vakinhoud, het programmaoverzicht en de lesonderdelen. Tenslotte volgt er een uitwerking van de wijze van toetsen en de vaststelling van het eindcijfer.",
+    "crumbs": [
+      "Module handleiding"
+    ]
+  },
+  {
+    "objectID": "overview.html#eindkwalificaties-leerdoelen",
+    "href": "overview.html#eindkwalificaties-leerdoelen",
+    "title": "Module handleiding",
+    "section": "Eindkwalificaties & Leerdoelen",
+    "text": "Eindkwalificaties & Leerdoelen\nDit vak draagt bij aan de volgende eindkwalificaties van de Masteropleiding:\n\nKennis en inzicht\n\n\nEK3. Verdiepende kennis over statistische softwarepakketten en de standaard terminologie horende bij calculatie-en programeer vaardigheden in R\n\n\nToepassen kennis en inzicht De afgestudeerde is in staat om:\n\n\nEK5. Secundaire of primaire data van geavanceerde statistische technieken in R te combineren en bewerken.\n\n\nCommunicatie De afgestudeerde is in staat om:\n\n\nEK9. Als statisticus binnen multidisciplinaire teams te werken en te communiceren.",
+    "crumbs": [
+      "Module handleiding"
+    ]
+  },
+  {
+    "objectID": "overview.html#leerdoelen",
+    "href": "overview.html#leerdoelen",
+    "title": "Module handleiding",
+    "section": "Leerdoelen",
+    "text": "Leerdoelen\nLeerdoelen voor deze cursus zijn aangegeven met tussen haakjes aan welke eindkwalificatie die gerelateerd zijn.\nAan het eind van deze module kan de student: - de software R gebruiken voor reproduceerbare statistische analyse van gegevens en programmeren (EK3) - met behulp van syntax en code grafieken te (re)produceren, verwerken en aanpassen (EK5) - in georganiseerd teamverband werken om data uit verschillende bronnen te verkennen, samen te voegen en aan te passen, en inferentiële, predictieve en beschrijvende data-analyse projectmatig te presenteren en uit te voeren (EK9)",
+    "crumbs": [
+      "Module handleiding"
+    ]
+  },
+  {
+    "objectID": "overview.html#omschrijving-van-de-vakinhoud",
+    "href": "overview.html#omschrijving-van-de-vakinhoud",
+    "title": "Module handleiding",
+    "section": "Omschrijving van de vakinhoud",
+    "text": "Omschrijving van de vakinhoud\nDe hoofdonderwerpen die hierbij aan de orde komen zijn:\n\ndatabestanden beheren, data uit verschillende softwarebronnen exporteren en inlezen (importeren)\ndatabeheer en -hercodering, data mutaties en data throughput\ncreëren van grafieken en visualisaties (visual storytelling)\nsyntax en code lezen en schrijven (programmeren)\ntools om data te verkennen\nbestanden en gegevens uit verschillende bronnen samenvoegen (mergen)\nreproduceerbare codes schrijven om inferentiële, predictieve en beschrijvende statistieken en visualisaties te produceren voor twee of meer variabelen.",
+    "crumbs": [
+      "Module handleiding"
+    ]
+  },
+  {
+    "objectID": "overview.html#programmaoverzicht",
+    "href": "overview.html#programmaoverzicht",
+    "title": "Module handleiding",
+    "section": "Programmaoverzicht",
+    "text": "Programmaoverzicht\nEen overzicht van het studieprogramma staat op temporale volgorde in de hoofdstukken van dit boek. Een tabel met duidelijke weergave van welk hoofdstuk op welke dag behandeld wordt, is hieronder te vinden. De hoofdstukken met lesstof bevatten een overzicht van de behandelde onderwerpen, leerdoelen, benodigde voorbereiding en cursusmaterialen voor ieder gecombineerd hoor/werkcollege.\n\nProgrammaoverzicht en lesonderdelen\n\n\nCollegedag (=4 uren)\nDatum\n\n\n\n\nGecombineerde HC & WC\nPeriode: 2 juni – 13 juni 2025\n\n\nIntroductie in R & RStudio\nMaandag 2 Juni 2025\n\n\n2  Data Management\nDinsdag 3 Juni 2025\n\n\nGeen hoorcollege\nWoensdag 4 Juni 2025\n\n\n3  Data manipulatie\nDonderdag 5 Juni 2025\n\n\n4  Statistiche Analyse\nVrijdag 6 Juni 2025\n\n\n5  Functioneel Programmeren\nMaandag 09 Juni\n\n\n6  Geavanceerde data technieken\nDinsdag 10 Juni\n\n\nGeen Hoorcollege\nWoensdag 11 Juni\n\n\n7  Data visualizatie\nDonderdag 12 Juni\n\n\n8  Ontwikkelen en programmeren in R\nVrijdag 13 Juni\n\n\nWerkcolleges\nMa 16 – Vr 27 juni 2025\n\n\nOnderwijsvrij\n30 juni – 10 juli 2025\n\n\nTentamen\nVrijdag 11 juli 2025",
+    "crumbs": [
+      "Module handleiding"
+    ]
+  },
+  {
+    "objectID": "overview.html#onderwijsvormgeving",
+    "href": "overview.html#onderwijsvormgeving",
+    "title": "Module handleiding",
+    "section": "Onderwijsvormgeving",
+    "text": "Onderwijsvormgeving\nDe leeractiviteiten in deze module zijn: Hoorcolleges (HC): Theorie en voorbeelden (studenten bestuderen de slides vóór de colleges); Werkcolleges (WC): Tijdens de werkcolleges krijgen studenten verdere instructies/begeleiding voor het maken van de opdrachten; Zelfstudie: Het uitwerken van de gegeven opdrachten en analyses als voorbereiding op de WC (individueel of als groep). In deze module wordt gewerkt met ‘samenwerkend leren’ als didactische werkvorm. Hierbij worden de studenten in groepen ingedeeld waarbij ze, in dit geval, complementair zelfstandig aan de opdrachten werken. Tijdens de werkcolleges worden de opdrachten gepresenteerd en bediscussieerd in groepsverband volgens een beurtensysteem. Na het college wordt door de groep de uitgewerkte opdrachten en aantekeningen geüpload op Moodle in de hiervoor aangemaakte mappen. Deze werkvorm stelt de studenten in staat kennis met elkaar te delen en vaardigheden en inzichten op te doen, tijdens zowel het groepswerk als de presentaties.",
+    "crumbs": [
+      "Module handleiding"
+    ]
+  },
+  {
+    "objectID": "overview.html#verwachtingen-van-studenten-en-voorkennis",
+    "href": "overview.html#verwachtingen-van-studenten-en-voorkennis",
+    "title": "Module handleiding",
+    "section": "Verwachtingen van studenten en voorkennis",
+    "text": "Verwachtingen van studenten en voorkennis\nVan de studenten wordt verwacht dat ze zich voorbereiden op de werkcolleges. De studenten dienen ook een actieve en zelfsturende leer houding te demonstreren waarbij ze nieuwe kennis willen/kunnen uitzoeken. Verder wordt er verwacht dat ze naast de colleges wekelijks gemiddeld 20 uur aan het vak besteden (zie Module belasting).\nDe verwachtingen van de student voor het goed doorlopen van deze module zijn verder:\n\nBasiskennis wiskunde en statistiek (BSc niveau)\n\nHet tijdig downloaden van college slides, documenten (via Moodle) voor zelfstudie, collegevoorbereiding en het maken van de opdrachten\nControleren van de Module/cursus Moodle page voor aankondigingen over colleges en toetsing\nHet hebben van een Laptop of PC/ microfoon / webcam (eventueel) / Goede Internetverbinding voor het volgen van sommige colleges",
+    "crumbs": [
+      "Module handleiding"
+    ]
+  },
+  {
+    "objectID": "overview.html#module-belasting",
+    "href": "overview.html#module-belasting",
+    "title": "Module handleiding",
+    "section": "Module belasting",
+    "text": "Module belasting\nDe module belasting telt in totaal 6 ECTs (SP) wat gemiddeld neerkomt op het reserveren van 168 studieuren. In de onderstaande tabel vind je de spreiding van de uren over de diverse activiteiten die betrokken zijn bij het behalen van dit vak met een opsplitsing van contacturen, zelfstudie uren en het tentamen.\n\nSTUDIEPUNTEN UITGEWERKT IN CONTACT EN ZELF-STUDIEUREN\n\n\n\n\n\n\n\nActiviteit\nAantal weken/dagen\nTotaal aantal uren\n\n\n\n\nContacturen\n\n\n\n\nGecombineerde hoor- en werkcolleges\n2 weken\n8 dagen x 4 uren = 40 uren\n\n\nWerkcolleges\n2 dagen\n2 dagen x 4 uren= 8uren\n\n\nResponsiecollege\n1 dag\n3,5 uren\n\n\nZelfstudie uren\n\n\n\n\nStudieplanning maken\n2 weken\n2 uren/week = 4 uren\n\n\nLiteratuurstudie\n2 weken\n8 uren/week = 16 uren\n\n\nUitwerken van vraagstukken/opdrachten\n2 weken\n20 uren/week = 40 uren\n\n\nVoorbereiding middels ondersteunend materiaal (collegeslides, video’s)\n2 weken\n15 uren/week = 30 uren\n\n\nHerhaling\n2 weken\n7,5 uren/week = 15 uren\n\n\nTentamen\n1 dag\n3,5 uren\n\n\n\nTotaal aantal uren: 168 uren (6 ECTs: 6 x 28 = 168 uren )",
+    "crumbs": [
+      "Module handleiding"
+    ]
+  },
+  {
+    "objectID": "team.html",
+    "href": "team.html",
+    "title": "Teaching team",
+    "section": "",
+    "text": "Docent\nAls psycholoog ben ik per ongeluk statisticus geworden. Ik heb een voorliefde voor het overbrengen van informatie en lesgeven, en doe dit vooral over mijn expertise in rekenen, wiskunde, programmeren en kunstmatige intelligentie (AI). Ik geef lezingen en cursussen over de hele wereld, maar vooral in Utrecht. Daarnaast maak ik als wetenschapper software en web-apps zodat studenten, overheden en onderzoekers die niet zoveel kaas hebben gegeten van lastige wiskundige modellen, toch de state-of-the-art kunnen gebruiken of begrijpen. Ook geef ik in Utrecht leiding aan het universiteitsbrede consortium over de impact van AI in onderwijs. Je kunt me bereiken via e-mail: g.vink@uu.nl",
+    "crumbs": [
+      "Teaching team"
+    ]
+  },
+  {
+    "objectID": "deliverables.html",
+    "href": "deliverables.html",
+    "title": "Oefententamen",
+    "section": "",
+    "text": "Een voorbeeldtentamen zal worden aangeboden in de week van 23 juni. De oefentoets is bedoeld om een indicatie te krijgen van het soort vragen wat op de echte toets verwacht kan worden. De oefentoets geld niet als richtlijn voor de studiestof of onderwerpen die in de echte toets aan bod zullen komen.",
+    "crumbs": [
+      "Oefententamen"
+    ]
+  },
+  {
+    "objectID": "genai.html",
+    "href": "genai.html",
+    "title": "GenAI rules",
+    "section": "",
+    "text": "Copyright and intellectual property",
+    "crumbs": [
+      "GenAI rules"
+    ]
+  },
+  {
+    "objectID": "genai.html#copyright-and-intellectual-property",
+    "href": "genai.html#copyright-and-intellectual-property",
+    "title": "GenAI rules",
+    "section": "",
+    "text": "Do you know your input rights?\n\n\n\nIn academia we hold ethics, honesty, and the values of open science in the highest regard. These principles are the backbone of our academic community and guide our education as well as our pursuit of knowledge.\nNow that AI tools become more advanced and widespread, it is crucial to uphold these values. While much focus has been on the output of AI tools, I want to bring attention to a different concern: the unjust use of what we input into these tools.\nMany of us interact with AI in what feels like the privacy of our own devices. This perceived privacy can create a false sense of security, leading some to input information that was not theirs to share or should have remained confidential. To safeguard our integrity and respect intellectual property rights, we must be cautious about what we share with AI tools. Specifically,\n\nDo not input assignments, course materials, scientific manuscripts or any other work without explicit permission from the owners.\nAvoid using AI tools to process, summarize, grade or evaluate each other’s work unless you have the author’s consent.\n\nBy following these guidelines, we protect and respect both the creative efforts and the intellectual property in our community.",
+    "crumbs": [
+      "GenAI rules"
+    ]
+  },
+  {
+    "objectID": "genai.html#what-about-this-course",
+    "href": "genai.html#what-about-this-course",
+    "title": "GenAI rules",
+    "section": "What about this course?",
+    "text": "What about this course?\nThe materials in this course are generated by Gerko and his team, who hold the copyright. The intellectual property belongs to Utrecht University. Images are either self-generated, directly linked, or generated with AI tools. That said, there is no information in these that exceeds legal use of copyright materials in academic settings, or that is not publicly available or should not be part of the public domain.\n\n\n\n\n\n\nWarning\n\n\n\nYou may use any and all content in this course - including staff names - and submit it as input to generative AI tools, with the following exception:\n\nYou must ensure that the content is not used for further training of the AI model",
+    "crumbs": [
+      "GenAI rules"
+    ]
+  },
+  {
+    "objectID": "genai.html#my-advice",
+    "href": "genai.html#my-advice",
+    "title": "GenAI rules",
+    "section": "My advice",
+    "text": "My advice\nGenerative AI can be a great assistant in the generating structured language. Most of the markup and programming skills that we will consider in this course are extremely structured and generative AI can seem of great help. Mastering a new language, however, requires practice and becoming dependent on genAI will hinder your progression in the long run, or even make you pathologically dependent on AI. Therefore we advice you to also interact with your instructors, peers and other resources around the web, as it will transform you from a leecher into a seeder. Or in educational terms: if you can explain to others what and why you are doing, you have transformed from student to master. Only if you have those metacognitive skills you have the proper foundation to start using generative AI.",
+    "crumbs": [
+      "GenAI rules"
+    ]
+  },
+  {
+    "objectID": "meeting1.html",
+    "href": "meeting1.html",
+    "title": "Introductie in R & RStudio",
+    "section": "",
+    "text": "Practical 1\nIn this practical you will get acquainted with R, RStudio and Quarto.\nIn general for all practicals in this course: aim to make the exercises without looking at the answers and use the solutions file (“Practical 1: solutions”) to evaluate your work. However, do not ‘struggle’ too long because you will run out of time.\nIn any case, ask for help when you feel help is needed.",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Introductie in R & RStudio</span>"
+    ]
+  },
+  {
+    "objectID": "meeting1.html#practical-1",
+    "href": "meeting1.html#practical-1",
+    "title": "Introductie in R & RStudio",
+    "section": "",
+    "text": "Create an R Project\n\nGo to today’s course chapter: Introductie in R & RStudio. If you can read this, you should already be at the right location.\nDownload the Practical_1_template.qmd file and save it in a new folder with name “RCourse”, for example.\nOpen RStudio and choose File -&gt; New Project. Choose the option “Existing Directory”. Find the Project Working Directory, the folder “RCourse” you just created. Click on “Create project”.\nOpen the “Practical_1_template.qmd” with File -&gt; Open File.\nContinue below to complete the exercises in the template file.",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Introductie in R & RStudio</span>"
+    ]
+  },
+  {
+    "objectID": "meeting1.html#introduction-to-rstudio-and-quarto",
+    "href": "meeting1.html#introduction-to-rstudio-and-quarto",
+    "title": "Introductie in R & RStudio",
+    "section": "Introduction to RStudio and Quarto",
+    "text": "Introduction to RStudio and Quarto\n\nA closer look at RStudio\nRStudio is divided in 4 panes, as shown in the lecture, slide 9:\n\nThe editor pane, where we create R code and text. This is the pane where the current file, Practical_A_template.Rmd is located.\nThe console pane where code is processed.\nThe environment/history pane.\nThe output pane where we can access our files, plots, the help files, make packages and view our data objects.\n\n\n\nThe editor pane and Quarto\nThis is an Quarto file. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. A Markdown file has three components:\n\nOn top of the document, a YAML part, which defines the markup of the document. YAML stands for Yet Another Markup Language/ Ain’t Markup Language.\nText part, where you can create plain text.\nThe code chunks, where you type R code (but you can also choose another programming language such as Python).\n\n\nGetting help on Quarto\nTo learn more about Quarto and to get help with the options, see: Markdown Quick Reference in RStudio, see menu Help -&gt; Markdown Quick Reference. This will open the reference document in the output pane in the tab “Help”.\n\n\n\nExercise 1: try a few options in Quarto plain text\nTake a look at the Markdown Quick Reference in R Studio and try the following:\n\nAdd a Level 1 Header called “This is a Header 1” to this document.\nAdd a Level 2 sub-header with name “Sub-header 1”.\nCreate some plain text and mark some part of the text bold or italic.\nInclude the hyperlink to the Quarto reference page: https://quarto.org\nCompile this document as a html file. Use the  Render button in the RStudio IDE to render the file and preview the output with a single click or keyboard shortcut (⇧⌘K).\n\n\n\n\n\n\n\nVerify how the headers and the hyperlink look like. Instead of knitting, it is also possible to get a preview by clicking on “Visual” in the left upper corner of the editor pane. Try both options.\n\nThe benefit of using html as an output format lies in the dimensional properties of a web-page. Especially when dealing with long code-files, large output from analyses or many graphs, exporting your file as html is much more convenient. You can simply scroll down or up to see the ‘rest’, instead of having to flip through pages back and forth to compare code, graphs or output.\n\n\nExercise 2: Code chunks in Quarto\n\nDownload the R Markdown cheat sheet, see R Studio menu Help -&gt; Cheat Sheets -&gt; R Markdown Cheat Sheet. Read the section about code chunks, see the section on page 1, bottom left with header “Embed Code with knitr”.\nConsider the code chunk below. It contains R code that asks for the summary statistics of the cars data.\nYou can run the code in two ways:\n\n\nLine by line: select the line you want to run and use Ctrl + Enter (Windows/Linux) or Cmd + Return (Mac)\nRun the code by clicking on the green “play” button in the top right corner of the code chunk. This will execute all the code in the code chunk.\n\nDo you obtain the summary statistics?\n\nsummary(cars)\n\n\nAdd a new code chunk (use the code chunk icon on top of this editor pane) to this document. Copy the R code that asks for a summary of the cars data in this new code chunk. Adapt the code chunk in such a way that only the summary statistics (the results) will be displayed in the knitted HTML document. Knit the document and verify the results.\n\n\n\nExercise 3: Learning some R code.\nHave a look at the following code chunk with R code:\n\na &lt;- 100\n\nThe # tells R that everything that follows in that specific line is not to be considered as code. In other words, you can use # to comment in your own R-scripts. I used # here to elaborate that the following line is the code from exercise 3.\nThe line a &lt;- 100 assigns the value 100 to object a. When reading that code say: “a gets value 100” in your head. When you run your code, it will be saved.\nEven if &lt;- is a pain to type, don’t use = instead, it will work, but it will cause confusion later. Use RStudio’s keyboard shortcut: Alt/Option + - (the minus sign). Notice that RStudio automatically surrounds &lt;- with spaces (good code formatting practice).\nCreate an object a with element (value) 1\n\n# type your code here\n\nVerify that 1 is stored in a\n\n# type your code here\n\nSquare a (in a new code chunk)\n\n# type your code here\n\nCreate b and assign a+a to b. Check if b is indeed a+a.\n\n# type your code here\n\n\n\nExercise 3: Inspect the contents of the global environment by typing and running ls()\nThe following is returned by R\n\nls()\n#&gt; character(0)\n\nA single value is the most basic object in R. The next step up in objects is a vector, followed by a matrix, followed by an array. Eventually, each of these objects can be stored in a list. We will learn about vectors, matrices and arrays later today.\nNow you know how to use R as a calculator and R-Studio with Quarto as a typesetting and storytelling device.",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Introductie in R & RStudio</span>"
+    ]
+  },
+  {
+    "objectID": "meeting1.html#practical-2",
+    "href": "meeting1.html#practical-2",
+    "title": "Introductie in R & RStudio",
+    "section": "Practical 2",
+    "text": "Practical 2\n\nExercise 1-5\n\n\nMake two vectors: one named vec1 with values 1 through 6 and one named vec2 with letters A through F.\n\n\nCreate two matrices, one from vec1 and one from vec2. The dimensions for both matrices are 3 rows by 2 columns. Find the function to create a matrix by typing ?matrix. Notice that when you start typing ?matrix in the code chunk, a pop-up window appears with information about the function.\n\nTo create a matrix we used matrix(). For a matrix we need to specify the dimensions (in this case 3 rows and 2 columns) and the input (in this case vec1 or vec2) needs to match these dimensions.\n\nInspect your vectors and matrices. Are all numerical?\n\n\nMake a matrix from both vec1 and vec2 with 6 rows and 2 columns. Inspect this matrix.\n\nIf one or more elements in the matrix represent characters, all other elements are also converted to characters. A matrix is just for either numeric or character elements. Notice that the second approach (the column bind approach from mat3b) returns a matrix where the column names are already set to the name of the bound objects.\nTo solve the problem of numbers represented as characters we can create a dataframe. A dataframe is essentially a matrix that allows for character elements. The use of a dataframe is often preferred over the use of a matrix in R, except for purposes where pure numerical calculations are done, such as in matrix algebra. However, most datasets do contain character information and a dataframe would normally be your preferred choice when working with your own collected datasets in R.\n\nMake a dataframe called dat3 where vec1 and vec2 are both columns. Name the columns V1 and V2, respectively. Use function data.frame().\n\n\n\n\nExercise 6-10\n\n\nA useful function to check the properties of any R object is the str() function. Try this function on dat3.\n\nYou can inspect the structure of a dataframe (or other R object) by using the str() function or by clicking on the object in the Environment tab in RStudio, which unfolds the properties of each element. See:\n\n\n\nTry both ways of inspecting the structure of dat3.\nInspecting the structure of your data is vital, as you probably have imported your data from some other source. If we, at a later stage, start analyzing our data without the correct measurement level, we may run into problems. One problem that often occurs is that categorical variables (factors in R) are not coded as such.\n\n\nSelect 1) the third row, 2) the second column and 3) the intersection of these two in the dataframe dat3 that you have created in Question 4.\n\nThe [3, 2] index is very useful in ‘R’. The first number (before the comma) represents the row and the second number (after the comma) represents the column. For a vector there are no two dimensions and only one dimension can be called. For example, vec1[3] would yield 3. Try it.\nColumns can also be called by the $ sign, but only if a name has been assigned. With dataframes assigning names happens automatically.\n\nImagine that the first variable V1 in our dataframe dat3 is not coded correctly, but actually represents grouping information about cities. Convert the variable to a factor and add the labels Utrecht, New York, London, Singapore, Rome and Cape Town.\n\nYou can verify the changes with str() or by inspecting the object dat3 in the RStudio Environment tab.\n\nOpen the workspace boys.RData.\n\nThere are two ways to go about opening workspaces that are available on the internet. You either need to download this boys.RData file from the course page and put it in the project folder. Then run the below code\n\nload(\"boys.RData\")\n\nor double-click the boys.RData file on your machine (right-click and open with RStudio if it does not open by default in RStudio, but in R).\nAlternatively, you can import workspaces directly from the internet by running and loading a connection to a URL. For example, the following connection loads the boys.RData file from another course page:\n\ncon &lt;- url(\"https://www.gerkovink.com/fundamentals/data/boys.RData\")\nload(con)\n\nIn the above code we store the connection in object con and then load the connection with load(con). Be aware that if you store your code on multiple locations, it will burn carbon (energy) at multiple locations. Better is to have a central repository where you store your code and data. This is what working in Projects - which we discussed in Practical 1, facilitates.\n\nMost packages have datasets included. Since we have not learned to load packages yet, you are presented with such a data set in a workspace. Open the boys dataset (it is from package mice, by the way) by typing boys in the console, and subsequently by using the function View().\n\nThe output is not displayed here as the data set is simply too large.\nUsing View() is preferred for inspecting datasets that are large. View() opens the dataset in a spreadsheet-like window (conform MS Excel, or SPSS). If you View() your own datasets, you can not edit the datasets’ contents.\n\n\n\nExercise 11-15\n\n\nFind out the dimensions of the boys data set and inspect the first and final 6 cases in the data set.\n\nTo do it numerically, find out what the dimensions of the boys dataset are.\nSelect the first and last six cases\nor, more efficiently:\n\nhead(boys)\n#&gt;      age  hgt   wgt   bmi   hc  gen  phb tv   reg\n#&gt; 3  0.035 50.1 3.650 14.54 33.7 &lt;NA&gt; &lt;NA&gt; NA south\n#&gt; 4  0.038 53.5 3.370 11.77 35.0 &lt;NA&gt; &lt;NA&gt; NA south\n#&gt; 18 0.057 50.0 3.140 12.56 35.2 &lt;NA&gt; &lt;NA&gt; NA south\n#&gt; 23 0.060 54.5 4.270 14.37 36.7 &lt;NA&gt; &lt;NA&gt; NA south\n#&gt; 28 0.062 57.5 5.030 15.21 37.3 &lt;NA&gt; &lt;NA&gt; NA south\n#&gt; 36 0.068 55.5 4.655 15.11 37.0 &lt;NA&gt; &lt;NA&gt; NA south\ntail(boys)\n#&gt;         age   hgt  wgt   bmi   hc  gen  phb tv   reg\n#&gt; 7410 20.372 188.7 59.8 16.79 55.2 &lt;NA&gt; &lt;NA&gt; NA  west\n#&gt; 7418 20.429 181.1 67.2 20.48 56.6 &lt;NA&gt; &lt;NA&gt; NA north\n#&gt; 7444 20.761 189.1 88.0 24.60   NA &lt;NA&gt; &lt;NA&gt; NA  west\n#&gt; 7447 20.780 193.5 75.4 20.13   NA &lt;NA&gt; &lt;NA&gt; NA  west\n#&gt; 7451 20.813 189.0 78.0 21.83 59.9 &lt;NA&gt; &lt;NA&gt; NA north\n#&gt; 7475 21.177 181.8 76.5 23.14   NA &lt;NA&gt; &lt;NA&gt; NA  east\n\nThe functions head() and tail() are very useful functions. For example, from looking at both functions we can observe that the data are very likely sorted based on age.\n\nSuppose you want to plot the height versus the weight of the boys. You would like to have the weight variable (wgt) on the x-axis and the height variable (hgt) on the y-axis. How can you achieve such a plot? Tip: use the args() function.\n\nA. plot(boys$wgt, boys$hgt)\nB. plot(boys$hgt, boys$wgt)\nC. plot(x=boys$wgt, y=boys$hgt)\nD. plot(y=boys$hgt, x=boys$wgt)\n\n# look at the arguments structure in the function\n\nMake the plot using the correct code.\n\nIt seems that the boys data are sorted based on age. Verify this.\n\nTo verify if the data are indeed sorted, we can run the following command to test the complement of that statement. Remember that we can always search the help for functions: e.g. we could have searched here for ?sort and we would quickly have ended up at function is.unsorted() as it tests whether an object is not sorted.\nwhich returns FALSE, indicating that boys’ age is indeed sorted (we asked if it was unsorted!). To directly test if it is sorted, we could have used\n\n!is.unsorted(boys$age)\n#&gt; [1] TRUE\n\nwhich tests if data data are not unsorted. In other words the values TRUE and FALSE under is.unsorted() turn into FALSE and TRUE under !is.unsorted(), respectively.\n\n\nInspect the boys dataset with str(). Use one or more functions to find distributional summary information (at least information about the minimum, the maximum, the mean and the median) for all of the variables. Give the standard deviation for age and bmi. Tip: make use of the help (?) and help search (??) functionality in R.\n\nNote that bmi contains 21 missing values, e.g. by looking at the summary information. Therefor we need to use na.rm = T to calculate the standard deviation on the observed cases only.\n\n\nSelect all boys that are 20 years or older. How many are there?\n\nThe logical operators (TRUE vs FALSE) are a very powerful tool in R. For example, we can just select the rows (respondents) in the data that are older than 20 by putting the logical operator within the row index of the dataset:\nor, alternatively using subset(),\n\nboys2.1 &lt;- subset(boys, age &gt;= 20)\nnrow(boys2.1)\n#&gt; [1] 12\n\n\n\n\nExercise 16-17\n\n\nSelect all boys that are older than 19, but younger than 19.5. How many are there?\n\nor, alternatively, use subset().\n\n\nWhat is the mean age of boys younger than 15 years of age that do not live in region north?\n\nor, alternatively,\n\nmean(subset(boys, age &lt; 15 & reg != \"north\")$age, na.rm=TRUE)\n#&gt; [1] 6.044461\n\nThe mean age is 6.0444609 years\n\nToday we have learned to use R at its basics. This offers tremendous flexibility, but may also be inefficient when our aim is some complex analysis, data operation of data manipulation. Doing advanced operations in basic R may require lots and lots of code. Tomorrow we will start using packages that allow us to do complicated operations with just a few lines of code.\nAs you start using R in your own research, you will find yourself in need of packages that are not part of the default R installation. The beauty of R is that its functionality is community-driven. People can add packages to CRAN that other people can use and improve. Chances are that a function and/or package has been already developed for the analysis or operation you plan to carry out. If not, you are of course welcome to fill the gap by submitting your own package.\n\nEnd of practicals",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Introductie in R & RStudio</span>"
+    ]
+  },
+  {
+    "objectID": "meeting2.html",
+    "href": "meeting2.html",
+    "title": "2  Data Management",
+    "section": "",
+    "text": "Hoorcollege 3 juni 2025\n\n\n\nVandaag gaan we dwars door R heen om ons snel bekend te maken met de onderliggende machinery van het systeem. We gaan leren hoe je een simpele functie maakt en hoe je die snel en efficient kunt toepassen op verschillende data objecten. In de breedste zin zullen we vandaag al leren hoe je op een efficiente wijze dwars door environments, frames en data containers heen kunt gaan om uiteindelijk de data op een juiste manier te managen. De slides voor het hoorcollege kun u hier vinden",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Data Management</span>"
+    ]
+  },
+  {
+    "objectID": "meeting3.html",
+    "href": "meeting3.html",
+    "title": "3  Data manipulatie",
+    "section": "",
+    "text": "Hoorcollege 5 juni 2025\n\n\n\nVandaag gaan we aan de slag met heel veel vormen van data manipulatie. Een goede troughput strategie is essentieel om van de ruwe data naar een correcte data set voor de uiteindelijke analyse te gaan. We gebruiken hiervoor het tidyverse framework en zullen verder leren om nog efficienter met pipes te gaan werken, zodat het proces om van ruwe data naar analyseresultaten te gaan uiterst inzichtelijk blijft. De slides voor het hoorcollege kun u hier vinden",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Data manipulatie</span>"
+    ]
+  },
+  {
+    "objectID": "meeting4.html",
+    "href": "meeting4.html",
+    "title": "4  Statistiche Analyse",
+    "section": "",
+    "text": "Hoorcollege 6 juni 2025\n\n\n\nVandaag gaan we de diepte in. We zullen leren hoe we uit data een model kunnen halen, en hoe we dat model kunnen gebruiken om voorspellingen te doen. We zullen ook leren hoe we de kwaliteit van ons model kunnen beoordelen. Dit is een belangrijke stap in het proces van data-analyse, en een goed begrip hiervan zal ons in staat stellen om betere beslissingen te nemen op basis van onze data. Veel van de modellen vandaag zullen betrekking hebben op marginale (één dimensie), conditionele (twee dimensies) of joint verdelingen (meerdere dimensies tegelijkertijd). Stiekem zullen ze allemaal in meer of mindere mate terugvoeren op least squares methodologie - de methoden die gebruik maken van de kleinste gekwadrateerde verschillen om een schatting te kunnen verkrijgen. De slides voor het hoorcollege kunt u hier vinden",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Statistiche Analyse</span>"
+    ]
+  },
+  {
+    "objectID": "meeting5.html",
+    "href": "meeting5.html",
+    "title": "5  Functioneel Programmeren",
+    "section": "",
+    "text": "Hoorcollege 9 juni 2025\n\n\n\nFunctioneel programmeren is misschien wel de belangrijkste vaardigheid die een statistisch programmeur zich eigen kan maken. Soms kost het draaien van een statistisch model of een simulatiestudie enorm veel rekenkracht. Efficient programmeren is dan essentieel. Daarnaast is het handig als het rekenwerk verdeeld kan worden over verschillende streams. We gaan daarom vandaag ook aandacht besteden aan het parallel computing en zullen ons de map-reduce workflow eigen maken. De collegeslides voor vandaag kun u hier vinden",
+    "crumbs": [
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Functioneel Programmeren</span>"
+    ]
+  },
+  {
+    "objectID": "meeting6.html",
+    "href": "meeting6.html",
+    "title": "6  Geavanceerde data technieken",
+    "section": "",
+    "text": "Hoorcollege 10 juni 2025\n\n\n\nVandaag gaan we zelf data maken. Op het eerste gezicht klinkt dat misschien een beetje frauduleus - hoe komen we aan die data en waarom zou deze data goed zijn? We zullen zien dat we data-gebaseerde en informatie-gebaseerde modellen kunnen gebruiken om valide inferentie (gevolgtrekkingen) te kunnen trekken op basis van bestaande - al dan niet compleet geobserveerde - data. We gebruiken daarvoor veel van de technieken en theorie die we tot nu toe hebben geleerd. Eigenlijk komt alles wat we tot nu toe hebben besproken samen in dit college. De collegeslides kunt u hier vinden",
+    "crumbs": [
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Geavanceerde data technieken</span>"
+    ]
+  },
+  {
+    "objectID": "meeting7.html",
+    "href": "meeting7.html",
+    "title": "7  Data visualizatie",
+    "section": "",
+    "text": "Lecture 12 June 2025\n\n\n\n\nA picture says more than a thousand words\n\nAan het bovenstaande adage zullen we vandaag veel aandacht besteden. We duiken in de rationale achter de gramatica van afbeeldingen en zullen dit ons eigen gaan maken. We behandelen verschillende visualizatie benaderingen en zullen zien dat less is more een goed uitgangspunt is. De collegeslides voor deze week kunt u hier vinden",
+    "crumbs": [
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Data visualizatie</span>"
+    ]
+  },
+  {
+    "objectID": "meeting8.html",
+    "href": "meeting8.html",
+    "title": "8  Ontwikkelen en programmeren in R",
+    "section": "",
+    "text": "8.1 R-packages\nIt is much easier to create, manage and co-develop an R-package when you incorporate it into a distributed version control system like Git. The extension to a software development hosting service like GitHub is then a natural one. Although there are other procedures, devops systems and hosting services that may lend itself for package development, we outline the workflow with Git and GitHub. We also assume that you have RStudio installed.",
+    "crumbs": [
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Ontwikkelen en programmeren in R</span>"
+    ]
+  },
+  {
+    "objectID": "meeting8.html#r-packages",
+    "href": "meeting8.html#r-packages",
+    "title": "8  Ontwikkelen en programmeren in R",
+    "section": "",
+    "text": "8.1.0.1 Recap on Git\nGit is a free and open source version control system for text files. It can handle extensive change logging for you, no matter the size of the project. Git is fast and efficient, but its effectiveness depends also on the frequency you instruct it to log your project’s changes.\nYou can see Git as a blank canvas that starts at a certain point in time. Every time you (or others) instruct Git to log any changes that have been made, Git adds the changes that are made to this canvas. We call the changes to the canvas commits. With every commit an extensive log is created that includes at least the following information:\n\nthe changes made\nwho made the changes\nmetadata\na small piece of text that describe the changes made\n\nThe difference between two commits - or the changes between them - are called diffs.\nIf you’d like to know much more about Git, this online book is a very good resource. If you’d like to practice with the command line interface use this webpage for a quick course. This book covers pretty much everything you need to marry Git and R.\n\n\n8.1.0.2 Why GitHub\nGitHub is the social and user interface to Git that allows you to work in repositories. These repositories can be seen as project folders in which you publish your work, but you can also use them as test sites for development, testing, etcetera. There is a distinction between private repositories (only for you and those you grant access) and public repositories (visible for everyone).\nYour public repositories can be viewed and forked by everyone. Forking is when other people create a copy of your repository on their own account. This allows them to work on a repository without affecting the master. You can also do this yourself, but then the process is called branching instead of forking. If you create a copy of a repository that is offline, the process is called cloning.\nGitHub’s ability to branch, fork and clone is very useful as it allows other people and yourself to experiment on (the code in) a repository before any definitive changes are merged with the master. If you’re working in a forked repository, you can submit a pull request to the repository collaborators to accept (or reject) any suggested changes.\nFor now, this may be confusing, but I hope you recognize the benefits GitHub can have on the process of development and bug-fixing. For example, the most up-to-date version of the mice package in R can be directly installed from the mice repository with the following code:\n\ninstall.packages(\"devtools\")\ndevtools::install_github(repo = \"stefvanbuuren/mice\")\n\nYou can see that this process requires package devtools that expands the R functionality with essential development tools. Loading packages in R directly from their respective GitHub repositories, allows you to obtain the latest - often improved and less buggy - iteration of that software even before it is published on CRAN.\n\n\n8.1.0.3 Install RStudio\nInstall RStudio from Posit’s website. The free edition will suffice.\n\n\n8.1.1 Some R-code\nIn order to demonstrate the creation of an R-package, we will identify some odd behaviour by R:\n\nlibrary(dplyr)\nc(0.5, 1.5, 2.5, 3.5) %&gt;% round()\n\n[1] 0 2 2 4\n\n\nWe can see that R rounds - by default - the number 1.5 to integer 2 and the number 2.5 also to integer 2. The reason for this behaviour is the IEC 60559 standard where a 5 is expected to be rounded to the even digit.\nIf we’d like to round up to the next integer, we can easily define the following function:\n\nrounder &lt;- function(x){\n  diff &lt;- x - floor(x)\n  out &lt;- x %&gt;% ceiling()\n  out[diff &lt; .5] &lt;- floor(x)[diff &lt; .5]\n  return(out)\n}\n\nwhere the vector c(0.5, 1.5, 2.5, 3.5) is rounded up to the next integer\n\nc(0.5, 1.5, 2.5, 3.5) %&gt;% rounder()\n\n[1] 1 2 3 4\n\n\nand where the vector c(0.49, 1.49, 2.49, 3.49) is rounded down to the previous integer\n\nc(0.49, 1.49, 2.49, 3.49) %&gt;% rounder()\n\n[1] 0 1 2 3",
+    "crumbs": [
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Ontwikkelen en programmeren in R</span>"
+    ]
+  },
+  {
+    "objectID": "meeting8.html#create-r-package-roundr",
+    "href": "meeting8.html#create-r-package-roundr",
+    "title": "8  Ontwikkelen en programmeren in R",
+    "section": "8.2 Create R-package roundR",
+    "text": "8.2 Create R-package roundR\nThe goal of this document is to create the code for the rounder() function into a stand-alone R-package with its referenceable Digital Object Identifier\n\n8.2.1 Steps in creating an R-package\n\n8.2.1.1 Packages and sources needed\nWe need the following packages to help us with building, testing and maintaining our package:\n\nlibrary(devtools) # development tools\nlibrary(usethis)  # automated package and project setup\nlibrary(testthat) # unit testing\n\n\n\n8.2.1.2 Preparing the package structure\nWe need a location for our R-package. The simplest approach to creating the skeleton for an R-package is to use RStudio. The following gif outlines this procedure:\n\n\n\nWe have now created the necessary structure for an R-package. We can see this structure and the generated package files in the File Pane in RStudio.\n\n\n\nThe R subfolder contains all the R-code for your package and the man folder contains all the corresponding R manuals. By default, for a new R-package generated by RStudio the file hello.R is generated.\n\n\n\nAs a matter of fact, the skeleton R-package is already a fully functional R-package. Try installing the package in the build pane.\n\n\n\n\n\n8.2.1.3 Add the description\nOpen the file DESCRIPTION from the file pane. The following window opens:\n\n\n\n\nNow, replace the contents of the DESCRIPTION file with\n\nPackage: roundR\nType: Package\nTitle: Round Numeric Values to the Nearest Integer\nVersion: 0.1.0\nAuthor: Gerko Vink and Hanne Oberman\nMaintainer: Gerko Vink &lt;G.Vink@uu.nl&gt;\nDescription: In R the default choice for rounding follows the IEC 60559 standard where a 5 is expected to be rounded to the even digit. This package offers alternative functionality to round to the closest integer. \nLicense: No LiCeNsE YeT\nEncoding: UTF-8\nLazyData: true\n\nThe DESCRIPTION file governs the information about the licence, authors, contributors, maintainers, etcetera. The argument lazyData: true indicates that data sets should be lazily loaded. This means that data will not occupy any memory unless it is needed. This is a good argument to have as default.\nWe also need to set a license. Running the following code from package usethis will write a permissive MIT license to the description file\n\nusethis::use_mit_license()\n\nDon’t forget to save the updated DESCRIPTION file and change our names to your name.\n\n\n8.2.1.4 Add the functional code\nNow it is time to extend the package with the functionality we promised in our updated DESCRIPTION. To do so, we start a new file names rounder.R by either manually creating it in the R sub folder, or by running the following code evaluation\n\nusethis::use_r(\"rounder\")\n\nThe use_r() function from the usethis package is very convenient, because it creates the necessary file in the correct location and opens the file in the editor pane.\n\n\n\n\nNow that we have created the file for our functional code, we can start building the code file. The most flexible approach to creating and maintaining a package is to use roxygen2. The roxygen2 package is a convenient in-line documentation convention that generates your Rd documentation, NAMESPACE file, and much more for you. Remember that man folder in our package root? That contains all documentation files. However, you can imagine if we have two seperate locations for our R-code and our Rd help files, that at some point the code and documentation might get out of sync. For example, if we update the code, but forget to reflect changes in our manual, the usability of our package may be at stake and documentation to end-users might get confusing. Most of all, it would be a lot of work for us to maintain multiple linked files in multiple locations. roxygen2 solves this for us by extracting the documentation from our R-code file. The only thing we need to do is maintain a single file.\nTo start with roxygen2 in our package, we need to instruct the package to use roxygen2 from now on:\n\nusethis::use_roxygen_md()\n\nThe above call will add the following lines to our DESCRIPTION file:\n\nRoxygen: list(markdown = TRUE)\nRoxygenNote: 7.2.3\n\nWe mentioned before that the roxygen2 engine expects the function documentation in the same file as the function code. A good starting point for that documentation is the following block:\n\n#' A short description of your function\n#' \n#' @param x The first argument to be governed by the letter x.\n#' @param y The second argument to denoted by the letter y.\n#' @returns a short description of the expected return.\n#' @examples\n#' examplecode 1\n#' examplecode 2\n\nIn R, when you have executed usethis::use_r() and have filled in your R code, you can run Code &gt; Insert Roxygen Skeleton to automatically create the relevant roxygen documentation. For our function rounder() - with some customization and examples, this could result in the following rounder.R code file\n\n#' Round to the nearest integer\n#'\n#'Function \\code{\\link{base::round}} rounds - by default -  the number `1.5` to\n#'integer `2` and the number `2.5` also to integer `2`. The reason for this\n#'behaviour is the IEC 60559 standard where a 5 is expected to be rounded to the\n#'even digit. This function provides an integer rounding alternative to\n#'\\code{\\link{base::round}}.\n#'\n#' @param x A numeric element or vector to round to the nearest integer\n#' @returns An integer element or vector\n#' @author Gerko Vink \\email{g.vink@uu.nl} and Hanne Oberman \\email{h.i.oberman@uu.nl}\n#' @examples\n#' # rounds weirdly\n#' c(0.5, 1.5, 2.5, 3.5) %&gt;% round()\n#' # rounds correctly\n#' c(0.5, 1.5, 2.5, 3.5) %&gt;% rounder()\n#'\nrounder &lt;- function(x) {\n  diff &lt;- x - floor(x)\n  out &lt;- x %&gt;% ceiling()\n  out[diff &lt; .5] &lt;- floor(x)[diff &lt; .5]\n  return(out)\n}\n\nYou can copy the above code chunk to your rounder.R file. A good source to find inspiration for writing roxygen2 documentation is the roxygen2 reference page.\nNow that we have a working rounder.R file with documentation included, we can build the documentation. A good wrapper function to build all documentation in your package is the following code evaluation:\n\ndevtools::document()\n\n\n\n\n\nThe document() function from the devtools package will build all documentation for all files that use roxygen2 and it will build the NAMESPACE of your package accordingly. If you encounter the following message:\n\nSkipping NAMESPACE\n✖ It already exists and was not generated by roxygen2. \n\njust remove the NAMESPACE file and re-run the document() function.\nWe can now remove the R/hello.R and man/hello.Rd files as they are not supposed to be part of our package\n\n\n8.2.1.5 Building and checking\nLet’s check the functionality of our package.\n\n\n\n\nWe can see under build &gt; check that our current package yields 1 error, 1 warning and 1 note.\n\n8.2.1.5.1 Error\n\n❯ checking examples ... ERROR\n  Running examples in ‘roundR-Ex.R’ failed\n  The error most likely occurred in:\n\n    ...\n  \n  &gt; c(0.5, 1.5, 2.5, 3.5) %&gt;% round()\n  Error in c(0.5, 1.5, 2.5, 3.5) %&gt;% round() : \n    could not find function \"%&gt;%\"\n  Execution halted\n\nThe error stems from the examples in our documentation. The examples use the binary function %&gt;% from package magrittr, but we did not load that package in the example. Remember that these examples are self-contained and that any dependent packages need to be explicitly loaded via library() for the code to run. Just like any other R instance. Simply adding library(magrittr) to the example code will solve the issue.\nAdd library(magrittr) to the example code:\n\n#' @examples\n#' library(magrittr)\n#' # rounds weirdly\n#' c(0.5, 1.5, 2.5, 3.5) %&gt;% round()\n#' # rounds correctly\n#' c(0.5, 1.5, 2.5, 3.5) %&gt;% rounder()\n\n\n\n8.2.1.5.2 Warning\n\n❯ checking Rd cross-references ... WARNING\n  Missing link or links in documentation object 'rounder.Rd':\n    ‘base::round’\n  \n  See section 'Cross-references' in the 'Writing R Extensions' manual.\n\nThe error stems from the crossreference we attempted in our documentation. The proper way to refer to function round() from package base is not with \\link{base::round}, but with \\link[base]{round} following the structure \\link[package]{function}. We could have opted for not referencing, or linking the round() function at all, but this would not align with open and inclusive development conventions.\nCorrect the faulty crossreferences in the documentation:\n\n#'Function \\code{\\link[base]{round}} rounds - by default -  the number `1.5` to\n#'integer `2` and the number `2.5` also to integer `2`. The reason for this\n#'behaviour is the IEC 60559 standard where a 5 is expected to be rounded to the\n#'even digit. This function provides an integer rounding alternative to\n#'\\code{\\link[base]{round}}.\n\n\n\n8.2.1.5.3 Note\n\n❯ checking R code for possible problems ... NOTE\n  rounder: no visible global function definition for ‘%&gt;%’\n  Undefined global functions or variables:\n    %&gt;%\n\nWe use function %&gt;% from package magrittr, but we neglected to make explicit that this function should have been imported from package magrittr. In other words, R needs to know that our package roundR would depend on package magrittr for its functionality to work.\nWe can fix this by runnin the following usethis evaluation in the console:\n\nusethis::use_import_from(\"magrittr\", \"%&gt;%\")\n\nWhen asked\n\n`use_import_from()` requires package-level documentation.\nWould you like to add it now?\n\n1: For sure\n2: Not now\n3: No way\n\nchoose the fun option that would add it (i.e. For Sure, Yes, Absolutely, etc). These options change every time you re-run the function code, so read it carefully!\nOnce you have selected the correct option, we can re-run the CHECK. You will find that there still persists an error in the example:\n\n❯ checking examples ... ERROR\n  Running examples in ‘roundR-Ex.R’ failed\n  The error most likely occurred in:\n  \n  ...\n  \n  &gt; c(0.5, 1.5, 2.5, 3.5) %&gt;% rounder()\n  Error in rounder(.) : could not find function \"rounder\"\n  Calls: %&gt;%\n  Execution halted\n\nOur package CHECK cannot find function rounder(). That may seem weird, since it is the only function in our package. The thing is - we have not explicitly told roxygen2 to export our function, i.e. to make our function available outside of the package namespace. Simply adding @export to the rounder.R file would solve this error:\n\n...\n#' @author Gerko Vink \\email{g.vink@uu.nl} and Hanne Oberman \\email{h.i.oberman@uu.nl}\n#' @export\n#' @examples\n#' library(magrittr)\n...\n\nTry re-running the CHECK to see if you hit three green check marks (NO errors, warnings and notes). If all is well, you’ll see:\n\n── R CMD check results ────────────────────────────────────────── roundR 0.1.0 ────\nDuration: 6.6s\n\n0 errors ✔ | 0 warnings ✔ | 0 notes ✔\n\nR CMD check succeeded\n\n\n\n\n8.2.1.6 Increasing the version\nNow that we have a working package with a succesfull R CMD check, we might think about updating the version of the package. After all, a lot has changed since the last version got defined at the start of our development journey.\nThe easiest means to increasing the version to 0.2.0 (indicating a minor update) is to use\n\nusethis::use_version()\n\nYou will be presented with something like:\n\n✔ Setting active project to '/Users/gerko/surfdrive/Werk/GitHub/roundR/roundR'\nCurrent version is 0.1.1.\nWhat should the new version be? (0 to exit) \n\n1: major --&gt; 1.0.0\n2: minor --&gt; 0.2.0\n3: patch --&gt; 0.1.2\n4:   dev --&gt; 0.1.1.9000\n\nSelection: 2\n✔ Setting Version field in DESCRIPTION to '0.2.0'\nThere is 1 uncommitted file:\n* 'DESCRIPTION'\nIs it ok to commit it?\n\n1: For sure\n2: Negative\n3: Nope\n\nSelection: 1\n✔ Adding files\n✔ Making a commit with message 'Increment version number to 0.2.0'\n\nThe question Is it ok to commit it? is related to Git. Please click to commit the version increase. For reasons of brevity and simplicity, we will leave a thorough discussion of incremental Git commits for now and demonstrate to use of Git and GitHub at the end of this walkthrough.\n\n\n8.2.1.7 Add tests\nThe next step for a mature package is to include tests. Every function should have functional tests. The testthat package is geared to that. Make sure that you have the rounder.R file open in the Source pane and run:\n\nusethis::use_test()\n\nThe proper structure for test files has now been created:\n\n✔ Adding 'testthat' to Suggests field in DESCRIPTION\n✔ Setting Config/testthat/edition field in DESCRIPTION to '3'\n✔ Creating 'tests/testthat/'\n✔ Writing 'tests/testthat.R'\n✔ Writing 'tests/testthat/test-rounder.R'\n• Modify 'tests/testthat/test-rounder.R'\n\nYou are asked to modify the tests/testthat/test-rounder.R file. Replace the example test with:\n\ntest_that(\"rounder works\", {\n  A &lt;- c(0.5, 1.5, 2.5, 3.5) %&gt;% rounder()\n  B &lt;- c(0.49, 1.49, 2.49, 3.49) %&gt;% rounder()\n  expect_equal(A, c(1, 2, 3, 4))\n  expect_equal(B, c(0, 1, 2, 3))\n})\n\ntest_that(\"rounder yields different results than round\", {\n  vec1 &lt;- c(0.5, 1.5, 2.5, 3.5)\n  vec2 &lt;- c(0.499999999999999999995,\n            1.499999999999999999995,\n            2.499999999999999999995,\n            3.499999999999999999995)\n  A &lt;- vec1 %&gt;% rounder()\n  B &lt;- vec1 %&gt;% round()\n  C &lt;- vec2 %&gt;% rounder()\n  D &lt;- vec2 %&gt;% round()\n  expect_false(identical(A, B))\n  expect_false(identical(C, D))\n})\n\nClick the Test button in the build pane:\n\n\n\nAll test should pass, meaning that your rounder() function yields correct results (test 1) that differ fundamentally from the results obtained with round() (test 2).\nIf test would fail, you’d be notified. For example\n\ntest_that(\"rounder works\", {\n  A &lt;- c(0.5, 1.5, 2.5, 3.5) %&gt;% rounder()\n  expect_equal(A, c(4, 3, 2, 1))\n  })\n\n── Failure: rounder works ──────────────────────────────────────────────────────\n`A` not equal to c(4, 3, 2, 1).\n4/4 mismatches (average diff: 2)\n[1] 1 - 4 == -3\n[2] 2 - 3 == -1\n[3] 3 - 2 ==  1\n[4] 4 - 1 ==  3\n\n\nError:\n! Test failed\n\n\nFortunately, our test all passed. Now rerun the R CMD check. If all is well you’ll receive confirmation of a successful check.\n\n\n8.2.1.8 Publishing to GitHub\nThis section assumes that you are logged into your GitHub account. If you have trouble realizing this, GitHub has a great step-by-step walkthrough.\nLet’s publish our R-package to GitHub. To do so, we need to perform two steps. First, we must log (commit) our changes to the Git distributed version control system. This stores the file changes to our own machine. Next we must link our local Git to a remote online repository on GitHub. Luckily, with GitHub Desktop, we can perform all these steps in a single window interface.\nLet’s start by adding our R-package to GitHub desktop. Remember that we already started the package in RStudio as a Git repository, so we only have to point GitHub desktop to the correct directory.\n\n\n\nNext, we commit the changes. This means that we save the state of files for a moment in time, so that we can always revert to that state and see how the files changed with respect to the previous state.\n\n\n\nNaturally, you would not only do this at the start (when RStudio created the Git repository) and end (when we have a working package), but at regular and informative intervals. For example, when you add a function, a test, a help file, a license, etcetera.\nNow that we have commited our package, we can publish it on GitHub.\n\n\n\nTry your online GitHub repositories at https://github.com. You will see your package there and that the license is automatically recognized. You will also see that you are in the main branch. By default, that will be the live version of your package. Now that your package is live, it would be nice to add a Readme file that informs visitors to your repository. But we will extend our workflow with a good behaviour: not working in the main branch. We would not want to accidentally overwrite or break the functionality of our package, just because we were working in the same branch. So let’s add a Readme to a new development branch.\n\n\n\nWhen we commit the new Readme file to the development branch, a new window opens to propose the pull request (PR). The PR is nothing more than a request to the package developers to pull your proposed changes into (usually) the main branch of the software. Since we are the developers, we have to both create and accept the PR.\n\n\n\nIt is good procedure to write an informative PR message, usually outlining the nature and rationale of the changes. I also demonstrate how to accept a PR, thereby approving the changes per file (only one now) and signing it with my initials. I cannot formally approve my own PR, since that would leave great opportunity for subjectivity or error. Proper procedure would be to have someone else check and approve your changes.\n\n\n\nWhen you go back to GitHub desktop and fetch the changes on teh remote (that would be GitHub online), you will see that you have now access to the readme file and the development branch.\n\n\n8.2.1.9 Registering a DOI\nNow that we have a proper and open source package online and the world as our user base, it would be wise to allow for proper referencing of our package.\nGitHub and Zenodo have paired to facilitate this procedure. If you link your Zenodo account to GitHub, as outlined here, you only have to click, copy and paste to fully make your GitHub repo citeable.\n\n\n\n\n\n8.2.1.10 Add citation\nZenodo prepares the repository citation for us. We can simply grab the info, change our personal information and submit it to GitHub.\n\n\n\nThe final step before we would put our package out there is to notify how users can refer to our package. Run the following code:\n\nusethis::use_citation()\n\nwhich will create the necessary citation files for modification\n\n✔ Creating 'inst/'\n✔ Writing 'inst/CITATION'\n• Modify 'inst/CITATION'\n\nWe can now simply grab the text and/or bibtex citation from GitHub and paste it into the CITATION file. The citation info cf. R-packages could be:\n\ncitHeader(\"To cite roundR in publications use:\")\n\ncitEntry(\n  entry    = \"Manual\",\n  title    = \"gerkovink/roundR: Version 0.2.0 - First release\",\n  author   = \"Gerko Vink and Hanne Oberman\",\n  year     = \"2023\",\n  doi      = \"10.5281/zenodo.7668889\",\n  url      = \"github.com/gerkovink/roundR\",\n  textVersion = paste(\n\"Vink, G and Oberman, H.I. (2023). gerkovink/roundR: Version 0.2.0 - First release (Version v0.2.0) [Computer software]. https://doi.org/10.5281/zenodo.7668889\"\n  )\n)\n\nModify this to your name and paste it into the CITATION file.",
+    "crumbs": [
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Ontwikkelen en programmeren in R</span>"
+    ]
+  },
+  {
+    "objectID": "meeting8.html#installing-your-own-package-from-github",
+    "href": "meeting8.html#installing-your-own-package-from-github",
+    "title": "8  Ontwikkelen en programmeren in R",
+    "section": "8.3 Installing your own package from GitHub",
+    "text": "8.3 Installing your own package from GitHub\nGo to GitHub desktop, and commit and push the changes to GitHub. Then run the following code block:\n\ndevtools::install_github(\"gerkovink/roundR\")\n\nwhere you replace \"gerkovink/roundR\" with your GitHub handle and repository name.",
+    "crumbs": [
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Ontwikkelen en programmeren in R</span>"
+    ]
+  },
+  {
+    "objectID": "meeting8.html#advanced-topics",
+    "href": "meeting8.html#advanced-topics",
+    "title": "8  Ontwikkelen en programmeren in R",
+    "section": "8.4 Advanced topics",
+    "text": "8.4 Advanced topics\n\n\n\n\nPotential next steps include:\n\nCreating package documentation (e.g. vignettes)\nCreating a hex logo (e.g. with hexmake)\nCreating a package website (e.g. with pkgdown)\nChecking the FAIR-ness of your package (e.g. with howfairis, or BadgeApp)\nChecking the code coverage of your package (e.g. with Codecov)\nMaintaining the package (e.g. with GitHub issues)\nMaintaining contributions (e.g. with a code of conduct)",
+    "crumbs": [
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Ontwikkelen en programmeren in R</span>"
+    ]
+  },
+  {
+    "objectID": "meeting8.html#other-useful-sources",
+    "href": "meeting8.html#other-useful-sources",
+    "title": "8  Ontwikkelen en programmeren in R",
+    "section": "8.5 Other useful sources",
+    "text": "8.5 Other useful sources\n\nThe R Packages book by Hadley Wickham and Jenny Bryan",
+    "crumbs": [
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Ontwikkelen en programmeren in R</span>"
+    ]
+  }
+]

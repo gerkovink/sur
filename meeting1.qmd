@@ -11,7 +11,6 @@ format:
   html:
     highlight-style: github
     number-sections: false
-    embed-resources: true
     toc: true
     toc-depth: 3
 ---
@@ -25,18 +24,22 @@ knitr::opts_chunk$set(
 
 ::: callout-tip
 ## Hoorcollege 2 juni 2025
-We beginnen vandaag met `R` en `RStudio`. We zullen leren om deze software efficient te gebruiken en we gaan werken in projecten. Dit is belangrijk omdat een gestructureerde werkomgeving het mogelijk maakt om met anderen samen te werken aan hetzelfde project. We beginnen vandaag ook meteen met `storytelling` en zullen daar het publicatieplatform [`Quarto`]() voor gebruiken. 
-
-De slides voor het hoorcollege kunt u [hier vinden](slides/lec-1.html)
+We beginnen vandaag met `R` en `RStudio`. We zullen leren om deze software efficient te gebruiken en we gaan werken in projecten. Dit is belangrijk omdat een gestructureerde werkomgeving het mogelijk maakt om met anderen samen te werken aan hetzelfde project. We beginnen vandaag ook meteen met `storytelling` en zullen daar het publicatieplatform [`Quarto`]() voor gebruiken. De slides voor het hoorcollege kunt u [hier vinden](slides/lec-1.html).
 :::
 
 ::: callout-note
 ## Lesstof
-De volgende stof moet voor het college bestudeerd zijn:
+De volgende taken moeten voorafgaand het college voltooid zijn:
 
--   [R](https://cran.r-project.org/)
--   [RStudio](https://posit.co/download/rstudio-desktop/)
--   [Quarto](https://quarto.org/)
+-   installeer [R](https://cran.r-project.org/)
+-   installeer [RStudio](https://posit.co/download/rstudio-desktop/)
+-   installeer [Quarto](https://quarto.org/) door onderstaande code in de `R` console te evalueren:
+
+```{r eval = FALSE}
+install.packages("quarto", dependencies = TRUE)
+```
+
+- lees [R for Data Science, hoofdstuk 1](https://r4ds.had.co.nz/)
 :::
 
 ## Practical 1
@@ -50,9 +53,9 @@ In general for all practicals in this course: aim to make the exercises without 
 ### Create an `R Project`
 
 1. Go to today's course chapter: @sec-mt1. If you can read this, you should already be at the right location. 
-2. Download the "Practical 1: template file" and save it in a new folder with name "RCourse", for example.
+2. Download the [Practical_1_template.qmd](documents/mt1/Practical_1_Template.qmd) file and save it in a new folder with name "RCourse", for example.
 3. Open `RStudio` and choose File -> New Project. Choose the option "Existing Directory". Find the Project Working Directory, the folder "RCourse" you just created. Click on "Create project".
-4. Open the "Practical_1_template.Rmd" with File -> Open File. 
+4. Open the "Practical_1_template.qmd" with File -> Open File. 
 5. Continue below to complete the exercises in the template file.
 
 ## Introduction to `RStudio` and `Quarto`
@@ -89,6 +92,7 @@ Take a look at the `Markdown Quick Reference` in `R Studio` and try the followin
 5. Compile this document as a `html` file. Use the <kbd>![](https://github.com/quarto-dev/quarto-web/blob/main/docs/get-started/hello/images/rstudio-render-button.png?raw=true){width="25" height="20"}</kbd> **Render** button in the RStudio IDE to render the file and preview the output with a single click or keyboard shortcut (⇧⌘K).
 
 ![](https://github.com/quarto-dev/quarto-web/blob/main/docs/get-started/hello/images/rstudio-render.png?raw=true){.border fig-alt="Top of the text editor in RStudio with the Render button highlighted with a purple box." fig-align="center"}
+
 6. Verify how the headers and the hyperlink look like. Instead of knitting, it is also possible to get a preview by clicking on "Visual" in the left upper corner of the editor pane. Try both options.
 
 The benefit of using html as an output format lies in the dimensional properties of a web-page. Especially when dealing with long code-files, large output from analyses or many graphs, exporting your file as html is much more convenient. You can simply scroll down or up to see the 'rest', instead of having to flip through pages back and forth to compare code, graphs or output.

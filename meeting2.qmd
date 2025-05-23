@@ -2,6 +2,6 @@
 
 ::: callout-tip
 ## Hoorcollege 3 juni 2025
-Vandaag gaan we dwars door `R` heen om ons snel bekend te maken met de onderliggende machinery van het systeem. We gaan leren hoe je een simpele functie maakt en hoe je die snel en efficient kunt toepassen op verschillende data objecten. In de breedste zin zullen we vandaag al leren hoe je op een efficiente wijze dwars door environments, frames en data containers heen kunt gaan om uiteindelijk de data op een juiste manier te managen. De slides voor het hoorcollege kun u [hier vinden](slides/lec-2.html)
+Vandaag gaan we dwars door `R` heen om ons snel bekend te maken met de onderliggende machinery van het systeem. We gaan leren hoe je een simpele functie maakt en hoe je die snel en efficient kunt toepassen op verschillende data objecten. In de breedste zin zullen we vandaag al leren hoe je op een efficiente wijze dwars door environments, frames en data containers heen kunt gaan om uiteindelijk de data op een juiste manier te managen. De slides voor het hoorcollege kun u [hier vinden](slides/lec-2.html) 
 :::
 
