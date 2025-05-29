@@ -53,7 +53,7 @@ library(ggplot2)
 
 and if you'd like the same results as I have obtained, you can fix the random seed
 
-```{r cache=TRUE}
+```{r}
 set.seed(123)
 ```
 
@@ -76,13 +76,13 @@ There are many more functions that can plot specific types of plots. For example
 
 With the standard plotting device in `R`:
 
-```{r cache=TRUE}
+```{r }
 mice::boys %$% plot(bmi ~ age)
 ```
 
 or, with `ggplot2`:
 
-```{r cache=TRUE}
+```{r }
 p <- ggplot(mice::boys, aes(age, bmi))
 p + geom_point()
 ```
@@ -115,7 +115,7 @@ Hint: it may help to expand the data set with a new variable.
 
 It may be easier to create a new variable that creates the specified categories. We can use the `cut()` function to do this quickly
 
-```{r cache=TRUE}
+```{r }
 boys2 <- 
   boys %>%
   mutate(class = cut(x = bmi, breaks = c(0, 18.5, 25, 30, Inf),
@@ -127,7 +127,7 @@ boys2 <-
 
 by specifying the boundaries of the intervals. In this case we obtain 4 intervals: `0-18.5`, `18.5-25`, `25-30` and `30-Inf`. We used the `%>%` pipe to work with `bmi` directly. Alternatively, we could have done this without a pipe:
 
-```{r cache=TRUE}
+```{r }
 boys3 <- boys
 boys3$class <- cut(boys$bmi, c(0, 18.5, 25, 30, Inf), 
                    labels = c("underweight",
@@ -140,7 +140,7 @@ to obtain the same result.
 
 With the standard plotting device in `R` we can now specify:
 
-```{r cache=TRUE}
+```{r }
 plot(bmi ~ age, subset = class == "underweight", col = "lightblue", data = boys2, 
      ylim = c(10, 35), xlim = c(0, 25))
 points(bmi ~ age, subset = class == "healthy", col = "lightgreen", data = boys2)
@@ -150,7 +150,7 @@ points(bmi ~ age, subset = class == "obese", col = "red", data = boys2)
 
 and with `ggplot2` we can call
 
-```{r cache=TRUE}
+```{r }
 boys2 %>%
   ggplot() +
   geom_point(aes(age, bmi, col = class))
@@ -158,7 +158,7 @@ boys2 %>%
 
 Although the different classifications have different colours, the colours are not conform the specifications of this exercise. We can manually override this:
 
-```{r cache=TRUE}
+```{r }
 boys2 %>%
   ggplot() +
   geom_point(aes(age, bmi, col = class)) +
@@ -167,7 +167,7 @@ boys2 %>%
 
 Because there are missing values, `ggplot2` displays a warning message. If we would like to not consider the missing values when plotting, we can simply exclude the `NA`s by using a `filter()`:
 
-```{r cache=TRUE}
+```{r }
 boys2 %>% 
   filter(!is.na(class)) %>%
   ggplot() +
@@ -183,26 +183,26 @@ Specifying a filter on the feature `class` is sufficient: age has no missings an
 
 With the standard plotting device in `R`:
 
-```{r cache=TRUE}
+```{r }
 boys %$%
   hist(age, breaks = 50)
 ```
 
 The `breaks = 50` overrides the default breaks between the bars. By default the plot would be
 
-```{r cache=TRUE}
+```{r }
 boys %$%
   hist(age)
 ```
 Using a pipe is a nice approach for this plot because it inherits the names of the objects we aim to plot. Without the pipe we might need to adjust the main title for the histogram:
 
-```{r cache=TRUE}
+```{r }
 hist(boys$age, breaks = 50)
 ```
 
 With `ggplot2`:
 
-```{r cache=TRUE}
+```{r }
 boys %>%
   ggplot() + 
   geom_histogram(aes(age), binwidth = .4)
@@ -215,7 +215,7 @@ Please note that the plots from `geom_histogram()` and `hist` use different calc
 4. **Create a bar chart for `reg` in the boys data set**
 With a standard plotting device in `R`:
 
-```{r cache=TRUE}
+```{r }
 boys %$%
   table(reg) %>%
   barplot()
@@ -223,7 +223,7 @@ boys %$%
 
 With `ggplot2`:
 
-```{r cache=TRUE}
+```{r }
 boys %>%
   ggplot() + 
   geom_bar(aes(reg))
@@ -236,14 +236,14 @@ Note that `geom_bar` by default plots the `NA`'s, while `barplot()` omits the `N
 5. **Create a box plot for `hgt` with different boxes for `reg` in the `boys` data set**
 With a standard plotting device in `R`:
 
-```{r cache=TRUE}
+```{r }
 boys %$%
   boxplot(hgt ~ reg)
 ```
 
 With `ggplot2`:
 
-```{r cache=TRUE}
+```{r }
 boys %>%
   ggplot(aes(reg, hgt)) +
   geom_boxplot()
@@ -259,7 +259,7 @@ boys %>%
 6. **Create a density plot for `age` with different curves for boys from the `city` and boys from rural areas (`!city`).**
 With a standard plotting device in `R`:
 
-```{r cache=TRUE}
+```{r }
 d1 <- boys %>%
   subset(reg == "city") %$%
   density(age)
@@ -274,7 +274,7 @@ lines(d2, col = "blue")
 
 The above plot can also be generated without pipes, but results in an *ugly* main title. You may edit the title via the `main` argument in the `plot()` function.
 
-```{r cache=TRUE}
+```{r }
 plot(density(boys$age[!is.na(boys$reg) & boys$reg == "city"]), 
      col = "red", 
      ylim = c(0, .08))
@@ -284,7 +284,7 @@ lines(density(boys$age[!is.na(boys$reg) & boys$reg != "city"]),
 
 With `ggplot2` everything looks much nicer:
 
-```{r cache=TRUE}
+```{r }
 boys %>%
   mutate(area = ifelse(reg == "city", "city", "rural")) %>%
   filter(!is.na(area)) %>%
