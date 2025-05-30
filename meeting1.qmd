@@ -29,11 +29,13 @@ knitr::opts_chunk$set(
 
 ::: callout-tip
 ## Hoorcollege 2 juni 2025
+
 We beginnen vandaag met `R` en `RStudio`. We zullen leren om deze software efficient te gebruiken en we gaan werken in projecten. Dit is belangrijk omdat een gestructureerde werkomgeving het mogelijk maakt om met anderen samen te werken aan hetzelfde project. We beginnen vandaag ook meteen met `storytelling` en zullen daar het publicatieplatform [`Quarto`]() voor gebruiken. De slides voor het hoorcollege kunt u [hier vinden](slides/lec-1.html).
 :::
 
 ::: callout-note
 ## Lesstof
+
 De volgende taken moeten voorafgaand het college voltooid zijn:
 
 -   installeer [R](https://cran.r-project.org/)
@@ -44,377 +46,439 @@ De volgende taken moeten voorafgaand het college voltooid zijn:
 install.packages("quarto", dependencies = TRUE)
 ```
 
-- lees [R for Data Science, hoofdstuk 1](https://r4ds.had.co.nz/)
+-   lees [R for Data Science, hoofdstuk 1](https://r4ds.had.co.nz/)
 :::
 
 ## Practical 1
 
-In this practical you will get acquainted with `R`, `RStudio` and `Quarto`.
+In this lab you will learn to work with Quarto files and RStudio Projects.
 
-In general for all practicals in this course: aim to make the exercises without looking at the answers and use the solutions file ("Practical 1: solutions") to evaluate your work. However, do not 'struggle' too long because you will run out of time.
+### Exercise 1. Create an R Project to organise your work
 
-**In any case, ask for help when you feel help is needed.**
+In this course you learn to work with RStudio Projects. This way of working ensures that your R code and your analyses will continue to work and are easy to share with collaborators.
 
-### Create an `R Project`
+1.  Create a folder on your computer where you will store all the materials of this course. Call it for example "Module_6". It is better to avoid spaces in the name of your folder; you can use underscore (\_) or Capitals to separate words.
+2.  Open RStudio. The RStudio interface will probably look like this:
 
-1. Go to today's course chapter: @sec-mt1. If you can read this, you should already be at the right location. 
-2. Download the [Practical_1_template.qmd](documents/mt1/Practical_1_Template.qmd) file and save it in a new folder with name "RCourse", for example.
-3. Open `RStudio` and choose File -> New Project. Choose the option "Existing Directory". Find the Project Working Directory, the folder "RCourse" you just created. Click on "Create project".
-4. Open the "Practical_1_template.qmd" with File -> Open File. 
-5. Continue below to complete the exercises in the template file.
+![](images/mt1/RStudioInterface.png){width="80%"}
 
-## Introduction to `RStudio` and `Quarto`
+3.  Create a new RStudio Project by selecting File -\> New Project. A new window pops up, choose the option "New Directory". Then create a folder "Module_6" in a directory of your choice. Click on "Create project". See the steps to create an R Project below. When you open a new RStudio Project, a new R session starts up and creates the project structure.
 
-### A closer look at `RStudio`
+![](images/mt1/CreateRProjectSteps.png){width="100%"} <br>
 
-RStudio is divided in 4 panes, as shown in the lecture, slide 9:
+**More information about RStudio Projects**
 
-1.  The **editor pane**, where we create R code and text. This is the pane where the current file, Practical_A_template.Rmd is located.
-2.  The **console pane** where code is processed.
-3.  The **environment/history pane**.
-4.  The **output pane** where we can access our files, plots, the help files, make packages and view our data objects.
+On the RStudio Support website you can find a webpage explaining all you need to know about RStudio Projects, see here: https://support.posit.co/hc/en-us/articles/200526207-Using-RStudio-Projects
 
-### The editor pane and `Quarto`
+### Exercise 2. Working with RStudio and Quarto
 
-This is an `Quarto` file. `Markdown` is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. A `Markdown` file has three components:
+#### Open a new Quarto file
 
-1.  On top of the document, a YAML part, which defines the markup of the document. YAML stands for Yet Another Markup Language/ Ain't Markup Language.
-2.  Text part, where you can create plain text.
-3.  The code chunks, where you type `R` code (but you can also choose another programming language such as Python).
+To open a new file, click on the little green plus on the upper left part of the menu bar, and select Quarto, as in the image below. In the window that pops up, leave the settings as they are. You do not have to fill in a title yet.
 
-#### Getting help on `Quarto`
-To learn more about `Quarto` and to get help with the options, see: 
-Markdown Quick Reference in `RStudio`, see menu `Help` -> `Markdown Quick Reference`. This will open the reference document in the output pane in the tab "Help". 
+![](images/mt1/OpenQuartoFile.png){width="40%"}
 
-### Exercise 1: try a few options in `Quarto` plain text
+#### The structure of a Quarto file
 
-Take a look at the `Markdown Quick Reference` in `R Studio` and try the following:
+Quarto uses Markdown. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. A Markdown file has three components:
 
-1. Add a Level 1 Header called "This is a Header 1" to this document.
-2. Add a Level 2 sub-header with name "Sub-header 1".
-3. Create some plain text and mark some part of the text bold or italic. 
-4. Include the hyperlink to the `Quarto` reference page: [https://quarto.org](https://quarto.org)
-5. Compile this document as a `html` file. Use the <kbd>![](https://github.com/quarto-dev/quarto-web/blob/main/docs/get-started/hello/images/rstudio-render-button.png?raw=true){width="25" height="20"}</kbd> **Render** button in the RStudio IDE to render the file and preview the output with a single click or keyboard shortcut (⇧⌘K).
+-   On top of the document, a YAML part, which defines the markup of the document. YAML stands for "Yet Another Markup Language/ Ain't Markup Language".
+-   A text part, where you can create plain text. This part of the document is white.
+-   The code chunks, where you type R code (but you can also choose another programming language such as Python). Code chunks are grey coloured boxes.
 
-![](https://github.com/quarto-dev/quarto-web/blob/main/docs/get-started/hello/images/rstudio-render.png?raw=true){.border fig-alt="Top of the text editor in RStudio with the Render button highlighted with a purple box." fig-align="center"}
+#### Open the Markdown Quick Reference
 
-6. Verify how the headers and the hyperlink look like. Instead of knitting, it is also possible to get a preview by clicking on "Visual" in the left upper corner of the editor pane. Try both options.
+To learn more about Quarto and to get help with the options, open the Markdown Quick Reference in RStudio, see menu Help -\> Markdown Quick Reference. This will open the reference document in the output pane in the tab "Help". Use the Quick Reference to do the following exercise.
 
-The benefit of using html as an output format lies in the dimensional properties of a web-page. Especially when dealing with long code-files, large output from analyses or many graphs, exporting your file as html is much more convenient. You can simply scroll down or up to see the 'rest', instead of having to flip through pages back and forth to compare code, graphs or output.
+### Exercise 3. Try a few options in Quarto
 
+1.  When you open a new Quarto file, it contains some example code. Delete all the code from line 5 downwards.
+2.  The first line of the document shows the word "title". Change the title of the document in the YAML part of the document into: `title: 'Practical 1'`. Please note that you have to use quotation marks.
+3.  Save the Quarto file using File -\> Save. Because you created an R Project in exercise 1, the Quarto file will be saved automatically in the folder of the R Project.
+4.  Fill in your name by adding `author: yourname` to the YAML header between the `title` and `format`.
+5.  Add a Level 1 Header called "This is a level 1 header" to the document. See Markdown Quick Reference, Headers, for how to make headers.
+6.  Add a Level 2 sub-header with name "This is a level 2 header".
+7.  Add a code chunk by selecting the green button with "c" on the top right, see screenshot below:
 
+![](images/mt1/InsertCodeChunk.png){width="30%"}
 
-### Exercise 2: Code chunks in `Quarto`
+8.  Write some plain text and mark some part of the text bold and some other part of the text italic. In the Markdown Quick Reference, you see that you can make text italic or bold using either `*` or `_`. Do you have an idea why there are two options for making text bold or italic?
+9.  Save your Quarto file.
 
-1. Download the `R Markdown` cheat sheet, see `R Studio` menu `Help` -> `Cheat Sheets` -> `R Markdown Cheat Sheet`. Read the section about code chunks, see the section on page 1, bottom left with header "Embed Code with knitr".
-2. Consider the code chunk below. It contains `R` code that asks for the summary statistics of the `cars` data. 
-3. You can run the code in two ways:
-  - Line by line: select the line you want to run and use Ctrl + Enter (Windows/Linux) or Cmd + Return (Mac)
-  - Run the code by clicking on the green "play" button in the top right corner of the code chunk. This will execute all the code in the code chunk.
+After these steps, your Quarto file should look like this:
 
-Do you obtain the summary statistics?
+![](images/mt1/FirstQuartoDocument.png){width="90%"}
 
-```{r eval = FALSE}
-summary(cars)
+### Exercise 4: Knitting your Quarto file to HTML
+
+Compile the Quarto file as a HTML file. Click on the `Render` icon. Verify how the headers look like and whether some part of the text is indeed in italic or bold.
+
+Instead of rendering, it is also possible to get a preview by clicking on "Visual" in the left upper corner of the editor pane. Try both options.
+
+### Exercise 5: Entering and running R commands
+
+The **code chunks** are where you put R code in a Quarto file. So far, your “knitted” file (your output document HTML file) does not show any results from R code, because we did not use any code chunks yet.
+
+1.  Add a code chunk by selecting the green button with "c" on the top right, see screenshot below:
+
+![](images/mt1/InsertCodeChunk.png){width="30%"}
+
+When you create a new code chunk you should notice that the code area is grey and that it starts and ends with three back ticks \`.
+
+One common mistake is to accidentally delete these back ticks. Remember, code chunks are grey and text entry is white - if the colour of certain parts of your Markdown does not look right, check that you have not deleted the back ticks.
+
+2.  Type the following command to create a new variable called `x` with the value of `8`, in this way: `x <- 8`.
+
+The arrow `<-` is called an **assignment operator**, and tells R to save an object called x that has the value of 8.
+
+Even if `<-` is a pain to type, don’t use `=` instead, it will work, but it will cause confusion later. Use RStudio’s keyboard shortcut: `Alt/Option` + `-` (the minus sign). Notice that RStudio automatically surrounds `<-` with spaces (good code formatting practice).
+
+Your Quarto file should look like this now:
+
+![](images/mt1/FirstQuartoDocument_2.png){width="70%"} **Running R commands**
+
+To actually RUN this command, you have two options:
+
+-   Click on the green triangle in the code chunk. Note: this will run **all** the code in the code chunk.
+
+-   Highlight the code and hit Control-Enter on a PC or Command-Return on a Mac. This option allows you to run specific lines of code in a code chunk.
+
+Think of “running” code in your console as telling R: “do this”.
+
+3.  Run the command using one of these two options. Note that you now have a new object in your workspace (top right pane), called `x`.
+
+4.  To look at the value of `x` (to get the value printed): add `x` in a new line of the code chunk, see below. Then run the code again. What happens?
+
+```{r }
+x <- 8
+x 
 ```
 
-4. Add a new code chunk (use the code chunk icon on top of this editor pane) to this document. Copy the `R` code that asks for a summary of the `cars` data in this new code chunk. Adapt the code chunk in such a way that only the summary statistics (the results) will be displayed in the knitted HTML document. Knit the document and verify the results.
+5.  Compile the Quarto file again, using the Knit button and have a look at the result. It should look approximately like this:
 
+![](images/mt1/HTMLversion_ExampleRMarkdown.png){width="70%"}
 
-### Exercise 3: Learning some `R` code.
+5.  Remove the object `x` from the workspace by typing `rm(x)` in the code chunk and run this line.
 
-Have a look at the following code chunk with `R` code:
-```{r eval = FALSE}
-a <- 100
+### Exercise 6: Customizing chunk options
+
+You can customize the way your R code is displayed in the knitted html file. To do this for an individual code chunk, you have to add an option to the chunck header.
+
+Some commonly used chunk header options are:
+
+-   Show both R code and output. This is the default R code chunk setting.
+-   Show the results, not the R code. Use `{r echo = FALSE}` in the code chunk header.
+-   Do not show the R code, do not show the results. Use `{r include = FALSE}`
+
+**Question**
+
+Add a new code chunk to your Quarto file and type the code below in your code chunk. It creates a contour plot of the Maunga Whau volcano in New Zealand. Try a few options to control the output of your code chunk, such as `{r echo = FALSE}` or `{r include = FALSE}` and see what happens when you knit the your Quarto file.
+
+```{r contourplot }
+image(volcano)
 ```
 
-The `#` tells `R` that everything that follows in that specific line is not to be considered as code. In other words, you can use `#` to comment in your own `R`-scripts. I used `#` here to elaborate that the following line is the code from exercise 3.
+See the [R Markdown Cheat Sheet](https://posit.co/wp-content/uploads/2022/10/rmarkdown-1.pdf) for a complete list of knitr chunk options.
 
-The line `a <- 100` assigns the value `100` to object `a`. When reading that code say: "a gets value 100" in your head. When you run your code, it will be saved.
+### Closing RStudio Projects
 
-Even if `<-` is a pain to type, don't use `=` instead, it will work, but it will cause confusion later. Use `RStudio`'s keyboard shortcut: Alt/Option + - (the minus sign). Notice that `RStudio` automatically surrounds `<-` with spaces (good code formatting practice).
+When you want to **close your RStudio Project**, there are several options:
 
-**Create an object a with element (value) `1`**
-```{r}
-# type your code here
+-   Quit RStudio using RStudio -\> Quit RStudio. This will close the RStudio application but keep the current RStudio Project active. This means that when you open RStudio the next time, it will automatically open with the current RStudio Project.
 
-```
+-   Close the RStudio Project using File -\> Close Project. This will only close the current RStudio Project, but it will not close the RStudio application.
 
-**Verify that 1 is stored in `a`**
-```{r}
-# type your code here
+Close the RStudio Project using the option where you close the RStudio Project, but keep the RStudio application open. A window will pop up asking you whether you want to save the workspace (this is the piece of memory where `x` with value 8 is located). Choose "do not save".
 
-```
+For more information about RStudio Projects, see the [RStudio Support page.](https://support.posit.co/hc/en-us/articles/200526207-Using-RStudio-Projects)
 
-**Square `a` (in a new code chunk)** 
-```{r}
-# type your code here
+### End of Practical 1.
 
-```
+I suggest you continue with Practical 2. If in the end you have time left, play around with R and RStudio or do the advanced exercise.
 
-**Create `b` and assign `a+a` to `b`. Check if `b` is indeed `a+a`.**
-```{r}
-# type your code here
+::: callout-note
+## Advanced exercise: Inline code
 
-```
-
-
-### Exercise 3: Inspect the contents of the global environment by typing and running `ls()`
-
-The following is returned by `R`
-
-```{r}
-ls()
-```
-
-
-A single value is the most basic object in `R`. The next step up in objects is a vector, followed by a matrix, followed by an array. Eventually, each of these objects can be stored in a list. We will learn about vectors, matrices and arrays later today.
-
-Now you know how to use `R` as a calculator and `R-Studio` with `Quarto` as a typesetting and storytelling device. 
-
-## Practical 2
-
-### Exercise 1-5
-
-------------------------------------------------------------------------
-
-1.  **Make two vectors: one named `vec1` with values 1 through 6 and one named `vec2` with letters A through F.**
-
-```{r}
-
-```
-
-
-
-2.  **Create two matrices, one from `vec1` and one from `vec2`. The dimensions for both matrices are 3 rows by 2 columns. Find the function to create a matrix by typing `?matrix`**. Notice that when you start typing `?matrix` in the code chunk, a pop-up window appears with information about the function.
-
-```{r}
-
-```
-
-To create a matrix we used `matrix()`. For a matrix we need to specify the dimensions (in this case 3 rows and 2 columns) and the input (in this case `vec1` or `vec2`) needs to match these dimensions.
-
-3.  **Inspect your vectors and matrices. Are all numerical?**
-
-```{r}
-
-```
-
-4.  **Make a matrix from both `vec1` and `vec2` with 6 rows and 2 columns. Inspect this matrix.**
+1.  Add a new code chunk to your document and type the following code but with your own information (name, age, country of residence, birthday). You can do this by copy the code below and paste it in the new code chunk. In the R language text values and dates need to be contained in quotation marks but numerical values do not.
 
 ```{r}
-
+name <- "Karin" 
+age <- 26
+country <- "The Netherlands"
+today <- Sys.Date()
+birthday <- as.Date("2024-10-11")
 ```
 
-If one or more elements in the matrix represent characters, all other elements are also converted to characters. A matrix is just for either numeric or character elements. Notice that the second approach (the column bind approach from `mat3b`) returns a matrix where the column names are already set to the name of the bound objects.
+2.  A Markdown file is convenient for combining code and text in the same document. When reporting the results of statistical analyses, you will need to refer to the statistics from your analyses. This can be done in Quarto using inline code. Let’s use the information from your code chunk to demonstrate how inline code works. Copy and paste this text exactly (do not change anything) to **the white space** underneath your code chunk (not in the code chunk!):
 
-To solve the problem of numbers represented as characters we can create a dataframe. A dataframe is essentially a matrix that allows for character elements. The use of a dataframe is often preferred over the use of a matrix in `R`, except for purposes where pure numerical calculations are done, such as in matrix algebra. However, most datasets do contain character information and a dataframe would normally be your preferred choice when working with your own collected datasets in R.
+```{r eval=FALSE}
+My name is `r name` and I am `r age` years old. It is `r birthday - today` days until my birthday.
+```
 
+3.  Knit the document using `Render` and look at the result. It should look like this, but then with your own name, country etc.: **My name is `r name` and I am `r age` years old. It is `r birthday - today` days until my birthday.**
+:::
 
-5.  **Make a dataframe called `dat3` where `vec1` and `vec2` are both columns. Name the columns `V1` and `V2`, respectively. Use function `data.frame()`.**
+## Practical part 2
+
+## Exercise 1-5
+
+---
+
+ 1. **Make two vectors: one named `vec1` with values 1 through 6 and one named `vec2` with letters A through F. **
+```{r}
+vec1 <- c(1, 2, 3, 4, 5, 6)
+vec2 <- c("A", "B", "C", "D", "E", "F")
+```
+
+To create a vector we used `c()`, which stands for 'concatenation'. It is just a series of numbers or letters. 
+
+---
+
+ 2. **Create two matrices, one from `vec1` and one from `vec2`. The dimensions for both matrices are 3 rows by 2 columns. **
 
 ```{r}
-
+mat1 <- matrix(vec1, nrow = 3, ncol = 2)
+mat2 <- matrix(vec2, nrow = 3, ncol = 2)
 ```
 
-------------------------------------------------------------------------
+To create a matrix we used `matrix()`. For a matrix we need to specify the dimensions (in this case 3 rows and 2 columns) and the input (in this case `vec1` or `vec2`) needs to match these dimensions. 
 
-### Exercise 6-10
+---
 
-------------------------------------------------------------------------
-
-6. **A useful function to check the properties of any R object is the `str()` function. Try this function on `dat3`.**
-
-You can inspect the structure of a dataframe (or other R object) by using the `str()` function or by clicking on the object in the Environment tab in `RStudio`, which unfolds the properties of each element. See:
-
-<center><img src="images/mt1/Structure_RObjects_Data_tab.png" alt="HTML5 Icon" width="65%"/></center>
-
-Try both ways of inspecting the structure of `dat3`.
+3. **Inspect your vectors and matrices. Are all numerical?**
 
 ```{r}
-
+vec1
+vec2
+mat1
+mat2
 ```
-Inspecting the structure of your data is vital, as you probably have imported your data from some other source. If we, at a later stage, start analyzing our data without the correct measurement level, we may run into problems. One problem that often occurs is that categorical variables (factors in `R`) are not coded as such.
 
-------------------------------------------------------------------------
+`vec1` and `mat1` contain numbers and `vec2` and `mat2` contain characters. 
 
-7.  **Select 1) the third row, 2) the second column and 3) the intersection of these two in the dataframe `dat3` that you have created in Question 4.**
+---
+
+ 4. **Make a matrix from both `vec1` and `vec2` with 6 rows and 2 columns. Inspect this matrix.**
 
 ```{r}
-
+mat3 <- matrix(c(vec1, vec2), 6, 2)
+mat3
+```
+or
+```{r}
+mat3b <- cbind(vec1, vec2)
+is.matrix(mat3b)
+mat3b
 ```
 
-The `[3, 2]` index is very useful in 'R'. The first number (before the comma) represents the row and the second number (after the comma) represents the column. For a vector there are no two dimensions and only one dimension can be called. For example, `vec1[3]` would yield `3`. Try it.
 
-Columns can also be called by the `$` sign, but only if a name has been assigned. With dataframes assigning names happens automatically.
+If one or more elements in the matrix represent characters, all other elements are also converted to characters. A matrix is just for either numeric or character elements. Notice that the second approach (the column bind approach from `mat3b`) returns a matrix where the column names are already set to the name of the bound objects. 
 
-8.  **Imagine that the first variable `V1` in our dataframe `dat3` is not coded correctly, but actually represents grouping information about cities. Convert the variable to a factor and add the labels Utrecht, New York, London, Singapore, Rome and Cape Town.**
+To solve the problem of charactered numbers we can create a dataframe. A dataframe is essentially a matrix that allows for character elements. The use of a dataframe is often preferred over the use of a matrix in `R`, except for purposes where pure numerical calculations are done, such as in matrix algebra. However, most datasets do contain character information and a dataframe would normally be your preferred choice when working with your own collected datasets in R. 
+
+---
+
+5. **Make a dataframe called `dat3` where `vec1` and `vec2` are both columns. Name the columns `V1` and `V2`, respectively. Use function `data.frame()`.**
 
 ```{r}
-
+dat3 <- data.frame(V1 = vec1, V2 = vec2)
+dat3
 ```
 
-You can verify the changes with `str()` or by inspecting the object `dat3` in the RStudio Environment tab.
+---
 
-9. **Open the workspace `boys.RData`.**
+## Exercise 6-10
 
-There are two ways to go about opening workspaces that are available on the internet. You either need to download this [`boys.RData`](documents/mt1/boys.RData) file from the course page and put it in the project folder. Then run the below code
+---
 
-```{r eval = FALSE}
-load("boys.RData")
+6. **Again, make a dataframe called `dat3b` where `vec1` and `vec2` are both columns. Name the columns `V1` and `V2`, respectively. Use function `as.data.frame()` on the matrix obtained from `Question 4`. **
+
+This is a tricky situation. At face value, everything may seem to be in order. But, be aware that the code
+```{r}
+dat3b <- as.data.frame(mat3, stringsAsFactors = TRUE)
+dat3b
+```
+does not work properly (at least not as intended) as the matrix nature of `mat3` turned everything into a character value and you have lost the numerical nature of `vec1`. It may appear to be working, but if we check if column 1 is numerical, it turns out not to be the case. 
+
+---
+
+7. **Check if the first column in the data frames from Question 4 and Question 5 are indeed numeric. If not, determine what they are. **
+
+```{r}
+is.numeric(dat3[, 1])
+is.numeric(dat3b[, 1])
+```
+The first column in matrix `dat3b` obtained from Question 5 is indeed not numeric. As a matter of fact, it is also not a character variable.
+```{r}
+is.character(dat3b[, 1])
+```
+Rather tricky; the function `as.data.frame()` has converted the first variable to a factor. 
+```{r}
+is.factor(dat3b[, 1])
+```
+This is due to us not specifying the variable correctly in the matrix we used to create the dataframe. Factors are categorical variables that are depicted by numbers. Character vectors are not converted to factors in data frames by default, but the argument `stringsAsFactors = TRUE` has resulted in this conversion. I forced this to prove a point: You now know that there is a distinction between characters and factors and you know hot to force this conversion to factors in a data frame. 
+
+---
+
+8. **Select 1) the third row, 2) the second column and 3) the intersection of these two in the dataframe `dat3` that you have created in Question 4. **
+```{r}
+dat3[3, ] #3rd row
+dat3[, 2] #2nd column
+dat3$V2   #also 2nd column
+dat3[3,2] #intersection
 ```
 
-or double-click the `boys.RData` file on your machine (right-click and `open with RStudio` if it does not open by default in `RStudio`, but in `R`).
+The `[3,2]` index is very useful in 'R'. The first number (before the comma) represents the row and the second number (after the comma) represents the column. For a vector there are no two dimensions and only one dimension can be called. For example, `vec1[3]` would yield `3`. Try it. 
 
-Alternatively, you can import workspaces directly from the internet by running and loading a connection to a URL. For example, the following connection loads the `boys.RData` file from another course page:
+Columns can also be called by the `$` sign, but only if a name has been assigned. With dataframes assigning names happens automatically. 
 
+Note that `R` automatically reports the values the character column can take. This means that the column is indeed a factor (a categorical variable - as it is supposed to be). A useful function to inspect the structure of a dataframe is `str()`. Try running it. 
+
+```{r}
+str(dat3)
+```
+
+Inspecting the structure of your data is vital, as you probably have imported your data from some other source. If we, at a later stage, start analyzing our data without the correct measurement level, we may run into problems. One problem that often occurs is that categorical variables (factors in `R`) are not coded as such. 
+
+---
+
+9. **Imagine that the first variable `V1` in our dataframe `dat3` is not coded correctly, but actually represents grouping information about cities. Convert the variable to a factor and add the labels Utrecht, New York, London, Singapore, Rome and Cape Town.** 
+```{r}
+dat3$V1 <- factor(dat3$V1, labels = c("Utrecht", "New York", "London", "Singapore", "Rome", "Capetown"))
+dat3
+```
+
+---
+
+10. **Open the workspace `boys.RData`.** 
+
+We have not yet learned to import data into `R`. Usually, we would store the data in our project and then import it from that location. For now, we load a dataset in from the internet by running and loading the connection
 ```{r eval = TRUE}
 con <- url("https://www.gerkovink.com/fundamentals/data/boys.RData")
 load(con)
 ```
+In the above code we store the connection as a url character string in object `con` and then load the connection with `load(con)`.
 
-In the above code we store the connection in object `con` and then load the connection with `load(con)`. Be aware that if you store your code on multiple locations, it will burn carbon (energy) at multiple locations. Better is to have a central repository where you store your code and data. This is what working in Projects - which we discussed in Practical 1, facilitates. 
-
-10. **Most packages have datasets included. Since we have not learned to load packages yet, you are presented with such a data set in a workspace. Open the `boys` dataset (it is from package `mice`, by the way) by typing `boys` in the console, and subsequently by using the function `View()`.**
-
-The output is not displayed here as the data set is simply too large.
-
-Using `View()` is preferred for inspecting datasets that are large. `View()` opens the dataset in a spreadsheet-like window (conform MS Excel, or SPSS). If you `View()` your own datasets, you can not edit the datasets' contents.
-
-------------------------------------------------------------------------
-
-### Exercise 11-15
-
-------------------------------------------------------------------------
-
-11. **Find out the dimensions of the `boys` data set and inspect the first and final 6 cases in the data set.**
-
-To do it numerically, find out what the dimensions of the boys dataset are.
-
-```{r}
-
+The `boys` object will be added to your Global Environment. You can now use the `boys` data by running
+```{r eval=FALSE}
+boys
 ```
 
-Select the first and last six cases
+---
 
+## Exercise 11-15
+
+---
+
+11. **Most packages have datasets included. Since we have not learned to load packages yet, you are presented with such a data set in a workspace. Open the `boys` dataset (it is from package `mice`, by the way) by typing `boys` in the console, and subsequently by using the function `View()`. **
+
+The output is not displayed here as it is simply too large. 
+
+Using `View()` is preferred for inspecting datasets that are large. `View()` opens the dataset in a spreadsheet-like window (conform MS Excel, or SPSS). If you `View()` your own datasets, you can not edit the datasets' contents. 
+
+---
+
+12. **Find out the dimensions of the `boys` data set and inspect the first and final 6 cases in the data set. **
+
+To do it numerically, find out what the dimensions of the boys dataset are. 
 ```{r}
-
+dim(boys)
 ```
-
+There are 748 cases on 9 variables. To select the first and last six cases, use
+```{r}
+boys[1:6, ]
+boys[743:748, ]
+```
 or, more efficiently:
-
 ```{r}
 head(boys)
 tail(boys)
 ```
-
 The functions `head()` and `tail()` are very useful functions. For example, from looking at both functions we can observe that the data are very likely sorted based on `age`.
 
+---
 
-12. **Suppose you want to plot the height versus the weight of the boys.** You would like to have the weight variable (`wgt`) on the x-axis and the height variable (`hgt`) on the y-axis. How can you achieve such a plot? Tip: use the `args()` function.
+13. **It seems that the `boys` data are sorted based on `age`. Verify this.** 
 
-A. `plot(boys$wgt, boys$hgt)`
-
-B. `plot(boys$hgt, boys$wgt)`
-
-C. `plot(x=boys$wgt, y=boys$hgt)`
-
-D. `plot(y=boys$hgt, x=boys$wgt)`
-
+To verify if the data are indeed sorted, we can run the following command to test the complement of that statement. Remember that we can always search the help for functions: e.g. we could have searched here for `?sort` and we would quickly have ended up at function `is.unsorted()` as it tests whether an object is **not sorted**. 
 
 ```{r}
-# look at the arguments structure in the function
-
-
+is.unsorted(boys$age)
 ```
-Make the plot using the correct code.
-
-```{r}
-
-```
-13. **It seems that the `boys` data are sorted based on `age`. Verify this.**
-
-To verify if the data are indeed sorted, we can run the following command to test the complement of that statement. Remember that we can always search the help for functions: e.g. we could have searched here for `?sort` and we would quickly have ended up at function `is.unsorted()` as it tests whether an object is **not sorted**.
-
-```{r}
-
-```
-
 which returns `FALSE`, indicating that boys' age is indeed sorted (we asked if it was unsorted!). To directly test if it is sorted, we could have used
-
 ```{r}
 !is.unsorted(boys$age)
 ```
+which tests if data data are not unsorted. In other words the values `TRUE` and `FALSE` under `is.unsorted()` turn into `FALSE` and `TRUE` under `!is.unsorted()`, respectively. 
 
-which tests if data data are not unsorted. In other words the values `TRUE` and `FALSE` under `is.unsorted()` turn into `FALSE` and `TRUE` under `!is.unsorted()`, respectively.
+---
 
-------------------------------------------------------------------------
-
-14. **Inspect the `boys` dataset with `str()`. Use one or more functions to find distributional summary information (at least information about the minimum, the maximum, the mean and the median) for all of the variables. Give the standard deviation for `age` and `bmi`.** Tip: make use of the help (?) and help search (??) functionality in `R`.
+14. **Inspect the `boys` dataset with `str()`. Use one or more functions to find distributional summary information (at least information about the minimum, the maximum, the mean and the median) for all of the variables. Give the standard deviation for `age` and `bmi`. ** Tip: make use of the help (?) and help search (??) functionality in `R`. 
 
 ```{r}
-
+str(boys)
+summary(boys) #summary info
+sd(boys$age) #standard deviation for age
+sd(boys$bmi, na.rm = TRUE) #standard deviation for bmi
 ```
 
-Note that `bmi` contains 21 missing values, e.g. by looking at the summary information. Therefor we need to use `na.rm = T` to calculate the standard deviation on the observed cases only.
+Note that `bmi` contains 21 missing values, e.g. by looking at the summary information. Therefor we need to use `na.rm = TRUE` to calculate the standard deviation on the observed cases only.
 
-------------------------------------------------------------------------
+---
 
 15. **Select all boys that are 20 years or older. How many are there?**
 
-The logical operators (TRUE vs FALSE) are a very powerful tool in `R`. For example, we can just select the rows (respondents) in the data that are older than 20 by putting the logical operator within the row index of the dataset:
-
+The logical operators (TRUE vs FALSE) are a very powerful tool in `R`. For example, we can just select the rows (respondents) in the data that are older than 20 by putting the logical operater within the row index of the dataset:
 ```{r}
-
+boys2 <- boys[boys$age >= 20, ]
+nrow(boys2)
 ```
 
-or, alternatively using `subset()`,
-
+or, alternatively, 
 ```{r}
 boys2.1 <- subset(boys, age >= 20)
 nrow(boys2.1)
 ```
 
-------------------------------------------------------------------------
+---
 
-### Exercise 16-17
+## Exercise 16-17
 
-------------------------------------------------------------------------
+---
 
 16. **Select all boys that are older than 19, but younger than 19.5. How many are there?**
-
 ```{r}
-
+boys3 <- boys[boys$age > 19 & boys$age < 19.5, ]
+nrow(boys3)
 ```
 
-or, alternatively, use `subset()`.
-
+or, alternatively, 
 ```{r}
-
+boys3.2 <- subset(boys, age > 19 & age < 19.5)
+nrow(boys3.2)
 ```
 
-------------------------------------------------------------------------
+---
 
 17. **What is the mean age of boys younger than 15 years of age that do not live in region `north`?**
 
 ```{r}
-
+mean(boys$age[boys$age < 15 & boys$reg != "north" ], na.rm = TRUE)
 ```
 
-or, alternatively,
-
+or, alternatively, 
 ```{r}
 mean(subset(boys, age < 15 & reg != "north")$age, na.rm=TRUE)
 ```
 
 The mean age is `r mean(boys$age[boys$age < 15 & boys$reg != "north" ], na.rm = TRUE)` years
 
-------------------------------------------------------------------------
+--- 
 
-Today we have learned to use `R` at its basics. This offers tremendous flexibility, but may also be inefficient when our aim is some complex analysis, data operation of data manipulation. Doing advanced operations in basic `R` may require lots and lots of code. Tomorrow we will start using packages that allow us to do complicated operations with just a few lines of code.
+Today we have learned to use `R` at its basics. This offers tremendous flexibility, but may also be inefficient when our aim is some complex analysis, data operation of data manipulation. Doing advanced operations in basic `R` may require lots and lots of code. Tomorrow we will start using packages that allow us to do complicated operations with just a few lines of code. 
 
-As you start using `R` in your own research, you will find yourself in need of packages that are not part of the default `R` installation. The beauty of `R` is that its functionality is community-driven. People can add packages to `CRAN` that other people can use and improve. Chances are that a function and/or package has been already developed for the analysis or operation you plan to carry out. If not, you are of course welcome to fill the gap by submitting your own package.
+As you start using `R` in your own research, you will find yourself in need of packages that are not part of the default `R` installation. The beauty of `R` is that its functionality is community-driven. People can add packages to `CRAN` that other people can use and improve. Chances are that a function and/or package has been already developed for the analysis or operation you plan to carry out. If not, you are of course welcome to fill the gap by submitting your own package. 
 
-------------------------------------------------------------------------
+---
 
-End of practicals
+End of practical

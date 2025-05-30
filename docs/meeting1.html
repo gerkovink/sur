@@ -235,24 +235,20 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul>
   <li><a href="#practical-1" id="toc-practical-1" class="nav-link active" data-scroll-target="#practical-1">Practical 1</a>
   <ul class="collapse">
-  <li><a href="#create-an-r-project" id="toc-create-an-r-project" class="nav-link" data-scroll-target="#create-an-r-project">Create an <code>R Project</code></a></li>
+  <li><a href="#exercise-1.-create-an-r-project-to-organise-your-work" id="toc-exercise-1.-create-an-r-project-to-organise-your-work" class="nav-link" data-scroll-target="#exercise-1.-create-an-r-project-to-organise-your-work">Exercise 1. Create an R Project to organise your work</a></li>
+  <li><a href="#exercise-2.-working-with-rstudio-and-quarto" id="toc-exercise-2.-working-with-rstudio-and-quarto" class="nav-link" data-scroll-target="#exercise-2.-working-with-rstudio-and-quarto">Exercise 2. Working with RStudio and Quarto</a></li>
+  <li><a href="#exercise-3.-try-a-few-options-in-quarto" id="toc-exercise-3.-try-a-few-options-in-quarto" class="nav-link" data-scroll-target="#exercise-3.-try-a-few-options-in-quarto">Exercise 3. Try a few options in Quarto</a></li>
+  <li><a href="#exercise-4-knitting-your-quarto-file-to-html" id="toc-exercise-4-knitting-your-quarto-file-to-html" class="nav-link" data-scroll-target="#exercise-4-knitting-your-quarto-file-to-html">Exercise 4: Knitting your Quarto file to HTML</a></li>
+  <li><a href="#exercise-5-entering-and-running-r-commands" id="toc-exercise-5-entering-and-running-r-commands" class="nav-link" data-scroll-target="#exercise-5-entering-and-running-r-commands">Exercise 5: Entering and running R commands</a></li>
+  <li><a href="#exercise-6-customizing-chunk-options" id="toc-exercise-6-customizing-chunk-options" class="nav-link" data-scroll-target="#exercise-6-customizing-chunk-options">Exercise 6: Customizing chunk options</a></li>
+  <li><a href="#closing-rstudio-projects" id="toc-closing-rstudio-projects" class="nav-link" data-scroll-target="#closing-rstudio-projects">Closing RStudio Projects</a></li>
+  <li><a href="#end-of-practical-1." id="toc-end-of-practical-1." class="nav-link" data-scroll-target="#end-of-practical-1.">End of Practical 1.</a></li>
   </ul></li>
-  <li><a href="#introduction-to-rstudio-and-quarto" id="toc-introduction-to-rstudio-and-quarto" class="nav-link" data-scroll-target="#introduction-to-rstudio-and-quarto">Introduction to <code>RStudio</code> and <code>Quarto</code></a>
-  <ul class="collapse">
-  <li><a href="#a-closer-look-at-rstudio" id="toc-a-closer-look-at-rstudio" class="nav-link" data-scroll-target="#a-closer-look-at-rstudio">A closer look at <code>RStudio</code></a></li>
-  <li><a href="#the-editor-pane-and-quarto" id="toc-the-editor-pane-and-quarto" class="nav-link" data-scroll-target="#the-editor-pane-and-quarto">The editor pane and <code>Quarto</code></a></li>
-  <li><a href="#exercise-1-try-a-few-options-in-quarto-plain-text" id="toc-exercise-1-try-a-few-options-in-quarto-plain-text" class="nav-link" data-scroll-target="#exercise-1-try-a-few-options-in-quarto-plain-text">Exercise 1: try a few options in <code>Quarto</code> plain text</a></li>
-  <li><a href="#exercise-2-code-chunks-in-quarto" id="toc-exercise-2-code-chunks-in-quarto" class="nav-link" data-scroll-target="#exercise-2-code-chunks-in-quarto">Exercise 2: Code chunks in <code>Quarto</code></a></li>
-  <li><a href="#exercise-3-learning-some-r-code." id="toc-exercise-3-learning-some-r-code." class="nav-link" data-scroll-target="#exercise-3-learning-some-r-code.">Exercise 3: Learning some <code>R</code> code.</a></li>
-  <li><a href="#exercise-3-inspect-the-contents-of-the-global-environment-by-typing-and-running-ls" id="toc-exercise-3-inspect-the-contents-of-the-global-environment-by-typing-and-running-ls" class="nav-link" data-scroll-target="#exercise-3-inspect-the-contents-of-the-global-environment-by-typing-and-running-ls">Exercise 3: Inspect the contents of the global environment by typing and running <code>ls()</code></a></li>
-  </ul></li>
-  <li><a href="#practical-2" id="toc-practical-2" class="nav-link" data-scroll-target="#practical-2">Practical 2</a>
-  <ul class="collapse">
+  <li><a href="#practical-part-2" id="toc-practical-part-2" class="nav-link" data-scroll-target="#practical-part-2">Practical part 2</a></li>
   <li><a href="#exercise-1-5" id="toc-exercise-1-5" class="nav-link" data-scroll-target="#exercise-1-5">Exercise 1-5</a></li>
   <li><a href="#exercise-6-10" id="toc-exercise-6-10" class="nav-link" data-scroll-target="#exercise-6-10">Exercise 6-10</a></li>
   <li><a href="#exercise-11-15" id="toc-exercise-11-15" class="nav-link" data-scroll-target="#exercise-11-15">Exercise 11-15</a></li>
   <li><a href="#exercise-16-17" id="toc-exercise-16-17" class="nav-link" data-scroll-target="#exercise-16-17">Exercise 16-17</a></li>
-  </ul></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/gerkovink/sur/edit/book/meeting1.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/gerkovink/sur/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
@@ -339,281 +335,529 @@ Lesstof
 </div>
 <section id="practical-1" class="level2">
 <h2 class="anchored" data-anchor-id="practical-1">Practical 1</h2>
-<p>In this practical you will get acquainted with <code>R</code>, <code>RStudio</code> and <code>Quarto</code>.</p>
-<p>In general for all practicals in this course: aim to make the exercises without looking at the answers and use the solutions file (“Practical 1: solutions”) to evaluate your work. However, do not ‘struggle’ too long because you will run out of time.</p>
-<p><strong>In any case, ask for help when you feel help is needed.</strong></p>
-<section id="create-an-r-project" class="level3">
-<h3 class="anchored" data-anchor-id="create-an-r-project">Create an <code>R Project</code></h3>
+<p>In this lab you will learn to work with Quarto files and RStudio Projects.</p>
+<section id="exercise-1.-create-an-r-project-to-organise-your-work" class="level3">
+<h3 class="anchored" data-anchor-id="exercise-1.-create-an-r-project-to-organise-your-work">Exercise 1. Create an R Project to organise your work</h3>
+<p>In this course you learn to work with RStudio Projects. This way of working ensures that your R code and your analyses will continue to work and are easy to share with collaborators.</p>
 <ol type="1">
-<li>Go to today’s course chapter: <a href="#sec-mt1" class="quarto-xref"><span>Introductie in R &amp; RStudio</span></a>. If you can read this, you should already be at the right location.</li>
-<li>Download the <a href="documents/mt1/Practical_1_Template.qmd">Practical_1_template.qmd</a> file and save it in a new folder with name “RCourse”, for example.</li>
-<li>Open <code>RStudio</code> and choose File -&gt; New Project. Choose the option “Existing Directory”. Find the Project Working Directory, the folder “RCourse” you just created. Click on “Create project”.</li>
-<li>Open the “Practical_1_template.qmd” with File -&gt; Open File.</li>
-<li>Continue below to complete the exercises in the template file.</li>
+<li>Create a folder on your computer where you will store all the materials of this course. Call it for example “Module_6”. It is better to avoid spaces in the name of your folder; you can use underscore (_) or Capitals to separate words.</li>
+<li>Open RStudio. The RStudio interface will probably look like this:</li>
+</ol>
+<p><img src="images/mt1/RStudioInterface.png" class="img-fluid" style="width:80.0%"></p>
+<ol start="3" type="1">
+<li>Create a new RStudio Project by selecting File -&gt; New Project. A new window pops up, choose the option “New Directory”. Then create a folder “Module_6” in a directory of your choice. Click on “Create project”. See the steps to create an R Project below. When you open a new RStudio Project, a new R session starts up and creates the project structure.</li>
+</ol>
+<p><img src="images/mt1/CreateRProjectSteps.png" class="img-fluid" style="width:100.0%"> <br></p>
+<p><strong>More information about RStudio Projects</strong></p>
+<p>On the RStudio Support website you can find a webpage explaining all you need to know about RStudio Projects, see here: https://support.posit.co/hc/en-us/articles/200526207-Using-RStudio-Projects</p>
+</section>
+<section id="exercise-2.-working-with-rstudio-and-quarto" class="level3">
+<h3 class="anchored" data-anchor-id="exercise-2.-working-with-rstudio-and-quarto">Exercise 2. Working with RStudio and Quarto</h3>
+<section id="open-a-new-quarto-file" class="level4">
+<h4 class="anchored" data-anchor-id="open-a-new-quarto-file">Open a new Quarto file</h4>
+<p>To open a new file, click on the little green plus on the upper left part of the menu bar, and select Quarto, as in the image below. In the window that pops up, leave the settings as they are. You do not have to fill in a title yet.</p>
+<p><img src="images/mt1/OpenQuartoFile.png" class="img-fluid" style="width:40.0%"></p>
+</section>
+<section id="the-structure-of-a-quarto-file" class="level4">
+<h4 class="anchored" data-anchor-id="the-structure-of-a-quarto-file">The structure of a Quarto file</h4>
+<p>Quarto uses Markdown. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. A Markdown file has three components:</p>
+<ul>
+<li>On top of the document, a YAML part, which defines the markup of the document. YAML stands for “Yet Another Markup Language/ Ain’t Markup Language”.</li>
+<li>A text part, where you can create plain text. This part of the document is white.</li>
+<li>The code chunks, where you type R code (but you can also choose another programming language such as Python). Code chunks are grey coloured boxes.</li>
+</ul>
+</section>
+<section id="open-the-markdown-quick-reference" class="level4">
+<h4 class="anchored" data-anchor-id="open-the-markdown-quick-reference">Open the Markdown Quick Reference</h4>
+<p>To learn more about Quarto and to get help with the options, open the Markdown Quick Reference in RStudio, see menu Help -&gt; Markdown Quick Reference. This will open the reference document in the output pane in the tab “Help”. Use the Quick Reference to do the following exercise.</p>
+</section>
+</section>
+<section id="exercise-3.-try-a-few-options-in-quarto" class="level3">
+<h3 class="anchored" data-anchor-id="exercise-3.-try-a-few-options-in-quarto">Exercise 3. Try a few options in Quarto</h3>
+<ol type="1">
+<li>When you open a new Quarto file, it contains some example code. Delete all the code from line 5 downwards.</li>
+<li>The first line of the document shows the word “title”. Change the title of the document in the YAML part of the document into: <code>title: 'Practical 1'</code>. Please note that you have to use quotation marks.</li>
+<li>Save the Quarto file using File -&gt; Save. Because you created an R Project in exercise 1, the Quarto file will be saved automatically in the folder of the R Project.</li>
+<li>Fill in your name by adding <code>author: yourname</code> to the YAML header between the <code>title</code> and <code>format</code>.</li>
+<li>Add a Level 1 Header called “This is a level 1 header” to the document. See Markdown Quick Reference, Headers, for how to make headers.</li>
+<li>Add a Level 2 sub-header with name “This is a level 2 header”.</li>
+<li>Add a code chunk by selecting the green button with “c” on the top right, see screenshot below:</li>
+</ol>
+<p><img src="images/mt1/InsertCodeChunk.png" class="img-fluid" style="width:30.0%"></p>
+<ol start="8" type="1">
+<li>Write some plain text and mark some part of the text bold and some other part of the text italic. In the Markdown Quick Reference, you see that you can make text italic or bold using either <code>*</code> or <code>_</code>. Do you have an idea why there are two options for making text bold or italic?</li>
+<li>Save your Quarto file.</li>
+</ol>
+<p>After these steps, your Quarto file should look like this:</p>
+<p><img src="images/mt1/FirstQuartoDocument.png" class="img-fluid" style="width:90.0%"></p>
+</section>
+<section id="exercise-4-knitting-your-quarto-file-to-html" class="level3">
+<h3 class="anchored" data-anchor-id="exercise-4-knitting-your-quarto-file-to-html">Exercise 4: Knitting your Quarto file to HTML</h3>
+<p>Compile the Quarto file as a HTML file. Click on the <code>Render</code> icon. Verify how the headers look like and whether some part of the text is indeed in italic or bold.</p>
+<p>Instead of rendering, it is also possible to get a preview by clicking on “Visual” in the left upper corner of the editor pane. Try both options.</p>
+</section>
+<section id="exercise-5-entering-and-running-r-commands" class="level3">
+<h3 class="anchored" data-anchor-id="exercise-5-entering-and-running-r-commands">Exercise 5: Entering and running R commands</h3>
+<p>The <strong>code chunks</strong> are where you put R code in a Quarto file. So far, your “knitted” file (your output document HTML file) does not show any results from R code, because we did not use any code chunks yet.</p>
+<ol type="1">
+<li>Add a code chunk by selecting the green button with “c” on the top right, see screenshot below:</li>
+</ol>
+<p><img src="images/mt1/InsertCodeChunk.png" class="img-fluid" style="width:30.0%"></p>
+<p>When you create a new code chunk you should notice that the code area is grey and that it starts and ends with three back ticks `.</p>
+<p>One common mistake is to accidentally delete these back ticks. Remember, code chunks are grey and text entry is white - if the colour of certain parts of your Markdown does not look right, check that you have not deleted the back ticks.</p>
+<ol start="2" type="1">
+<li>Type the following command to create a new variable called <code>x</code> with the value of <code>8</code>, in this way: <code>x &lt;- 8</code>.</li>
+</ol>
+<p>The arrow <code>&lt;-</code> is called an <strong>assignment operator</strong>, and tells R to save an object called x that has the value of 8.</p>
+<p>Even if <code>&lt;-</code> is a pain to type, don’t use <code>=</code> instead, it will work, but it will cause confusion later. Use RStudio’s keyboard shortcut: <code>Alt/Option</code> + <code>-</code> (the minus sign). Notice that RStudio automatically surrounds <code>&lt;-</code> with spaces (good code formatting practice).</p>
+<p>Your Quarto file should look like this now:</p>
+<p><img src="images/mt1/FirstQuartoDocument_2.png" class="img-fluid" style="width:70.0%"> <strong>Running R commands</strong></p>
+<p>To actually RUN this command, you have two options:</p>
+<ul>
+<li><p>Click on the green triangle in the code chunk. Note: this will run <strong>all</strong> the code in the code chunk.</p></li>
+<li><p>Highlight the code and hit Control-Enter on a PC or Command-Return on a Mac. This option allows you to run specific lines of code in a code chunk.</p></li>
+</ul>
+<p>Think of “running” code in your console as telling R: “do this”.</p>
+<ol start="3" type="1">
+<li><p>Run the command using one of these two options. Note that you now have a new object in your workspace (top right pane), called <code>x</code>.</p></li>
+<li><p>To look at the value of <code>x</code> (to get the value printed): add <code>x</code> in a new line of the code chunk, see below. Then run the code again. What happens?</p></li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="dv">8</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>x </span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] 8</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ol start="5" type="1">
+<li>Compile the Quarto file again, using the Knit button and have a look at the result. It should look approximately like this:</li>
+</ol>
+<p><img src="images/mt1/HTMLversion_ExampleRMarkdown.png" class="img-fluid" style="width:70.0%"></p>
+<ol start="5" type="1">
+<li>Remove the object <code>x</code> from the workspace by typing <code>rm(x)</code> in the code chunk and run this line.</li>
 </ol>
 </section>
-</section>
-<section id="introduction-to-rstudio-and-quarto" class="level2">
-<h2 class="anchored" data-anchor-id="introduction-to-rstudio-and-quarto">Introduction to <code>RStudio</code> and <code>Quarto</code></h2>
-<section id="a-closer-look-at-rstudio" class="level3">
-<h3 class="anchored" data-anchor-id="a-closer-look-at-rstudio">A closer look at <code>RStudio</code></h3>
-<p>RStudio is divided in 4 panes, as shown in the lecture, slide 9:</p>
-<ol type="1">
-<li>The <strong>editor pane</strong>, where we create R code and text. This is the pane where the current file, Practical_A_template.Rmd is located.</li>
-<li>The <strong>console pane</strong> where code is processed.</li>
-<li>The <strong>environment/history pane</strong>.</li>
-<li>The <strong>output pane</strong> where we can access our files, plots, the help files, make packages and view our data objects.</li>
-</ol>
-</section>
-<section id="the-editor-pane-and-quarto" class="level3">
-<h3 class="anchored" data-anchor-id="the-editor-pane-and-quarto">The editor pane and <code>Quarto</code></h3>
-<p>This is an <code>Quarto</code> file. <code>Markdown</code> is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. A <code>Markdown</code> file has three components:</p>
-<ol type="1">
-<li>On top of the document, a YAML part, which defines the markup of the document. YAML stands for Yet Another Markup Language/ Ain’t Markup Language.</li>
-<li>Text part, where you can create plain text.</li>
-<li>The code chunks, where you type <code>R</code> code (but you can also choose another programming language such as Python).</li>
-</ol>
-<section id="getting-help-on-quarto" class="level4">
-<h4 class="anchored" data-anchor-id="getting-help-on-quarto">Getting help on <code>Quarto</code></h4>
-<p>To learn more about <code>Quarto</code> and to get help with the options, see: Markdown Quick Reference in <code>RStudio</code>, see menu <code>Help</code> -&gt; <code>Markdown Quick Reference</code>. This will open the reference document in the output pane in the tab “Help”.</p>
-</section>
-</section>
-<section id="exercise-1-try-a-few-options-in-quarto-plain-text" class="level3">
-<h3 class="anchored" data-anchor-id="exercise-1-try-a-few-options-in-quarto-plain-text">Exercise 1: try a few options in <code>Quarto</code> plain text</h3>
-<p>Take a look at the <code>Markdown Quick Reference</code> in <code>R Studio</code> and try the following:</p>
-<ol type="1">
-<li>Add a Level 1 Header called “This is a Header 1” to this document.</li>
-<li>Add a Level 2 sub-header with name “Sub-header 1”.</li>
-<li>Create some plain text and mark some part of the text bold or italic.</li>
-<li>Include the hyperlink to the <code>Quarto</code> reference page: <a href="https://quarto.org">https://quarto.org</a></li>
-<li>Compile this document as a <code>html</code> file. Use the <kbd><img src="https://github.com/quarto-dev/quarto-web/blob/main/docs/get-started/hello/images/rstudio-render-button.png?raw=true" width="25" height="20"></kbd> <strong>Render</strong> button in the RStudio IDE to render the file and preview the output with a single click or keyboard shortcut (⇧⌘K).</li>
-</ol>
-<div class="quarto-figure quarto-figure-center">
+<section id="exercise-6-customizing-chunk-options" class="level3">
+<h3 class="anchored" data-anchor-id="exercise-6-customizing-chunk-options">Exercise 6: Customizing chunk options</h3>
+<p>You can customize the way your R code is displayed in the knitted html file. To do this for an individual code chunk, you have to add an option to the chunck header.</p>
+<p>Some commonly used chunk header options are:</p>
+<ul>
+<li>Show both R code and output. This is the default R code chunk setting.</li>
+<li>Show the results, not the R code. Use <code>{r echo = FALSE}</code> in the code chunk header.</li>
+<li>Do not show the R code, do not show the results. Use <code>{r include = FALSE}</code></li>
+</ul>
+<p><strong>Question</strong></p>
+<p>Add a new code chunk to your Quarto file and type the code below in your code chunk. It creates a contour plot of the Maunga Whau volcano in New Zealand. Try a few options to control the output of your code chunk, such as <code>{r echo = FALSE}</code> or <code>{r include = FALSE}</code> and see what happens when you knit the your Quarto file.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">image</span>(volcano)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
 <figure class="figure">
-<p><img src="https://github.com/quarto-dev/quarto-web/blob/main/docs/get-started/hello/images/rstudio-render.png?raw=true" class="border img-fluid quarto-figure quarto-figure-center figure-img" alt="Top of the text editor in RStudio with the Render button highlighted with a purple box."></p>
+<p><img src="meeting1_files/figure-html/contourplot-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
-<ol start="6" type="1">
-<li>Verify how the headers and the hyperlink look like. Instead of knitting, it is also possible to get a preview by clicking on “Visual” in the left upper corner of the editor pane. Try both options.</li>
-</ol>
-<p>The benefit of using html as an output format lies in the dimensional properties of a web-page. Especially when dealing with long code-files, large output from analyses or many graphs, exporting your file as html is much more convenient. You can simply scroll down or up to see the ‘rest’, instead of having to flip through pages back and forth to compare code, graphs or output.</p>
+</div>
+</div>
+<p>See the <a href="https://posit.co/wp-content/uploads/2022/10/rmarkdown-1.pdf">R Markdown Cheat Sheet</a> for a complete list of knitr chunk options.</p>
 </section>
-<section id="exercise-2-code-chunks-in-quarto" class="level3">
-<h3 class="anchored" data-anchor-id="exercise-2-code-chunks-in-quarto">Exercise 2: Code chunks in <code>Quarto</code></h3>
-<ol type="1">
-<li>Download the <code>R Markdown</code> cheat sheet, see <code>R Studio</code> menu <code>Help</code> -&gt; <code>Cheat Sheets</code> -&gt; <code>R Markdown Cheat Sheet</code>. Read the section about code chunks, see the section on page 1, bottom left with header “Embed Code with knitr”.</li>
-<li>Consider the code chunk below. It contains <code>R</code> code that asks for the summary statistics of the <code>cars</code> data.</li>
-<li>You can run the code in two ways:</li>
-</ol>
+<section id="closing-rstudio-projects" class="level3">
+<h3 class="anchored" data-anchor-id="closing-rstudio-projects">Closing RStudio Projects</h3>
+<p>When you want to <strong>close your RStudio Project</strong>, there are several options:</p>
 <ul>
-<li>Line by line: select the line you want to run and use Ctrl + Enter (Windows/Linux) or Cmd + Return (Mac)</li>
-<li>Run the code by clicking on the green “play” button in the top right corner of the code chunk. This will execute all the code in the code chunk.</li>
+<li><p>Quit RStudio using RStudio -&gt; Quit RStudio. This will close the RStudio application but keep the current RStudio Project active. This means that when you open RStudio the next time, it will automatically open with the current RStudio Project.</p></li>
+<li><p>Close the RStudio Project using File -&gt; Close Project. This will only close the current RStudio Project, but it will not close the RStudio application.</p></li>
 </ul>
-<p>Do you obtain the summary statistics?</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(cars)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Close the RStudio Project using the option where you close the RStudio Project, but keep the RStudio application open. A window will pop up asking you whether you want to save the workspace (this is the piece of memory where <code>x</code> with value 8 is located). Choose “do not save”.</p>
+<p>For more information about RStudio Projects, see the <a href="https://support.posit.co/hc/en-us/articles/200526207-Using-RStudio-Projects">RStudio Support page.</a></p>
+</section>
+<section id="end-of-practical-1." class="level3">
+<h3 class="anchored" data-anchor-id="end-of-practical-1.">End of Practical 1.</h3>
+<p>I suggest you continue with Practical 2. If in the end you have time left, play around with R and RStudio or do the advanced exercise.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
 </div>
-<ol start="4" type="1">
-<li>Add a new code chunk (use the code chunk icon on top of this editor pane) to this document. Copy the <code>R</code> code that asks for a summary of the <code>cars</code> data in this new code chunk. Adapt the code chunk in such a way that only the summary statistics (the results) will be displayed in the knitted HTML document. Knit the document and verify the results.</li>
+<div class="callout-title-container flex-fill">
+Advanced exercise: Inline code
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li>Add a new code chunk to your document and type the following code but with your own information (name, age, country of residence, birthday). You can do this by copy the code below and paste it in the new code chunk. In the R language text values and dates need to be contained in quotation marks but numerical values do not.</li>
 </ol>
-</section>
-<section id="exercise-3-learning-some-r-code." class="level3">
-<h3 class="anchored" data-anchor-id="exercise-3-learning-some-r-code.">Exercise 3: Learning some <code>R</code> code.</h3>
-<p>Have a look at the following code chunk with <code>R</code> code:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="dv">100</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>name <span class="ot">&lt;-</span> <span class="st">"Karin"</span> </span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>age <span class="ot">&lt;-</span> <span class="dv">26</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>country <span class="ot">&lt;-</span> <span class="st">"The Netherlands"</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>today <span class="ot">&lt;-</span> <span class="fu">Sys.Date</span>()</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>birthday <span class="ot">&lt;-</span> <span class="fu">as.Date</span>(<span class="st">"2024-10-11"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>The <code>#</code> tells <code>R</code> that everything that follows in that specific line is not to be considered as code. In other words, you can use <code>#</code> to comment in your own <code>R</code>-scripts. I used <code>#</code> here to elaborate that the following line is the code from exercise 3.</p>
-<p>The line <code>a &lt;- 100</code> assigns the value <code>100</code> to object <code>a</code>. When reading that code say: “a gets value 100” in your head. When you run your code, it will be saved.</p>
-<p>Even if <code>&lt;-</code> is a pain to type, don’t use <code>=</code> instead, it will work, but it will cause confusion later. Use <code>RStudio</code>’s keyboard shortcut: Alt/Option + - (the minus sign). Notice that <code>RStudio</code> automatically surrounds <code>&lt;-</code> with spaces (good code formatting practice).</p>
-<p><strong>Create an object a with element (value) <code>1</code></strong></p>
+<ol start="2" type="1">
+<li>A Markdown file is convenient for combining code and text in the same document. When reporting the results of statistical analyses, you will need to refer to the statistics from your analyses. This can be done in Quarto using inline code. Let’s use the information from your code chunk to demonstrate how inline code works. Copy and paste this text exactly (do not change anything) to <strong>the white space</strong> underneath your code chunk (not in the code chunk!):</li>
+</ol>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># type your code here</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>My name is <span class="st">`</span><span class="at">r name</span><span class="st">`</span> and I am <span class="st">`</span><span class="at">r age</span><span class="st">`</span> years old. It is <span class="st">`</span><span class="at">r birthday - today</span><span class="st">`</span> days until my birthday.</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p><strong>Verify that 1 is stored in <code>a</code></strong></p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># type your code here</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ol start="3" type="1">
+<li>Knit the document using <code>Render</code> and look at the result. It should look like this, but then with your own name, country etc.: <strong>My name is Karin and I am 26 years old. It is -231 days until my birthday.</strong></li>
+</ol>
 </div>
-<p><strong>Square <code>a</code> (in a new code chunk)</strong></p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># type your code here</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p><strong>Create <code>b</code> and assign <code>a+a</code> to <code>b</code>. Check if <code>b</code> is indeed <code>a+a</code>.</strong></p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># type your code here</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="exercise-3-inspect-the-contents-of-the-global-environment-by-typing-and-running-ls" class="level3">
-<h3 class="anchored" data-anchor-id="exercise-3-inspect-the-contents-of-the-global-environment-by-typing-and-running-ls">Exercise 3: Inspect the contents of the global environment by typing and running <code>ls()</code></h3>
-<p>The following is returned by <code>R</code></p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span>()</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; character(0)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>A single value is the most basic object in <code>R</code>. The next step up in objects is a vector, followed by a matrix, followed by an array. Eventually, each of these objects can be stored in a list. We will learn about vectors, matrices and arrays later today.</p>
-<p>Now you know how to use <code>R</code> as a calculator and <code>R-Studio</code> with <code>Quarto</code> as a typesetting and storytelling device.</p>
 </section>
+<section id="practical-part-2" class="level2">
+<h2 class="anchored" data-anchor-id="practical-part-2">Practical part 2</h2>
 </section>
-<section id="practical-2" class="level2">
-<h2 class="anchored" data-anchor-id="practical-2">Practical 2</h2>
-<section id="exercise-1-5" class="level3">
-<h3 class="anchored" data-anchor-id="exercise-1-5">Exercise 1-5</h3>
+<section id="exercise-1-5" class="level2">
+<h2 class="anchored" data-anchor-id="exercise-1-5">Exercise 1-5</h2>
 <hr>
 <ol type="1">
-<li><strong>Make two vectors: one named <code>vec1</code> with values 1 through 6 and one named <code>vec2</code> with letters A through F.</strong></li>
+<li><strong>Make two vectors: one named <code>vec1</code> with values 1 through 6 and one named <code>vec2</code> with letters A through F. </strong></li>
 </ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>vec1 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>vec2 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"A"</span>, <span class="st">"B"</span>, <span class="st">"C"</span>, <span class="st">"D"</span>, <span class="st">"E"</span>, <span class="st">"F"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>To create a vector we used <code>c()</code>, which stands for ‘concatenation’. It is just a series of numbers or letters.</p>
+<hr>
 <ol start="2" type="1">
-<li><strong>Create two matrices, one from <code>vec1</code> and one from <code>vec2</code>. The dimensions for both matrices are 3 rows by 2 columns. Find the function to create a matrix by typing <code>?matrix</code></strong>. Notice that when you start typing <code>?matrix</code> in the code chunk, a pop-up window appears with information about the function.</li>
+<li><strong>Create two matrices, one from <code>vec1</code> and one from <code>vec2</code>. The dimensions for both matrices are 3 rows by 2 columns. </strong></li>
 </ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>mat1 <span class="ot">&lt;-</span> <span class="fu">matrix</span>(vec1, <span class="at">nrow =</span> <span class="dv">3</span>, <span class="at">ncol =</span> <span class="dv">2</span>)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>mat2 <span class="ot">&lt;-</span> <span class="fu">matrix</span>(vec2, <span class="at">nrow =</span> <span class="dv">3</span>, <span class="at">ncol =</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 <p>To create a matrix we used <code>matrix()</code>. For a matrix we need to specify the dimensions (in this case 3 rows and 2 columns) and the input (in this case <code>vec1</code> or <code>vec2</code>) needs to match these dimensions.</p>
+<hr>
 <ol start="3" type="1">
 <li><strong>Inspect your vectors and matrices. Are all numerical?</strong></li>
 </ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>vec1</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] 1 2 3 4 5 6</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>vec2</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] "A" "B" "C" "D" "E" "F"</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>mat1</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;      [,1] [,2]</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1,]    1    4</span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [2,]    2    5</span></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [3,]    3    6</span></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>mat2</span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;      [,1] [,2]</span></span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1,] "A"  "D" </span></span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [2,] "B"  "E" </span></span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [3,] "C"  "F"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><code>vec1</code> and <code>mat1</code> contain numbers and <code>vec2</code> and <code>mat2</code> contain characters.</p>
+<hr>
 <ol start="4" type="1">
 <li><strong>Make a matrix from both <code>vec1</code> and <code>vec2</code> with 6 rows and 2 columns. Inspect this matrix.</strong></li>
 </ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>mat3 <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(vec1, vec2), <span class="dv">6</span>, <span class="dv">2</span>)</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>mat3</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;      [,1] [,2]</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1,] "1"  "A" </span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [2,] "2"  "B" </span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [3,] "3"  "C" </span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [4,] "4"  "D" </span></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [5,] "5"  "E" </span></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [6,] "6"  "F"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>or</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>mat3b <span class="ot">&lt;-</span> <span class="fu">cbind</span>(vec1, vec2)</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">is.matrix</span>(mat3b)</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] TRUE</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>mat3b</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;      vec1 vec2</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1,] "1"  "A" </span></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [2,] "2"  "B" </span></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [3,] "3"  "C" </span></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [4,] "4"  "D" </span></span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [5,] "5"  "E" </span></span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [6,] "6"  "F"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 <p>If one or more elements in the matrix represent characters, all other elements are also converted to characters. A matrix is just for either numeric or character elements. Notice that the second approach (the column bind approach from <code>mat3b</code>) returns a matrix where the column names are already set to the name of the bound objects.</p>
-<p>To solve the problem of numbers represented as characters we can create a dataframe. A dataframe is essentially a matrix that allows for character elements. The use of a dataframe is often preferred over the use of a matrix in <code>R</code>, except for purposes where pure numerical calculations are done, such as in matrix algebra. However, most datasets do contain character information and a dataframe would normally be your preferred choice when working with your own collected datasets in R.</p>
+<p>To solve the problem of charactered numbers we can create a dataframe. A dataframe is essentially a matrix that allows for character elements. The use of a dataframe is often preferred over the use of a matrix in <code>R</code>, except for purposes where pure numerical calculations are done, such as in matrix algebra. However, most datasets do contain character information and a dataframe would normally be your preferred choice when working with your own collected datasets in R.</p>
+<hr>
 <ol start="5" type="1">
 <li><strong>Make a dataframe called <code>dat3</code> where <code>vec1</code> and <code>vec2</code> are both columns. Name the columns <code>V1</code> and <code>V2</code>, respectively. Use function <code>data.frame()</code>.</strong></li>
 </ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>dat3 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">V1 =</span> vec1, <span class="at">V2 =</span> vec2)</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>dat3</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   V1 V2</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1  1  A</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2  2  B</span></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3  3  C</span></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4  4  D</span></span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5  5  E</span></span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 6  6  F</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 <hr>
 </section>
-<section id="exercise-6-10" class="level3">
-<h3 class="anchored" data-anchor-id="exercise-6-10">Exercise 6-10</h3>
+<section id="exercise-6-10" class="level2">
+<h2 class="anchored" data-anchor-id="exercise-6-10">Exercise 6-10</h2>
 <hr>
 <ol start="6" type="1">
-<li><strong>A useful function to check the properties of any R object is the <code>str()</code> function. Try this function on <code>dat3</code>.</strong></li>
+<li><strong>Again, make a dataframe called <code>dat3b</code> where <code>vec1</code> and <code>vec2</code> are both columns. Name the columns <code>V1</code> and <code>V2</code>, respectively. Use function <code>as.data.frame()</code> on the matrix obtained from <code>Question 4</code>. </strong></li>
 </ol>
-<p>You can inspect the structure of a dataframe (or other R object) by using the <code>str()</code> function or by clicking on the object in the Environment tab in <code>RStudio</code>, which unfolds the properties of each element. See:</p>
-<center>
-<img src="images/mt1/Structure_RObjects_Data_tab.png" alt="HTML5 Icon" width="65%">
-</center>
-<p>Try both ways of inspecting the structure of <code>dat3</code>.</p>
-<p>Inspecting the structure of your data is vital, as you probably have imported your data from some other source. If we, at a later stage, start analyzing our data without the correct measurement level, we may run into problems. One problem that often occurs is that categorical variables (factors in <code>R</code>) are not coded as such.</p>
+<p>This is a tricky situation. At face value, everything may seem to be in order. But, be aware that the code</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>dat3b <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(mat3, <span class="at">stringsAsFactors =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>dat3b</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   V1 V2</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1  1  A</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2  2  B</span></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3  3  C</span></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4  4  D</span></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5  5  E</span></span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 6  6  F</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>does not work properly (at least not as intended) as the matrix nature of <code>mat3</code> turned everything into a character value and you have lost the numerical nature of <code>vec1</code>. It may appear to be working, but if we check if column 1 is numerical, it turns out not to be the case.</p>
 <hr>
 <ol start="7" type="1">
-<li><strong>Select 1) the third row, 2) the second column and 3) the intersection of these two in the dataframe <code>dat3</code> that you have created in Question 4.</strong></li>
+<li><strong>Check if the first column in the data frames from Question 4 and Question 5 are indeed numeric. If not, determine what they are. </strong></li>
 </ol>
-<p>The <code>[3, 2]</code> index is very useful in ‘R’. The first number (before the comma) represents the row and the second number (after the comma) represents the column. For a vector there are no two dimensions and only one dimension can be called. For example, <code>vec1[3]</code> would yield <code>3</code>. Try it.</p>
-<p>Columns can also be called by the <code>$</code> sign, but only if a name has been assigned. With dataframes assigning names happens automatically.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">is.numeric</span>(dat3[, <span class="dv">1</span>])</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] TRUE</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="fu">is.numeric</span>(dat3b[, <span class="dv">1</span>])</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] FALSE</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>The first column in matrix <code>dat3b</code> obtained from Question 5 is indeed not numeric. As a matter of fact, it is also not a character variable.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">is.character</span>(dat3b[, <span class="dv">1</span>])</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] FALSE</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Rather tricky; the function <code>as.data.frame()</code> has converted the first variable to a factor.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">is.factor</span>(dat3b[, <span class="dv">1</span>])</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] TRUE</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>This is due to us not specifying the variable correctly in the matrix we used to create the dataframe. Factors are categorical variables that are depicted by numbers. Character vectors are not converted to factors in data frames by default, but the argument <code>stringsAsFactors = TRUE</code> has resulted in this conversion. I forced this to prove a point: You now know that there is a distinction between characters and factors and you know hot to force this conversion to factors in a data frame.</p>
+<hr>
 <ol start="8" type="1">
+<li><strong>Select 1) the third row, 2) the second column and 3) the intersection of these two in the dataframe <code>dat3</code> that you have created in Question 4. </strong></li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>dat3[<span class="dv">3</span>, ] <span class="co">#3rd row</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   V1 V2</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3  3  C</span></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>dat3[, <span class="dv">2</span>] <span class="co">#2nd column</span></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] "A" "B" "C" "D" "E" "F"</span></span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>dat3<span class="sc">$</span>V2   <span class="co">#also 2nd column</span></span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] "A" "B" "C" "D" "E" "F"</span></span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>dat3[<span class="dv">3</span>,<span class="dv">2</span>] <span class="co">#intersection</span></span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] "C"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>The <code>[3,2]</code> index is very useful in ‘R’. The first number (before the comma) represents the row and the second number (after the comma) represents the column. For a vector there are no two dimensions and only one dimension can be called. For example, <code>vec1[3]</code> would yield <code>3</code>. Try it.</p>
+<p>Columns can also be called by the <code>$</code> sign, but only if a name has been assigned. With dataframes assigning names happens automatically.</p>
+<p>Note that <code>R</code> automatically reports the values the character column can take. This means that the column is indeed a factor (a categorical variable - as it is supposed to be). A useful function to inspect the structure of a dataframe is <code>str()</code>. Try running it.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(dat3)</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 'data.frame':    6 obs. of  2 variables:</span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  $ V1: num  1 2 3 4 5 6</span></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  $ V2: chr  "A" "B" "C" "D" ...</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Inspecting the structure of your data is vital, as you probably have imported your data from some other source. If we, at a later stage, start analyzing our data without the correct measurement level, we may run into problems. One problem that often occurs is that categorical variables (factors in <code>R</code>) are not coded as such.</p>
+<hr>
+<ol start="9" type="1">
 <li><strong>Imagine that the first variable <code>V1</code> in our dataframe <code>dat3</code> is not coded correctly, but actually represents grouping information about cities. Convert the variable to a factor and add the labels Utrecht, New York, London, Singapore, Rome and Cape Town.</strong></li>
 </ol>
-<p>You can verify the changes with <code>str()</code> or by inspecting the object <code>dat3</code> in the RStudio Environment tab.</p>
-<ol start="9" type="1">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>dat3<span class="sc">$</span>V1 <span class="ot">&lt;-</span> <span class="fu">factor</span>(dat3<span class="sc">$</span>V1, <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"Utrecht"</span>, <span class="st">"New York"</span>, <span class="st">"London"</span>, <span class="st">"Singapore"</span>, <span class="st">"Rome"</span>, <span class="st">"Capetown"</span>))</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>dat3</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;          V1 V2</span></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1   Utrecht  A</span></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2  New York  B</span></span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3    London  C</span></span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4 Singapore  D</span></span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5      Rome  E</span></span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 6  Capetown  F</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<hr>
+<ol start="10" type="1">
 <li><strong>Open the workspace <code>boys.RData</code>.</strong></li>
 </ol>
-<p>There are two ways to go about opening workspaces that are available on the internet. You either need to download this <a href="documents/mt1/boys.RData"><code>boys.RData</code></a> file from the course page and put it in the project folder. Then run the below code</p>
+<p>We have not yet learned to import data into <code>R</code>. Usually, we would store the data in our project and then import it from that location. For now, we load a dataset in from the internet by running and loading the connection</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">load</span>(<span class="st">"boys.RData"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>con <span class="ot">&lt;-</span> <span class="fu">url</span>(<span class="st">"https://www.gerkovink.com/fundamentals/data/boys.RData"</span>)</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="fu">load</span>(con)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>or double-click the <code>boys.RData</code> file on your machine (right-click and <code>open with RStudio</code> if it does not open by default in <code>RStudio</code>, but in <code>R</code>).</p>
-<p>Alternatively, you can import workspaces directly from the internet by running and loading a connection to a URL. For example, the following connection loads the <code>boys.RData</code> file from another course page:</p>
+<p>In the above code we store the connection as a url character string in object <code>con</code> and then load the connection with <code>load(con)</code>.</p>
+<p>The <code>boys</code> object will be added to your Global Environment. You can now use the <code>boys</code> data by running</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>con <span class="ot">&lt;-</span> <span class="fu">url</span>(<span class="st">"https://www.gerkovink.com/fundamentals/data/boys.RData"</span>)</span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">load</span>(con)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>boys</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>In the above code we store the connection in object <code>con</code> and then load the connection with <code>load(con)</code>. Be aware that if you store your code on multiple locations, it will burn carbon (energy) at multiple locations. Better is to have a central repository where you store your code and data. This is what working in Projects - which we discussed in Practical 1, facilitates.</p>
-<ol start="10" type="1">
-<li><strong>Most packages have datasets included. Since we have not learned to load packages yet, you are presented with such a data set in a workspace. Open the <code>boys</code> dataset (it is from package <code>mice</code>, by the way) by typing <code>boys</code> in the console, and subsequently by using the function <code>View()</code>.</strong></li>
-</ol>
-<p>The output is not displayed here as the data set is simply too large.</p>
-<p>Using <code>View()</code> is preferred for inspecting datasets that are large. <code>View()</code> opens the dataset in a spreadsheet-like window (conform MS Excel, or SPSS). If you <code>View()</code> your own datasets, you can not edit the datasets’ contents.</p>
 <hr>
 </section>
-<section id="exercise-11-15" class="level3">
-<h3 class="anchored" data-anchor-id="exercise-11-15">Exercise 11-15</h3>
+<section id="exercise-11-15" class="level2">
+<h2 class="anchored" data-anchor-id="exercise-11-15">Exercise 11-15</h2>
 <hr>
 <ol start="11" type="1">
-<li><strong>Find out the dimensions of the <code>boys</code> data set and inspect the first and final 6 cases in the data set.</strong></li>
+<li><strong>Most packages have datasets included. Since we have not learned to load packages yet, you are presented with such a data set in a workspace. Open the <code>boys</code> dataset (it is from package <code>mice</code>, by the way) by typing <code>boys</code> in the console, and subsequently by using the function <code>View()</code>. </strong></li>
+</ol>
+<p>The output is not displayed here as it is simply too large.</p>
+<p>Using <code>View()</code> is preferred for inspecting datasets that are large. <code>View()</code> opens the dataset in a spreadsheet-like window (conform MS Excel, or SPSS). If you <code>View()</code> your own datasets, you can not edit the datasets’ contents.</p>
+<hr>
+<ol start="12" type="1">
+<li><strong>Find out the dimensions of the <code>boys</code> data set and inspect the first and final 6 cases in the data set. </strong></li>
 </ol>
 <p>To do it numerically, find out what the dimensions of the boys dataset are.</p>
-<p>Select the first and last six cases</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(boys)</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] 748   9</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>There are 748 cases on 9 variables. To select the first and last six cases, use</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>boys[<span class="dv">1</span><span class="sc">:</span><span class="dv">6</span>, ]</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;      age  hgt   wgt   bmi   hc  gen  phb tv   reg</span></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3  0.035 50.1 3.650 14.54 33.7 &lt;NA&gt; &lt;NA&gt; NA south</span></span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4  0.038 53.5 3.370 11.77 35.0 &lt;NA&gt; &lt;NA&gt; NA south</span></span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 18 0.057 50.0 3.140 12.56 35.2 &lt;NA&gt; &lt;NA&gt; NA south</span></span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 23 0.060 54.5 4.270 14.37 36.7 &lt;NA&gt; &lt;NA&gt; NA south</span></span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 28 0.062 57.5 5.030 15.21 37.3 &lt;NA&gt; &lt;NA&gt; NA south</span></span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 36 0.068 55.5 4.655 15.11 37.0 &lt;NA&gt; &lt;NA&gt; NA south</span></span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a>boys[<span class="dv">743</span><span class="sc">:</span><span class="dv">748</span>, ]</span>
+<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;         age   hgt  wgt   bmi   hc  gen  phb tv   reg</span></span>
+<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 7410 20.372 188.7 59.8 16.79 55.2 &lt;NA&gt; &lt;NA&gt; NA  west</span></span>
+<span id="cb22-12"><a href="#cb22-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 7418 20.429 181.1 67.2 20.48 56.6 &lt;NA&gt; &lt;NA&gt; NA north</span></span>
+<span id="cb22-13"><a href="#cb22-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 7444 20.761 189.1 88.0 24.60   NA &lt;NA&gt; &lt;NA&gt; NA  west</span></span>
+<span id="cb22-14"><a href="#cb22-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 7447 20.780 193.5 75.4 20.13   NA &lt;NA&gt; &lt;NA&gt; NA  west</span></span>
+<span id="cb22-15"><a href="#cb22-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 7451 20.813 189.0 78.0 21.83 59.9 &lt;NA&gt; &lt;NA&gt; NA north</span></span>
+<span id="cb22-16"><a href="#cb22-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 7475 21.177 181.8 76.5 23.14   NA &lt;NA&gt; &lt;NA&gt; NA  east</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 <p>or, more efficiently:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(boys)</span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;      age  hgt   wgt   bmi   hc  gen  phb tv   reg</span></span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3  0.035 50.1 3.650 14.54 33.7 &lt;NA&gt; &lt;NA&gt; NA south</span></span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4  0.038 53.5 3.370 11.77 35.0 &lt;NA&gt; &lt;NA&gt; NA south</span></span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 18 0.057 50.0 3.140 12.56 35.2 &lt;NA&gt; &lt;NA&gt; NA south</span></span>
-<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 23 0.060 54.5 4.270 14.37 36.7 &lt;NA&gt; &lt;NA&gt; NA south</span></span>
-<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 28 0.062 57.5 5.030 15.21 37.3 &lt;NA&gt; &lt;NA&gt; NA south</span></span>
-<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 36 0.068 55.5 4.655 15.11 37.0 &lt;NA&gt; &lt;NA&gt; NA south</span></span>
-<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a><span class="fu">tail</span>(boys)</span>
-<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;         age   hgt  wgt   bmi   hc  gen  phb tv   reg</span></span>
-<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 7410 20.372 188.7 59.8 16.79 55.2 &lt;NA&gt; &lt;NA&gt; NA  west</span></span>
-<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 7418 20.429 181.1 67.2 20.48 56.6 &lt;NA&gt; &lt;NA&gt; NA north</span></span>
-<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 7444 20.761 189.1 88.0 24.60   NA &lt;NA&gt; &lt;NA&gt; NA  west</span></span>
-<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 7447 20.780 193.5 75.4 20.13   NA &lt;NA&gt; &lt;NA&gt; NA  west</span></span>
-<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 7451 20.813 189.0 78.0 21.83 59.9 &lt;NA&gt; &lt;NA&gt; NA north</span></span>
-<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 7475 21.177 181.8 76.5 23.14   NA &lt;NA&gt; &lt;NA&gt; NA  east</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(boys)</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;      age  hgt   wgt   bmi   hc  gen  phb tv   reg</span></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3  0.035 50.1 3.650 14.54 33.7 &lt;NA&gt; &lt;NA&gt; NA south</span></span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4  0.038 53.5 3.370 11.77 35.0 &lt;NA&gt; &lt;NA&gt; NA south</span></span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 18 0.057 50.0 3.140 12.56 35.2 &lt;NA&gt; &lt;NA&gt; NA south</span></span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 23 0.060 54.5 4.270 14.37 36.7 &lt;NA&gt; &lt;NA&gt; NA south</span></span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 28 0.062 57.5 5.030 15.21 37.3 &lt;NA&gt; &lt;NA&gt; NA south</span></span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 36 0.068 55.5 4.655 15.11 37.0 &lt;NA&gt; &lt;NA&gt; NA south</span></span>
+<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a><span class="fu">tail</span>(boys)</span>
+<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;         age   hgt  wgt   bmi   hc  gen  phb tv   reg</span></span>
+<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 7410 20.372 188.7 59.8 16.79 55.2 &lt;NA&gt; &lt;NA&gt; NA  west</span></span>
+<span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 7418 20.429 181.1 67.2 20.48 56.6 &lt;NA&gt; &lt;NA&gt; NA north</span></span>
+<span id="cb23-13"><a href="#cb23-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 7444 20.761 189.1 88.0 24.60   NA &lt;NA&gt; &lt;NA&gt; NA  west</span></span>
+<span id="cb23-14"><a href="#cb23-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 7447 20.780 193.5 75.4 20.13   NA &lt;NA&gt; &lt;NA&gt; NA  west</span></span>
+<span id="cb23-15"><a href="#cb23-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 7451 20.813 189.0 78.0 21.83 59.9 &lt;NA&gt; &lt;NA&gt; NA north</span></span>
+<span id="cb23-16"><a href="#cb23-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 7475 21.177 181.8 76.5 23.14   NA &lt;NA&gt; &lt;NA&gt; NA  east</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>The functions <code>head()</code> and <code>tail()</code> are very useful functions. For example, from looking at both functions we can observe that the data are very likely sorted based on <code>age</code>.</p>
-<ol start="12" type="1">
-<li><strong>Suppose you want to plot the height versus the weight of the boys.</strong> You would like to have the weight variable (<code>wgt</code>) on the x-axis and the height variable (<code>hgt</code>) on the y-axis. How can you achieve such a plot? Tip: use the <code>args()</code> function.</li>
-</ol>
-<p>A. <code>plot(boys$wgt, boys$hgt)</code></p>
-<p>B. <code>plot(boys$hgt, boys$wgt)</code></p>
-<p>C. <code>plot(x=boys$wgt, y=boys$hgt)</code></p>
-<p>D. <code>plot(y=boys$hgt, x=boys$wgt)</code></p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># look at the arguments structure in the function</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>Make the plot using the correct code.</p>
+<hr>
 <ol start="13" type="1">
 <li><strong>It seems that the <code>boys</code> data are sorted based on <code>age</code>. Verify this.</strong></li>
 </ol>
 <p>To verify if the data are indeed sorted, we can run the following command to test the complement of that statement. Remember that we can always search the help for functions: e.g.&nbsp;we could have searched here for <code>?sort</code> and we would quickly have ended up at function <code>is.unsorted()</code> as it tests whether an object is <strong>not sorted</strong>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">is.unsorted</span>(boys<span class="sc">$</span>age)</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] FALSE</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 <p>which returns <code>FALSE</code>, indicating that boys’ age is indeed sorted (we asked if it was unsorted!). To directly test if it is sorted, we could have used</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="sc">!</span><span class="fu">is.unsorted</span>(boys<span class="sc">$</span>age)</span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] TRUE</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="sc">!</span><span class="fu">is.unsorted</span>(boys<span class="sc">$</span>age)</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] TRUE</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>which tests if data data are not unsorted. In other words the values <code>TRUE</code> and <code>FALSE</code> under <code>is.unsorted()</code> turn into <code>FALSE</code> and <code>TRUE</code> under <code>!is.unsorted()</code>, respectively.</p>
 <hr>
 <ol start="14" type="1">
-<li><strong>Inspect the <code>boys</code> dataset with <code>str()</code>. Use one or more functions to find distributional summary information (at least information about the minimum, the maximum, the mean and the median) for all of the variables. Give the standard deviation for <code>age</code> and <code>bmi</code>.</strong> Tip: make use of the help (?) and help search (??) functionality in <code>R</code>.</li>
+<li><strong>Inspect the <code>boys</code> dataset with <code>str()</code>. Use one or more functions to find distributional summary information (at least information about the minimum, the maximum, the mean and the median) for all of the variables. Give the standard deviation for <code>age</code> and <code>bmi</code>. </strong> Tip: make use of the help (?) and help search (??) functionality in <code>R</code>.</li>
 </ol>
-<p>Note that <code>bmi</code> contains 21 missing values, e.g.&nbsp;by looking at the summary information. Therefor we need to use <code>na.rm = T</code> to calculate the standard deviation on the observed cases only.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(boys)</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 'data.frame':    748 obs. of  9 variables:</span></span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  $ age: num  0.035 0.038 0.057 0.06 0.062 0.068 0.068 0.071 0.071 0.073 ...</span></span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  $ hgt: num  50.1 53.5 50 54.5 57.5 55.5 52.5 53 55.1 54.5 ...</span></span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  $ wgt: num  3.65 3.37 3.14 4.27 5.03 ...</span></span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  $ bmi: num  14.5 11.8 12.6 14.4 15.2 ...</span></span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  $ hc : num  33.7 35 35.2 36.7 37.3 37 34.9 35.8 36.8 38 ...</span></span>
+<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  $ gen: Ord.factor w/ 5 levels "G1"&lt;"G2"&lt;"G3"&lt;..: NA NA NA NA NA NA NA NA NA NA ...</span></span>
+<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  $ phb: Ord.factor w/ 6 levels "P1"&lt;"P2"&lt;"P3"&lt;..: NA NA NA NA NA NA NA NA NA NA ...</span></span>
+<span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  $ tv : int  NA NA NA NA NA NA NA NA NA NA ...</span></span>
+<span id="cb26-11"><a href="#cb26-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  $ reg: Factor w/ 5 levels "north","east",..: 4 4 4 4 4 4 4 3 3 2 ...</span></span>
+<span id="cb26-12"><a href="#cb26-12" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(boys) <span class="co">#summary info</span></span>
+<span id="cb26-13"><a href="#cb26-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;       age              hgt              wgt              bmi       </span></span>
+<span id="cb26-14"><a href="#cb26-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  Min.   : 0.035   Min.   : 50.00   Min.   :  3.14   Min.   :11.77  </span></span>
+<span id="cb26-15"><a href="#cb26-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  1st Qu.: 1.581   1st Qu.: 84.88   1st Qu.: 11.70   1st Qu.:15.90  </span></span>
+<span id="cb26-16"><a href="#cb26-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  Median :10.505   Median :147.30   Median : 34.65   Median :17.45  </span></span>
+<span id="cb26-17"><a href="#cb26-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  Mean   : 9.159   Mean   :132.15   Mean   : 37.15   Mean   :18.07  </span></span>
+<span id="cb26-18"><a href="#cb26-18" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  3rd Qu.:15.267   3rd Qu.:175.22   3rd Qu.: 59.58   3rd Qu.:19.53  </span></span>
+<span id="cb26-19"><a href="#cb26-19" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  Max.   :21.177   Max.   :198.00   Max.   :117.40   Max.   :31.74  </span></span>
+<span id="cb26-20"><a href="#cb26-20" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;                   NA's   :20       NA's   :4        NA's   :21     </span></span>
+<span id="cb26-21"><a href="#cb26-21" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;        hc          gen        phb            tv           reg     </span></span>
+<span id="cb26-22"><a href="#cb26-22" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  Min.   :33.70   G1  : 56   P1  : 63   Min.   : 1.00   north: 81  </span></span>
+<span id="cb26-23"><a href="#cb26-23" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  1st Qu.:48.12   G2  : 50   P2  : 40   1st Qu.: 4.00   east :161  </span></span>
+<span id="cb26-24"><a href="#cb26-24" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  Median :53.00   G3  : 22   P3  : 19   Median :12.00   west :239  </span></span>
+<span id="cb26-25"><a href="#cb26-25" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  Mean   :51.51   G4  : 42   P4  : 32   Mean   :11.89   south:191  </span></span>
+<span id="cb26-26"><a href="#cb26-26" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  3rd Qu.:56.00   G5  : 75   P5  : 50   3rd Qu.:20.00   city : 73  </span></span>
+<span id="cb26-27"><a href="#cb26-27" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  Max.   :65.00   NA's:503   P6  : 41   Max.   :25.00   NA's :  3  </span></span>
+<span id="cb26-28"><a href="#cb26-28" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  NA's   :46                 NA's:503   NA's   :522</span></span>
+<span id="cb26-29"><a href="#cb26-29" aria-hidden="true" tabindex="-1"></a><span class="fu">sd</span>(boys<span class="sc">$</span>age) <span class="co">#standard deviation for age</span></span>
+<span id="cb26-30"><a href="#cb26-30" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] 6.894052</span></span>
+<span id="cb26-31"><a href="#cb26-31" aria-hidden="true" tabindex="-1"></a><span class="fu">sd</span>(boys<span class="sc">$</span>bmi, <span class="at">na.rm =</span> <span class="cn">TRUE</span>) <span class="co">#standard deviation for bmi</span></span>
+<span id="cb26-32"><a href="#cb26-32" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] 3.053421</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Note that <code>bmi</code> contains 21 missing values, e.g.&nbsp;by looking at the summary information. Therefor we need to use <code>na.rm = TRUE</code> to calculate the standard deviation on the observed cases only.</p>
 <hr>
 <ol start="15" type="1">
 <li><strong>Select all boys that are 20 years or older. How many are there?</strong></li>
 </ol>
-<p>The logical operators (TRUE vs FALSE) are a very powerful tool in <code>R</code>. For example, we can just select the rows (respondents) in the data that are older than 20 by putting the logical operator within the row index of the dataset:</p>
-<p>or, alternatively using <code>subset()</code>,</p>
+<p>The logical operators (TRUE vs FALSE) are a very powerful tool in <code>R</code>. For example, we can just select the rows (respondents) in the data that are older than 20 by putting the logical operater within the row index of the dataset:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>boys2<span class="fl">.1</span> <span class="ot">&lt;-</span> <span class="fu">subset</span>(boys, age <span class="sc">&gt;=</span> <span class="dv">20</span>)</span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="fu">nrow</span>(boys2<span class="fl">.1</span>)</span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] 12</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>boys2 <span class="ot">&lt;-</span> boys[boys<span class="sc">$</span>age <span class="sc">&gt;=</span> <span class="dv">20</span>, ]</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="fu">nrow</span>(boys2)</span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] 12</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>or, alternatively,</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>boys2<span class="fl">.1</span> <span class="ot">&lt;-</span> <span class="fu">subset</span>(boys, age <span class="sc">&gt;=</span> <span class="dv">20</span>)</span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="fu">nrow</span>(boys2<span class="fl">.1</span>)</span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] 12</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <hr>
 </section>
-<section id="exercise-16-17" class="level3">
-<h3 class="anchored" data-anchor-id="exercise-16-17">Exercise 16-17</h3>
+<section id="exercise-16-17" class="level2">
+<h2 class="anchored" data-anchor-id="exercise-16-17">Exercise 16-17</h2>
 <hr>
 <ol start="16" type="1">
 <li><strong>Select all boys that are older than 19, but younger than 19.5. How many are there?</strong></li>
 </ol>
-<p>or, alternatively, use <code>subset()</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>boys3 <span class="ot">&lt;-</span> boys[boys<span class="sc">$</span>age <span class="sc">&gt;</span> <span class="dv">19</span> <span class="sc">&amp;</span> boys<span class="sc">$</span>age <span class="sc">&lt;</span> <span class="fl">19.5</span>, ]</span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="fu">nrow</span>(boys3)</span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] 18</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>or, alternatively,</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>boys3<span class="fl">.2</span> <span class="ot">&lt;-</span> <span class="fu">subset</span>(boys, age <span class="sc">&gt;</span> <span class="dv">19</span> <span class="sc">&amp;</span> age <span class="sc">&lt;</span> <span class="fl">19.5</span>)</span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="fu">nrow</span>(boys3<span class="fl">.2</span>)</span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] 18</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 <hr>
 <ol start="17" type="1">
 <li><strong>What is the mean age of boys younger than 15 years of age that do not live in region <code>north</code>?</strong></li>
 </ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(boys<span class="sc">$</span>age[boys<span class="sc">$</span>age <span class="sc">&lt;</span> <span class="dv">15</span> <span class="sc">&amp;</span> boys<span class="sc">$</span>reg <span class="sc">!=</span> <span class="st">"north"</span> ], <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] 6.044461</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 <p>or, alternatively,</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(<span class="fu">subset</span>(boys, age <span class="sc">&lt;</span> <span class="dv">15</span> <span class="sc">&amp;</span> reg <span class="sc">!=</span> <span class="st">"north"</span>)<span class="sc">$</span>age, <span class="at">na.rm=</span><span class="cn">TRUE</span>)</span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] 6.044461</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(<span class="fu">subset</span>(boys, age <span class="sc">&lt;</span> <span class="dv">15</span> <span class="sc">&amp;</span> reg <span class="sc">!=</span> <span class="st">"north"</span>)<span class="sc">$</span>age, <span class="at">na.rm=</span><span class="cn">TRUE</span>)</span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] 6.044461</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>The mean age is 6.0444609 years</p>
 <hr>
 <p>Today we have learned to use <code>R</code> at its basics. This offers tremendous flexibility, but may also be inefficient when our aim is some complex analysis, data operation of data manipulation. Doing advanced operations in basic <code>R</code> may require lots and lots of code. Tomorrow we will start using packages that allow us to do complicated operations with just a few lines of code.</p>
 <p>As you start using <code>R</code> in your own research, you will find yourself in need of packages that are not part of the default <code>R</code> installation. The beauty of <code>R</code> is that its functionality is community-driven. People can add packages to <code>CRAN</code> that other people can use and improve. Chances are that a function and/or package has been already developed for the analysis or operation you plan to carry out. If not, you are of course welcome to fill the gap by submitting your own package.</p>
 <hr>
-<p>End of practicals</p>
+<p>End of practical</p>
 
 
-</section>
 </section>
 
 </main> <!-- /main -->
