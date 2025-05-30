@@ -45,8 +45,6 @@ De volgende taken moeten voorafgaand het college voltooid zijn:
 ```{r eval = FALSE}
 install.packages("quarto", dependencies = TRUE)
 ```
-
--   lees [R for Data Science, hoofdstuk 1](https://r4ds.had.co.nz/)
 :::
 
 ## Practical 1
@@ -68,7 +66,7 @@ In this course you learn to work with RStudio Projects. This way of working ensu
 
 **More information about RStudio Projects**
 
-On the RStudio Support website you can find a webpage explaining all you need to know about RStudio Projects, see here: https://support.posit.co/hc/en-us/articles/200526207-Using-RStudio-Projects
+On the RStudio Support website [you can find a webpage explaining all you need to know about RStudio Projects](https://support.posit.co/hc/en-us/articles/200526207-Using-RStudio-Projects).
 
 ### Exercise 2. Working with RStudio and Quarto
 
