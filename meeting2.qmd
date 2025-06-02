@@ -17,11 +17,19 @@ format:
 
 ::: callout-tip
 ## Hoorcollege 3 juni 2025
-Vandaag gaan we dwars door `R` heen om ons snel bekend te maken met de onderliggende machinery van het systeem. We gaan leren hoe je een simpele functie maakt en hoe je die snel en efficient kunt toepassen op verschillende data objecten. In de breedste zin zullen we vandaag al leren hoe je op een efficiente wijze dwars door environments, frames en data containers heen kunt gaan om uiteindelijk de data op een juiste manier te managen. De slides voor het hoorcollege kun u [hier vinden](slides/lec-2.html) 
+Vandaag gaan we dwars door `R` heen om ons snel bekend te maken met de onderliggende machinery van het systeem. We gaan leren hoe je data inleest in `R`, hoe je het exporteert en hoe je de data gaafmaakt voor verdere analyse. In de breedste zin zullen we vandaag al leren hoe je op een efficiente wijze dwars door environments, frames en data containers heen kunt gaan om uiteindelijk de data op een juiste manier te managen. De slides voor het hoorcollege kun u [hier vinden](slides/lec-2.html) 
 :::
 
 ## Practical 1: Data Management
 Begin this practical exercise by setting the maximum line length in `R-Studio` to 80 characters. Go to `RStudio`'s `Preferences` (or `Global Options` under `Tools`) --> `Code` --> `Display`, and tick the `show margin` box. Make sure that the `margin column` is set to `80`
+
+The following packages are required for this practical:
+```{r, message=FALSE}
+library(dplyr)    # for data manipulation
+library(magrittr) # for flexible pipes
+library(mice)     # for the mammalsleep and boys datasets
+library(haven)    # for importing SPSS and Stata data
+```
 
 ---
 
@@ -60,7 +68,11 @@ Using `View()` is preferred for inspecting datasets that are large. `View()` ope
 4. **Write the mammalsleep dataset from package `mice` to the work directory (= the directory of your R project) as a tab-delimited text file with `.` as a decimal separator. Use the function `write.table()` and name the file `mammalsleep.txt`.**
 
 ```{r, warning=FALSE, message=FALSE}
-write.table(mammalsleep, "mammalsleep.txt", sep = "\t", dec = ".", row.names = FALSE)
+write.table(x = mammalsleep, # the data to be exported
+            file = "mammalsleep.txt", # the name of the file
+            sep = "\t", # column seperated by tabs
+            dec = ".", # decimal separator
+            row.names = FALSE) # do not include the rownames as column
 ```
 The command `sep = "\t"` indicates that the file is tabulated and the command `dec = "."` indicates that a point is used as the decimal separator (instead of a comma). `row.names = FALSE` tells `R` that row names are not to be included in the exported file. 
 
@@ -68,14 +80,20 @@ The command `sep = "\t"` indicates that the file is tabulated and the command `d
 
 5. **Import the `mammalsleep.txt` file with `read.table()`. **
 ```{r}
-sleepdata <- read.table("mammalsleep.txt", sep = "\t", dec = ".", header = TRUE, stringsAsFactors = TRUE)
+sleepdata <- read.table("mammalsleep.txt", # the name of the file
+                        sep = "\t", # columns seperated by tabs
+                        dec = ".", # decimal separator
+                        header = TRUE, # 1st row contains variable names
+                        stringsAsFactors = TRUE) # convert strings to factors
+sleepdata %<>% # assign pipe to feed the result back into sleepdata
+  as_tibble() # convert to tibble
 ```
 
 The command `sep = "\t"` indicates that the file is tabulated and the command `dec = "."` indicates that a point is used as the decimal separator (instead of a comma). `header = TRUE` tells `R` that variable names are included in the header.
 
 All files that are presented in the work directory of the current `R` project, can essentially be imported into the workspace (the space that contains all environments) directly. All other locations require you to specify the specific path from the root of your machine. To find out what the current work directory is, you can type `getwd()` and to change the work directory you can use `setwd()`. The beauty of using projects in RStudio is that you would never have to change the work directory, as the work directory is automatically set, relative to your projects' `R`-scripts. 
 
-There are many packages that facilitate importing data sets from other statistical software packages, such as SPSS (e.g. function `read_spss` from package `haven`), Mplus (package `MplusAutomation`), Stata (`read.dta()` in `foreign`), SAS (`sasxport.get()` from package `Hmisc`) and from spreadsheet software, such as MS Excel (function `read.xlsx()` from package `xlsx`). For a short guideline to import multiple formats into `R`, see e.g. http://www.statmethods.net/input/importingdata.html. 
+There are many packages that facilitate importing data sets from other statistical software packages, such as SPSS (e.g. function `read_spss()` from package `haven`), Mplus (package `MplusAutomation`), Stata (`read_dta()` in `haven` and `read.dta()` in `foreign`), SAS (`sasxport.get()` from package `Hmisc`) and from spreadsheet software, such as MS Excel (function `read.xlsx()` from package `xlsx`). 
 
 ---
 
@@ -91,10 +109,13 @@ Inspecting the sleepdata could be done by
 ```{r}
 # the data structure
 summary(sleepdata) #distributional summaries
-round(cor(sleepdata[, -1], use = "pairwise.complete.obs"), 2) 
-# above line yields bivariate correlations, variable 1 excluded. 
+sleepdata %>% 
+  select(-species) %>% # exclude the first column (because it is character)
+  cor(use = "pairwise.complete.obs") %>% # calculate Pearson's correlation
+  round(2) # round to two decimal places 
 head(mammalsleep) # first six rows
 tail(mammalsleep) # last six rows
+glimpse(mammalsleep) # a quick overview of the data structure
 ```
 ```{r eval=FALSE}
 ?mammalsleep # the help
@@ -114,13 +135,13 @@ One thing that may have caught your attention is the relation between `ts`, `ps`
 Now that we have imported our data, it may be wise to save the current workspace, i.e. the current state of affairs. Saving the workspace will leave everything as is, so that we can continue from this exact state at a later time, by simply opening the workspace file. To save everything in the current workspace, type:
 ```{r}
 # To save the entire workspace:
-save.image("Practical_C.RData")
+save.image("Practical_3juni2025.RData")
 ```
 
 To save just the data set `sleepdata`, and nothing else, type:
 ```{r}
 # To save the data set only.
-save(sleepdata, file = "Sleepdata.RData")
+save(sleepdata, file = "sleepdata.RData")
 ```
 
 With the save functions, any object in the work space can be saved. 
@@ -135,12 +156,12 @@ exclude <- c("Echidna", "Lesser short-tailed shrew", "Musk shrew")
 # Indicate the species that match the names in exclude
 which <- sleepdata$species %in% exclude 
 which
-sleepdata2 <- sleepdata[!which, ]
+sleepdata_new <- sleepdata[!which, ]
 ```
 
 and the second approach uses the row numbers directly (you would need to inquire about, or calculate the row numbers)
 ```{r}
-sleepdata2 <- sleepdata[-c(16, 32, 38), ]
+sleepdata_new <- sleepdata[-c(16, 32, 38), ]
 ```
 Note that the numbered option requires less code, but the named option has a much lower probability for error. As the data set might change, or might get sorted differently, the second option may not be valid anymore. 
 
@@ -156,7 +177,7 @@ dplyr::filter(sleepdata, !sleepdata$species %in% exclude)
 9. **Plot brain weight as a function of species. **
 
 ```{r}
-plot(brw ~ species, data = sleepdata2)
+plot(brw ~ species, data = sleepdata_new)
 ```
 
 ---
@@ -165,31 +186,31 @@ plot(brw ~ species, data = sleepdata2)
 
 To find out which animals have a brain weight larger than 1 standard deviation above the mean brain weight:
 ```{r}
-sd.brw <- sd(sleepdata2$brw) # standard deviation  
-mean.brw <- mean(sleepdata2$brw) # mean
-which <- sleepdata2$brw > (mean.brw + (1 * sd.brw)) # which are larger?
-as.character(sleepdata2$species[which]) # names of the animals with brw > 1000
+sd.brw <- sd(sleepdata_new$brw) # standard deviation  
+mean.brw <- mean(sleepdata_new$brw) # mean
+which <- sleepdata_new$brw > (mean.brw + (1 * sd.brw)) # which are larger?
+as.character(sleepdata_new$species[which]) # names of the animals with brw > 1000
 ```
 
 To plot these animals:
 ```{r}
-plot(brw ~ species, data = sleepdata2[which, ])
+plot(brw ~ species, data = sleepdata_new[which, ])
 ```
 
 The downside is that it still prints all the animals on the x-axis. This is due to the factor labels for `species` being copied to the smaller subset of the data. Plot automatically takes over the labels. For example, 
 ```{r}
-sleepdata2$species[which]
+sleepdata_new$species[which]
 ```
 
 returns only 3 mammals, but still has 62 factor levels. To get rid of the unused factor levels, we can use function `factor()`:
 ```{r}
-sleepdata3 <- sleepdata2[which, ]
-sleepdata3$species <- factor(sleepdata3$species)
-sleepdata3$species
+sleepdata_3mammals <- sleepdata_new[which, ]
+sleepdata_3mammals$species <- factor(sleepdata_3mammals$species)
+sleepdata_3mammals$species
 ```
 To plot the graph that we wanted:
 ```{r}
-plot(brw ~ species, data = sleepdata3)
+plot(brw ~ species, data = sleepdata_3mammals)
 ```
 
 ---
@@ -198,7 +219,23 @@ If your current software-analysis platform is different from `R`, chances are th
 
 ---
 
-### TODO: READ IN THE FOLLOWING FILES WITH HAVEN
+11. **Read in the SPSS and Stata data sets that are provided on Moodle. Place them in the Project folder of this practical. Use the functions `read_sav()` and `read_dta()` from package `haven`. **
+
+```{r echo=FALSE}
+# Import the SPSS data set
+spss_data <- read_sav("moodle/data/SUR_2023_LAPOP_AmericasBarometer_v1.0_w_orginal.sav")
+# Import the Stata data set
+stata_data <- read_dta("moodle/data/03-poverty-analysis-data-2022-rt001-housing-plus.dta")
+```
+
+```{r eval=FALSE}
+library(haven) # for importing SPSS and Stata data
+# Import the SPSS data set
+spss_data <- read_sav("SUR_2023_LAPOP_AmericasBarometer_v1.0_w_orginal.sav")
+# Import the Stata data set
+stata_data <- read_dta("03-poverty-analysis-data-2022-rt001-housing-plus.dta")
+```
+
 
 ### Useful links for Practical 1
 
@@ -207,16 +244,11 @@ If your current software-analysis platform is different from `R`, chances are th
 ---
 
 ## Practical 2: Pipes
+Don't throw away the imported data sets from 
 
 ---
 
-The following packages are required for this practical:
-```{r, message=FALSE}
-library(dplyr)
-library(magrittr)
-library(mice)
-```
-and if you'd like the same results as I have obtained, you can fix the random seed
+If you'd like the same results as I have obtained, you can fix the random seed
 ```{r}
 set.seed(123)
 ```
@@ -237,11 +269,15 @@ rnorm(1000, 5) %>%
 
 ---
 
-2. **Use a pipe to calculate the correlation matrix on the `anscombe` data set**
+2. **On the `03-poverty-analysis-data-2022-rt001-housing-plus.dta`: Use a pipe to calculate the correlation matrix on the continuous variables that start with `q13`. Round the result to two decimal places.**
 
 ```{r}
-anscombe %>%
-  cor()
+stata_data %>% 
+  as_factor() %>% # first make sure that factors are factors
+  select(where(is.numeric)) %>% # select only numeric variables
+  select(starts_with("q13")) %>% # select only variables that start with q13
+  cor(use = "pairwise.complete.obs") %>% # use all info from complete pairs
+  round(2) # round to two decimal places
 ```
 
 ---
@@ -262,7 +298,7 @@ anscombe %$%
 
 ---
 
-4. **Use a pipe to calculate the correlation between `hgt` and `wgt` in the `boys` data set from package `mice`.**
+4. **Have a look at the `boys` data set from package `mice`. Use a pipe to calculate the correlation between `hgt` and `wgt` in the `boys` data set from package `mice`.**
 
 Because `boys` has missing values for almost all variables, we must first select `wgt` and `hgt` and then omit the rows that have missing values, before we can calculate the correlation. Using the standard `%>%` pipe, this would look like:
 ```{r}
@@ -292,8 +328,8 @@ The `%$%` pipe *unfolds* the listed dimensions of the `boys` data set, such that
 Using the standard `%>%` and the `%$%` pipes:
 ```{r}
 boys %>%
-  transform(hgt = hgt / 100) %$%
-  mean(hgt, na.rm = TRUE)
+  transform(hgt = hgt / 100) %$% # transform centimeters to meters
+  mean(hgt, na.rm = TRUE) # verify that indeed it is now in meters
 ```
  
 ---

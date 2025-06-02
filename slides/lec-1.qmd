@@ -32,6 +32,25 @@ format:
     standalone: true
 ---
 
+## Disclaimer {.smaller}
+I owe a debt of gratitude to many people as the thoughts and code in these slides are the process of years-long development cycles and discussions with my team, friends, colleagues and peers. When someone has contributed to the content of the slides, I have credited their authorship.
+
+Images are either directly linked, or generated with StableDiffusion or DALL-E. That said, there is no information in this presentation that exceeds legal use of copyright materials in academic settings, or that should not be part of the public domain. 
+
+::: {.callout-warning}
+You **may use** any and all content in this presentation - including my name - and submit it as input to generative AI tools, with the following **exception**:
+
+- You must ensure that the content is not used for further training of the model
+:::
+
+## Slide materials and source code
+::: callout-tip
+# Materials
+- lecture slides on Moodle
+- course page: [www.gerkovink.com/sur](https://www.gerkovink.com/sur)
+- source: [github.com/gerkovink/sur](https://github.com/gerkovink/sur)
+:::
+
 ## Topics of this lecture
 
 1. Introduction to R and RStudio
