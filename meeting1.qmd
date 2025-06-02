@@ -20,12 +20,6 @@ format:
     toc-depth: 3
 ---
 
-```{r, include = FALSE}
-knitr::opts_chunk$set(
-  collapse = TRUE,
-  comment = "#>"
-)
-```
 
 ::: callout-tip
 ## Hoorcollege 2 juni 2025
