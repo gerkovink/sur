@@ -287,9 +287,15 @@ spss_data %>%
 ```
 
 ## Calculations and summarising 
-
 ```{r}
 spss_data %>%
+  filter(age > 18) %>%
+  summarise(mean_age = mean(age, na.rm = TRUE))
+```
+`age` is also a factor, hence `mean()` is meaningless. We have to convert `age` to numeric:
+```{r}
+spss_data %>%
+  mutate(age = as.numeric(age)) %>% 
   filter(age > 18) %>%
   summarise(mean_age = mean(age, na.rm = TRUE))
 ```
