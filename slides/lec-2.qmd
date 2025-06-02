@@ -300,41 +300,6 @@ spss_data %>%
   summarise(mean_age = mean(age, na.rm = TRUE))
 ```
 
-
-## Joining data
-```{r}
-band_members
-band_instruments
-```
-
-## Inner join
-With an inner join, we combine two data frames based on a common key. Only the rows with matching keys in both data frames are kept.
-
-```{r}
-band_members %>% inner_join(band_instruments)
-```
-
-## Left join
-With a left join, we keep all rows from the left data frame and only the matching rows from the right data frame. If there is no match, the result will contain `NA` for the columns from the right data frame.
-```{r}
-band_members %>% left_join(band_instruments)
-```
-
-
-
-## Right join
-With a right join, we keep all rows from the right data frame and only the matching rows from the left data frame. If there is no match, the result will contain `NA` for the columns from the left data frame.
-```{r}
-band_members %>% right_join(band_instruments)
-```
-
-
-## Full join
-With a full join, we keep all rows from both data frames. If there is no match, the result will contain `NA` for the columns from the other data frame.
-```{r}
-band_members %>% full_join(band_instruments)
-```
-
 ## Modeling in `R`
 To model objects based on other objects, we use `~` (tilde)
 
@@ -397,17 +362,15 @@ stata_data %$%
 ---
 
 ## Tibbles vs data.frames
-Tibbles are a modern reimagining of data frames in R. They are part of the `tidyverse` and provide a more user-friendly interface for working with data.
+Tibbles are a modern re-imagining of data frames in R. They are part of the `tidyverse` and provide a more user-friendly interface for working with data.
 
 ```{r, paged.print=FALSE}
 is_tibble(band_members)
-band_members %>% 
-  full_join(band_instruments)
+band_members 
 ```
 
 ```{r, paged.print=FALSE}
 band_members %>% 
-  full_join(band_instruments) %>% 
   as.data.frame()
 ```
 
