@@ -1,4 +1,4 @@
-# Data visualisatie {#sec-mt7}
+# Data Visualisatie {#sec-mt7}
 
 ---
 author: 

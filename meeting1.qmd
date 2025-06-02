@@ -216,7 +216,7 @@ My name is `r name` and I am `r age` years old. It is `r birthday - today` days 
 3.  Knit the document using `Render` and look at the result. It should look like this, but then with your own name, country etc.: **My name is `r name` and I am `r age` years old. It is `r birthday - today` days until my birthday.**
 :::
 
-## Practical part 2
+## Practical 2
 
 ## Exercise 1-5
 

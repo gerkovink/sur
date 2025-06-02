@@ -1,4 +1,19 @@
 # Functioneel Programmeren {#sec-mt5}
+---
+author: 
+  - name: "Gerko Vink"
+    orcid: "0000-0001-9767-1924"
+    email: g.vink@uu.nl
+    affiliations:
+      - name: Methodology & Statistics @ Utrecht University
+format:
+  html:
+    highlight-style: github
+    number-sections: false
+    toc: true
+    toc-depth: 3
+    code_folding: hide
+---
 
 ::: callout-tip
 ## Hoorcollege 9 juni 2025

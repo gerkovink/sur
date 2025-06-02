@@ -126,7 +126,7 @@ Packages are to `R` what apps are on your mobile phone.
 * Each time you want to use the package, you have to **load** (activate) it.
 
 
-## Opening and closing packages 
+### Opening and closing packages 
 
 To **load** a package use the following code (similar to opening an app on your phone):
 
@@ -260,7 +260,7 @@ Here are the common signs to use in arithmetic:
 
 ## Assignment operator
 
-In reading materials you have learned about the `<-` **assignment operator**.
+If you have used `R` before, you know the `<-` **assignment operator**.
 
 Here `x` is assigned the value `8`
 
@@ -270,7 +270,7 @@ x <- 8
 
 If you run this code:
 
--   a new value will be saved in your work space (piece of memory)
+-   a new value will be saved in your work space (uses computer memory!)
 -   In the environment pane, the tab "Environment", you will see `x` under "Values" followed by 8
 
 ![](img/l1/EnvironmentPaneValues.png){width="80%"}
@@ -311,11 +311,12 @@ The most commonly used objects are:
 
 ## Vector
 
-A vector is a list of values (data). The simplest object in R is a vector with one element:
+A vector is a concatenation of values (data). The simplest object in R is a vector with one element:
 
 ```{r}
 x <- 8 
 ```
+
 
 ## Vector generating functions
 
@@ -345,7 +346,7 @@ rep(1:5, times = 2)
 
 ## Classes
 
-Vectors (and othe R objects) can contain different data types (classes)
+Vectors (and other `R` objects) can contain be of data types (classes)
 
 **Numeric**
 
@@ -360,6 +361,8 @@ class(v)
 char <- c("cat", "dog")
 typeof(char)
 ```
+
+A vector can only be of *one* class. If you combine different classes, R will convert them to the most general class.
 
 ## Classes
 

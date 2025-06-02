@@ -127,7 +127,9 @@ De student haalt deze module met een cijfer van 5.5 of meer. Indien een student 
 
 ## Collegemateriaal
 
--	Collegeslides, gepubliceerd op www.gerkovink.com/sur
--	Wickham, H., Çetinkaya-Rundel, M., & Grolemund, G. (2023, 2nd edition). R for data science. " O'Reilly Media, Inc.”. Open Access Book freely available from https://r4ds.hadley.nz/.
--	James, G., Witten, D., Hastie, T., & Tibshirani, R. (2023, 2nd edition, corrected print). An introduction to statistical learning with applications in R. New York: springer. Open Access Book freely available from https://www.statlearning.com/
--	Van Buuren, S. (2018). Flexible Imputation of Missing Data. CRC Press. Book freely available from https://stefvanbuuren.name/fimd/ 
+- Collegeslides, gepubliceerd Moodle en op www.gerkovink.com/sur 
+- Wickham, H., Çetinkaya-Rundel, M., & Grolemund, G. (2023, 2nd edition). R for data science. " O'Reilly Media, Inc.”. Open Access Book freely available from [https://r4ds.hadley.nz/](https://r4ds.hadley.nz/)
+- Wickham, H. (2019). Advanced R. Chapman and Hall/CRC. Open Access Book freely available from [https://adv-r.hadley.nz](https://adv-r.hadley.nz) 
+- James, G., Witten, D., Hastie, T., & Tibshirani, R. (2023, 2nd edition, corrected print). An introduction to statistical learning with applications in R. New York: springer. Open Access Book freely available from [https://www.statlearning.com/](https://www.statlearning.com/)
+- Van Buuren, S. (2018). Flexible Imputation of Missing Data. CRC Press. Book freely available from [https://stefvanbuuren.name/fimd/](https://stefvanbuuren.name/fimd/) 
+- Een selectie van relevante en vrij beschikbare open source materialen 

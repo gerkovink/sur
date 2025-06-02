@@ -1,4 +1,4 @@
-# Ontwikkelen en programmeren in R {#sec-mt8}
+# Ontwikkelen en Programmeren in R {#sec-mt8}
 
 ::: callout-tip
 ## Hoorcollege 13 juni 2025

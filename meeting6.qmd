@@ -1,4 +1,4 @@
-# Geavanceerde data technieken {#sec-mt6}
+# Geavanceerde Data Technieken {#sec-mt6}
 
 ::: callout-tip
 ## Hoorcollege 10 juni 2025
