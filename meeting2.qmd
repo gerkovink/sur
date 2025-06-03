@@ -20,7 +20,291 @@ format:
 Vandaag gaan we dwars door `R` heen om ons snel bekend te maken met de onderliggende machinery van het systeem. We gaan leren hoe je data inleest in `R`, hoe je het exporteert en hoe je de data gaafmaakt voor verdere analyse. In de breedste zin zullen we vandaag al leren hoe je op een efficiente wijze dwars door environments, frames en data containers heen kunt gaan om uiteindelijk de data op een juiste manier te managen. De slides voor het hoorcollege kun u [hier vinden](slides/lec-2.html) 
 :::
 
-## Practical 1: Data Management
+Vandaag beginnen we met het overgebleven deel van het werkcollege van gisteren. Als je het werkcollege van gisteren al hebt afgerond, dan kun je Practical 1 van vandaag overslaan en direct beginnen met Practical 2 en het extra practical doen.
+
+---
+
+## Practical 1
+
+### Exercise 1-5
+
+---
+
+ 1. **Make two vectors: one named `vec1` with values 1 through 6 and one named `vec2` with letters A through F. **
+```{r}
+vec1 <- c(1, 2, 3, 4, 5, 6)
+vec2 <- c("A", "B", "C", "D", "E", "F")
+```
+
+To create a vector we used `c()`, which stands for 'concatenation'. It is just a series of numbers or letters. 
+
+---
+
+ 2. **Create two matrices, one from `vec1` and one from `vec2`. The dimensions for both matrices are 3 rows by 2 columns. **
+
+```{r}
+mat1 <- matrix(vec1, nrow = 3, ncol = 2)
+mat2 <- matrix(vec2, nrow = 3, ncol = 2)
+```
+
+To create a matrix we used `matrix()`. For a matrix we need to specify the dimensions (in this case 3 rows and 2 columns) and the input (in this case `vec1` or `vec2`) needs to match these dimensions. 
+
+---
+
+3. **Inspect your vectors and matrices. Are all numerical?**
+
+```{r}
+vec1
+vec2
+mat1
+mat2
+```
+
+`vec1` and `mat1` contain numbers and `vec2` and `mat2` contain characters. 
+
+---
+
+ 4. **Make a matrix from both `vec1` and `vec2` with 6 rows and 2 columns. Inspect this matrix.**
+
+```{r}
+mat3 <- matrix(c(vec1, vec2), 6, 2)
+mat3
+```
+or
+```{r}
+mat3b <- cbind(vec1, vec2)
+is.matrix(mat3b)
+mat3b
+```
+
+If one or more elements in the matrix represent characters, all other elements are also converted to characters. A matrix is just for either numeric or character elements. Notice that the second approach (the column bind approach from `mat3b`) returns a matrix where the column names are already set to the name of the bound objects. 
+
+To solve the problem of charactered numbers we can create a dataframe. A dataframe is essentially a matrix that allows for character elements. The use of a dataframe is often preferred over the use of a matrix in `R`, except for purposes where pure numerical calculations are done, such as in matrix algebra. However, most datasets do contain character information and a dataframe would normally be your preferred choice when working with your own collected datasets in R. 
+
+---
+
+5. **Make a dataframe called `dat3` where `vec1` and `vec2` are both columns. Name the columns `V1` and `V2`, respectively. Use function `data.frame()`.**
+
+```{r}
+dat3 <- data.frame(V1 = vec1, V2 = vec2)
+dat3
+```
+
+---
+
+### Exercise 6-10
+
+---
+
+6. **Again, make a dataframe called `dat3b` where `vec1` and `vec2` are both columns. Name the columns `V1` and `V2`, respectively. Use function `as.data.frame()` on the matrix obtained from `Question 4`. **
+
+This is a tricky situation. At face value, everything may seem to be in order. But, be aware that the code
+```{r}
+dat3b <- as.data.frame(mat3, stringsAsFactors = TRUE)
+dat3b
+```
+does not work properly (at least not as intended) as the matrix nature of `mat3` turned everything into a character value and you have lost the numerical nature of `vec1`. It may appear to be working, but if we check if column 1 is numerical, it turns out not to be the case. 
+
+---
+
+7. **Check if the first column in the data frames from Question 4 and Question 5 are indeed numeric. If not, determine what they are. **
+
+```{r}
+is.numeric(dat3[, 1])
+is.numeric(dat3b[, 1])
+```
+The first column in matrix `dat3b` obtained from Question 5 is indeed not numeric. As a matter of fact, it is also not a character variable.
+```{r}
+is.character(dat3b[, 1])
+```
+Rather tricky; the function `as.data.frame()` has converted the first variable to a factor. 
+```{r}
+is.factor(dat3b[, 1])
+```
+This is due to us not specifying the variable correctly in the matrix we used to create the dataframe. Factors are categorical variables that are depicted by numbers. Character vectors are not converted to factors in data frames by default, but the argument `stringsAsFactors = TRUE` has resulted in this conversion. I forced this to prove a point: You now know that there is a distinction between characters and factors and you know hot to force this conversion to factors in a data frame. 
+
+---
+
+8. **Select 1) the third row, 2) the second column and 3) the intersection of these two in the dataframe `dat3` that you have created in Question 4. **
+```{r}
+dat3[3, ] #3rd row
+dat3[, 2] #2nd column
+dat3$V2   #also 2nd column
+dat3[3,2] #intersection
+```
+
+The `[3,2]` index is very useful in 'R'. The first number (before the comma) represents the row and the second number (after the comma) represents the column. For a vector there are no two dimensions and only one dimension can be called. For example, `vec1[3]` would yield `3`. Try it. 
+
+Columns can also be called by the `$` sign, but only if a name has been assigned. With dataframes assigning names happens automatically. 
+
+Note that `R` automatically reports the values the character column can take. This means that the column is indeed a factor (a categorical variable - as it is supposed to be). A useful function to inspect the structure of a dataframe is `str()`. Try running it. 
+
+```{r}
+str(dat3)
+```
+
+Inspecting the structure of your data is vital, as you probably have imported your data from some other source. If we, at a later stage, start analyzing our data without the correct measurement level, we may run into problems. One problem that often occurs is that categorical variables (factors in `R`) are not coded as such. 
+
+---
+
+9. **Imagine that the first variable `V1` in our dataframe `dat3` is not coded correctly, but actually represents grouping information about cities. Convert the variable to a factor and add the labels Utrecht, New York, London, Singapore, Rome and Cape Town.** 
+```{r}
+dat3$V1 <- factor(dat3$V1, labels = c("Utrecht", "New York", "London", "Singapore", "Rome", "Capetown"))
+dat3
+```
+
+---
+
+## Practical 2: Pipes
+
+We need the following packages for this part:
+```{r}
+library(dplyr)    # for data manipulation
+library(magrittr) # for flexible pipes
+library(haven)    # for importing SPSS and Stata data
+library(mice)     # for the boys data
+```
+
+
+---
+
+0. **Read in the SPSS and Stata data sets that are provided on Moodle. Place them in the Project folder of this practical. Use the functions `read_sav()` and `read_dta()` from package `haven`. **
+
+```{r echo=FALSE}
+# Import the SPSS data set
+spss_data <- read_sav("moodle/data/SUR_2023_LAPOP_AmericasBarometer_v1.0_w_orginal.sav")
+# Import the Stata data set
+stata_data <- read_dta("moodle/data/03-poverty-analysis-data-2022-rt001-housing-plus.dta")
+```
+
+```{r eval=FALSE}
+library(haven) # for importing SPSS and Stata data
+# Import the SPSS data set
+spss_data <- read_sav("SUR_2023_LAPOP_AmericasBarometer_v1.0_w_orginal.sav")
+# Import the Stata data set
+stata_data <- read_dta("03-poverty-analysis-data-2022-rt001-housing-plus.dta")
+```
+
+---
+
+1. **Use a pipe to do the following:**
+
+- draw 1000 values from a normal distribution with `mean = 5` and `sd = 1` - $N(5, 1)$, 
+- create a matrix where the first 500 values are the first column and the second 500 values are the second column **
+- make a scatterplot of these two columns
+
+If you'd like the same results as I have obtained, you can fix the random seed
+```{r}
+set.seed(123)
+```
+
+```{r}
+rnorm(1000, 5) %>%
+  matrix(ncol = 2) %>%
+  plot()
+```
+
+
+---
+
+2. **On the `03-poverty-analysis-data-2022-rt001-housing-plus.dta`: Use a pipe to calculate the correlation matrix on the continuous variables that start with `q13`. Round the result to two decimal places.**
+
+```{r}
+stata_data %>% 
+  as_factor() %>% # first make sure that factors are factors
+  select(where(is.numeric)) %>% # select only numeric variables
+  select(starts_with("q13")) %>% # select only variables that start with q13
+  cor(use = "pairwise.complete.obs") %>% # use all info from complete pairs
+  round(2) # round to two decimal places
+```
+
+---
+
+3. **Now use a pipe to calculate the correlation for the pair (`x4`, `y4`) on the `anscombe` data set**
+
+Using the standard `%>%` pipe:
+```{r}
+anscombe %>%
+  subset(select = c(x4, y4)) %>%
+  cor()
+```
+Alternatively, we can use the `%$%` pipe from package `magrittr` to make this process much more efficient.
+```{r}
+anscombe %$%
+  cor(x4, y4)
+```
+
+---
+
+4. **Have a look at the `boys` data set from package `mice` (don't forget to `library(mice)`). Use a pipe to calculate the correlation between `hgt` and `wgt` in the `boys` data set from package `mice`.**
+
+Because `boys` has missing values for almost all variables, we must first select `wgt` and `hgt` and then omit the rows that have missing values, before we can calculate the correlation. Using the standard `%>%` pipe, this would look like:
+```{r}
+mice::boys %>% # mice::boys tells us that boys comes from package mice
+  select(wgt, hgt) %>%
+  cor(use = "pairwise.complete.obs")
+```
+which - because there are only two variables - is equivalent to 
+```{r}
+boys %>%
+  select(wgt, hgt) %>%
+  na.omit() %>%
+  cor()
+```
+
+Alternatively, we can use the `%$%` pipe:
+```{r}
+boys %$% 
+  cor(hgt, wgt, use = "pairwise.complete.obs")
+```
+The `%$%` pipe *unfolds* the listed dimensions of the `boys` data set, such that we can refer to them directly. 
+
+---
+
+5. **In the `boys` data set, `hgt` is recorded in centimeters. Use a pipe to transform `hgt` in the `boys` dataset to height in meters and verify the transformation by calculating the mean of `hgt`**
+
+Using the standard `%>%` and the `%$%` pipes:
+```{r}
+boys %>%
+  mutate(hgt = hgt / 100) %$% # transform centimeters to meters
+  mean(hgt, na.rm = TRUE) # verify that indeed it is now in meters
+```
+ 
+---
+
+6. **Use a pipe to filter all rows in the `boys` data set where `hgt` is larger than 1.5 meters and `wgt` is larger than 50 kg. How many rows are there in the subset? And how many rows did you exclude?**
+
+Let's first make a subset of the `boys` data without the excluded rows
+```{r}
+boys_subset <- 
+  boys %>%
+  filter(hgt > 1.5, wgt > 50) # filter rows where hgt > 1.5 and wgt > 50
+```
+
+The subset has `r nrow(boys_subset)` rows:
+```{r}
+boys_subset %>% 
+  nrow()
+```
+
+The original `boys` data had `r nrow(boys)` rows. this means that `748 - 263 =``r nrow(boys) - nrow(boys_subset)` rows have been excluded.
+```{r}
+boys %>% 
+  nrow()
+```
+
+
+---
+
+### Useful References for Practical 2
+
+- [`magrittr`](https://magrittr.tidyverse.org)
+- [`R` for Data Science](http://r4ds.had.co.nz) - [Chapter 18 on pipes](http://r4ds.had.co.nz/pipes.html)
+
+
+---
+
+## Extra Practical: Data Management
 Begin this practical exercise by setting the maximum line length in `R-Studio` to 80 characters. Go to `RStudio`'s `Preferences` (or `Global Options` under `Tools`) --> `Code` --> `Display`, and tick the `show margin` box. Make sure that the `margin column` is set to `80`
 
 The following packages are required for this practical:
@@ -219,126 +503,9 @@ If your current software-analysis platform is different from `R`, chances are th
 
 ---
 
-11. **Read in the SPSS and Stata data sets that are provided on Moodle. Place them in the Project folder of this practical. Use the functions `read_sav()` and `read_dta()` from package `haven`. **
-
-```{r echo=FALSE}
-# Import the SPSS data set
-spss_data <- read_sav("moodle/data/SUR_2023_LAPOP_AmericasBarometer_v1.0_w_orginal.sav")
-# Import the Stata data set
-stata_data <- read_dta("moodle/data/03-poverty-analysis-data-2022-rt001-housing-plus.dta")
-```
-
-```{r eval=FALSE}
-library(haven) # for importing SPSS and Stata data
-# Import the SPSS data set
-spss_data <- read_sav("SUR_2023_LAPOP_AmericasBarometer_v1.0_w_orginal.sav")
-# Import the Stata data set
-stata_data <- read_dta("03-poverty-analysis-data-2022-rt001-housing-plus.dta")
-```
-
-
-### Useful links for Practical 1
+### Useful links for the Extra Practical
 
 - [`Package haven`](https://haven.tidyverse.org/index.html) for importing/exporting `SPSS`, `SAS` and `STATA` data.
-
----
-
-## Practical 2: Pipes
-Don't throw away the imported data sets from 
-
----
-
-If you'd like the same results as I have obtained, you can fix the random seed
-```{r}
-set.seed(123)
-```
-
----
-
-1. **Use a pipe to do the following:**
-
-- draw 1000 values from a normal distribution with `mean = 5` and `sd = 1` - $N(5, 1)$, 
-- create a matrix where the first 500 values are the first column and the second 500 values are the second column **
-- make a scatterplot of these two columns
-```{r}
-rnorm(1000, 5) %>%
-  matrix(ncol = 2) %>%
-  plot()
-```
-
-
----
-
-2. **On the `03-poverty-analysis-data-2022-rt001-housing-plus.dta`: Use a pipe to calculate the correlation matrix on the continuous variables that start with `q13`. Round the result to two decimal places.**
-
-```{r}
-stata_data %>% 
-  as_factor() %>% # first make sure that factors are factors
-  select(where(is.numeric)) %>% # select only numeric variables
-  select(starts_with("q13")) %>% # select only variables that start with q13
-  cor(use = "pairwise.complete.obs") %>% # use all info from complete pairs
-  round(2) # round to two decimal places
-```
-
----
-
-3. **Now use a pipe to calculate the correlation for the pair (`x4`, `y4`) on the `anscombe` data set**
-
-Using the standard `%>%` pipe:
-```{r}
-anscombe %>%
-  subset(select = c(x4, y4)) %>%
-  cor()
-```
-Alternatively, we can use the `%$%` pipe from package `magrittr` to make this process much more efficient.
-```{r}
-anscombe %$%
-  cor(x4, y4)
-```
-
----
-
-4. **Have a look at the `boys` data set from package `mice`. Use a pipe to calculate the correlation between `hgt` and `wgt` in the `boys` data set from package `mice`.**
-
-Because `boys` has missing values for almost all variables, we must first select `wgt` and `hgt` and then omit the rows that have missing values, before we can calculate the correlation. Using the standard `%>%` pipe, this would look like:
-```{r}
-boys %>%
-  subset(select = c("wgt", "hgt")) %>%
-  cor(use = "pairwise.complete.obs")
-```
-which is equivalent to 
-```{r}
-boys %>%
-  subset(select = c("wgt", "hgt")) %>%
-  na.omit() %>%
-  cor()
-```
-
-Alternatively, we can use the `%$%` pipe:
-```{r}
-boys %$% 
-  cor(hgt, wgt, use = "pairwise.complete.obs")
-```
-The `%$%` pipe *unfolds* the listed dimensions of the `boys` data set, such that we can refer to them directly. 
-
----
-
-5. **In the `boys` data set, `hgt` is recorded in centimeters. Use a pipe to transform `hgt` in the `boys` dataset to height in meters and verify the transformation**
-
-Using the standard `%>%` and the `%$%` pipes:
-```{r}
-boys %>%
-  transform(hgt = hgt / 100) %$% # transform centimeters to meters
-  mean(hgt, na.rm = TRUE) # verify that indeed it is now in meters
-```
- 
----
-
-### Useful References for Practical 2
-
-- [`magrittr`](https://magrittr.tidyverse.org)
-- [`R` for Data Science](http://r4ds.had.co.nz) - [Chapter 18 on pipes](http://r4ds.had.co.nz/pipes.html)
-
 
 ---
 

@@ -46,7 +46,7 @@ Download the **`dplyr` cheat sheet**  [here](https://rstudio.github.io/cheatshee
 
 The Mammals Sleep data set[^msleep] contains the sleep times and weights for a set of mammals. This data set contains 83 rows (the animals) and 11 variables (the characteristics of the animals). 
 
-Be sure to place the data set [`msleep.csv`](documents/mt3/msleep.csv) in **the same folder as the R Markdown template you are working on**. Use the function `read_csv` from the `readr` package to import the data and save it as `msleep` (using the assignment `<-` operator).
+Be sure to place the data set [`msleep.csv`](documents/mt3/msleep.csv) in **the same folder as the RStudio Project you are working on**. Use the function `read_csv` from the `readr` package to import the data and save it as `msleep` (using the assignment `<-` operator).
 
 ```{r echo=FALSE}
 msleep <- readr::read_csv("documents/mt3/msleep.csv")

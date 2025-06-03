@@ -1,6 +1,6 @@
 ---
 title: "Data manipulation"
-subtitle: "`tidyverse`, importing data"
+subtitle: "`tidyverse`, grouping and formulas"
 author: 
   - name: Gerko Vink
     orcid: 0000-0001-9767-1924
@@ -56,12 +56,27 @@ You **may use** any and all content in this presentation - including my name - a
 
 ## Recap
 
-Yesterday we have learned:
+Gisteren hebben we deze onderwerpen behandeld:
+
+- Importeren en bestuderen van datasets
+- Begrijpen en toepassen van verschillende datatypes en database
+formats
+- Variabelen labelen en (her)coderen
+- De blauwdruk van R: frames en environments
+- Pipes
+- Formules gebruiken in functies
 
 
 
 ## Today
-Today we will learn how to:
+Vandaag leren we:
+
+- Het combineren van datasets
+- Groeperen en aggregeren
+- Nieuwe variabelen creëren
+- Filteren en sorteren van gegevens
+- Het maken en aanpassen van datagroepen
+- Clustering van gegevens
 
 ```{r include=FALSE}
 knitr::opts_chunk$set(message = FALSE, comment = "")
@@ -97,6 +112,8 @@ planets <- data.frame(planet_type = factor(planet_type), diameter, rotation, rin
 ```
 
 
+# Datasets combineren
+
 ## Joining data
 ```{r}
 band_members
@@ -130,16 +147,6 @@ With a full join, we keep all rows from both data frames. If there is no match, 
 ```{r}
 band_members %>% full_join(band_instruments)
 ```
-
-## Topics of this lecture
-
-The `tidyverse` packages 
-
-* `dplyr` package
-* pipe operator `%>%`
-* standard solves for missing data
-
-Importing data
 
 
 # The tidyverse packages
@@ -525,166 +532,6 @@ data%>%dplyr::group_by(X)%>%dplyr::filter(Y>4)%>%dplyr::summarise(mean(Y))
 ## More about coding style: `tidyverse` style guide
 
 https://style.tidyverse.org/index.html
-
-
-
-
-# Linear regression
-
-
-## Linear Model
-
-The linear regression model:
-
-$$y_i=\beta_0+\sum_{j}\beta_{j} x_{ij}+\varepsilon_i, \ \ \ \ \ \  \varepsilon_i\sim N(0, \sigma^2)$$
-where
-
-- $y_i$ is score of individual $i$ on the numeric dependent variable $Y$
-
-- $x_{ij}$ is the score of individual $i$ on predictor $X_j$  
-
-- $\beta_0$ is the intercept 
-
-- $\beta_j$ is the slope of $X_j$
-
-- $\varepsilon_{i}$ is the residual (prediction error)
-
-
-## The `lm()` function
-
-```{r eval = FALSE}
-lm(formula, data) # returns an object of class lm
-```
-
-formula        | model
-:--------------|--------------------------
-`y ~ 1`        | intercept-only
-`y ~ x1`       | main effect of x1
-`y ~ x1 + x2`  | main effects of x1, x2
-`y ~ .`        | main effects of all predictors
-`y ~ . - x1`   | main effects of all predictors except x1
-`y ~ x1 + x2 + x1:x2`    | main effects + interaction between x1 and x2
-`y ~ x1*x2`    | idem
-`y ~ .^2`      | main effects + pairwise interactions between all predictors
-
-
-# Simple regression 
-
-## Continuous predictor
-
-
-- observed = fitted + residual
-
-$$y_i=\hat{y}_i+\varepsilon_i$$
-- fitted = intercept + slope times x
-
-$$\hat{y}_i=\beta_0 + \beta_1x_i$$
-
-<br>
-
-- fitted changes with $\beta_1$ for each unit increase in $x$
-
-## Regression line for `mpg ~ disp`
-
-```{r message = FALSE}
-ggplot(mtcars, aes(disp, mpg)) + 
-  geom_point() +
-  xlim(0, 500) +
-  geom_smooth(method = "lm", se = FALSE, fullrange=T)
-```
-
-## Coefficients
-
-Interpretation of the parameter estimates.
-
-```{r}
-fit <- lm(mpg ~ disp, mtcars)
-```
-
-## Structure of `lm` object
-
-```{r}
-str(fit)
-```
-
-## Summary of `lm` object 
-
-```{r}
-summary(fit)
-```
-
-## Structure summary `lm` object
-
-```{r}
-str(summary(fit))
-```
-
-
-## Extracting  `lm` list elements:
-
-
-Function / Subsetting        | Output
------------------------------|-------------------------
-`coef(fit) / fit$coef`       | coefficients
-`fitted(fit) / fit$fitted`   | fitted values
-`resid(fit) / fit$resid`     | residuals
-`summary(fit)$r.squared`     | R-squared statistic
-
-```{r collapse = T}
-fit$coef
-summary(fit)$r.squared
-```
-
-
-
-# Categorical predictor 
-
-
-## Dummy variables
-
-Categorical predictors are converted into dummy variables: 
-
-- each category has a dummy with value 1 for that category, and 0 otherwise
-
-- except for the reference category  (0 on all dummies)
-
-- all categories are compared to the reference category
-
-
-
-```{r echo = FALSE, out.width = "70%", fig.cap = "Reference category of $z$ is $a$", fig.align = "center"}
-knitr::include_graphics("img/lec-3/dummies.png")
-```
-
-
-## Interpreting dummies
-
-Model for categorical $Z$ with categories $a, b, c$:
-
-$$\hat{y}=\beta_0+\beta_1zb+\beta_2zc$$
-
-<br>
-
-parameters        | interpretation
-------------------|---------------
-$\beta_0$         | predicted mean category $a$ (reference category)
-$\beta_0+\beta_1$ | predicted mean category $b$
-$\beta_0+\beta_2$ | predicted mean category $c$
-
-
-
-## Example
-
-Interpret the parameter estimates of model `mpg ~ factor(am)` 
-
-- `am = 0` is  automatic and `am = 1` is manual transmission
-
-- reference category is `am = 0`
-
-
-```{r}
-coef(lm(mpg ~ factor(am), mtcars))
-```
 
 # Practical
 
