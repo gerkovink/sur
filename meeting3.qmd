@@ -432,7 +432,6 @@ msleep4 <- dplyr::filter(msleep, !msleep$name %in% exclude) # ! makes all TRUES 
 
 ```
 
-
 ### Close the project
 
 Close the RStudio Project using the option you prefer.
