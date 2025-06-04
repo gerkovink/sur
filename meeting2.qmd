@@ -56,7 +56,6 @@ To create a matrix we used `matrix()`. For a matrix we need to specify the dimen
 3. **Inspect your vectors and matrices. Are all numerical?**
 
 ```{r}
-#| code-fold: false
 vec1
 vec2
 mat1
@@ -193,7 +192,7 @@ stata_data <- read_dta("03-poverty-analysis-data-2022-rt001-housing-plus.dta")
 1. **Use a pipe to do the following:**
 
 - draw 1000 values from a normal distribution with `mean = 5` and `sd = 1` - $N(5, 1)$, 
-- create a matrix where the first 500 values are the first column and the second 500 values are the second column **
+- create a matrix where the first 500 values are the first column and the second 500 values are the second column
 - make a scatterplot of these two columns
 
 If you'd like the same results as I have obtained, you can fix the random seed
@@ -221,6 +220,7 @@ cor_stata <- stata_data %>%
 # which is the maximum correlation in the correlation matrix?
 # first, set the diagonal to zero -> these values are all 1
 diag(cor_stata) <- 0
+cor_stata[cor_stata == 1 | cor_stata == -1] <- NA # set 1 and -1 to NA, as these are not interesting
 # calculate the maximum correlation
 max_cor_value <- max(cor_stata, na.rm = TRUE) # there are NAs in cor_stata
 which_max <- which(cor_stata == max_cor_value, 
@@ -228,15 +228,15 @@ which_max <- which(cor_stata == max_cor_value,
 which_max
 ```
 
-We can see that the pairs `fortnight, hhid` and `CPI_2017_22, CPI_june2022` have the highest correlation of `1`. 
+We can see that the pairs `fortnight, hhid` and `CPI_2017_22, CPI_june2022` have the highest correlation of `r stata_data %$% cor(fortnight, hhid)`. 
 
 ```{r}
 stata_data %>% 
-  select(CPI_2017_22, CPI_june2022) %>% 
+  select(fortnight, hhid) %>% 
   cor(use = "pairwise.complete.obs")
 ```
 
-This is because the values in CPI_2017_22 and CPI_june2022 are (near) constant.
+
 
 ::: callout-tip
 ## Sneak peek for tomorrow

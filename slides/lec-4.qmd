@@ -71,15 +71,37 @@ Vandaag behandelen we de volgende onderwerpen:
 
 ##  We use the following packages
 ```{r message=FALSE}
-library(MASS)
-library(dplyr)
-library(magrittr)
-library(ggplot2)
-library(mice)
-library(DAAG)
-library(car)
+library(tidyverse) # data manipulation and visualization
+library(psych) # descriptive statistics
+library(mice) # for the boys data
 
 set.seed(123)
+```
+
+## Packages we use today
+```{r}
+library(mice)  # for the boys data
+```
+
+
+# Beschrijvende statistiek
+
+## `psych::describe()`
+Yesterday we already used the `describe()` function from package `psych`
+```{r}
+boys %>% psych::describe()
+```
+## `summary()`
+The `summary()` function is a base R function that provides a summary of the data. It is a very useful function for quick inspection of variables
+```{r}
+boys %>% summary()
+```
+
+## `summary()` only on the non-numeric columns
+To perform summary only on the non-numeric columns in the `boys` data set, we can use all of the skills we have learned so far:
+```{r}
+boys %>% 
+  select(where(is.numeric))
 ```
 
 # Linear regression

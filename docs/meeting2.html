@@ -595,7 +595,7 @@ Attaching package: 'mice'</code></pre>
 </ol>
 <ul>
 <li>draw 1000 values from a normal distribution with <code>mean = 5</code> and <code>sd = 1</code> - <span class="math inline">\(N(5, 1)\)</span>,</li>
-<li>create a matrix where the first 500 values are the first column and the second 500 values are the second column **</li>
+<li>create a matrix where the first 500 values are the first column and the second 500 values are the second column</li>
 <li>make a scatterplot of these two columns</li>
 </ul>
 <p>If you’d like the same results as I have obtained, you can fix the random seed</p>
@@ -630,29 +630,29 @@ zero</code></pre>
 <div class="sourceCode cell-code" id="cb54"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="co"># which is the maximum correlation in the correlation matrix?</span></span>
 <span id="cb54-2"><a href="#cb54-2" aria-hidden="true" tabindex="-1"></a><span class="co"># first, set the diagonal to zero -&gt; these values are all 1</span></span>
 <span id="cb54-3"><a href="#cb54-3" aria-hidden="true" tabindex="-1"></a><span class="fu">diag</span>(cor_stata) <span class="ot">&lt;-</span> <span class="dv">0</span></span>
-<span id="cb54-4"><a href="#cb54-4" aria-hidden="true" tabindex="-1"></a><span class="co"># calculate the maximum correlation</span></span>
-<span id="cb54-5"><a href="#cb54-5" aria-hidden="true" tabindex="-1"></a>max_cor_value <span class="ot">&lt;-</span> <span class="fu">max</span>(cor_stata, <span class="at">na.rm =</span> <span class="cn">TRUE</span>) <span class="co"># there are NAs in cor_stata</span></span>
-<span id="cb54-6"><a href="#cb54-6" aria-hidden="true" tabindex="-1"></a>which_max <span class="ot">&lt;-</span> <span class="fu">which</span>(cor_stata <span class="sc">==</span> max_cor_value, </span>
-<span id="cb54-7"><a href="#cb54-7" aria-hidden="true" tabindex="-1"></a>                   <span class="at">arr.ind =</span> <span class="cn">TRUE</span>) <span class="co"># get the indices of rows and columns</span></span>
-<span id="cb54-8"><a href="#cb54-8" aria-hidden="true" tabindex="-1"></a>which_max</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb54-4"><a href="#cb54-4" aria-hidden="true" tabindex="-1"></a>cor_stata[cor_stata <span class="sc">==</span> <span class="dv">1</span> <span class="sc">|</span> cor_stata <span class="sc">==</span> <span class="sc">-</span><span class="dv">1</span>] <span class="ot">&lt;-</span> <span class="cn">NA</span> <span class="co"># set 1 and -1 to NA, as these are not interesting</span></span>
+<span id="cb54-5"><a href="#cb54-5" aria-hidden="true" tabindex="-1"></a><span class="co"># calculate the maximum correlation</span></span>
+<span id="cb54-6"><a href="#cb54-6" aria-hidden="true" tabindex="-1"></a>max_cor_value <span class="ot">&lt;-</span> <span class="fu">max</span>(cor_stata, <span class="at">na.rm =</span> <span class="cn">TRUE</span>) <span class="co"># there are NAs in cor_stata</span></span>
+<span id="cb54-7"><a href="#cb54-7" aria-hidden="true" tabindex="-1"></a>which_max <span class="ot">&lt;-</span> <span class="fu">which</span>(cor_stata <span class="sc">==</span> max_cor_value, </span>
+<span id="cb54-8"><a href="#cb54-8" aria-hidden="true" tabindex="-1"></a>                   <span class="at">arr.ind =</span> <span class="cn">TRUE</span>) <span class="co"># get the indices of rows and columns</span></span>
+<span id="cb54-9"><a href="#cb54-9" aria-hidden="true" tabindex="-1"></a>which_max</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>             row col
-CPI_2017_22   53  52
-CPI_june2022  52  53</code></pre>
+<pre><code>          row col
+fortnight   3   1
+hhid        1   3</code></pre>
 </div>
 </div>
-<p>We can see that the pairs <code>fortnight, hhid</code> and <code>CPI_2017_22, CPI_june2022</code> have the highest correlation of <code>1</code>.</p>
+<p>We can see that the pairs <code>fortnight, hhid</code> and <code>CPI_2017_22, CPI_june2022</code> have the highest correlation of 0.9996074.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb56"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a>stata_data <span class="sc">%&gt;%</span> </span>
-<span id="cb56-2"><a href="#cb56-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(CPI_2017_22, CPI_june2022) <span class="sc">%&gt;%</span> </span>
+<span id="cb56-2"><a href="#cb56-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(fortnight, hhid) <span class="sc">%&gt;%</span> </span>
 <span id="cb56-3"><a href="#cb56-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cor</span>(<span class="at">use =</span> <span class="st">"pairwise.complete.obs"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>             CPI_2017_22 CPI_june2022
-CPI_2017_22            1            1
-CPI_june2022           1            1</code></pre>
+<pre><code>          fortnight      hhid
+fortnight 1.0000000 0.9996074
+hhid      0.9996074 1.0000000</code></pre>
 </div>
 </div>
-<p>This is because the values in CPI_2017_22 and CPI_june2022 are (near) constant.</p>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">

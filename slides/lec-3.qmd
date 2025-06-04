@@ -247,7 +247,7 @@ Check the [`dplyr` cheat sheet](https://rstudio.github.io/cheatsheets/data-trans
 -   `str()` shows more detailed information about data structure.
 
 ```{r , echo=T, collapse=T}
-dplyr::glimpse(planets)
+glimpse(planets)
 str(planets)
 ```
 
@@ -255,35 +255,16 @@ str(planets)
 
 ## Compute new variables with `dplyr::mutate()`
 
-`dplyr::mutate()` adds a new variable to the data frame.
-
 ```{r include=T, echo=T, eval=F}
 data %>% 
   dplyr::mutate(..., .keep = c("all", ...), .before = NULL, .after = NULL)
 ```
 
 <br>
-
-*Arguments:*
-
-`.keep` specifies which variables to return, "all", "used", "unused", "none".
-
-`.before` or `.after` determine where the new variables are inserted.
-
-## Compute new variables with `dplyr::mutate()`
-
-```{r include=T, echo=T, eval=F}
-data %>% 
-  dplyr::mutate(..., .keep = c("all", ...), .before = NULL, .after = NULL)
-```
-
-<br>
-
-**Example**: compute a new variable `rotation_diameter = rotation/diameter`, add it to the data frame and keep all other variables:
 
 ```{r}
 planets %>% 
-  dplyr::mutate(rotation_diameter = rotation/diameter, .keep = "all") %>%
+  mutate(rotation_diameter = rotation/diameter, .keep = "all") %>%
   glimpse()
 ```
 
@@ -295,8 +276,7 @@ The pipe operations do not make changes to the original data set, unless you sav
 
 ```{r eval=FALSE}
 planets %>% 
-  dplyr::mutate(rotation_diameter = 
-                  rotation/diameter)
+  mutate(rotation_diameter = rotation/diameter)
 
 ```
 
@@ -308,10 +288,23 @@ names(planets)
 
 ```{r collapse=T}
 new_data_set <- planets %>% 
-  dplyr::mutate(rotation_diameter = 
-                  rotation/diameter) 
+  mutate(rotation_diameter = rotation/diameter) 
 names(new_data_set)
 ```
+
+## Remember the `%<>%` pipe?
+
+We could have used the `%<>%` pipe to save the changes to the original data frame directly:
+
+**Changes saved in new data frame:**
+
+```{r eval = FALSE, collapse=T}
+planets %<>% 
+  mutate(rotation_diameter = rotation/diameter) 
+names(new_data_set)
+```
+
+You should only do so if the intend is to overwrite the original set. 
 
 # Filtering and sorting
 
@@ -333,9 +326,9 @@ planets %>%
   select(where(is.numeric))
 ```
 
-## Select numeric columns with `dplyr::select()`
+## Select factor columns with `dplyr::select()`
 
-Select numerical variables with `where(is.numeric)`:
+Select numerical variables with `where(is.factor)`:
 
 ```{r}
 planets %>% 
@@ -560,7 +553,7 @@ data %>%
 but definitely NOT:
 
 ```{r include=T, echo=T, eval=F}
-data%>%dplyr::group_by(X)%>%dplyr::filter(Y>4)%>%dplyr::summarise(mean(Y))
+data%>%group_by(X)%>%filter(Y>4)%>%summarise(mean(Y))
 ```
 
 ## More about coding style: `tidyverse` style guide
