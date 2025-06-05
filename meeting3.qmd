@@ -102,7 +102,7 @@ summary(msleep)
 
 # Selecting columns with `dplyr::select()`
 
-### Select columns by name and save under a different name
+### Select columns by name 
 
 Use `dplyr::select()` to select two variables from `msleep`: the variables `name` and `sleep_total`.
 
@@ -168,11 +168,11 @@ The `dplyr::filter()` function allows to filter rows to include only those rows 
 ```{r}
 dplyr::filter(msleep, sleep_total >= 18)
 
-# 5 mammals sleep more than 18 hours.
+# 5 mammals sleep 18 hours or more
 ```
 ### Filter rows based on 2 selection rules
 
-Write code to filter the rows for mammals that sleep a total of more than 18 hours *and* have a body weight of greater than 1 kilogram. How many mammals match these criteria?
+Write code to filter the rows for mammals that sleep a total of 18 hours or more *and* have a body weight of greater than 1 kilogram. How many mammals match these criteria?
 
 ```{r}
 dplyr::filter(msleep, sleep_total >= 18, bodywt >= 1)
@@ -380,7 +380,7 @@ newdata2 <- newdata %>%
             sleep_total <= 6 ~ "short",
             sleep_total > 10  ~ "long",
             TRUE ~ "normal"),
- sleep_cat = factor(sleep_cat)       
+         sleep_cat = factor(sleep_cat)       
         )
 
 summary(newdata2$sleep_cat)
@@ -396,7 +396,7 @@ newdata3 <- msleep %>%
             vore == "insecti" ~ "carni",
             vore == "herbi" ~ "herbi",
             vore == "omni" ~ "omni"),
- vore_cat = factor(vore_cat)       
+         vore_cat = factor(vore_cat)       
         )
 
 summary(newdata3$vore_cat)

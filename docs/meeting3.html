@@ -240,7 +240,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </ul></li>
   <li><a href="#selecting-columns-with-dplyrselect" id="toc-selecting-columns-with-dplyrselect" class="nav-link" data-scroll-target="#selecting-columns-with-dplyrselect">Selecting columns with <code>dplyr::select()</code></a>
   <ul class="collapse">
-  <li><a href="#select-columns-by-name-and-save-under-a-different-name" id="toc-select-columns-by-name-and-save-under-a-different-name" class="nav-link" data-scroll-target="#select-columns-by-name-and-save-under-a-different-name">Select columns by name and save under a different name</a></li>
+  <li><a href="#select-columns-by-name" id="toc-select-columns-by-name" class="nav-link" data-scroll-target="#select-columns-by-name">Select columns by name</a></li>
   <li><a href="#select-columns-with-operators" id="toc-select-columns-with-operators" class="nav-link" data-scroll-target="#select-columns-with-operators">Select columns with operators</a></li>
   <li><a href="#select-a-range-of-columns" id="toc-select-a-range-of-columns" class="nav-link" data-scroll-target="#select-a-range-of-columns">Select a range of columns</a></li>
   <li><a href="#select-columns-based-on-letters" id="toc-select-columns-based-on-letters" class="nav-link" data-scroll-target="#select-columns-based-on-letters">Select columns based on letters</a></li>
@@ -510,8 +510,8 @@ $ bodywt       &lt;dbl&gt; 50.000, 0.480, 1.350, 0.019, 600.000, 3.850, 20.490, 
 </section>
 <section id="selecting-columns-with-dplyrselect" class="level1">
 <h1>Selecting columns with <code>dplyr::select()</code></h1>
-<section id="select-columns-by-name-and-save-under-a-different-name" class="level3">
-<h3 class="anchored" data-anchor-id="select-columns-by-name-and-save-under-a-different-name">Select columns by name and save under a different name</h3>
+<section id="select-columns-by-name" class="level3">
+<h3 class="anchored" data-anchor-id="select-columns-by-name">Select columns by name</h3>
 <p>Use <code>dplyr::select()</code> to select two variables from <code>msleep</code>: the variables <code>name</code> and <code>sleep_total</code>.</p>
 <div class="cell">
 <details class="code-fold">
@@ -671,13 +671,13 @@ $ bodywt       &lt;dbl&gt; 50.000, 0.480, 1.350, 0.019, 600.000, 3.850, 20.490, 
 </div>
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 5 mammals sleep more than 18 hours.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 5 mammals sleep 18 hours or more</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 </section>
 <section id="filter-rows-based-on-2-selection-rules" class="level3">
 <h3 class="anchored" data-anchor-id="filter-rows-based-on-2-selection-rules">Filter rows based on 2 selection rules</h3>
-<p>Write code to filter the rows for mammals that sleep a total of more than 18 hours <em>and</em> have a body weight of greater than 1 kilogram. How many mammals match these criteria?</p>
+<p>Write code to filter the rows for mammals that sleep a total of 18 hours or more <em>and</em> have a body weight of greater than 1 kilogram. How many mammals match these criteria?</p>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
@@ -1043,7 +1043,7 @@ F-statistic: 6.075 on 1 and 54 DF,  p-value: 0.01692</code></pre>
 <span id="cb56-3"><a href="#cb56-3" aria-hidden="true" tabindex="-1"></a>            sleep_total <span class="sc">&lt;=</span> <span class="dv">6</span> <span class="sc">~</span> <span class="st">"short"</span>,</span>
 <span id="cb56-4"><a href="#cb56-4" aria-hidden="true" tabindex="-1"></a>            sleep_total <span class="sc">&gt;</span> <span class="dv">10</span>  <span class="sc">~</span> <span class="st">"long"</span>,</span>
 <span id="cb56-5"><a href="#cb56-5" aria-hidden="true" tabindex="-1"></a>            <span class="cn">TRUE</span> <span class="sc">~</span> <span class="st">"normal"</span>),</span>
-<span id="cb56-6"><a href="#cb56-6" aria-hidden="true" tabindex="-1"></a> <span class="at">sleep_cat =</span> <span class="fu">factor</span>(sleep_cat)       </span>
+<span id="cb56-6"><a href="#cb56-6" aria-hidden="true" tabindex="-1"></a>         <span class="at">sleep_cat =</span> <span class="fu">factor</span>(sleep_cat)       </span>
 <span id="cb56-7"><a href="#cb56-7" aria-hidden="true" tabindex="-1"></a>        )</span>
 <span id="cb56-8"><a href="#cb56-8" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb56-9"><a href="#cb56-9" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(newdata2<span class="sc">$</span>sleep_cat)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1065,7 +1065,7 @@ F-statistic: 6.075 on 1 and 54 DF,  p-value: 0.01692</code></pre>
 <span id="cb58-4"><a href="#cb58-4" aria-hidden="true" tabindex="-1"></a>            vore <span class="sc">==</span> <span class="st">"insecti"</span> <span class="sc">~</span> <span class="st">"carni"</span>,</span>
 <span id="cb58-5"><a href="#cb58-5" aria-hidden="true" tabindex="-1"></a>            vore <span class="sc">==</span> <span class="st">"herbi"</span> <span class="sc">~</span> <span class="st">"herbi"</span>,</span>
 <span id="cb58-6"><a href="#cb58-6" aria-hidden="true" tabindex="-1"></a>            vore <span class="sc">==</span> <span class="st">"omni"</span> <span class="sc">~</span> <span class="st">"omni"</span>),</span>
-<span id="cb58-7"><a href="#cb58-7" aria-hidden="true" tabindex="-1"></a> <span class="at">vore_cat =</span> <span class="fu">factor</span>(vore_cat)       </span>
+<span id="cb58-7"><a href="#cb58-7" aria-hidden="true" tabindex="-1"></a>         <span class="at">vore_cat =</span> <span class="fu">factor</span>(vore_cat)       </span>
 <span id="cb58-8"><a href="#cb58-8" aria-hidden="true" tabindex="-1"></a>        )</span>
 <span id="cb58-9"><a href="#cb58-9" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb58-10"><a href="#cb58-10" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(newdata3<span class="sc">$</span>vore_cat)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
