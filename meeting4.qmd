@@ -133,7 +133,7 @@ With `par(mfrow = c(2, 2))` we set the plotting window to have 2 rows and 2 colu
 To revert to a single plotting window, you can use `par(mfrow = c(1, 1))` after the plots.
 
 ```{r}
-par(mfrow = c(1, 1)) # revert to single plotting window
+par(mfrow = c(1, 1)) # revert to single plotting window 
 ```
 
 
