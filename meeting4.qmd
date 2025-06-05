@@ -13,298 +13,39 @@ format:
     number-sections: false
     toc: true
     toc-depth: 3
-    code_folding: hide
+    code-fold: true
 ---
 
 ::: callout-tip
 ## Hoorcollege 5 juni 2025
-Vandaag gaan we de diepte in. We zullen leren hoe we uit data een model kunnen halen, en hoe we dat model kunnen gebruiken om voorspellingen te doen. We zullen ook leren hoe we de kwaliteit van ons model kunnen beoordelen. Dit is een belangrijke stap in het proces van data-analyse, en een goed begrip hiervan zal ons in staat stellen om betere beslissingen te nemen op basis van onze data. Veel van de modellen vandaag zullen betrekking hebben op marginale (één dimensie), conditionele (twee dimensies) of joint verdelingen (meerdere dimensies tegelijkertijd). Stiekem zullen ze allemaal in meer of mindere mate terugvoeren op *least squares* methodologie - de methoden die gebruik maken van de kleinste gekwadrateerde verschillen om een schatting te kunnen verkrijgen. De slides voor het hoorcollege kunt u [hier vinden](slides/lec-4.html)
+Vandaag gaan we de diepte in. We zullen leren hoe we uit data een model kunnen halen, en hoe we dat model kunnen gebruiken om statistische testen uit te voeren. Stiekem zullen alle modellen van vandaag in meer of mindere mate terugvoeren op *least squares* methodologie - de methoden die gebruik maken van de kleinste gekwadrateerde verschillen om een schatting te kunnen verkrijgen. De slides voor het hoorcollege kunt u [hier vinden](slides/lec-4.html)
 :::
 
-## Practical 1
+---
 
-We use the following packages in this Practical:
+# Exercises
+
+---
+
+## Load packages
 ```{r}
-library(MASS)
-library(plyr)
-library(dplyr)
-library(magrittr)
-library(ggplot2)
-```
-
-If you need package `plyr` and package `dplyr`, always load package `plyr` first!
-If you load `dplyr` before `plyr`, `plyr` will produce a warning. 
-
----
-
-#### Exercises
-
----
-
-In this exercise we will again be using random number generators. When using random numbers, it is wise to always fix the random seed (the starting point of the number generation). This ensures that in the future we can exactly reproduce the chain of executions that led to the randomly generated results. 
-
-Start by setting a random seed. If you follow my random seed and reproduce the code below in exactly the same order, you will get the same results. If you do not follow the exact ordering (i.e. if you skip or rerun a question, or have different code), your results may be different due to random sampling. This is not a bad thing! It is just a result of the method and should be that way.
-
-```{r}
-#set random seed, make things reproducible
-set.seed(123)
+#| code-fold: false
+library(tidyverse) # for data manipulation and visualization
+# tidyverse loads readr, dplyr, tidyr, tibble, stringr, etcetera
+# all these packages we need in some form in this practical
+library(magrittr)  # for flexible pipes
 ```
 
 ---
 
-1. **A group of experimenters have 4 experimental conditions they want to run. In each of these four conditions, there are seven manipulations that should be in a random order. Design the experiment such that for every condition, the seven manipulations are randomly ordered.** 
+## Linear model
 
-```{r eval=TRUE, echo=TRUE}
-# Make an empty matrix. 
-design <- matrix(NA, 7, 4)
+__Exercise 1:__ **Fit the following linear models on the `anscombe` data:**
 
-# Name the columns and rows. 
-colnames(design) <- paste("condition", 1:4, sep=" ")
-rownames(design) <- paste("manipulation",  1:7, sep=" ")
-
-# Put a random ordering in each column.
-for(j in 1:ncol(design)) {
-    design[, j] <- sample(1:7, replace=FALSE)
-}
-
-design
-```
-
----
-
-2. **Generate a vector of 100 random standard normal numbers.**
-
-```{r eval=TRUE, echo=TRUE}
-# Get random numbers.
-y <- rnorm(100)
-```
-
----
-
-3. **Compute the mean and standard deviation of the vector from question 2.**
-
-```{r eval=TRUE, echo=TRUE}
-mean(y)
-sd(y)
-```
-
----
-
-4. **Generate a vector of 100 random standard normal numbers (like in Exercise 2) 25 times, and each time store means in object `av`. Compute the standard deviation of `av`.**
-
-```{r eval=TRUE, echo=TRUE}
-# Repeat the sampling of numbers 25 times, each time getting the mean.
-av <- numeric(25)
-for(i in 1:25) {
-    av[i] <- mean(rnorm(100))
-}
-
-# Standard error of sample mean.
-sd(av) 
-```
-
-or alternatively with function `rlply()` from package `plyr`:
-```{r}
-samples <- rlply(.n = 25, rnorm(100, mean = 0, sd = 1))
-```
-
-Function `plyr::rlply()` evaluates an expression $n$ times and combines the 
-results in a list. So the call `rnorm(5000, mean = 0, sd = 1)` is evaluated
-`.n = 25` times. 
-
-We can then call the following `sapply()` statement to create object `av`:
-```{r}
-av <- sapply(samples, mean)
-sd(av) # Standard error of sample mean.
-```
-
-Function `sapply()` evalutes the expression `mean()` over each listed element in 
-`samples`. The result is a vector of length `100` with the means of the 100 samples
-from the `samples` object.
-
----
-
-5. **Create a function that automatically returns a vector like `av`.**
-
-```{r eval=TRUE, echo=TRUE}
-# Create a function for sd of sample means
-mean.av <- function(n = 100, reps = 25) {
-    
-  # Make an empty vector. 
-  av <- numeric(reps)
-  
-  for(i in 1:reps) {
-      
-    # Make a random standard normal dataset of size n.
-    y     <- rnorm(n)
-    
-    # Compute and save the mean. 
-    av[i] <- mean(y)
-  }
-  
-  # Return the vector of means. 
-  av
-}
-
-sd(mean.av())
-```
-
-or, with `rlply()`:
-
-```{r eval=TRUE, echo=TRUE}
-# Create a function for sd of sample means
-mean.av <- function(n = 100, reps = 25) {
-  rlply(.n = reps, rnorm(n, mean = 0, sd = 1)) %>%
-    sapply(mean)
-}
-
-sd(mean.av())
-```
-
----
-
-6. **Add the option to this function to print a density plot. Set it to TRUE by default. **
-
-```{r eval=TRUE, echo=TRUE}
-# Create a function for sd of sample means
-mean.av <- function(n = 100, reps = 25, plotDens = TRUE) {
-    
-  # Make an empty vector. 
-  av <- numeric(reps)
-  
-  for(i in 1:reps) {
-      
-    # Make a random standard normal dataset of size n.
-    y     <- rnorm(n)
-    
-    # Compute and save the mean. 
-    av[i] <- mean(y)
-  }
-  
-  if (plotDens) {
-      plot(density(av), main = "Sampling distribution of the mean.")
-  }
-  
-  # Return the vector of means. 
-  av
-}
-```
-
-The above function does two things:
-
-1. It returns a vector of 25 means by default (the default argument for reps is `reps=25`)
-2. It plots a densityplot of those 25 means, if wanted. By default it does this because the argument for plotting is `plotDens=TRUE`. 
-
-Let's go through the function. 
-
-- `av <- numeric(reps)`. This line creates a vector with zeros that is long as the number of `reps`. 
-- `for(i in 1:reps) {`. This line starts the for loop and dictates that we are goint to repeat the code within the loop 1 through 25 - so 25 times in total. 
-- `y <- rnorm(n)`. This samples `n` values from the standard normal distribution. Remember that the default argument for `n` is `n=100`. So, by default it draws `100` values. These values are stored in object `y`, such that we can use it later on in the function. 
-- `av[i] <- mean(y)`. Now we calculate the mean on the current (*i*th) sample and store that in the vector `av` as the *i*th element. Over all the for-loops we will replace each element in `av` with the mean of the respective simulated sample. 
-- `if (plotDens) {` evaluates whether to execute the code within the `{` and `}` that define the if-statement. This code is designed to print a plot. The default for `plotDens` is `plotDens=TRUE`, so by default the if-statement will print the plot. `if` looks for `TRUE` or `FALSE` and only executes its code when it finds `TRUE`. Because `plotDens` is `TRUE`, we do not have to say `if (plotDens = TRUE)` and `if(plotDens)` suffices. 
-- `plot(density(av), main = "Sampling distribution of the mean.")` plots a densityplot with main title 'Sampling distribution of the mean.'. 
-
-or, with `rlply()` and a pipe:
-
-```{r eval=TRUE, echo=TRUE}
-# Create a function for sd of sample means
-mean.av <- function(n = 100, reps = 25, plotDens = TRUE) {
-  av <- 
-    rlply(.n = reps, rnorm(n, mean = 0, sd = 1)) %>%
-    sapply(mean) 
-  if (plotDens) {
-    density(av) %>%
-      plot(main = "Sampling distribution of the mean.")
-  }
-  return(av)
-}
-
-sd(mean.av())
-```
-
----
-
-In the next codeblock, we first set the graphical parameters to display a 2 by 2 matrix of plots. Then we run the function `mean.av()` 4 times; each time generating a plot. After running the function four times, we will have filled the 2 by 2 plot raster.  We do not have to specify the arguments of this function because all arguments are set by default. We end by resetting the graphical parameters to its original state by stating `par(mfrow = c(1, 1))`, such that when we plot a new graph, it will be displayed as a single graph and not in a raster of 4 plots. 
-```{r}
-par(mfrow = c(2, 2))
-mean.av()
-mean.av()
-mean.av()
-mean.av()
-```
-
-and we return the graphing parameter to its previous state of a single plot (i.e. 1 row and 1 column). 
-```{r}
-par(mfrow = c(1, 1))
-```
-
----
-
-7. **Generate a random sample of size 20 from a normal population with mean 100 and standard deviation 10. **
-
-```{r eval=TRUE, echo=TRUE}
-rnorm(20, 100, 10)
-```
-
----
-
-8. **Use `mfrow` to set up the layout for a 3 by 4 array of plots. In the top 4 panels, show normal probability plots ('QQ-plots') for 4 separate "random" samples of size 10, all drawn from a normal distribution. In the middle 4 panels, display plots for samples of size 100. In the bottom 4 panels, display plots for samples of size 1000. Comment on how the appearance of the plots changes as the sample size changes.**
-
-```{r eval=TRUE, echo=TRUE}
-par(mfrow=c(3, 4))
-
-for (i in 1:3) {
-  for (j in 1:4) {
-    qqnorm(rnorm(10^i))
-  }
-}
-```
-
----
-
-9. **Repeat exercise 8, but use `runif` instead of `rnorm`.**
-
-```{r eval=TRUE, echo=TRUE}
-par(mfrow=c(3, 4))
-
-for (i in 1:3) {
-  for (j in 1:4) {
-    qqnorm(runif(10^i))
-  }
-}
-
-par(mfrow=c(1, 1))
-```
-
----
-
-10. **Use the function `rexp()` to simulate 100 exponential random numbers with rate 0.2. Do the following on the simulated random numbers **
-
-- Obtain a density plot for the observations. 
-- Find the sample mean of the observations. 
-- Compare with the population mean (the mean for an exponential population is 1/rate).
-
-```{r eval=TRUE, echo=TRUE}
-# Simulate numbers 
-data <- rexp(100, .2) 
-
-# Plot the data 
-data %>%
-  density(from = 0) %>%
-  plot(main="Exponential with rate = 0.2")
-
-# Comparison.
-c("sample.mean" = mean(data), "pop.mean" = 1 / .2)
-```
-
----
-
-11. **Fit the following linear models on the anscombe data:**
-
-- `y1` predicted by `x1` - stored in object `fit1`
-- `y2` predicted by `x2` - stored in object `fit2`
-- `y3` predicted by `x3` - stored in object `fit3`
-- `y4` predicted by `x4` - stored in object `fit4`
+- `y1` modeled by `x1` - stored (i.e. assign with `<-`) in object `fit1`
+- `y2` modeled by `x2` - stored (i.e. assign with `<-`) in object `fit2`
+- `y3` modeled by `x3` - stored (i.e. assign with `<-`) in object `fit3`
+- `y4` modeled by `x4` - stored (i.e. assign with `<-`) in object `fit4`
 
 ```{r}
 fit1 <- anscombe %$%
@@ -317,23 +58,56 @@ fit4 <- anscombe %$%
   lm(y4 ~ x4)
 ```
 
+It is a convention to call an object that contains a fitted model (`lm(y1 ~ x1)` results in a fitted linear model) by its name prefixed with `fit`. This is not a requirement, but it is a convention that makes it easier to read the code. Anyone who sees `fit1` knows that this is a fitted model - and most likely the first one - in a series of fitted models.
+
 ---
 
-12. **`Create a data frame from the coefficients of the 4 fitted objects from Exercise 11**
+## Structure the output
+
+__Exercise 2:__ **Create a data frame from the coefficients of the 4 fitted objects from Exercise 1 and name the resulting object `fitted_coefs`**
+We did not yet discuss this in the lecture, but the `coef()` function returns the coefficients of a fitted model. We can use this to quickly extract the coefficients of fitted models to create a data frame with the coefficients of the four fitted `anscombe` models. 
+
 ```{r}
-out <- data.frame(fit1 = coef(fit1),
-                  fit2 = coef(fit2),
-                  fit3 = coef(fit3),
-                  fit4 = coef(fit4))
-row.names(out) <- names(coef(fit1))
-out
+fitted_coefs <- data.frame(fit1 = coef(fit1),
+                           fit2 = coef(fit2),
+                           fit3 = coef(fit3),
+                           fit4 = coef(fit4))
+fitted_coefs
 ```
 
-These estimates are very similar. 
+These estimates are very similar, as we already established in today's lecture. For the interpretation of the estimates: 
+
+	-	The intercept represents the expected value of the outcome ($y$) when all predictor variables ($x$) are zero.
+	-	Each regression estimate (coefficient) shows the expected change in $y$ for a one-unit increase in that predictor, holding all other variables constant.
+	-	A positive coefficient means $y$ increases as the predictor $x$ increases; a negative coefficient means $y$ decreases with increasing $x$.
 
 ---
 
-13. **Plot the four fitted models from Exercise 11 in a single plotting window. Make the points in the plots `blue`, `gray`, `orange` and `purple`, respectively. **
+__Exercise 3:__ **Now add the rownames as a column to the data and make sure that the resulting object is a tibble.**
+```{r}
+fitted_coefs %<>% # assign pipe parses the result back to fitted_coefs
+  rownames_to_column(var = "estimate") %>% # add rownames to the data
+  as_tibble() # explicitly make it a tibble
+```
+
+---
+
+__Exercise 4:__ **Inspect the `fitted_coefs` data set. Why does `fit2` have fewer decimals printed than the other models?**
+
+```{r}
+fitted_coefs
+
+#The coefficient for `fit2` is exactly `0.5`, which is printed with only one decimal, while the other coefficients are printed with 3 digits. Tibbles print numbers with three significant digits by default, switching to scientific notation if the available space is too small. If it can be represented with fewer numbers, it will do so. 
+```
+
+---
+
+## Plotting the models
+
+__Exercise 5:__ **Plot the four fitted models from the anscombe data set in a single plotting window as follows: use `plot()` to make a plot for the first model and `points()` to add each subsequent model's points to the plot window. Make the points for the models in the plots `blue` (`y1 ~ x1`), `gray` (`y2 ~ x2`), `orange` (`y3 ~ x3`) and `purple` (`y4 ~ x4`), respectively. **
+
+Hint: look at `?plot` and `?points` for the arguments that you need to plot the models and to change the color of the points. 
+
 ```{r}
 plot(y1 ~ x1, col = "blue", data = anscombe)
 points(y2 ~ x2, col = "gray", data = anscombe)
@@ -343,7 +117,10 @@ points(y4 ~ x4, col = "purple", data = anscombe)
 
 ---
 
-14. **Now plot all four fitted models from Exercise 11 in a plotting window with 2 rows and 2 columns.**
+__Exercise 6:__ **Now plot all four fitted models in a plotting window with 2 rows and 2 columns.**
+
+Hint: use the command `par(mfrow = c(2, 2))` to set the plotting window to 2 rows and 2 columns. Use this command before you start the plots. You do not have to use `points()` in this case, but rather use `plot()` for every seperate model plot. 
+
 ```{r}
 par(mfrow = c(2, 2))
 plot(y1 ~ x1, data = anscombe)
@@ -351,52 +128,55 @@ plot(y2 ~ x2, data = anscombe)
 plot(y3 ~ x3, data = anscombe)
 plot(y4 ~ x4, data = anscombe)
 ```
+With `par(mfrow = c(2, 2))` we set the plotting window to have 2 rows and 2 columns. This means that the first plot will be placed in the first row, first column, the next plot will be placed in the first row, second column, and so on.
+
+To revert to a single plotting window, you can use `par(mfrow = c(1, 1))` after the plots.
+
+```{r}
+par(mfrow = c(1, 1)) # revert to single plotting window
+```
+
 
 ---
 
-## Practical 2
+## Read in the `titanic` data set
 
-We use the following packages in this practical:
-```{r warning=FALSE, message=FALSE}
-library(mice)
-library(caret)
-library(dplyr)
-library(magrittr)
-library(DAAG)
-library(readr)
-```
-
-We use the `titanic` data set for this exercise. Download the [`titanic.csv`](titanic.csv) data set. 
+We use the `titanic` data set for the next exercises. Use the code below to read them in from the internet:
 
 ```{r}
 con <- url("https://www.gerkovink.com/erasmus/Day%202/Part%20D/titanic.csv")
-titanic <- read_csv(con)
+titanic <- read_csv(con) # reads in the connection as a csv file
 ```
 
 ---
 
-__Exercise 1__ **Inspect the titanic data set by calling `titanic` in the console and with functions `summary()`, `str()` and `md.pattern()`.**
+__Exercise 7:__ **Inspect the titanic data set by calling `titanic` in the console and with functions `summary()`, `str()` and `glimpse`.**
 
+- `titanic` will print the data set in the console:
 ```{r}
 titanic
 ```
 We can see that the `titanic` data set is imported as a `tibble`. A `tibble` is a more flexible data frame with a much nicer printing class.
+
+- `summary()` gives us a quick overview of the data set:
 ```{r}
-summary(titanic)
+titanic %>% summary()
 ```
-The `summary()` output gives us direct information about the parametric nature of the columns is the data
+The `summary()` output gives us direct information about the parametric nature of the columns in the data
+
+- `str()` gives us the structure of the data set:
 ```{r}
-str(titanic)
+titanic %>% str()
 ```
 When we study the structure of the data set, we see that the outcome `Survived` is not coded as a `factor`, but as a numeric column. The same holds for `Pclass`. This will influence the default estimation later on. There are more irregularities, but we'll ignore those for now.
 ```{r}
-md.pattern(titanic, rotate.names = TRUE)
+titanic %>% glimpse()
 ```
 There are no missing values in this `titanic` data set. 
 
 ---
 
-__Exercise 2__ **Correct the measurement level of the columns `Pclass` and `Survived`. Then ask for the `summary()` once more.**
+__Exercise 8:__ **Correct the measurement level of the columns `Pclass` and `Survived`. Then ask for the `summary()` once more.**
 ```{r}
 titanic %<>% 
   mutate(Pclass = factor(Pclass, labels = c("1st class", "2nd class", "3rd class")), 
@@ -411,176 +191,101 @@ titanic <- titanic %>%
          Survived = factor(Survived, labels = c("No", "Yes")))
 ```
 
-
 ---
 
-# Data subsetting
+## Correlations
 
----
-
-__Exercise 3__ **Split the data manually into two parts: a training part (70% of cases) and a test part (30% of cases). Verify the dimensions of the splits with function `dim()`.**
+__Exercise 9:__ **Calculate Pearson's correlation coefficient between `Age` and `Fare` in the `titanic` data set.**
 
 ```{r}
-set.seed(123) # for reproducibility
-trainIndex <- createDataPartition(titanic$Survived, p = .7, times = 1, list = FALSE)
-
-train <- titanic[trainIndex, ]
-test <- titanic[-trainIndex, ]
-```
-We make use of the `createDataPartition()` function from package `caret` to generate the rownumbers for the splits. We could have also done this manually with e.g. `trainIndex <- sample(1:nrow(titanic), round(.7*nrow(titanic)), replace = TRUE)`. I find the `createDataPartition()` function always convenient, because it directly plugs into the `caret` functionality. 
-```{r}
-dim(train)
-dim(test)
-```
-We can see that the split with `r dim(train)[1]` cases in the `train` set and `r dim(test)[1]` cases in the `test` set approximates the desired `p = .7` split probability with `r dim(train)[1]/nrow(titanic)`.
-
----
-
-# Linear model
-
----
-
-__Exercise 3__ **Predict `Age` from `Pclass`, `Sex` and `Survived`. Train your model on the `train` set and validate it on the `test` set**
-```{r}
-fit <- train %$% 
-  lm(Age ~ Pclass + Sex + Survived) 
-pred <- fit %>% 
-  predict(newdata = test)
-```
-The `fit` object contains the model fitted on the training data. The `pred` object contains the predictions obtained by applying the `fit` model to the `test` data. 
-
----
-
-__Exercise 4__ **Now calculate the RMSE and the $R^2$ for the predictions and compare those to the fitted model in `fit`**
-```{r}
-results <- data.frame(R2 = c(cor(pred, test$Age)^2, 
-                             summary(fit)$r.squared),
-                      RMSE = c((pred - test$Age)^2 %>% sum %>% sqrt, 
-                               fit$residuals^2 %>% mean %>% sqrt))
-rownames(results) <- c("predicted", "fitted")
-results
-```
-We see that the $R^2$ is lower for the predictions and that the root mean squared error is higher. For unbiased estimators we can view the RMSE as the standard error of the estimator. The MSE would then be the variance of that unbiased estimator. 
-
----
-
-__Exercise 5__ **Now use the `caret` package to do the same as above. Use the default paramters for the `train()` function and use the `train` data to train the model.**
-```{r}
-set.seed(123) # for reproducibility
-# train the model on training set
-model <- train(Age ~ Pclass + Sex + Survived,
-               data = train,
-               method = "lm")
-model
-```
-We see that the `train` function by default uses a Bootstrapped resampling: the `train` data is resampled with replacement 25 times and every time the model is evaluated. Every individual sample is slightly different and, hence, the distribution of obtained results is also different. We can get information about the variance from:
-```{r}
-model$results
+titanic %>% 
+  summarise(correlation = cor(Age, Fare, use = "pairwise.complete.obs"))
+# or
+titanic %$%
+  cor(Age, Fare, use = "pairwise.complete.obs")
 ```
 
 ---
 
-__Exercise 6__ **Now use the model from (5) to predict the `test` data and calculate the same metrics as in (4).**
+## T-test
 
+
+__Exercise 10:__ **Calculate the mean and variance of age for the survivors and the non-surivors using `summarise()`**
 ```{r}
-pred <- predict(model, newdata = test)
-# R^2
-cor(pred, test$Age)^2
-# RMSE
-(pred - test$Age)^2 %>% mean %>% sqrt
-```
-A much easier way of obtaining the same metrics is with the `postResample()` function:
-```{r}
-postResample(pred = pred, obs = test$Age)
+titanic %>%
+  group_by(Survived) %>%
+  summarise(mean_age = mean(Age, na.rm = TRUE),
+            var_age = var(Age, na.rm = TRUE))
 ```
 
 ---
 
-__Exercise 7__ **Rerun the model from (5), but use 10-fold cross-validation on the training set. Evaluate the predictions with `postResample()`.**
+__Exercise 11:__ **Perform a t-test to compare the mean `Age` of passengers that survived and those that did not. Perform the t-test once with equal variances assumed, and once without. Does the conclusion change?**
 ```{r}
-set.seed(123) # for reproducibility
-model <- train(Age ~ Pclass + Sex + Survived,
-               data = train,
-               method = "lm",
-               trControl = trainControl(method = "cv", number = 10)
-               )
-model
-pred <- predict(model, newdata = test)
-postResample(pred, test$Age)
+titanic %$%
+  t.test(Age ~ Survived, var.equal = TRUE)
+titanic %$%
+  t.test(Age ~ Survived, var.equal = FALSE)
 ```
-There's not much more we can do for this linear model. At least we now that the below model is not grossly overfitted and that, if new data would come in, there is not much accuracy in predicting `Age` from these predictors. Let's hope that never happens. 
-```{r}
-lm(Age ~ Pclass + Sex + Survived, data = titanic) %>% summary()
-```
-We can still infer that `Age` differs over these groups. The overall model is highly significant. 
+
+There does not seem to be a significant difference in age between the survivors and the non-survivors. The p-value is larger than 0.05 in both cases, so we cannot reject the null hypothesis that the means are equal.
 
 ---
 
-# Logistic regression
+## Chi-squared test
 
----
+__Exercise 12:__ **Perform a chi-squared test to compare the survival rates of passengers in the different classes. Also study the observed frequencies table and study the expected frequencies.**
 
-__Exercise 8__ **Use the same train/test splits to evaluate the performance of a logistic model where `Survived` is predicted from `Age`, `Pclass` and `Sex`. Study the accuracy and the confusion matrix**
-
-We start by specifying the `caret` model. 
 ```{r}
-set.seed(123) # for reproducibility
-model <- train(Survived ~ Age + Pclass + Sex,
-               data = train,
-               method = "glm",
-               family = binomial(link = "logit"),
-               trControl = trainControl(method = "cv", number = 10)
-               )
-model
+titanic %$%
+  table(Pclass, Survived) # Create a contingency table
+titanic %$%
+  chisq.test(table(Pclass, Survived)) # Perform the chi-squared test
+titanic %$%
+  chisq.test(table(Pclass, Survived)) %>% 
+  .$expected # Study the expected frequencies
 ```
-We can ask for a confusion matrix over the crossvalidated sets. 
-```{r}
-confusionMatrix(model)
-```
-We see that a bit over 80% is accurately predicted. The off-diagonal holds the other almost 20%. 
 
-When we apply the model to the test data to obtain predictions, we can choose to get the `raw` predictions (i.e. the scale of the response as recorded in the data), or `prob` predictions (i.e. the scale of the response as modeled in probabilities). 
+The observed frequencies show that there are more survivors in the 1st class than in the 2nd and 3rd class. 
+
+The $\chi^2$-test indicates a significant difference in survival rates between the different classes, as the p-value is smaller than 0.05. The expected frequencies are all larger than 5, so we can safely use the chi-squared test. 
+
+Alternatively, we could have used `broom::tidy()` to tidy the output of the chi-squared test:
 ```{r}
-pred <- predict(model, newdata = test, type = "raw")
-```
-The confusion matrix over the predictions yields many informative measures. 
-```{r}
-confusionMatrix(pred, test$Survived)
+library(broom) # for tidy output
+titanic %$%
+  chisq.test(table(Pclass, Survived)) %>% 
+  broom::tidy()
 ```
 
 ---
 
-__Exercise 9__  **Compare the model obtained with `caret`'s `train()` on with a model obtained with `glm()`. Fit the `glm()` model on the training set. Study accuracy and parameters. **
+## ANOVA
 
-We start with generating the relevant output from `glm()`. First, we fit the model with the correct family and link function
+__Exercise 13:__ **Calculate the mean and variance of `Fare` for every passenger class using `summarise()`**
 ```{r}
-fit <- train %$% 
-  glm(Survived ~ Age + Pclass + Sex, 
-      family = binomial(link = "logit"))
-```
-Next, we generate the predicted values:
-```{r}
-pred.glm <- ifelse(predict(fit, newdata = test, type = "response") > .5, "Yes", "No")
-```
-We have to indicate how to go from the predicted probabilities back to `No` and `Yes`. I use the `ifelse()` function to do that: if the probability is over .5, then the new value will be `Yes`, else it will be `No`. 
-
-Now we can enter this vector of predicted `Yes` and `No` in the `postResample()` function to compare it with the observations in `test$Survived`. 
-```{r}
-postResample(pred.glm, test$Survived)
-```
-Finally, we can obtain the parameter summary from the fitted model. 
-```{r}
-fit %>% summary
+titanic %>% 
+  group_by(Pclass) %>% 
+  summarise(mean_fare = mean(Fare, na.rm = TRUE),
+            var_fare = var(Fare, na.rm = TRUE))
 ```
 
-When we obtain the same information from the `caret` model, we see that there are no differences. 
-```{r}
-postResample(pred, test$Survived)
-model$finalModel %>% summary()
-```
-The outputs are identical. `caret` does not perform magical parameter poolings over the crossvalidated sets. The returned model is the fitted model. The accuracy that is obtained over the `train` set is obtained by meand of crossvalidation. The fitted model is in both cases identically applied to the `test` set. 
+There is a visible difference in mean fare between the different classes, as the variance is larger for the *more luxurious* classes. The mean fare for 1st class is much higher than for 2nd and 3rd class, which is expected.
 
-That said, the modeling possibilities with `caret` are enormous and there are many modeling efforts possible that lead to a proper model training on a training set. Crossvalidation is then needed. A test set can then be used to evaluate the performance of the trained model on unseen data. 
+---
+
+__Exercise 14:__ **Perform an ANOVA to compare the mean `Fare` of passengers in the different classes.**
+
+```{r}
+titanic %$%
+  lm(Fare ~ Pclass) %>%
+  anova()
+# or
+titanic %$%
+  aov(Fare ~ Pclass) %>%
+  summary()
+```
+The ANOVA shows that there is a significant difference in mean fare between the different classes, as the p-value is smaller than 0.05.
 
 ---
 

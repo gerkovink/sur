@@ -261,11 +261,18 @@ window.Quarto = {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#practical-1" id="toc-practical-1" class="nav-link active" data-scroll-target="#practical-1">Practical 1</a></li>
-  <li><a href="#practical-2" id="toc-practical-2" class="nav-link" data-scroll-target="#practical-2">Practical 2</a></li>
-  <li><a href="#data-subsetting" id="toc-data-subsetting" class="nav-link" data-scroll-target="#data-subsetting">Data subsetting</a></li>
+  <li><a href="#exercises" id="toc-exercises" class="nav-link active" data-scroll-target="#exercises">Exercises</a>
+  <ul class="collapse">
+  <li><a href="#load-packages" id="toc-load-packages" class="nav-link" data-scroll-target="#load-packages">Load packages</a></li>
   <li><a href="#linear-model" id="toc-linear-model" class="nav-link" data-scroll-target="#linear-model">Linear model</a></li>
-  <li><a href="#logistic-regression" id="toc-logistic-regression" class="nav-link" data-scroll-target="#logistic-regression">Logistic regression</a></li>
+  <li><a href="#structure-the-output" id="toc-structure-the-output" class="nav-link" data-scroll-target="#structure-the-output">Structure the output</a></li>
+  <li><a href="#plotting-the-models" id="toc-plotting-the-models" class="nav-link" data-scroll-target="#plotting-the-models">Plotting the models</a></li>
+  <li><a href="#read-in-the-titanic-data-set" id="toc-read-in-the-titanic-data-set" class="nav-link" data-scroll-target="#read-in-the-titanic-data-set">Read in the <code>titanic</code> data set</a></li>
+  <li><a href="#correlations" id="toc-correlations" class="nav-link" data-scroll-target="#correlations">Correlations</a></li>
+  <li><a href="#t-test" id="toc-t-test" class="nav-link" data-scroll-target="#t-test">T-test</a></li>
+  <li><a href="#chi-squared-test" id="toc-chi-squared-test" class="nav-link" data-scroll-target="#chi-squared-test">Chi-squared test</a></li>
+  <li><a href="#anova" id="toc-anova" class="nav-link" data-scroll-target="#anova">ANOVA</a></li>
+  </ul></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/gerkovink/sur/edit/book/meeting4.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/gerkovink/sur/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
@@ -314,470 +321,184 @@ Hoorcollege 5 juni 2025
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Vandaag gaan we de diepte in. We zullen leren hoe we uit data een model kunnen halen, en hoe we dat model kunnen gebruiken om voorspellingen te doen. We zullen ook leren hoe we de kwaliteit van ons model kunnen beoordelen. Dit is een belangrijke stap in het proces van data-analyse, en een goed begrip hiervan zal ons in staat stellen om betere beslissingen te nemen op basis van onze data. Veel van de modellen vandaag zullen betrekking hebben op marginale (één dimensie), conditionele (twee dimensies) of joint verdelingen (meerdere dimensies tegelijkertijd). Stiekem zullen ze allemaal in meer of mindere mate terugvoeren op <em>least squares</em> methodologie - de methoden die gebruik maken van de kleinste gekwadrateerde verschillen om een schatting te kunnen verkrijgen. De slides voor het hoorcollege kunt u <a href="slides/lec-4.html">hier vinden</a></p>
+<p>Vandaag gaan we de diepte in. We zullen leren hoe we uit data een model kunnen halen, en hoe we dat model kunnen gebruiken om statistische testen uit te voeren. Stiekem zullen alle modellen van vandaag in meer of mindere mate terugvoeren op <em>least squares</em> methodologie - de methoden die gebruik maken van de kleinste gekwadrateerde verschillen om een schatting te kunnen verkrijgen. De slides voor het hoorcollege kunt u <a href="slides/lec-4.html">hier vinden</a></p>
 </div>
 </div>
-<section id="practical-1" class="level2">
-<h2 class="anchored" data-anchor-id="practical-1">Practical 1</h2>
-<p>We use the following packages in this Practical:</p>
+<hr>
+<section id="exercises" class="level1">
+<h1>Exercises</h1>
+<hr>
+<section id="load-packages" class="level2">
+<h2 class="anchored" data-anchor-id="load-packages">Load packages</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(MASS)</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(plyr)</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse) <span class="co"># for data manipulation and visualization</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
+✔ dplyr     1.1.4     ✔ readr     2.1.5
+✔ forcats   1.0.0     ✔ stringr   1.5.1
+✔ ggplot2   3.5.2     ✔ tibble    3.2.1
+✔ lubridate 1.9.4     ✔ tidyr     1.3.1
+✔ purrr     1.0.4     
+── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+✖ dplyr::filter() masks stats::filter()
+✖ dplyr::lag()    masks stats::lag()
+ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># tidyverse loads readr, dplyr, tidyr, tibble, stringr, etcetera</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="co"># all these packages we need in some form in this practical</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(magrittr)  <span class="co"># for flexible pipes</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>
-Attaching package: 'dplyr'</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>The following objects are masked from 'package:plyr':
+Attaching package: 'magrittr'
 
-    arrange, count, desc, failwith, id, mutate, rename, summarise,
-    summarize</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>The following object is masked from 'package:MASS':
+The following object is masked from 'package:purrr':
 
-    select</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>The following objects are masked from 'package:stats':
+    set_names
 
-    filter, lag</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>The following objects are masked from 'package:base':
+The following object is masked from 'package:tidyr':
 
-    intersect, setdiff, setequal, union</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(magrittr)</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>If you need package <code>plyr</code> and package <code>dplyr</code>, always load package <code>plyr</code> first! If you load <code>dplyr</code> before <code>plyr</code>, <code>plyr</code> will produce a warning.</p>
-<hr>
-<section id="exercises" class="level4">
-<h4 class="anchored" data-anchor-id="exercises">Exercises</h4>
-<hr>
-<p>In this exercise we will again be using random number generators. When using random numbers, it is wise to always fix the random seed (the starting point of the number generation). This ensures that in the future we can exactly reproduce the chain of executions that led to the randomly generated results.</p>
-<p>Start by setting a random seed. If you follow my random seed and reproduce the code below in exactly the same order, you will get the same results. If you do not follow the exact ordering (i.e.&nbsp;if you skip or rerun a question, or have different code), your results may be different due to random sampling. This is not a bad thing! It is just a result of the method and should be that way.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co">#set random seed, make things reproducible</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<hr>
-<ol type="1">
-<li><strong>A group of experimenters have 4 experimental conditions they want to run. In each of these four conditions, there are seven manipulations that should be in a random order. Design the experiment such that for every condition, the seven manipulations are randomly ordered.</strong></li>
-</ol>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Make an empty matrix. </span></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>design <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="cn">NA</span>, <span class="dv">7</span>, <span class="dv">4</span>)</span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Name the columns and rows. </span></span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(design) <span class="ot">&lt;-</span> <span class="fu">paste</span>(<span class="st">"condition"</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>, <span class="at">sep=</span><span class="st">" "</span>)</span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(design) <span class="ot">&lt;-</span> <span class="fu">paste</span>(<span class="st">"manipulation"</span>,  <span class="dv">1</span><span class="sc">:</span><span class="dv">7</span>, <span class="at">sep=</span><span class="st">" "</span>)</span>
-<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Put a random ordering in each column.</span></span>
-<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(j <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">ncol</span>(design)) {</span>
-<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>    design[, j] <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">7</span>, <span class="at">replace=</span><span class="cn">FALSE</span>)</span>
-<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>design</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>               condition 1 condition 2 condition 3 condition 4
-manipulation 1           7           5           3           3
-manipulation 2           3           4           7           2
-manipulation 3           6           1           1           6
-manipulation 4           2           2           4           1
-manipulation 5           4           3           5           5
-manipulation 6           5           6           6           4
-manipulation 7           1           7           2           7</code></pre>
+    extract</code></pre>
 </div>
 </div>
 <hr>
-<ol start="2" type="1">
-<li><strong>Generate a vector of 100 random standard normal numbers.</strong></li>
-</ol>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Get random numbers.</span></span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">100</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<hr>
-<ol start="3" type="1">
-<li><strong>Compute the mean and standard deviation of the vector from question 2.</strong></li>
-</ol>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(y)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] -0.002030083</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sd</span>(y)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.8947288</code></pre>
-</div>
-</div>
-<hr>
-<ol start="4" type="1">
-<li><strong>Generate a vector of 100 random standard normal numbers (like in Exercise 2) 25 times, and each time store means in object <code>av</code>. Compute the standard deviation of <code>av</code>.</strong></li>
-</ol>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Repeat the sampling of numbers 25 times, each time getting the mean.</span></span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>av <span class="ot">&lt;-</span> <span class="fu">numeric</span>(<span class="dv">25</span>)</span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">25</span>) {</span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>    av[i] <span class="ot">&lt;-</span> <span class="fu">mean</span>(<span class="fu">rnorm</span>(<span class="dv">100</span>))</span>
-<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Standard error of sample mean.</span></span>
-<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a><span class="fu">sd</span>(av) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.08063988</code></pre>
-</div>
-</div>
-<p>or alternatively with function <code>rlply()</code> from package <code>plyr</code>:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>samples <span class="ot">&lt;-</span> <span class="fu">rlply</span>(<span class="at">.n =</span> <span class="dv">25</span>, <span class="fu">rnorm</span>(<span class="dv">100</span>, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>Function <code>plyr::rlply()</code> evaluates an expression <span class="math inline">\(n\)</span> times and combines the results in a list. So the call <code>rnorm(5000, mean = 0, sd = 1)</code> is evaluated <code>.n = 25</code> times.</p>
-<p>We can then call the following <code>sapply()</code> statement to create object <code>av</code>:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>av <span class="ot">&lt;-</span> <span class="fu">sapply</span>(samples, mean)</span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sd</span>(av) <span class="co"># Standard error of sample mean.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.08895437</code></pre>
-</div>
-</div>
-<p>Function <code>sapply()</code> evalutes the expression <code>mean()</code> over each listed element in <code>samples</code>. The result is a vector of length <code>100</code> with the means of the 100 samples from the <code>samples</code> object.</p>
-<hr>
-<ol start="5" type="1">
-<li><strong>Create a function that automatically returns a vector like <code>av</code>.</strong></li>
-</ol>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a function for sd of sample means</span></span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>mean.av <span class="ot">&lt;-</span> <span class="cf">function</span>(<span class="at">n =</span> <span class="dv">100</span>, <span class="at">reps =</span> <span class="dv">25</span>) {</span>
-<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Make an empty vector. </span></span>
-<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>  av <span class="ot">&lt;-</span> <span class="fu">numeric</span>(reps)</span>
-<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>reps) {</span>
-<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>      </span>
-<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Make a random standard normal dataset of size n.</span></span>
-<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a>    y     <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n)</span>
-<span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb21-12"><a href="#cb21-12" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Compute and save the mean. </span></span>
-<span id="cb21-13"><a href="#cb21-13" aria-hidden="true" tabindex="-1"></a>    av[i] <span class="ot">&lt;-</span> <span class="fu">mean</span>(y)</span>
-<span id="cb21-14"><a href="#cb21-14" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb21-15"><a href="#cb21-15" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb21-16"><a href="#cb21-16" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Return the vector of means. </span></span>
-<span id="cb21-17"><a href="#cb21-17" aria-hidden="true" tabindex="-1"></a>  av</span>
-<span id="cb21-18"><a href="#cb21-18" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb21-19"><a href="#cb21-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-20"><a href="#cb21-20" aria-hidden="true" tabindex="-1"></a><span class="fu">sd</span>(<span class="fu">mean.av</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.1084715</code></pre>
-</div>
-</div>
-<p>or, with <code>rlply()</code>:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a function for sd of sample means</span></span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>mean.av <span class="ot">&lt;-</span> <span class="cf">function</span>(<span class="at">n =</span> <span class="dv">100</span>, <span class="at">reps =</span> <span class="dv">25</span>) {</span>
-<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rlply</span>(<span class="at">.n =</span> reps, <span class="fu">rnorm</span>(n, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">1</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sapply</span>(mean)</span>
-<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a><span class="fu">sd</span>(<span class="fu">mean.av</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.08855458</code></pre>
-</div>
-</div>
-<hr>
-<ol start="6" type="1">
-<li><strong>Add the option to this function to print a density plot. Set it to TRUE by default. </strong></li>
-</ol>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a function for sd of sample means</span></span>
-<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>mean.av <span class="ot">&lt;-</span> <span class="cf">function</span>(<span class="at">n =</span> <span class="dv">100</span>, <span class="at">reps =</span> <span class="dv">25</span>, <span class="at">plotDens =</span> <span class="cn">TRUE</span>) {</span>
-<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Make an empty vector. </span></span>
-<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>  av <span class="ot">&lt;-</span> <span class="fu">numeric</span>(reps)</span>
-<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>reps) {</span>
-<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a>      </span>
-<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Make a random standard normal dataset of size n.</span></span>
-<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a>    y     <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n)</span>
-<span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb25-12"><a href="#cb25-12" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Compute and save the mean. </span></span>
-<span id="cb25-13"><a href="#cb25-13" aria-hidden="true" tabindex="-1"></a>    av[i] <span class="ot">&lt;-</span> <span class="fu">mean</span>(y)</span>
-<span id="cb25-14"><a href="#cb25-14" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb25-15"><a href="#cb25-15" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb25-16"><a href="#cb25-16" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (plotDens) {</span>
-<span id="cb25-17"><a href="#cb25-17" aria-hidden="true" tabindex="-1"></a>      <span class="fu">plot</span>(<span class="fu">density</span>(av), <span class="at">main =</span> <span class="st">"Sampling distribution of the mean."</span>)</span>
-<span id="cb25-18"><a href="#cb25-18" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb25-19"><a href="#cb25-19" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb25-20"><a href="#cb25-20" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Return the vector of means. </span></span>
-<span id="cb25-21"><a href="#cb25-21" aria-hidden="true" tabindex="-1"></a>  av</span>
-<span id="cb25-22"><a href="#cb25-22" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>The above function does two things:</p>
-<ol type="1">
-<li>It returns a vector of 25 means by default (the default argument for reps is <code>reps=25</code>)</li>
-<li>It plots a densityplot of those 25 means, if wanted. By default it does this because the argument for plotting is <code>plotDens=TRUE</code>.</li>
-</ol>
-<p>Let’s go through the function.</p>
+</section>
+<section id="linear-model" class="level2">
+<h2 class="anchored" data-anchor-id="linear-model">Linear model</h2>
+<p><strong>Exercise 1:</strong> <strong>Fit the following linear models on the <code>anscombe</code> data:</strong></p>
 <ul>
-<li><code>av &lt;- numeric(reps)</code>. This line creates a vector with zeros that is long as the number of <code>reps</code>.</li>
-<li><code>for(i in 1:reps) {</code>. This line starts the for loop and dictates that we are goint to repeat the code within the loop 1 through 25 - so 25 times in total.</li>
-<li><code>y &lt;- rnorm(n)</code>. This samples <code>n</code> values from the standard normal distribution. Remember that the default argument for <code>n</code> is <code>n=100</code>. So, by default it draws <code>100</code> values. These values are stored in object <code>y</code>, such that we can use it later on in the function.</li>
-<li><code>av[i] &lt;- mean(y)</code>. Now we calculate the mean on the current (<em>i</em>th) sample and store that in the vector <code>av</code> as the <em>i</em>th element. Over all the for-loops we will replace each element in <code>av</code> with the mean of the respective simulated sample.</li>
-<li><code>if (plotDens) {</code> evaluates whether to execute the code within the <code>{</code> and <code>}</code> that define the if-statement. This code is designed to print a plot. The default for <code>plotDens</code> is <code>plotDens=TRUE</code>, so by default the if-statement will print the plot. <code>if</code> looks for <code>TRUE</code> or <code>FALSE</code> and only executes its code when it finds <code>TRUE</code>. Because <code>plotDens</code> is <code>TRUE</code>, we do not have to say <code>if (plotDens = TRUE)</code> and <code>if(plotDens)</code> suffices.</li>
-<li><code>plot(density(av), main = "Sampling distribution of the mean.")</code> plots a densityplot with main title ‘Sampling distribution of the mean.’.</li>
-</ul>
-<p>or, with <code>rlply()</code> and a pipe:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a function for sd of sample means</span></span>
-<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>mean.av <span class="ot">&lt;-</span> <span class="cf">function</span>(<span class="at">n =</span> <span class="dv">100</span>, <span class="at">reps =</span> <span class="dv">25</span>, <span class="at">plotDens =</span> <span class="cn">TRUE</span>) {</span>
-<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>  av <span class="ot">&lt;-</span> </span>
-<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">rlply</span>(<span class="at">.n =</span> reps, <span class="fu">rnorm</span>(n, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">1</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sapply</span>(mean) </span>
-<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (plotDens) {</span>
-<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">density</span>(av) <span class="sc">%&gt;%</span></span>
-<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a>      <span class="fu">plot</span>(<span class="at">main =</span> <span class="st">"Sampling distribution of the mean."</span>)</span>
-<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(av)</span>
-<span id="cb26-11"><a href="#cb26-11" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb26-12"><a href="#cb26-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-13"><a href="#cb26-13" aria-hidden="true" tabindex="-1"></a><span class="fu">sd</span>(<span class="fu">mean.av</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="meeting4_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.09943855</code></pre>
-</div>
-</div>
-<hr>
-<p>In the next codeblock, we first set the graphical parameters to display a 2 by 2 matrix of plots. Then we run the function <code>mean.av()</code> 4 times; each time generating a plot. After running the function four times, we will have filled the 2 by 2 plot raster. We do not have to specify the arguments of this function because all arguments are set by default. We end by resetting the graphical parameters to its original state by stating <code>par(mfrow = c(1, 1))</code>, such that when we plot a new graph, it will be displayed as a single graph and not in a raster of 4 plots.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">2</span>))</span>
-<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mean.av</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code> [1]  0.08055282 -0.09754160 -0.05821872 -0.12610514  0.22889697  0.06045094
- [7] -0.05005161  0.07929225 -0.04684410  0.06793366 -0.02824388 -0.04455662
-[13]  0.10751945 -0.03089715  0.16704208 -0.09191745 -0.01269223  0.12099754
-[19]  0.04812015 -0.01850196 -0.11234448 -0.04664174  0.05505689  0.07094203
-[25] -0.03480680</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean.av</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code> [1]  1.654544e-01  1.495430e-01 -3.593181e-02  1.118057e-01 -4.502700e-02
- [6] -1.658745e-01 -7.463339e-02  1.623282e-03 -2.816589e-02 -3.099463e-02
-[11]  1.026129e-02 -1.266549e-01 -6.979457e-02 -6.681426e-02  6.356481e-02
-[16] -2.826008e-02 -1.655376e-01 -7.398961e-03 -1.067788e-01 -9.776003e-02
-[21]  4.280866e-02 -4.562334e-05 -1.576694e-01  8.287469e-03  1.729710e-02</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean.av</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code> [1]  0.01368188  0.05596635 -0.08585031  0.05438344 -0.05927382  0.00753817
- [7] -0.08579420  0.04626604 -0.10121637 -0.02759589 -0.11875529 -0.04364157
-[13]  0.15317491 -0.03680002  0.10073299 -0.02057617 -0.12249468 -0.03698803
-[19]  0.02064375 -0.09719385 -0.10343772  0.01022079 -0.04506869 -0.15810880
-[25] -0.03312578</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean.av</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="meeting4_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code> [1] -0.170848928 -0.091800182  0.246267767  0.155764220 -0.241285739
- [6] -0.003461686  0.174884364 -0.182901627 -0.065698631  0.144222939
-[11] -0.104530834 -0.189716666  0.223340361  0.042319125  0.060407646
-[16]  0.001504321  0.061296232 -0.056766649 -0.190312830 -0.001227125
-[21] -0.023731935 -0.165083919  0.116943964 -0.013203330  0.137302444</code></pre>
-</div>
-</div>
-<p>and we return the graphing parameter to its previous state of a single plot (i.e.&nbsp;1 row and 1 column).</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<hr>
-<ol start="7" type="1">
-<li><strong>Generate a random sample of size 20 from a normal population with mean 100 and standard deviation 10. </strong></li>
-</ol>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rnorm</span>(<span class="dv">20</span>, <span class="dv">100</span>, <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code> [1]  88.74277  87.08169 123.24315  95.05002  97.70985 102.79113 100.98217
- [8] 102.30570 121.45238  94.62936  91.89949  92.73861 111.96596 120.77000
-[15] 104.17306  86.41646  90.04677 105.29433  97.05123  87.93305</code></pre>
-</div>
-</div>
-<hr>
-<ol start="8" type="1">
-<li><strong>Use <code>mfrow</code> to set up the layout for a 3 by 4 array of plots. In the top 4 panels, show normal probability plots (‘QQ-plots’) for 4 separate “random” samples of size 10, all drawn from a normal distribution. In the middle 4 panels, display plots for samples of size 100. In the bottom 4 panels, display plots for samples of size 1000. Comment on how the appearance of the plots changes as the sample size changes.</strong></li>
-</ol>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">3</span>, <span class="dv">4</span>))</span>
-<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>) {</span>
-<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (j <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>) {</span>
-<span id="cb39-5"><a href="#cb39-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">qqnorm</span>(<span class="fu">rnorm</span>(<span class="dv">10</span><span class="sc">^</span>i))</span>
-<span id="cb39-6"><a href="#cb39-6" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb39-7"><a href="#cb39-7" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="meeting4_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-<hr>
-<ol start="9" type="1">
-<li><strong>Repeat exercise 8, but use <code>runif</code> instead of <code>rnorm</code>.</strong></li>
-</ol>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">3</span>, <span class="dv">4</span>))</span>
-<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>) {</span>
-<span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (j <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>) {</span>
-<span id="cb40-5"><a href="#cb40-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">qqnorm</span>(<span class="fu">runif</span>(<span class="dv">10</span><span class="sc">^</span>i))</span>
-<span id="cb40-6"><a href="#cb40-6" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb40-7"><a href="#cb40-7" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="meeting4_files/figure-html/unnamed-chunk-17-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<hr>
-<ol start="10" type="1">
-<li><strong>Use the function <code>rexp()</code> to simulate 100 exponential random numbers with rate 0.2. Do the following on the simulated random numbers </strong></li>
-</ol>
-<ul>
-<li>Obtain a density plot for the observations.</li>
-<li>Find the sample mean of the observations.</li>
-<li>Compare with the population mean (the mean for an exponential population is 1/rate).</li>
+<li><code>y1</code> modeled by <code>x1</code> - stored (i.e.&nbsp;assign with <code>&lt;-</code>) in object <code>fit1</code></li>
+<li><code>y2</code> modeled by <code>x2</code> - stored (i.e.&nbsp;assign with <code>&lt;-</code>) in object <code>fit2</code></li>
+<li><code>y3</code> modeled by <code>x3</code> - stored (i.e.&nbsp;assign with <code>&lt;-</code>) in object <code>fit3</code></li>
+<li><code>y4</code> modeled by <code>x4</code> - stored (i.e.&nbsp;assign with <code>&lt;-</code>) in object <code>fit4</code></li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Simulate numbers </span></span>
-<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">rexp</span>(<span class="dv">100</span>, .<span class="dv">2</span>) </span>
-<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb42-4"><a href="#cb42-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the data </span></span>
-<span id="cb42-5"><a href="#cb42-5" aria-hidden="true" tabindex="-1"></a>data <span class="sc">%&gt;%</span></span>
-<span id="cb42-6"><a href="#cb42-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">density</span>(<span class="at">from =</span> <span class="dv">0</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb42-7"><a href="#cb42-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot</span>(<span class="at">main=</span><span class="st">"Exponential with rate = 0.2"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="meeting4_files/figure-html/unnamed-chunk-18-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>fit1 <span class="ot">&lt;-</span> anscombe <span class="sc">%$%</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">lm</span>(y1 <span class="sc">~</span> x1)</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>fit2 <span class="ot">&lt;-</span> anscombe <span class="sc">%$%</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">lm</span>(y2 <span class="sc">~</span> x2)</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>fit3 <span class="ot">&lt;-</span> anscombe <span class="sc">%$%</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">lm</span>(y3 <span class="sc">~</span> x3)</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>fit4 <span class="ot">&lt;-</span> anscombe <span class="sc">%$%</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">lm</span>(y4 <span class="sc">~</span> x4)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 </div>
-</div>
-<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Comparison.</span></span>
-<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(<span class="st">"sample.mean"</span> <span class="ot">=</span> <span class="fu">mean</span>(data), <span class="st">"pop.mean"</span> <span class="ot">=</span> <span class="dv">1</span> <span class="sc">/</span> .<span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>sample.mean    pop.mean 
-   5.288777    5.000000 </code></pre>
-</div>
-</div>
+<p>It is a convention to call an object that contains a fitted model (<code>lm(y1 ~ x1)</code> results in a fitted linear model) by its name prefixed with <code>fit</code>. This is not a requirement, but it is a convention that makes it easier to read the code. Anyone who sees <code>fit1</code> knows that this is a fitted model - and most likely the first one - in a series of fitted models.</p>
 <hr>
-<ol start="11" type="1">
-<li><strong>Fit the following linear models on the anscombe data:</strong></li>
-</ol>
-<ul>
-<li><code>y1</code> predicted by <code>x1</code> - stored in object <code>fit1</code></li>
-<li><code>y2</code> predicted by <code>x2</code> - stored in object <code>fit2</code></li>
-<li><code>y3</code> predicted by <code>x3</code> - stored in object <code>fit3</code></li>
-<li><code>y4</code> predicted by <code>x4</code> - stored in object <code>fit4</code></li>
-</ul>
+</section>
+<section id="structure-the-output" class="level2">
+<h2 class="anchored" data-anchor-id="structure-the-output">Structure the output</h2>
+<p><strong>Exercise 2:</strong> <strong>Create a data frame from the coefficients of the 4 fitted objects from Exercise 1 and name the resulting object <code>fitted_coefs</code></strong> We did not yet discuss this in the lecture, but the <code>coef()</code> function returns the coefficients of a fitted model. We can use this to quickly extract the coefficients of fitted models to create a data frame with the coefficients of the four fitted <code>anscombe</code> models.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a>fit1 <span class="ot">&lt;-</span> anscombe <span class="sc">%$%</span></span>
-<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">lm</span>(y1 <span class="sc">~</span> x1)</span>
-<span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a>fit2 <span class="ot">&lt;-</span> anscombe <span class="sc">%$%</span></span>
-<span id="cb45-4"><a href="#cb45-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">lm</span>(y2 <span class="sc">~</span> x2)</span>
-<span id="cb45-5"><a href="#cb45-5" aria-hidden="true" tabindex="-1"></a>fit3 <span class="ot">&lt;-</span> anscombe <span class="sc">%$%</span></span>
-<span id="cb45-6"><a href="#cb45-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">lm</span>(y3 <span class="sc">~</span> x3)</span>
-<span id="cb45-7"><a href="#cb45-7" aria-hidden="true" tabindex="-1"></a>fit4 <span class="ot">&lt;-</span> anscombe <span class="sc">%$%</span></span>
-<span id="cb45-8"><a href="#cb45-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">lm</span>(y4 <span class="sc">~</span> x4)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<hr>
-<ol start="12" type="1">
-<li><strong>`Create a data frame from the coefficients of the 4 fitted objects from Exercise 11</strong></li>
-</ol>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a>out <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">fit1 =</span> <span class="fu">coef</span>(fit1),</span>
-<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a>                  <span class="at">fit2 =</span> <span class="fu">coef</span>(fit2),</span>
-<span id="cb46-3"><a href="#cb46-3" aria-hidden="true" tabindex="-1"></a>                  <span class="at">fit3 =</span> <span class="fu">coef</span>(fit3),</span>
-<span id="cb46-4"><a href="#cb46-4" aria-hidden="true" tabindex="-1"></a>                  <span class="at">fit4 =</span> <span class="fu">coef</span>(fit4))</span>
-<span id="cb46-5"><a href="#cb46-5" aria-hidden="true" tabindex="-1"></a><span class="fu">row.names</span>(out) <span class="ot">&lt;-</span> <span class="fu">names</span>(<span class="fu">coef</span>(fit1))</span>
-<span id="cb46-6"><a href="#cb46-6" aria-hidden="true" tabindex="-1"></a>out</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>fitted_coefs <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">fit1 =</span> <span class="fu">coef</span>(fit1),</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>                           <span class="at">fit2 =</span> <span class="fu">coef</span>(fit2),</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>                           <span class="at">fit3 =</span> <span class="fu">coef</span>(fit3),</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>                           <span class="at">fit4 =</span> <span class="fu">coef</span>(fit4))</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>fitted_coefs</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>                 fit1     fit2      fit3      fit4
 (Intercept) 3.0000909 3.000909 3.0024545 3.0017273
 x1          0.5000909 0.500000 0.4997273 0.4999091</code></pre>
 </div>
 </div>
-<p>These estimates are very similar.</p>
+<p>These estimates are very similar, as we already established in today’s lecture. For the interpretation of the estimates:</p>
+<pre><code>-   The intercept represents the expected value of the outcome ($y$) when all predictor variables ($x$) are zero.
+-   Each regression estimate (coefficient) shows the expected change in $y$ for a one-unit increase in that predictor, holding all other variables constant.
+-   A positive coefficient means $y$ increases as the predictor $x$ increases; a negative coefficient means $y$ decreases with increasing $x$.</code></pre>
 <hr>
-<ol start="13" type="1">
-<li><strong>Plot the four fitted models from Exercise 11 in a single plotting window. Make the points in the plots <code>blue</code>, <code>gray</code>, <code>orange</code> and <code>purple</code>, respectively. </strong></li>
-</ol>
+<p><strong>Exercise 3:</strong> <strong>Now add the rownames as a column to the data and make sure that the resulting object is a tibble.</strong></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(y1 <span class="sc">~</span> x1, <span class="at">col =</span> <span class="st">"blue"</span>, <span class="at">data =</span> anscombe)</span>
-<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a><span class="fu">points</span>(y2 <span class="sc">~</span> x2, <span class="at">col =</span> <span class="st">"gray"</span>, <span class="at">data =</span> anscombe)</span>
-<span id="cb48-3"><a href="#cb48-3" aria-hidden="true" tabindex="-1"></a><span class="fu">points</span>(y3 <span class="sc">~</span> x3, <span class="at">col =</span> <span class="st">"orange"</span>, <span class="at">data =</span> anscombe)</span>
-<span id="cb48-4"><a href="#cb48-4" aria-hidden="true" tabindex="-1"></a><span class="fu">points</span>(y4 <span class="sc">~</span> x4, <span class="at">col =</span> <span class="st">"purple"</span>, <span class="at">data =</span> anscombe)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>fitted_coefs <span class="sc">%&lt;&gt;%</span> <span class="co"># assign pipe parses the result back to fitted_coefs</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rownames_to_column</span>(<span class="at">var =</span> <span class="st">"estimate"</span>) <span class="sc">%&gt;%</span> <span class="co"># add rownames to the data</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as_tibble</span>() <span class="co"># explicitly make it a tibble</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<hr>
+<p><strong>Exercise 4:</strong> <strong>Inspect the <code>fitted_coefs</code> data set. Why does <code>fit2</code> have fewer decimals printed than the other models?</strong></p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>fitted_coefs</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 5
+  estimate     fit1  fit2  fit3  fit4
+  &lt;chr&gt;       &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+1 (Intercept) 3.00   3.00 3.00  3.00 
+2 x1          0.500  0.5  0.500 0.500</code></pre>
+</div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co">#The coefficient for `fit2` is exactly `0.5`, which is printed with only one decimal, while the other coefficients are printed with 3 digits. Tibbles print numbers with three significant digits by default, switching to scientific notation if the available space is too small. If it can be represented with fewer numbers, it will do so. </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<hr>
+</section>
+<section id="plotting-the-models" class="level2">
+<h2 class="anchored" data-anchor-id="plotting-the-models">Plotting the models</h2>
+<p><strong>Exercise 5:</strong> <strong>Plot the four fitted models from the anscombe data set in a single plotting window as follows: use <code>plot()</code> to make a plot for the first model and <code>points()</code> to add each subsequent model’s points to the plot window. Make the points for the models in the plots <code>blue</code> (<code>y1 ~ x1</code>), <code>gray</code> (<code>y2 ~ x2</code>), <code>orange</code> (<code>y3 ~ x3</code>) and <code>purple</code> (<code>y4 ~ x4</code>), respectively. </strong></p>
+<p>Hint: look at <code>?plot</code> and <code>?points</code> for the arguments that you need to plot the models and to change the color of the points.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(y1 <span class="sc">~</span> x1, <span class="at">col =</span> <span class="st">"blue"</span>, <span class="at">data =</span> anscombe)</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="fu">points</span>(y2 <span class="sc">~</span> x2, <span class="at">col =</span> <span class="st">"gray"</span>, <span class="at">data =</span> anscombe)</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="fu">points</span>(y3 <span class="sc">~</span> x3, <span class="at">col =</span> <span class="st">"orange"</span>, <span class="at">data =</span> anscombe)</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="fu">points</span>(y4 <span class="sc">~</span> x4, <span class="at">col =</span> <span class="st">"purple"</span>, <span class="at">data =</span> anscombe)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="meeting4_files/figure-html/unnamed-chunk-21-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="meeting4_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
 <hr>
-<ol start="14" type="1">
-<li><strong>Now plot all four fitted models from Exercise 11 in a plotting window with 2 rows and 2 columns.</strong></li>
-</ol>
+<p><strong>Exercise 6:</strong> <strong>Now plot all four fitted models in a plotting window with 2 rows and 2 columns.</strong></p>
+<p>Hint: use the command <code>par(mfrow = c(2, 2))</code> to set the plotting window to 2 rows and 2 columns. Use this command before you start the plots. You do not have to use <code>points()</code> in this case, but rather use <code>plot()</code> for every seperate model plot.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">2</span>))</span>
-<span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(y1 <span class="sc">~</span> x1, <span class="at">data =</span> anscombe)</span>
-<span id="cb49-3"><a href="#cb49-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(y2 <span class="sc">~</span> x2, <span class="at">data =</span> anscombe)</span>
-<span id="cb49-4"><a href="#cb49-4" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(y3 <span class="sc">~</span> x3, <span class="at">data =</span> anscombe)</span>
-<span id="cb49-5"><a href="#cb49-5" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(y4 <span class="sc">~</span> x4, <span class="at">data =</span> anscombe)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">2</span>))</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(y1 <span class="sc">~</span> x1, <span class="at">data =</span> anscombe)</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(y2 <span class="sc">~</span> x2, <span class="at">data =</span> anscombe)</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(y3 <span class="sc">~</span> x3, <span class="at">data =</span> anscombe)</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(y4 <span class="sc">~</span> x4, <span class="at">data =</span> anscombe)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="meeting4_files/figure-html/unnamed-chunk-22-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="meeting4_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
+<p>With <code>par(mfrow = c(2, 2))</code> we set the plotting window to have 2 rows and 2 columns. This means that the first plot will be placed in the first row, first column, the next plot will be placed in the first row, second column, and so on.</p>
+<p>To revert to a single plotting window, you can use <code>par(mfrow = c(1, 1))</code> after the plots.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">1</span>)) <span class="co"># revert to single plotting window</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
 <hr>
 </section>
-</section>
-<section id="practical-2" class="level2">
-<h2 class="anchored" data-anchor-id="practical-2">Practical 2</h2>
-<p>We use the following packages in this practical:</p>
+<section id="read-in-the-titanic-data-set" class="level2">
+<h2 class="anchored" data-anchor-id="read-in-the-titanic-data-set">Read in the <code>titanic</code> data set</h2>
+<p>We use the <code>titanic</code> data set for the next exercises. Use the code below to read them in from the internet:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(mice)</span>
-<span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(caret)</span>
-<span id="cb50-3"><a href="#cb50-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
-<span id="cb50-4"><a href="#cb50-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(magrittr)</span>
-<span id="cb50-5"><a href="#cb50-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(DAAG)</span>
-<span id="cb50-6"><a href="#cb50-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>We use the <code>titanic</code> data set for this exercise. Download the <a href="titanic.csv"><code>titanic.csv</code></a> data set.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a>con <span class="ot">&lt;-</span> <span class="fu">url</span>(<span class="st">"https://www.gerkovink.com/erasmus/Day%202/Part%20D/titanic.csv"</span>)</span>
-<span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a>titanic <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(con)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>con <span class="ot">&lt;-</span> <span class="fu">url</span>(<span class="st">"https://www.gerkovink.com/erasmus/Day%202/Part%20D/titanic.csv"</span>)</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>titanic <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(con) <span class="co"># reads in the connection as a csv file</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-stderr">
 <pre><code>Rows: 887 Columns: 8
 ── Column specification ────────────────────────────────────────────────────────
@@ -790,9 +511,15 @@ dbl (6): Survived, Pclass, Age, Siblings/Spouses Aboard, Parents/Children Ab...
 </div>
 </div>
 <hr>
-<p><strong>Exercise 1</strong> <strong>Inspect the titanic data set by calling <code>titanic</code> in the console and with functions <code>summary()</code>, <code>str()</code> and <code>md.pattern()</code>.</strong></p>
+<p><strong>Exercise 7:</strong> <strong>Inspect the titanic data set by calling <code>titanic</code> in the console and with functions <code>summary()</code>, <code>str()</code> and <code>glimpse</code>.</strong></p>
+<ul>
+<li><code>titanic</code> will print the data set in the console:</li>
+</ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a>titanic</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>titanic</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 887 × 8
    Survived Pclass Name                       Sex     Age Siblings/Spouses Abo…¹
@@ -813,8 +540,14 @@ dbl (6): Survived, Pclass, Age, Siblings/Spouses Aboard, Parents/Children Ab...
 </div>
 </div>
 <p>We can see that the <code>titanic</code> data set is imported as a <code>tibble</code>. A <code>tibble</code> is a more flexible data frame with a much nicer printing class.</p>
+<ul>
+<li><code>summary()</code> gives us a quick overview of the data set:</li>
+</ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(titanic)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>titanic <span class="sc">%&gt;%</span> <span class="fu">summary</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>    Survived          Pclass          Name               Sex           
  Min.   :0.0000   Min.   :1.000   Length:887         Length:887        
@@ -839,9 +572,15 @@ dbl (6): Survived, Pclass, Age, Siblings/Spouses Aboard, Parents/Children Ab...
  Max.   :512.329  </code></pre>
 </div>
 </div>
-<p>The <code>summary()</code> output gives us direct information about the parametric nature of the columns is the data</p>
+<p>The <code>summary()</code> output gives us direct information about the parametric nature of the columns in the data</p>
+<ul>
+<li><code>str()</code> gives us the structure of the data set:</li>
+</ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb57"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(titanic)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>titanic <span class="sc">%&gt;%</span> <span class="fu">str</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>spc_tbl_ [887 × 8] (S3: spec_tbl_df/tbl_df/tbl/data.frame)
  $ Survived               : num [1:887] 0 1 1 1 0 0 0 0 1 1 ...
@@ -868,39 +607,34 @@ dbl (6): Survived, Pclass, Age, Siblings/Spouses Aboard, Parents/Children Ab...
 </div>
 <p>When we study the structure of the data set, we see that the outcome <code>Survived</code> is not coded as a <code>factor</code>, but as a numeric column. The same holds for <code>Pclass</code>. This will influence the default estimation later on. There are more irregularities, but we’ll ignore those for now.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb59"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a><span class="fu">md.pattern</span>(titanic, <span class="at">rotate.names =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>titanic <span class="sc">%&gt;%</span> <span class="fu">glimpse</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-stdout">
-<pre><code> /\     /\
-{  `---'  }
-{  O   O  }
-==&gt;  V &lt;==  No need for mice. This data set is completely observed.
- \  \|/  /
-  `-----'</code></pre>
-</div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="meeting4_files/figure-html/unnamed-chunk-28-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code>    Survived Pclass Name Sex Age Siblings/Spouses Aboard
-887        1      1    1   1   1                       1
-           0      0    0   0   0                       0
-    Parents/Children Aboard Fare  
-887                       1    1 0
-                          0    0 0</code></pre>
+<pre><code>Rows: 887
+Columns: 8
+$ Survived                  &lt;dbl&gt; 0, 1, 1, 1, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0,…
+$ Pclass                    &lt;dbl&gt; 3, 1, 3, 1, 3, 3, 1, 3, 3, 2, 3, 1, 3, 3, 3,…
+$ Name                      &lt;chr&gt; "Mr. Owen Harris Braund", "Mrs. John Bradley…
+$ Sex                       &lt;chr&gt; "male", "female", "female", "female", "male"…
+$ Age                       &lt;dbl&gt; 22, 38, 26, 35, 35, 27, 54, 2, 27, 14, 4, 58…
+$ `Siblings/Spouses Aboard` &lt;dbl&gt; 1, 1, 0, 1, 0, 0, 0, 3, 0, 1, 1, 0, 0, 1, 0,…
+$ `Parents/Children Aboard` &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 1, 2, 0, 1, 0, 0, 5, 0,…
+$ Fare                      &lt;dbl&gt; 7.2500, 71.2833, 7.9250, 53.1000, 8.0500, 8.…</code></pre>
 </div>
 </div>
 <p>There are no missing values in this <code>titanic</code> data set.</p>
 <hr>
-<p><strong>Exercise 2</strong> <strong>Correct the measurement level of the columns <code>Pclass</code> and <code>Survived</code>. Then ask for the <code>summary()</code> once more.</strong></p>
+<p><strong>Exercise 8:</strong> <strong>Correct the measurement level of the columns <code>Pclass</code> and <code>Survived</code>. Then ask for the <code>summary()</code> once more.</strong></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb62"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a>titanic <span class="sc">%&lt;&gt;%</span> </span>
-<span id="cb62-2"><a href="#cb62-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Pclass =</span> <span class="fu">factor</span>(Pclass, <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"1st class"</span>, <span class="st">"2nd class"</span>, <span class="st">"3rd class"</span>)), </span>
-<span id="cb62-3"><a href="#cb62-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">Survived =</span> <span class="fu">factor</span>(Survived, <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"No"</span>, <span class="st">"Yes"</span>)))</span>
-<span id="cb62-4"><a href="#cb62-4" aria-hidden="true" tabindex="-1"></a>titanic <span class="sc">%&gt;%</span> <span class="fu">summary</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>titanic <span class="sc">%&lt;&gt;%</span> </span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Pclass =</span> <span class="fu">factor</span>(Pclass, <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"1st class"</span>, <span class="st">"2nd class"</span>, <span class="st">"3rd class"</span>)), </span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">Survived =</span> <span class="fu">factor</span>(Survived, <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"No"</span>, <span class="st">"Yes"</span>)))</span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>titanic <span class="sc">%&gt;%</span> <span class="fu">summary</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-stdout">
 <pre><code> Survived        Pclass        Name               Sex           
  No :545   1st class:216   Length:887         Length:887        
@@ -927,354 +661,227 @@ dbl (6): Survived, Pclass, Age, Siblings/Spouses Aboard, Parents/Children Ab...
 </div>
 <p>We now see the tabular information about the <code>Survived</code> and <code>Pclass</code> columns. This is because these columns are now coded as factors (i.e.&nbsp;categorical variables with a numeric representation). Note that in the <code>mutate</code> call, I used the <code>%&lt;&gt;%</code> pipe. This <em>assign</em> pipe returns the endresult of the pipe to the original object. This mitigates the use of the <code>&lt;-</code> assign operator and the double calling of the <code>titanic</code> set in the regular strategy below:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb64"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb64-1"><a href="#cb64-1" aria-hidden="true" tabindex="-1"></a>titanic <span class="ot">&lt;-</span> titanic <span class="sc">%&gt;%</span> </span>
-<span id="cb64-2"><a href="#cb64-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Pclass =</span> <span class="fu">factor</span>(Pclass, <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"1st class"</span>, <span class="st">"2nd class"</span>, <span class="st">"3rd class"</span>)), </span>
-<span id="cb64-3"><a href="#cb64-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">Survived =</span> <span class="fu">factor</span>(Survived, <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"No"</span>, <span class="st">"Yes"</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>titanic <span class="ot">&lt;-</span> titanic <span class="sc">%&gt;%</span> </span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Pclass =</span> <span class="fu">factor</span>(Pclass, <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"1st class"</span>, <span class="st">"2nd class"</span>, <span class="st">"3rd class"</span>)), </span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">Survived =</span> <span class="fu">factor</span>(Survived, <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"No"</span>, <span class="st">"Yes"</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 </div>
 <hr>
 </section>
-<section id="data-subsetting" class="level1">
-<h1>Data subsetting</h1>
+<section id="correlations" class="level2">
+<h2 class="anchored" data-anchor-id="correlations">Correlations</h2>
+<p><strong>Exercise 9:</strong> <strong>Calculate Pearson’s correlation coefficient between <code>Age</code> and <code>Fare</code> in the <code>titanic</code> data set.</strong></p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>titanic <span class="sc">%&gt;%</span> </span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">correlation =</span> <span class="fu">cor</span>(Age, Fare, <span class="at">use =</span> <span class="st">"pairwise.complete.obs"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 1
+  correlation
+        &lt;dbl&gt;
+1       0.112</code></pre>
+</div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co"># or</span></span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>titanic <span class="sc">%$%</span></span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cor</span>(Age, Fare, <span class="at">use =</span> <span class="st">"pairwise.complete.obs"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.1123286</code></pre>
+</div>
+</div>
 <hr>
-<p><strong>Exercise 3</strong> <strong>Split the data manually into two parts: a training part (70% of cases) and a test part (30% of cases). Verify the dimensions of the splits with function <code>dim()</code>.</strong></p>
+</section>
+<section id="t-test" class="level2">
+<h2 class="anchored" data-anchor-id="t-test">T-test</h2>
+<p><strong>Exercise 10:</strong> <strong>Calculate the mean and variance of age for the survivors and the non-surivors using <code>summarise()</code></strong></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb65"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb65-1"><a href="#cb65-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>) <span class="co"># for reproducibility</span></span>
-<span id="cb65-2"><a href="#cb65-2" aria-hidden="true" tabindex="-1"></a>trainIndex <span class="ot">&lt;-</span> <span class="fu">createDataPartition</span>(titanic<span class="sc">$</span>Survived, <span class="at">p =</span> .<span class="dv">7</span>, <span class="at">times =</span> <span class="dv">1</span>, <span class="at">list =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb65-3"><a href="#cb65-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb65-4"><a href="#cb65-4" aria-hidden="true" tabindex="-1"></a>train <span class="ot">&lt;-</span> titanic[trainIndex, ]</span>
-<span id="cb65-5"><a href="#cb65-5" aria-hidden="true" tabindex="-1"></a>test <span class="ot">&lt;-</span> titanic[<span class="sc">-</span>trainIndex, ]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>titanic <span class="sc">%&gt;%</span></span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Survived) <span class="sc">%&gt;%</span></span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">mean_age =</span> <span class="fu">mean</span>(Age, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">var_age =</span> <span class="fu">var</span>(Age, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 3
+  Survived mean_age var_age
+  &lt;fct&gt;       &lt;dbl&gt;   &lt;dbl&gt;
+1 No           30.1    193.
+2 Yes          28.4    208.</code></pre>
 </div>
-<p>We make use of the <code>createDataPartition()</code> function from package <code>caret</code> to generate the rownumbers for the splits. We could have also done this manually with e.g.&nbsp;<code>trainIndex &lt;- sample(1:nrow(titanic), round(.7*nrow(titanic)), replace = TRUE)</code>. I find the <code>createDataPartition()</code> function always convenient, because it directly plugs into the <code>caret</code> functionality.</p>
+</div>
+<hr>
+<p><strong>Exercise 11:</strong> <strong>Perform a t-test to compare the mean <code>Age</code> of passengers that survived and those that did not. Perform the t-test once with equal variances assumed, and once without. Does the conclusion change?</strong></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb66"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb66-1"><a href="#cb66-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(train)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>titanic <span class="sc">%$%</span></span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">t.test</span>(Age <span class="sc">~</span> Survived, <span class="at">var.equal =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 622   8</code></pre>
+<pre><code>
+    Two Sample t-test
+
+data:  Age by Survived
+t = 1.7781, df = 885, p-value = 0.07572
+alternative hypothesis: true difference in means between group No and group Yes is not equal to 0
+95 percent confidence interval:
+ -0.1795246  3.6398052
+sample estimates:
+ mean in group No mean in group Yes 
+         30.13853          28.40839 </code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb68"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb68-1"><a href="#cb68-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(test)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>titanic <span class="sc">%$%</span></span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">t.test</span>(Age <span class="sc">~</span> Survived, <span class="at">var.equal =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 265   8</code></pre>
+<pre><code>
+    Welch Two Sample t-test
+
+data:  Age by Survived
+t = 1.763, df = 704.1, p-value = 0.07834
+alternative hypothesis: true difference in means between group No and group Yes is not equal to 0
+95 percent confidence interval:
+ -0.1966269  3.6569075
+sample estimates:
+ mean in group No mean in group Yes 
+         30.13853          28.40839 </code></pre>
 </div>
 </div>
-<p>We can see that the split with 622 cases in the <code>train</code> set and 265 cases in the <code>test</code> set approximates the desired <code>p = .7</code> split probability with 0.7012401.</p>
+<p>There does not seem to be a significant difference in age between the survivors and the non-survivors. The p-value is larger than 0.05 in both cases, so we cannot reject the null hypothesis that the means are equal.</p>
 <hr>
 </section>
-<section id="linear-model" class="level1">
-<h1>Linear model</h1>
-<hr>
-<p><strong>Exercise 3</strong> <strong>Predict <code>Age</code> from <code>Pclass</code>, <code>Sex</code> and <code>Survived</code>. Train your model on the <code>train</code> set and validate it on the <code>test</code> set</strong></p>
+<section id="chi-squared-test" class="level2">
+<h2 class="anchored" data-anchor-id="chi-squared-test">Chi-squared test</h2>
+<p><strong>Exercise 12:</strong> <strong>Perform a chi-squared test to compare the survival rates of passengers in the different classes. Also study the observed frequencies table and study the expected frequencies.</strong></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb70"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb70-1"><a href="#cb70-1" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">&lt;-</span> train <span class="sc">%$%</span> </span>
-<span id="cb70-2"><a href="#cb70-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">lm</span>(Age <span class="sc">~</span> Pclass <span class="sc">+</span> Sex <span class="sc">+</span> Survived) </span>
-<span id="cb70-3"><a href="#cb70-3" aria-hidden="true" tabindex="-1"></a>pred <span class="ot">&lt;-</span> fit <span class="sc">%&gt;%</span> </span>
-<span id="cb70-4"><a href="#cb70-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">predict</span>(<span class="at">newdata =</span> test)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>The <code>fit</code> object contains the model fitted on the training data. The <code>pred</code> object contains the predictions obtained by applying the <code>fit</code> model to the <code>test</code> data.</p>
-<hr>
-<p><strong>Exercise 4</strong> <strong>Now calculate the RMSE and the <span class="math inline">\(R^2\)</span> for the predictions and compare those to the fitted model in <code>fit</code></strong></p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb71"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb71-1"><a href="#cb71-1" aria-hidden="true" tabindex="-1"></a>results <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">R2 =</span> <span class="fu">c</span>(<span class="fu">cor</span>(pred, test<span class="sc">$</span>Age)<span class="sc">^</span><span class="dv">2</span>, </span>
-<span id="cb71-2"><a href="#cb71-2" aria-hidden="true" tabindex="-1"></a>                             <span class="fu">summary</span>(fit)<span class="sc">$</span>r.squared),</span>
-<span id="cb71-3"><a href="#cb71-3" aria-hidden="true" tabindex="-1"></a>                      <span class="at">RMSE =</span> <span class="fu">c</span>((pred <span class="sc">-</span> test<span class="sc">$</span>Age)<span class="sc">^</span><span class="dv">2</span> <span class="sc">%&gt;%</span> sum <span class="sc">%&gt;%</span> sqrt, </span>
-<span id="cb71-4"><a href="#cb71-4" aria-hidden="true" tabindex="-1"></a>                               fit<span class="sc">$</span>residuals<span class="sc">^</span><span class="dv">2</span> <span class="sc">%&gt;%</span> mean <span class="sc">%&gt;%</span> sqrt))</span>
-<span id="cb71-5"><a href="#cb71-5" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(results) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"predicted"</span>, <span class="st">"fitted"</span>)</span>
-<span id="cb71-6"><a href="#cb71-6" aria-hidden="true" tabindex="-1"></a>results</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>titanic <span class="sc">%$%</span></span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">table</span>(Pclass, Survived) <span class="co"># Create a contingency table</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-stdout">
-<pre><code>                 R2      RMSE
-predicted 0.1802922 208.17344
-fitted    0.2066340  12.57457</code></pre>
+<pre><code>           Survived
+Pclass       No Yes
+  1st class  80 136
+  2nd class  97  87
+  3rd class 368 119</code></pre>
 </div>
-</div>
-<p>We see that the <span class="math inline">\(R^2\)</span> is lower for the predictions and that the root mean squared error is higher. For unbiased estimators we can view the RMSE as the standard error of the estimator. The MSE would then be the variance of that unbiased estimator.</p>
-<hr>
-<p><strong>Exercise 5</strong> <strong>Now use the <code>caret</code> package to do the same as above. Use the default paramters for the <code>train()</code> function and use the <code>train</code> data to train the model.</strong></p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb73"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb73-1"><a href="#cb73-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>) <span class="co"># for reproducibility</span></span>
-<span id="cb73-2"><a href="#cb73-2" aria-hidden="true" tabindex="-1"></a><span class="co"># train the model on training set</span></span>
-<span id="cb73-3"><a href="#cb73-3" aria-hidden="true" tabindex="-1"></a>model <span class="ot">&lt;-</span> <span class="fu">train</span>(Age <span class="sc">~</span> Pclass <span class="sc">+</span> Sex <span class="sc">+</span> Survived,</span>
-<span id="cb73-4"><a href="#cb73-4" aria-hidden="true" tabindex="-1"></a>               <span class="at">data =</span> train,</span>
-<span id="cb73-5"><a href="#cb73-5" aria-hidden="true" tabindex="-1"></a>               <span class="at">method =</span> <span class="st">"lm"</span>)</span>
-<span id="cb73-6"><a href="#cb73-6" aria-hidden="true" tabindex="-1"></a>model</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Linear Regression 
-
-622 samples
-  3 predictor
-
-No pre-processing
-Resampling: Bootstrapped (25 reps) 
-Summary of sample sizes: 622, 622, 622, 622, 622, 622, ... 
-Resampling results:
-
-  RMSE      Rsquared   MAE    
-  12.83484  0.1941763  10.1362
-
-Tuning parameter 'intercept' was held constant at a value of TRUE</code></pre>
-</div>
-</div>
-<p>We see that the <code>train</code> function by default uses a Bootstrapped resampling: the <code>train</code> data is resampled with replacement 25 times and every time the model is evaluated. Every individual sample is slightly different and, hence, the distribution of obtained results is also different. We can get information about the variance from:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb75"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb75-1"><a href="#cb75-1" aria-hidden="true" tabindex="-1"></a>model<span class="sc">$</span>results</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>  intercept     RMSE  Rsquared     MAE    RMSESD RsquaredSD     MAESD
-1      TRUE 12.83484 0.1941763 10.1362 0.5506277 0.04287056 0.4955852</code></pre>
-</div>
-</div>
-<hr>
-<p><strong>Exercise 6</strong> <strong>Now use the model from (5) to predict the <code>test</code> data and calculate the same metrics as in (4).</strong></p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb77"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb77-1"><a href="#cb77-1" aria-hidden="true" tabindex="-1"></a>pred <span class="ot">&lt;-</span> <span class="fu">predict</span>(model, <span class="at">newdata =</span> test)</span>
-<span id="cb77-2"><a href="#cb77-2" aria-hidden="true" tabindex="-1"></a><span class="co"># R^2</span></span>
-<span id="cb77-3"><a href="#cb77-3" aria-hidden="true" tabindex="-1"></a><span class="fu">cor</span>(pred, test<span class="sc">$</span>Age)<span class="sc">^</span><span class="dv">2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.1802922</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb79"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb79-1"><a href="#cb79-1" aria-hidden="true" tabindex="-1"></a><span class="co"># RMSE</span></span>
-<span id="cb79-2"><a href="#cb79-2" aria-hidden="true" tabindex="-1"></a>(pred <span class="sc">-</span> test<span class="sc">$</span>Age)<span class="sc">^</span><span class="dv">2</span> <span class="sc">%&gt;%</span> mean <span class="sc">%&gt;%</span> sqrt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 12.78799</code></pre>
-</div>
-</div>
-<p>A much easier way of obtaining the same metrics is with the <code>postResample()</code> function:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb81"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb81-1"><a href="#cb81-1" aria-hidden="true" tabindex="-1"></a><span class="fu">postResample</span>(<span class="at">pred =</span> pred, <span class="at">obs =</span> test<span class="sc">$</span>Age)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>      RMSE   Rsquared        MAE 
-12.7879928  0.1802922  9.6969758 </code></pre>
-</div>
-</div>
-<hr>
-<p><strong>Exercise 7</strong> <strong>Rerun the model from (5), but use 10-fold cross-validation on the training set. Evaluate the predictions with <code>postResample()</code>.</strong></p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb83"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb83-1"><a href="#cb83-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>) <span class="co"># for reproducibility</span></span>
-<span id="cb83-2"><a href="#cb83-2" aria-hidden="true" tabindex="-1"></a>model <span class="ot">&lt;-</span> <span class="fu">train</span>(Age <span class="sc">~</span> Pclass <span class="sc">+</span> Sex <span class="sc">+</span> Survived,</span>
-<span id="cb83-3"><a href="#cb83-3" aria-hidden="true" tabindex="-1"></a>               <span class="at">data =</span> train,</span>
-<span id="cb83-4"><a href="#cb83-4" aria-hidden="true" tabindex="-1"></a>               <span class="at">method =</span> <span class="st">"lm"</span>,</span>
-<span id="cb83-5"><a href="#cb83-5" aria-hidden="true" tabindex="-1"></a>               <span class="at">trControl =</span> <span class="fu">trainControl</span>(<span class="at">method =</span> <span class="st">"cv"</span>, <span class="at">number =</span> <span class="dv">10</span>)</span>
-<span id="cb83-6"><a href="#cb83-6" aria-hidden="true" tabindex="-1"></a>               )</span>
-<span id="cb83-7"><a href="#cb83-7" aria-hidden="true" tabindex="-1"></a>model</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Linear Regression 
-
-622 samples
-  3 predictor
-
-No pre-processing
-Resampling: Cross-Validated (10 fold) 
-Summary of sample sizes: 560, 558, 559, 560, 559, 562, ... 
-Resampling results:
-
-  RMSE     Rsquared   MAE    
-  12.5743  0.2086778  9.93655
-
-Tuning parameter 'intercept' was held constant at a value of TRUE</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb85"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb85-1"><a href="#cb85-1" aria-hidden="true" tabindex="-1"></a>pred <span class="ot">&lt;-</span> <span class="fu">predict</span>(model, <span class="at">newdata =</span> test)</span>
-<span id="cb85-2"><a href="#cb85-2" aria-hidden="true" tabindex="-1"></a><span class="fu">postResample</span>(pred, test<span class="sc">$</span>Age)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>      RMSE   Rsquared        MAE 
-12.7879928  0.1802922  9.6969758 </code></pre>
-</div>
-</div>
-<p>There’s not much more we can do for this linear model. At least we now that the below model is not grossly overfitted and that, if new data would come in, there is not much accuracy in predicting <code>Age</code> from these predictors. Let’s hope that never happens.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb87"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb87-1"><a href="#cb87-1" aria-hidden="true" tabindex="-1"></a><span class="fu">lm</span>(Age <span class="sc">~</span> Pclass <span class="sc">+</span> Sex <span class="sc">+</span> Survived, <span class="at">data =</span> titanic) <span class="sc">%&gt;%</span> <span class="fu">summary</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>titanic <span class="sc">%$%</span></span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">chisq.test</span>(<span class="fu">table</span>(Pclass, Survived)) <span class="co"># Perform the chi-squared test</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>
-Call:
-lm(formula = Age ~ Pclass + Sex + Survived, data = titanic)
+    Pearson's Chi-squared test
 
-Residuals:
-    Min      1Q  Median      3Q     Max 
--39.406  -7.934  -0.934   7.493  47.066 
-
-Coefficients:
-                Estimate Std. Error t value Pr(&gt;|t|)    
-(Intercept)       41.406      1.422  29.122  &lt; 2e-16 ***
-Pclass2nd class   -9.803      1.281  -7.653 5.15e-14 ***
-Pclass3rd class  -15.889      1.098 -14.467  &lt; 2e-16 ***
-Sexmale            1.417      1.061   1.335    0.182    
-SurvivedYes       -5.427      1.098  -4.944 9.15e-07 ***
----
-Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-
-Residual standard error: 12.67 on 882 degrees of freedom
-Multiple R-squared:  0.1991,    Adjusted R-squared:  0.1954 
-F-statistic:  54.8 on 4 and 882 DF,  p-value: &lt; 2.2e-16</code></pre>
+data:  table(Pclass, Survived)
+X-squared = 101.22, df = 2, p-value &lt; 2.2e-16</code></pre>
+</div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>titanic <span class="sc">%$%</span></span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">chisq.test</span>(<span class="fu">table</span>(Pclass, Survived)) <span class="sc">%&gt;%</span> </span>
+<span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a>  .<span class="sc">$</span>expected <span class="co"># Study the expected frequencies</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>           Survived
+Pclass            No       Yes
+  1st class 132.7170  83.28298
+  2nd class 113.0552  70.94476
+  3rd class 299.2277 187.77227</code></pre>
 </div>
 </div>
-<p>We can still infer that <code>Age</code> differs over these groups. The overall model is highly significant.</p>
+<p>The observed frequencies show that there are more survivors in the 1st class than in the 2nd and 3rd class.</p>
+<p>The <span class="math inline">\(\chi^2\)</span>-test indicates a significant difference in survival rates between the different classes, as the p-value is smaller than 0.05. The expected frequencies are all larger than 5, so we can safely use the chi-squared test.</p>
+<p>Alternatively, we could have used <code>broom::tidy()</code> to tidy the output of the chi-squared test:</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(broom) <span class="co"># for tidy output</span></span>
+<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a>titanic <span class="sc">%$%</span></span>
+<span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">chisq.test</span>(<span class="fu">table</span>(Pclass, Survived)) <span class="sc">%&gt;%</span> </span>
+<span id="cb45-4"><a href="#cb45-4" aria-hidden="true" tabindex="-1"></a>  broom<span class="sc">::</span><span class="fu">tidy</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 4
+  statistic  p.value parameter method                    
+      &lt;dbl&gt;    &lt;dbl&gt;     &lt;int&gt; &lt;chr&gt;                     
+1      101. 1.05e-22         2 Pearson's Chi-squared test</code></pre>
+</div>
+</div>
 <hr>
 </section>
-<section id="logistic-regression" class="level1">
-<h1>Logistic regression</h1>
+<section id="anova" class="level2">
+<h2 class="anchored" data-anchor-id="anova">ANOVA</h2>
+<p><strong>Exercise 13:</strong> <strong>Calculate the mean and variance of <code>Fare</code> for every passenger class using <code>summarise()</code></strong></p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a>titanic <span class="sc">%&gt;%</span> </span>
+<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Pclass) <span class="sc">%&gt;%</span> </span>
+<span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">mean_fare =</span> <span class="fu">mean</span>(Fare, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb47-4"><a href="#cb47-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">var_fare =</span> <span class="fu">var</span>(Fare, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 3
+  Pclass    mean_fare var_fare
+  &lt;fct&gt;         &lt;dbl&gt;    &lt;dbl&gt;
+1 1st class      84.2    6143.
+2 2nd class      20.7     180.
+3 3rd class      13.7     140.</code></pre>
+</div>
+</div>
+<p>There is a visible difference in mean fare between the different classes, as the variance is larger for the <em>more luxurious</em> classes. The mean fare for 1st class is much higher than for 2nd and 3rd class, which is expected.</p>
 <hr>
-<p><strong>Exercise 8</strong> <strong>Use the same train/test splits to evaluate the performance of a logistic model where <code>Survived</code> is predicted from <code>Age</code>, <code>Pclass</code> and <code>Sex</code>. Study the accuracy and the confusion matrix</strong></p>
-<p>We start by specifying the <code>caret</code> model.</p>
+<p><strong>Exercise 14:</strong> <strong>Perform an ANOVA to compare the mean <code>Fare</code> of passengers in the different classes.</strong></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb89"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb89-1"><a href="#cb89-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>) <span class="co"># for reproducibility</span></span>
-<span id="cb89-2"><a href="#cb89-2" aria-hidden="true" tabindex="-1"></a>model <span class="ot">&lt;-</span> <span class="fu">train</span>(Survived <span class="sc">~</span> Age <span class="sc">+</span> Pclass <span class="sc">+</span> Sex,</span>
-<span id="cb89-3"><a href="#cb89-3" aria-hidden="true" tabindex="-1"></a>               <span class="at">data =</span> train,</span>
-<span id="cb89-4"><a href="#cb89-4" aria-hidden="true" tabindex="-1"></a>               <span class="at">method =</span> <span class="st">"glm"</span>,</span>
-<span id="cb89-5"><a href="#cb89-5" aria-hidden="true" tabindex="-1"></a>               <span class="at">family =</span> <span class="fu">binomial</span>(<span class="at">link =</span> <span class="st">"logit"</span>),</span>
-<span id="cb89-6"><a href="#cb89-6" aria-hidden="true" tabindex="-1"></a>               <span class="at">trControl =</span> <span class="fu">trainControl</span>(<span class="at">method =</span> <span class="st">"cv"</span>, <span class="at">number =</span> <span class="dv">10</span>)</span>
-<span id="cb89-7"><a href="#cb89-7" aria-hidden="true" tabindex="-1"></a>               )</span>
-<span id="cb89-8"><a href="#cb89-8" aria-hidden="true" tabindex="-1"></a>model</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a>titanic <span class="sc">%$%</span></span>
+<span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">lm</span>(Fare <span class="sc">~</span> Pclass) <span class="sc">%&gt;%</span></span>
+<span id="cb49-3"><a href="#cb49-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">anova</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-stdout">
-<pre><code>Generalized Linear Model 
+<pre><code>Analysis of Variance Table
 
-622 samples
-  3 predictor
-  2 classes: 'No', 'Yes' 
-
-No pre-processing
-Resampling: Cross-Validated (10 fold) 
-Summary of sample sizes: 559, 560, 560, 560, 560, 560, ... 
-Resampling results:
-
-  Accuracy   Kappa    
-  0.8020993  0.5771372</code></pre>
-</div>
-</div>
-<p>We can ask for a confusion matrix over the crossvalidated sets.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb91"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb91-1"><a href="#cb91-1" aria-hidden="true" tabindex="-1"></a><span class="fu">confusionMatrix</span>(model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Cross-Validated (10 fold) Confusion Matrix 
-
-(entries are percentual average cell counts across resamples)
- 
-          Reference
-Prediction   No  Yes
-       No  52.6 10.9
-       Yes  8.8 27.7
-                            
- Accuracy (average) : 0.8023</code></pre>
-</div>
-</div>
-<p>We see that a bit over 80% is accurately predicted. The off-diagonal holds the other almost 20%.</p>
-<p>When we apply the model to the test data to obtain predictions, we can choose to get the <code>raw</code> predictions (i.e.&nbsp;the scale of the response as recorded in the data), or <code>prob</code> predictions (i.e.&nbsp;the scale of the response as modeled in probabilities).</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb93"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb93-1"><a href="#cb93-1" aria-hidden="true" tabindex="-1"></a>pred <span class="ot">&lt;-</span> <span class="fu">predict</span>(model, <span class="at">newdata =</span> test, <span class="at">type =</span> <span class="st">"raw"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>The confusion matrix over the predictions yields many informative measures.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb94"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb94-1"><a href="#cb94-1" aria-hidden="true" tabindex="-1"></a><span class="fu">confusionMatrix</span>(pred, test<span class="sc">$</span>Survived)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Confusion Matrix and Statistics
-
-          Reference
-Prediction  No Yes
-       No  140  35
-       Yes  23  67
-                                          
-               Accuracy : 0.7811          
-                 95% CI : (0.7265, 0.8294)
-    No Information Rate : 0.6151          
-    P-Value [Acc &gt; NIR] : 5.749e-09       
-                                          
-                  Kappa : 0.5274          
-                                          
- Mcnemar's Test P-Value : 0.1486          
-                                          
-            Sensitivity : 0.8589          
-            Specificity : 0.6569          
-         Pos Pred Value : 0.8000          
-         Neg Pred Value : 0.7444          
-             Prevalence : 0.6151          
-         Detection Rate : 0.5283          
-   Detection Prevalence : 0.6604          
-      Balanced Accuracy : 0.7579          
-                                          
-       'Positive' Class : No              
-                                          </code></pre>
-</div>
-</div>
-<hr>
-<p><strong>Exercise 9</strong> <strong>Compare the model obtained with <code>caret</code>’s <code>train()</code> on with a model obtained with <code>glm()</code>. Fit the <code>glm()</code> model on the training set. Study accuracy and parameters. </strong></p>
-<p>We start with generating the relevant output from <code>glm()</code>. First, we fit the model with the correct family and link function</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb96"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb96-1"><a href="#cb96-1" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">&lt;-</span> train <span class="sc">%$%</span> </span>
-<span id="cb96-2"><a href="#cb96-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">glm</span>(Survived <span class="sc">~</span> Age <span class="sc">+</span> Pclass <span class="sc">+</span> Sex, </span>
-<span id="cb96-3"><a href="#cb96-3" aria-hidden="true" tabindex="-1"></a>      <span class="at">family =</span> <span class="fu">binomial</span>(<span class="at">link =</span> <span class="st">"logit"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>Next, we generate the predicted values:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb97"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb97-1"><a href="#cb97-1" aria-hidden="true" tabindex="-1"></a>pred.glm <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(<span class="fu">predict</span>(fit, <span class="at">newdata =</span> test, <span class="at">type =</span> <span class="st">"response"</span>) <span class="sc">&gt;</span> .<span class="dv">5</span>, <span class="st">"Yes"</span>, <span class="st">"No"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>We have to indicate how to go from the predicted probabilities back to <code>No</code> and <code>Yes</code>. I use the <code>ifelse()</code> function to do that: if the probability is over .5, then the new value will be <code>Yes</code>, else it will be <code>No</code>.</p>
-<p>Now we can enter this vector of predicted <code>Yes</code> and <code>No</code> in the <code>postResample()</code> function to compare it with the observations in <code>test$Survived</code>.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb98"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb98-1"><a href="#cb98-1" aria-hidden="true" tabindex="-1"></a><span class="fu">postResample</span>(pred.glm, test<span class="sc">$</span>Survived)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code> Accuracy     Kappa 
-0.7811321 0.5273678 </code></pre>
-</div>
-</div>
-<p>Finally, we can obtain the parameter summary from the fitted model.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb100"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb100-1"><a href="#cb100-1" aria-hidden="true" tabindex="-1"></a>fit <span class="sc">%&gt;%</span> summary</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-Call:
-glm(formula = Survived ~ Age + Pclass + Sex, family = binomial(link = "logit"))
-
-Coefficients:
-                 Estimate Std. Error z value Pr(&gt;|z|)    
-(Intercept)      3.672181   0.447397   8.208 2.25e-16 ***
-Age             -0.036166   0.008427  -4.291 1.78e-05 ***
-Pclass2nd class -1.138621   0.316826  -3.594 0.000326 ***
-Pclass3rd class -2.453363   0.314649  -7.797 6.33e-15 ***
-Sexmale         -2.643157   0.222832 -11.862  &lt; 2e-16 ***
+Response: Fare
+           Df  Sum Sq Mean Sq F value    Pr(&gt;F)    
+Pclass      2  774068  387034  240.66 &lt; 2.2e-16 ***
+Residuals 884 1421663    1608                      
 ---
-Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-
-(Dispersion parameter for binomial family taken to be 1)
-
-    Null deviance: 829.57  on 621  degrees of freedom
-Residual deviance: 555.37  on 617  degrees of freedom
-AIC: 565.37
-
-Number of Fisher Scoring iterations: 5</code></pre>
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </div>
-</div>
-<p>When we obtain the same information from the <code>caret</code> model, we see that there are no differences.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb102"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb102-1"><a href="#cb102-1" aria-hidden="true" tabindex="-1"></a><span class="fu">postResample</span>(pred, test<span class="sc">$</span>Survived)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="co"># or</span></span>
+<span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a>titanic <span class="sc">%$%</span></span>
+<span id="cb51-3"><a href="#cb51-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aov</span>(Fare <span class="sc">~</span> Pclass) <span class="sc">%&gt;%</span></span>
+<span id="cb51-4"><a href="#cb51-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summary</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-stdout">
-<pre><code> Accuracy     Kappa 
-0.7811321 0.5273678 </code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb104"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb104-1"><a href="#cb104-1" aria-hidden="true" tabindex="-1"></a>model<span class="sc">$</span>finalModel <span class="sc">%&gt;%</span> <span class="fu">summary</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-Call:
-NULL
-
-Coefficients:
-                   Estimate Std. Error z value Pr(&gt;|z|)    
-(Intercept)        3.672181   0.447397   8.208 2.25e-16 ***
-Age               -0.036166   0.008427  -4.291 1.78e-05 ***
-`Pclass2nd class` -1.138621   0.316826  -3.594 0.000326 ***
-`Pclass3rd class` -2.453363   0.314649  -7.797 6.33e-15 ***
-Sexmale           -2.643157   0.222832 -11.862  &lt; 2e-16 ***
+<pre><code>             Df  Sum Sq Mean Sq F value Pr(&gt;F)    
+Pclass        2  774068  387034   240.7 &lt;2e-16 ***
+Residuals   884 1421663    1608                   
 ---
-Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-
-(Dispersion parameter for binomial family taken to be 1)
-
-    Null deviance: 829.57  on 621  degrees of freedom
-Residual deviance: 555.37  on 617  degrees of freedom
-AIC: 565.37
-
-Number of Fisher Scoring iterations: 5</code></pre>
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </div>
 </div>
-<p>The outputs are identical. <code>caret</code> does not perform magical parameter poolings over the crossvalidated sets. The returned model is the fitted model. The accuracy that is obtained over the <code>train</code> set is obtained by meand of crossvalidation. The fitted model is in both cases identically applied to the <code>test</code> set.</p>
-<p>That said, the modeling possibilities with <code>caret</code> are enormous and there are many modeling efforts possible that lead to a proper model training on a training set. Crossvalidation is then needed. A test set can then be used to evaluate the performance of the trained model on unseen data.</p>
+<p>The ANOVA shows that there is a significant difference in mean fare between the different classes, as the p-value is smaller than 0.05.</p>
 <hr>
 <p>End of <code>Practical</code>.</p>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
