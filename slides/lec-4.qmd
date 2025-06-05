@@ -1,12 +1,12 @@
 ---
-title: "Statistische Analyse"
+title: "Statistical Analysis"
 author: 
   - name: Gerko Vink
     orcid: 0000-0001-9767-1924
     email: g.vink@uu.nl
     affiliations:
       - name: Methodology & Statistics @ Utrecht University
-date: 2 June 2025
+date: 5 June 2025
 date-format: "D MMM YYYY"
 execute: 
   echo: true
@@ -65,7 +65,7 @@ Vandaag behandelen we de volgende onderwerpen:
 - Beschrijvende statistiek
 - Kruistabellen en frequentieverdelingen
 - $\chi ^2$-toets
-- andere toets- en associatiematen
+- Andere toets- en associatiematen
 - Simpele lineaire regressie
 - Analyses draaien op groepen
 
@@ -176,6 +176,51 @@ boys %$%
   table(reg, gen) %>% # table with reg x gen
   prop.table(margin = 2) %>%  # columns sum up to 1 
   colSums() # check that columns sum up to 1
+```
+
+# Frequency distributions
+
+## Inspecting continuous data
+```{r}
+boys$age %>% hist()
+```
+
+## Inspecting continuous data
+```{r}
+boys$age %>% 
+  density() %>% 
+  plot()
+```
+
+## Inspecting categorical data
+```{r}
+boys$gen %>% plot()
+```
+## Plotting data frames
+```{r}
+boys %>% 
+  plot()
+```
+
+## Plotting (parts of) data frames
+```{r}
+boys %>% 
+  select(where(is.numeric)) %>% 
+  plot()
+```
+
+## Plotting (parts of) data frames
+```{r}
+boys %>% 
+  select(where(is.factor)) %>% 
+  plot()
+```
+
+## Plotting (parts of) data frames
+```{r}
+boys %>% 
+  select(age, hgt, gen, phb) %>% 
+  plot()
 ```
 
 # Association measures
