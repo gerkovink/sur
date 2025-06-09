@@ -627,32 +627,25 @@ Attaching package: 'mice'</code></pre>
 <pre><code>Warning in cor(., use = "pairwise.complete.obs"): the standard deviation is
 zero</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="co"># which is the maximum correlation in the correlation matrix?</span></span>
-<span id="cb54-2"><a href="#cb54-2" aria-hidden="true" tabindex="-1"></a><span class="co"># first, set the diagonal to zero -&gt; these values are all 1</span></span>
-<span id="cb54-3"><a href="#cb54-3" aria-hidden="true" tabindex="-1"></a><span class="fu">diag</span>(cor_stata) <span class="ot">&lt;-</span> <span class="dv">0</span></span>
-<span id="cb54-4"><a href="#cb54-4" aria-hidden="true" tabindex="-1"></a>cor_stata[cor_stata <span class="sc">==</span> <span class="dv">1</span> <span class="sc">|</span> cor_stata <span class="sc">==</span> <span class="sc">-</span><span class="dv">1</span>] <span class="ot">&lt;-</span> <span class="cn">NA</span> <span class="co"># set 1 and -1 to NA, as these are not interesting</span></span>
-<span id="cb54-5"><a href="#cb54-5" aria-hidden="true" tabindex="-1"></a><span class="co"># calculate the maximum correlation</span></span>
-<span id="cb54-6"><a href="#cb54-6" aria-hidden="true" tabindex="-1"></a>max_cor_value <span class="ot">&lt;-</span> <span class="fu">max</span>(cor_stata, <span class="at">na.rm =</span> <span class="cn">TRUE</span>) <span class="co"># there are NAs in cor_stata</span></span>
-<span id="cb54-7"><a href="#cb54-7" aria-hidden="true" tabindex="-1"></a>which_max <span class="ot">&lt;-</span> <span class="fu">which</span>(cor_stata <span class="sc">==</span> max_cor_value, </span>
-<span id="cb54-8"><a href="#cb54-8" aria-hidden="true" tabindex="-1"></a>                   <span class="at">arr.ind =</span> <span class="cn">TRUE</span>) <span class="co"># get the indices of rows and columns</span></span>
-<span id="cb54-9"><a href="#cb54-9" aria-hidden="true" tabindex="-1"></a>which_max</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>          row col
-fortnight   3   1
-hhid        1   3</code></pre>
 </div>
-</div>
-<p>We can see that the pairs <code>fortnight, hhid</code> and <code>CPI_2017_22, CPI_june2022</code> have the highest correlation of 0.9996074.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb56"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a>stata_data <span class="sc">%&gt;%</span> </span>
-<span id="cb56-2"><a href="#cb56-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(fortnight, hhid) <span class="sc">%&gt;%</span> </span>
-<span id="cb56-3"><a href="#cb56-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cor</span>(<span class="at">use =</span> <span class="st">"pairwise.complete.obs"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ol start="3" type="1">
+<li><strong>What is the maximum correlation in the correlation matrix? Exclude the value <code>1</code> in your calculations.</strong> # which is the maximum correlation in the correlation matrix? # first, set the diagonal to zero -&gt; these values are all 1 diag(cor_stata) &lt;- 0 cor_stata[cor_stata == 1 | cor_stata == -1] &lt;- NA # set 1 and -1 to NA, as these are not interesting # calculate the maximum correlation max_cor_value &lt;- max(cor_stata, na.rm = TRUE) # there are NAs in cor_stata which_max &lt;- which(cor_stata == max_cor_value, arr.ind = TRUE) # get the indices of rows and columns which_max</li>
+</ol>
+<pre><code>
+We can see that the pairs `fortnight, hhid` and `CPI_2017_22, CPI_june2022` have the highest correlation of 0.9996074. 
+
+::: {.cell}
+
+```{.r .cell-code}
+stata_data %&gt;% 
+  select(fortnight, hhid) %&gt;% 
+  cor(use = "pairwise.complete.obs")</code></pre>
 <div class="cell-output cell-output-stdout">
 <pre><code>          fortnight      hhid
 fortnight 1.0000000 0.9996074
 hhid      0.9996074 1.0000000</code></pre>
 </div>
-</div>
+<p>:::</p>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -665,18 +658,18 @@ Sneak peek for tomorrow
 <div class="callout-body-container callout-body">
 <p>We can also select only variables that belong to a specific set of items, such as <code>q13</code> in the STATA data set. This is done by selecting only variables that start with <code>q13</code> using the <code>starts_with()</code> verb:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb58"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a>cor_stata <span class="ot">&lt;-</span> stata_data <span class="sc">%&gt;%</span> </span>
-<span id="cb58-2"><a href="#cb58-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as_factor</span>() <span class="sc">%&gt;%</span> <span class="co"># first make sure that factors are factors</span></span>
-<span id="cb58-3"><a href="#cb58-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="fu">where</span>(is.numeric)) <span class="sc">%&gt;%</span> <span class="co"># select only numeric variables</span></span>
-<span id="cb58-4"><a href="#cb58-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="fu">starts_with</span>(<span class="st">"q13"</span>)) <span class="sc">%&gt;%</span> <span class="co"># select only variables that start with q13</span></span>
-<span id="cb58-5"><a href="#cb58-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cor</span>(<span class="at">use =</span> <span class="st">"pairwise.complete.obs"</span>) <span class="co"># use all info from complete pairs</span></span>
-<span id="cb58-6"><a href="#cb58-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb58-7"><a href="#cb58-7" aria-hidden="true" tabindex="-1"></a><span class="fu">diag</span>(cor_stata) <span class="ot">&lt;-</span> <span class="dv">0</span></span>
-<span id="cb58-8"><a href="#cb58-8" aria-hidden="true" tabindex="-1"></a><span class="co"># calculate the maximum correlation</span></span>
-<span id="cb58-9"><a href="#cb58-9" aria-hidden="true" tabindex="-1"></a>max_cor_value <span class="ot">&lt;-</span> <span class="fu">max</span>(cor_stata, <span class="at">na.rm =</span> <span class="cn">TRUE</span>) <span class="co"># there are NAs in cor_stata</span></span>
-<span id="cb58-10"><a href="#cb58-10" aria-hidden="true" tabindex="-1"></a>which_max <span class="ot">&lt;-</span> <span class="fu">which</span>(cor_stata <span class="sc">==</span> max_cor_value, </span>
-<span id="cb58-11"><a href="#cb58-11" aria-hidden="true" tabindex="-1"></a>                   <span class="at">arr.ind =</span> <span class="cn">TRUE</span>) <span class="co"># get the indices of rows and columns</span></span>
-<span id="cb58-12"><a href="#cb58-12" aria-hidden="true" tabindex="-1"></a>which_max</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb56"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a>cor_stata <span class="ot">&lt;-</span> stata_data <span class="sc">%&gt;%</span> </span>
+<span id="cb56-2"><a href="#cb56-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as_factor</span>() <span class="sc">%&gt;%</span> <span class="co"># first make sure that factors are factors</span></span>
+<span id="cb56-3"><a href="#cb56-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="fu">where</span>(is.numeric)) <span class="sc">%&gt;%</span> <span class="co"># select only numeric variables</span></span>
+<span id="cb56-4"><a href="#cb56-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="fu">starts_with</span>(<span class="st">"q13"</span>)) <span class="sc">%&gt;%</span> <span class="co"># select only variables that start with q13</span></span>
+<span id="cb56-5"><a href="#cb56-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cor</span>(<span class="at">use =</span> <span class="st">"pairwise.complete.obs"</span>) <span class="co"># use all info from complete pairs</span></span>
+<span id="cb56-6"><a href="#cb56-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb56-7"><a href="#cb56-7" aria-hidden="true" tabindex="-1"></a><span class="fu">diag</span>(cor_stata) <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb56-8"><a href="#cb56-8" aria-hidden="true" tabindex="-1"></a><span class="co"># calculate the maximum correlation</span></span>
+<span id="cb56-9"><a href="#cb56-9" aria-hidden="true" tabindex="-1"></a>max_cor_value <span class="ot">&lt;-</span> <span class="fu">max</span>(cor_stata, <span class="at">na.rm =</span> <span class="cn">TRUE</span>) <span class="co"># there are NAs in cor_stata</span></span>
+<span id="cb56-10"><a href="#cb56-10" aria-hidden="true" tabindex="-1"></a>which_max <span class="ot">&lt;-</span> <span class="fu">which</span>(cor_stata <span class="sc">==</span> max_cor_value, </span>
+<span id="cb56-11"><a href="#cb56-11" aria-hidden="true" tabindex="-1"></a>                   <span class="at">arr.ind =</span> <span class="cn">TRUE</span>) <span class="co"># get the indices of rows and columns</span></span>
+<span id="cb56-12"><a href="#cb56-12" aria-hidden="true" tabindex="-1"></a>which_max</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>       row col
 q13_19   4   3
@@ -686,14 +679,14 @@ q13_18   3   4</code></pre>
 </div>
 </div>
 <hr>
-<ol start="3" type="1">
+<ol start="4" type="1">
 <li><strong>Now use a pipe to calculate the correlation for the pair (<code>x4</code>, <code>y4</code>) on the <code>anscombe</code> data set</strong></li>
 </ol>
 <p>Using the standard <code>%&gt;%</code> pipe:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb60"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a>anscombe <span class="sc">%&gt;%</span></span>
-<span id="cb60-2"><a href="#cb60-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">subset</span>(<span class="at">select =</span> <span class="fu">c</span>(x4, y4)) <span class="sc">%&gt;%</span></span>
-<span id="cb60-3"><a href="#cb60-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cor</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb58"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a>anscombe <span class="sc">%&gt;%</span></span>
+<span id="cb58-2"><a href="#cb58-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">subset</span>(<span class="at">select =</span> <span class="fu">c</span>(x4, y4)) <span class="sc">%&gt;%</span></span>
+<span id="cb58-3"><a href="#cb58-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cor</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>          x4        y4
 x4 1.0000000 0.8165214
@@ -702,8 +695,8 @@ y4 0.8165214 1.0000000</code></pre>
 </div>
 <p>Alternatively, we can use the <code>%$%</code> pipe from package <code>magrittr</code> to make this process much more efficient.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb62"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a>anscombe <span class="sc">%$%</span></span>
-<span id="cb62-2"><a href="#cb62-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cor</span>(x4, y4)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb60"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a>anscombe <span class="sc">%$%</span></span>
+<span id="cb60-2"><a href="#cb60-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cor</span>(x4, y4)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.8165214</code></pre>
 </div>
@@ -714,9 +707,9 @@ y4 0.8165214 1.0000000</code></pre>
 </ol>
 <p>Because <code>boys</code> has missing values for almost all variables, we must first select <code>wgt</code> and <code>hgt</code> and then omit the rows that have missing values, before we can calculate the correlation. Using the standard <code>%&gt;%</code> pipe, this would look like:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb64"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb64-1"><a href="#cb64-1" aria-hidden="true" tabindex="-1"></a>mice<span class="sc">::</span>boys <span class="sc">%&gt;%</span> <span class="co"># mice::boys tells us that boys comes from package mice</span></span>
-<span id="cb64-2"><a href="#cb64-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(wgt, hgt) <span class="sc">%&gt;%</span></span>
-<span id="cb64-3"><a href="#cb64-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cor</span>(<span class="at">use =</span> <span class="st">"pairwise.complete.obs"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb62"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a>mice<span class="sc">::</span>boys <span class="sc">%&gt;%</span> <span class="co"># mice::boys tells us that boys comes from package mice</span></span>
+<span id="cb62-2"><a href="#cb62-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(wgt, hgt) <span class="sc">%&gt;%</span></span>
+<span id="cb62-3"><a href="#cb62-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cor</span>(<span class="at">use =</span> <span class="st">"pairwise.complete.obs"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>          wgt       hgt
 wgt 1.0000000 0.9428906
@@ -725,10 +718,10 @@ hgt 0.9428906 1.0000000</code></pre>
 </div>
 <p>which - because there are only two variables - is equivalent to</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb66"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb66-1"><a href="#cb66-1" aria-hidden="true" tabindex="-1"></a>boys <span class="sc">%&gt;%</span></span>
-<span id="cb66-2"><a href="#cb66-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(wgt, hgt) <span class="sc">%&gt;%</span></span>
-<span id="cb66-3"><a href="#cb66-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">na.omit</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb66-4"><a href="#cb66-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cor</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb64"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb64-1"><a href="#cb64-1" aria-hidden="true" tabindex="-1"></a>boys <span class="sc">%&gt;%</span></span>
+<span id="cb64-2"><a href="#cb64-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(wgt, hgt) <span class="sc">%&gt;%</span></span>
+<span id="cb64-3"><a href="#cb64-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">na.omit</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb64-4"><a href="#cb64-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cor</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>          wgt       hgt
 wgt 1.0000000 0.9428906
@@ -737,8 +730,8 @@ hgt 0.9428906 1.0000000</code></pre>
 </div>
 <p>Alternatively, we can use the <code>%$%</code> pipe:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb68"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb68-1"><a href="#cb68-1" aria-hidden="true" tabindex="-1"></a>boys <span class="sc">%$%</span> </span>
-<span id="cb68-2"><a href="#cb68-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cor</span>(hgt, wgt, <span class="at">use =</span> <span class="st">"pairwise.complete.obs"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb66"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb66-1"><a href="#cb66-1" aria-hidden="true" tabindex="-1"></a>boys <span class="sc">%$%</span> </span>
+<span id="cb66-2"><a href="#cb66-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cor</span>(hgt, wgt, <span class="at">use =</span> <span class="st">"pairwise.complete.obs"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.9428906</code></pre>
 </div>
@@ -750,9 +743,9 @@ hgt 0.9428906 1.0000000</code></pre>
 </ol>
 <p>Using the standard <code>%&gt;%</code> and the <code>%$%</code> pipes:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb70"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb70-1"><a href="#cb70-1" aria-hidden="true" tabindex="-1"></a>boys <span class="sc">%&gt;%</span></span>
-<span id="cb70-2"><a href="#cb70-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">hgt =</span> hgt <span class="sc">/</span> <span class="dv">100</span>) <span class="sc">%$%</span> <span class="co"># transform centimeters to meters</span></span>
-<span id="cb70-3"><a href="#cb70-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mean</span>(hgt, <span class="at">na.rm =</span> <span class="cn">TRUE</span>) <span class="co"># verify that indeed it is now in meters</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb68"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb68-1"><a href="#cb68-1" aria-hidden="true" tabindex="-1"></a>boys <span class="sc">%&gt;%</span></span>
+<span id="cb68-2"><a href="#cb68-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">hgt =</span> hgt <span class="sc">/</span> <span class="dv">100</span>) <span class="sc">%$%</span> <span class="co"># transform centimeters to meters</span></span>
+<span id="cb68-3"><a href="#cb68-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mean</span>(hgt, <span class="at">na.rm =</span> <span class="cn">TRUE</span>) <span class="co"># verify that indeed it is now in meters</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 1.321518</code></pre>
 </div>
@@ -763,22 +756,22 @@ hgt 0.9428906 1.0000000</code></pre>
 </ol>
 <p>Let’s first make a subset of the <code>boys</code> data without the excluded rows</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb72"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb72-1"><a href="#cb72-1" aria-hidden="true" tabindex="-1"></a>boys_subset <span class="ot">&lt;-</span> </span>
-<span id="cb72-2"><a href="#cb72-2" aria-hidden="true" tabindex="-1"></a>  boys <span class="sc">%&gt;%</span></span>
-<span id="cb72-3"><a href="#cb72-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(hgt <span class="sc">&gt;</span> <span class="fl">1.5</span>, wgt <span class="sc">&gt;</span> <span class="dv">50</span>) <span class="co"># filter rows where hgt &gt; 1.5 and wgt &gt; 50</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb70"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb70-1"><a href="#cb70-1" aria-hidden="true" tabindex="-1"></a>boys_subset <span class="ot">&lt;-</span> </span>
+<span id="cb70-2"><a href="#cb70-2" aria-hidden="true" tabindex="-1"></a>  boys <span class="sc">%&gt;%</span></span>
+<span id="cb70-3"><a href="#cb70-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(hgt <span class="sc">&gt;</span> <span class="fl">1.5</span>, wgt <span class="sc">&gt;</span> <span class="dv">50</span>) <span class="co"># filter rows where hgt &gt; 1.5 and wgt &gt; 50</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>The subset has 263 rows:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb73"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb73-1"><a href="#cb73-1" aria-hidden="true" tabindex="-1"></a>boys_subset <span class="sc">%&gt;%</span> </span>
-<span id="cb73-2"><a href="#cb73-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">nrow</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb71"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb71-1"><a href="#cb71-1" aria-hidden="true" tabindex="-1"></a>boys_subset <span class="sc">%&gt;%</span> </span>
+<span id="cb71-2"><a href="#cb71-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">nrow</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 263</code></pre>
 </div>
 </div>
 <p>The original <code>boys</code> data had 748 rows. this means that <code>748 - 263 =</code>485 rows have been excluded.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb75"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb75-1"><a href="#cb75-1" aria-hidden="true" tabindex="-1"></a>boys <span class="sc">%&gt;%</span> </span>
-<span id="cb75-2"><a href="#cb75-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">nrow</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb73"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb73-1"><a href="#cb73-1" aria-hidden="true" tabindex="-1"></a>boys <span class="sc">%&gt;%</span> </span>
+<span id="cb73-2"><a href="#cb73-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">nrow</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 748</code></pre>
 </div>
@@ -798,10 +791,10 @@ hgt 0.9428906 1.0000000</code></pre>
 <p>Begin this practical exercise by setting the maximum line length in <code>R-Studio</code> to 80 characters. Go to <code>RStudio</code>’s <code>Preferences</code> (or <code>Global Options</code> under <code>Tools</code>) –&gt; <code>Code</code> –&gt; <code>Display</code>, and tick the <code>show margin</code> box. Make sure that the <code>margin column</code> is set to <code>80</code></p>
 <p>The following packages are required for this practical:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb77"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb77-1"><a href="#cb77-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)    <span class="co"># for data manipulation</span></span>
-<span id="cb77-2"><a href="#cb77-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(magrittr) <span class="co"># for flexible pipes</span></span>
-<span id="cb77-3"><a href="#cb77-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(mice)     <span class="co"># for the mammalsleep and boys datasets</span></span>
-<span id="cb77-4"><a href="#cb77-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(haven)    <span class="co"># for importing SPSS and Stata data</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb75"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb75-1"><a href="#cb75-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)    <span class="co"># for data manipulation</span></span>
+<span id="cb75-2"><a href="#cb75-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(magrittr) <span class="co"># for flexible pipes</span></span>
+<span id="cb75-3"><a href="#cb75-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(mice)     <span class="co"># for the mammalsleep and boys datasets</span></span>
+<span id="cb75-4"><a href="#cb75-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(haven)    <span class="co"># for importing SPSS and Stata data</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <hr>
 <section id="exercise-1-5-1" class="level3">
@@ -819,7 +812,7 @@ hgt 0.9428906 1.0000000</code></pre>
 <li><strong>Load package <code>mice</code>. </strong> Loading packages can be done through functions <code>library()</code> and <code>require()</code>.</li>
 </ol>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb78"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb78-1"><a href="#cb78-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(mice)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb76"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb76-1"><a href="#cb76-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(mice)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>If you use <code>require()</code> within a function, and the required package is not available, <code>require()</code> will yield a warning and the remainder of the function is still executed, whereas <code>library()</code> will yield an error and terminate all executions. The use of <code>library()</code> when not doing too complicated things is preferred - <code>require()</code> would result in more computational overhead because it calls <code>library()</code> itself.</p>
 <hr>
@@ -832,11 +825,11 @@ hgt 0.9428906 1.0000000</code></pre>
 <li><strong>Write the mammalsleep dataset from package <code>mice</code> to the work directory (= the directory of your R project) as a tab-delimited text file with <code>.</code> as a decimal separator. Use the function <code>write.table()</code> and name the file <code>mammalsleep.txt</code>.</strong></li>
 </ol>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb79"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb79-1"><a href="#cb79-1" aria-hidden="true" tabindex="-1"></a><span class="fu">write.table</span>(<span class="at">x =</span> mammalsleep, <span class="co"># the data to be exported</span></span>
-<span id="cb79-2"><a href="#cb79-2" aria-hidden="true" tabindex="-1"></a>            <span class="at">file =</span> <span class="st">"mammalsleep.txt"</span>, <span class="co"># the name of the file</span></span>
-<span id="cb79-3"><a href="#cb79-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">sep =</span> <span class="st">"</span><span class="sc">\t</span><span class="st">"</span>, <span class="co"># column seperated by tabs</span></span>
-<span id="cb79-4"><a href="#cb79-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">dec =</span> <span class="st">"."</span>, <span class="co"># decimal separator</span></span>
-<span id="cb79-5"><a href="#cb79-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">row.names =</span> <span class="cn">FALSE</span>) <span class="co"># do not include the rownames as column</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb77"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb77-1"><a href="#cb77-1" aria-hidden="true" tabindex="-1"></a><span class="fu">write.table</span>(<span class="at">x =</span> mammalsleep, <span class="co"># the data to be exported</span></span>
+<span id="cb77-2"><a href="#cb77-2" aria-hidden="true" tabindex="-1"></a>            <span class="at">file =</span> <span class="st">"mammalsleep.txt"</span>, <span class="co"># the name of the file</span></span>
+<span id="cb77-3"><a href="#cb77-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">sep =</span> <span class="st">"</span><span class="sc">\t</span><span class="st">"</span>, <span class="co"># column seperated by tabs</span></span>
+<span id="cb77-4"><a href="#cb77-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">dec =</span> <span class="st">"."</span>, <span class="co"># decimal separator</span></span>
+<span id="cb77-5"><a href="#cb77-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">row.names =</span> <span class="cn">FALSE</span>) <span class="co"># do not include the rownames as column</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>The command <code>sep = "\t"</code> indicates that the file is tabulated and the command <code>dec = "."</code> indicates that a point is used as the decimal separator (instead of a comma). <code>row.names = FALSE</code> tells <code>R</code> that row names are not to be included in the exported file.</p>
 <hr>
@@ -844,13 +837,13 @@ hgt 0.9428906 1.0000000</code></pre>
 <li><strong>Import the <code>mammalsleep.txt</code> file with <code>read.table()</code>. </strong></li>
 </ol>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb80"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb80-1"><a href="#cb80-1" aria-hidden="true" tabindex="-1"></a>sleepdata <span class="ot">&lt;-</span> <span class="fu">read.table</span>(<span class="st">"mammalsleep.txt"</span>, <span class="co"># the name of the file</span></span>
-<span id="cb80-2"><a href="#cb80-2" aria-hidden="true" tabindex="-1"></a>                        <span class="at">sep =</span> <span class="st">"</span><span class="sc">\t</span><span class="st">"</span>, <span class="co"># columns seperated by tabs</span></span>
-<span id="cb80-3"><a href="#cb80-3" aria-hidden="true" tabindex="-1"></a>                        <span class="at">dec =</span> <span class="st">"."</span>, <span class="co"># decimal separator</span></span>
-<span id="cb80-4"><a href="#cb80-4" aria-hidden="true" tabindex="-1"></a>                        <span class="at">header =</span> <span class="cn">TRUE</span>, <span class="co"># 1st row contains variable names</span></span>
-<span id="cb80-5"><a href="#cb80-5" aria-hidden="true" tabindex="-1"></a>                        <span class="at">stringsAsFactors =</span> <span class="cn">TRUE</span>) <span class="co"># convert strings to factors</span></span>
-<span id="cb80-6"><a href="#cb80-6" aria-hidden="true" tabindex="-1"></a>sleepdata <span class="sc">%&lt;&gt;%</span> <span class="co"># assign pipe to feed the result back into sleepdata</span></span>
-<span id="cb80-7"><a href="#cb80-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as_tibble</span>() <span class="co"># convert to tibble</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb78"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb78-1"><a href="#cb78-1" aria-hidden="true" tabindex="-1"></a>sleepdata <span class="ot">&lt;-</span> <span class="fu">read.table</span>(<span class="st">"mammalsleep.txt"</span>, <span class="co"># the name of the file</span></span>
+<span id="cb78-2"><a href="#cb78-2" aria-hidden="true" tabindex="-1"></a>                        <span class="at">sep =</span> <span class="st">"</span><span class="sc">\t</span><span class="st">"</span>, <span class="co"># columns seperated by tabs</span></span>
+<span id="cb78-3"><a href="#cb78-3" aria-hidden="true" tabindex="-1"></a>                        <span class="at">dec =</span> <span class="st">"."</span>, <span class="co"># decimal separator</span></span>
+<span id="cb78-4"><a href="#cb78-4" aria-hidden="true" tabindex="-1"></a>                        <span class="at">header =</span> <span class="cn">TRUE</span>, <span class="co"># 1st row contains variable names</span></span>
+<span id="cb78-5"><a href="#cb78-5" aria-hidden="true" tabindex="-1"></a>                        <span class="at">stringsAsFactors =</span> <span class="cn">TRUE</span>) <span class="co"># convert strings to factors</span></span>
+<span id="cb78-6"><a href="#cb78-6" aria-hidden="true" tabindex="-1"></a>sleepdata <span class="sc">%&lt;&gt;%</span> <span class="co"># assign pipe to feed the result back into sleepdata</span></span>
+<span id="cb78-7"><a href="#cb78-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as_tibble</span>() <span class="co"># convert to tibble</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>The command <code>sep = "\t"</code> indicates that the file is tabulated and the command <code>dec = "."</code> indicates that a point is used as the decimal separator (instead of a comma). <code>header = TRUE</code> tells <code>R</code> that variable names are included in the header.</p>
 <p>All files that are presented in the work directory of the current <code>R</code> project, can essentially be imported into the workspace (the space that contains all environments) directly. All other locations require you to specify the specific path from the root of your machine. To find out what the current work directory is, you can type <code>getwd()</code> and to change the work directory you can use <code>setwd()</code>. The beauty of using projects in RStudio is that you would never have to change the work directory, as the work directory is automatically set, relative to your projects’ <code>R</code>-scripts.</p>
@@ -866,8 +859,8 @@ hgt 0.9428906 1.0000000</code></pre>
 <p>If you would like to know more about this dataset, you can open the help for the <code>mammalsleep</code> dataset in package <code>mice</code> through <code>?mammalsleep</code>.</p>
 <p>Inspecting the sleepdata could be done by</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb81"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb81-1"><a href="#cb81-1" aria-hidden="true" tabindex="-1"></a><span class="co"># the data structure</span></span>
-<span id="cb81-2"><a href="#cb81-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(sleepdata) <span class="co">#distributional summaries</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb79"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb79-1"><a href="#cb79-1" aria-hidden="true" tabindex="-1"></a><span class="co"># the data structure</span></span>
+<span id="cb79-2"><a href="#cb79-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(sleepdata) <span class="co">#distributional summaries</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>                      species         bw                brw         
  African elephant         : 1   Min.   :   0.005   Min.   :   0.14  
@@ -894,10 +887,10 @@ hgt 0.9428906 1.0000000</code></pre>
  Max.   :645.00   Max.   :5.000   Max.   :5.000   Max.   :5.000  
  NA's   :4                                                       </code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb83"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb83-1"><a href="#cb83-1" aria-hidden="true" tabindex="-1"></a>sleepdata <span class="sc">%&gt;%</span> </span>
-<span id="cb83-2"><a href="#cb83-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>species) <span class="sc">%&gt;%</span> <span class="co"># exclude the first column (because it is character)</span></span>
-<span id="cb83-3"><a href="#cb83-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cor</span>(<span class="at">use =</span> <span class="st">"pairwise.complete.obs"</span>) <span class="sc">%&gt;%</span> <span class="co"># calculate Pearson's correlation</span></span>
-<span id="cb83-4"><a href="#cb83-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">round</span>(<span class="dv">2</span>) <span class="co"># round to two decimal places </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb81"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb81-1"><a href="#cb81-1" aria-hidden="true" tabindex="-1"></a>sleepdata <span class="sc">%&gt;%</span> </span>
+<span id="cb81-2"><a href="#cb81-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>species) <span class="sc">%&gt;%</span> <span class="co"># exclude the first column (because it is character)</span></span>
+<span id="cb81-3"><a href="#cb81-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cor</span>(<span class="at">use =</span> <span class="st">"pairwise.complete.obs"</span>) <span class="sc">%&gt;%</span> <span class="co"># calculate Pearson's correlation</span></span>
+<span id="cb81-4"><a href="#cb81-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">round</span>(<span class="dv">2</span>) <span class="co"># round to two decimal places </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>       bw   brw   sws    ps    ts   mls    gt    pi   sei   odi
 bw   1.00  0.93 -0.38 -0.11 -0.31  0.30  0.65  0.06  0.34  0.13
@@ -911,7 +904,7 @@ pi   0.06  0.03 -0.32 -0.45 -0.40 -0.10  0.20  1.00  0.62  0.92
 sei  0.34  0.37 -0.54 -0.54 -0.64  0.36  0.64  0.62  1.00  0.79
 odi  0.13  0.15 -0.48 -0.58 -0.59  0.06  0.38  0.92  0.79  1.00</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb85"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb85-1"><a href="#cb85-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(mammalsleep) <span class="co"># first six rows</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb83"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb83-1"><a href="#cb83-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(mammalsleep) <span class="co"># first six rows</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>                    species       bw    brw sws  ps   ts  mls  gt pi sei odi
 1          African elephant 6654.000 5712.0  NA  NA  3.3 38.6 645  3   5   3
@@ -921,7 +914,7 @@ odi  0.13  0.15 -0.48 -0.58 -0.59  0.06  0.38  0.92  0.79  1.00</code></pre>
 5            Asian elephant 2547.000 4603.0 2.1 1.8  3.9 69.0 624  3   5   4
 6                    Baboon   10.550  179.5 9.1 0.7  9.8 27.0 180  4   4   4</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb87"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb87-1"><a href="#cb87-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tail</span>(mammalsleep) <span class="co"># last six rows</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb85"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb85-1"><a href="#cb85-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tail</span>(mammalsleep) <span class="co"># last six rows</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>                 species    bw  brw  sws  ps   ts  mls  gt pi sei odi
 57                Tenrec 0.900  2.6 11.0 2.3 13.3  4.5  60  2   1   2
@@ -931,7 +924,7 @@ odi  0.13  0.15 -0.48 -0.58 -0.59  0.06  0.38  0.92  0.79  1.00</code></pre>
 61         Water opossum 3.500  3.9 12.8 6.6 19.4  3.0  14  2   1   1
 62 Yellow-bellied marmot 4.050 17.0   NA  NA   NA 13.0  38  3   1   1</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb89"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb89-1"><a href="#cb89-1" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(mammalsleep) <span class="co"># a quick overview of the data structure</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb87"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb87-1"><a href="#cb87-1" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(mammalsleep) <span class="co"># a quick overview of the data structure</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Rows: 62
 Columns: 11
@@ -949,7 +942,7 @@ $ odi     &lt;int&gt; 3, 3, 1, 3, 4, 4, 1, 4, 1, 1, 4, 5, 2, 5, 1, 2, 2, 2, 1, 1
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb91"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb91-1"><a href="#cb91-1" aria-hidden="true" tabindex="-1"></a>?mammalsleep <span class="co"># the help</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb89"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb89-1"><a href="#cb89-1" aria-hidden="true" tabindex="-1"></a>?mammalsleep <span class="co"># the help</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Note that the sleepdata dataset is automatically recognized as a dataframe. There is one factor (categorical variable) containing the animal names.</p>
 <p>The functions <code>head()</code> and <code>tail()</code> are very useful functions. As is function <code>str()</code> as it gives you a quick overview of the measurement levels in <code>mammalsleep</code>.</p>
@@ -961,13 +954,13 @@ $ odi     &lt;int&gt; 3, 3, 1, 3, 4, 4, 1, 4, 1, 1, 4, 5, 2, 5, 1, 2, 2, 2, 1, 1
 </ol>
 <p>Now that we have imported our data, it may be wise to save the current workspace, i.e.&nbsp;the current state of affairs. Saving the workspace will leave everything as is, so that we can continue from this exact state at a later time, by simply opening the workspace file. To save everything in the current workspace, type:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb92"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb92-1"><a href="#cb92-1" aria-hidden="true" tabindex="-1"></a><span class="co"># To save the entire workspace:</span></span>
-<span id="cb92-2"><a href="#cb92-2" aria-hidden="true" tabindex="-1"></a><span class="fu">save.image</span>(<span class="st">"Practical_3juni2025.RData"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb90"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb90-1"><a href="#cb90-1" aria-hidden="true" tabindex="-1"></a><span class="co"># To save the entire workspace:</span></span>
+<span id="cb90-2"><a href="#cb90-2" aria-hidden="true" tabindex="-1"></a><span class="fu">save.image</span>(<span class="st">"Practical_3juni2025.RData"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>To save just the data set <code>sleepdata</code>, and nothing else, type:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb93"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb93-1"><a href="#cb93-1" aria-hidden="true" tabindex="-1"></a><span class="co"># To save the data set only.</span></span>
-<span id="cb93-2"><a href="#cb93-2" aria-hidden="true" tabindex="-1"></a><span class="fu">save</span>(sleepdata, <span class="at">file =</span> <span class="st">"sleepdata.RData"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb91"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb91-1"><a href="#cb91-1" aria-hidden="true" tabindex="-1"></a><span class="co"># To save the data set only.</span></span>
+<span id="cb91-2"><a href="#cb91-2" aria-hidden="true" tabindex="-1"></a><span class="fu">save</span>(sleepdata, <span class="at">file =</span> <span class="st">"sleepdata.RData"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>With the save functions, any object in the work space can be saved.</p>
 <hr>
@@ -976,10 +969,10 @@ $ odi     &lt;int&gt; 3, 3, 1, 3, 4, 4, 1, 4, 1, 1, 4, 5, 2, 5, 1, 2, 2, 2, 1, 1
 </ol>
 <p>There are three ways to exclude the three animals from the data set. The first approach uses the names:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb94"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb94-1"><a href="#cb94-1" aria-hidden="true" tabindex="-1"></a>exclude <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Echidna"</span>, <span class="st">"Lesser short-tailed shrew"</span>, <span class="st">"Musk shrew"</span>)</span>
-<span id="cb94-2"><a href="#cb94-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Indicate the species that match the names in exclude</span></span>
-<span id="cb94-3"><a href="#cb94-3" aria-hidden="true" tabindex="-1"></a>which <span class="ot">&lt;-</span> sleepdata<span class="sc">$</span>species <span class="sc">%in%</span> exclude </span>
-<span id="cb94-4"><a href="#cb94-4" aria-hidden="true" tabindex="-1"></a>which</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb92"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb92-1"><a href="#cb92-1" aria-hidden="true" tabindex="-1"></a>exclude <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Echidna"</span>, <span class="st">"Lesser short-tailed shrew"</span>, <span class="st">"Musk shrew"</span>)</span>
+<span id="cb92-2"><a href="#cb92-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Indicate the species that match the names in exclude</span></span>
+<span id="cb92-3"><a href="#cb92-3" aria-hidden="true" tabindex="-1"></a>which <span class="ot">&lt;-</span> sleepdata<span class="sc">$</span>species <span class="sc">%in%</span> exclude </span>
+<span id="cb92-4"><a href="#cb92-4" aria-hidden="true" tabindex="-1"></a>which</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> [1] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
 [13] FALSE FALSE FALSE  TRUE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
@@ -988,17 +981,17 @@ $ odi     &lt;int&gt; 3, 3, 1, 3, 4, 4, 1, 4, 1, 1, 4, 5, 2, 5, 1, 2, 2, 2, 1, 1
 [49] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
 [61] FALSE FALSE</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb96"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb96-1"><a href="#cb96-1" aria-hidden="true" tabindex="-1"></a>sleepdata_new <span class="ot">&lt;-</span> sleepdata[<span class="sc">!</span>which, ]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb94"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb94-1"><a href="#cb94-1" aria-hidden="true" tabindex="-1"></a>sleepdata_new <span class="ot">&lt;-</span> sleepdata[<span class="sc">!</span>which, ]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>and the second approach uses the row numbers directly (you would need to inquire about, or calculate the row numbers)</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb97"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb97-1"><a href="#cb97-1" aria-hidden="true" tabindex="-1"></a>sleepdata_new <span class="ot">&lt;-</span> sleepdata[<span class="sc">-</span><span class="fu">c</span>(<span class="dv">16</span>, <span class="dv">32</span>, <span class="dv">38</span>), ]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb95"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb95-1"><a href="#cb95-1" aria-hidden="true" tabindex="-1"></a>sleepdata_new <span class="ot">&lt;-</span> sleepdata[<span class="sc">-</span><span class="fu">c</span>(<span class="dv">16</span>, <span class="dv">32</span>, <span class="dv">38</span>), ]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Note that the numbered option requires less code, but the named option has a much lower probability for error. As the data set might change, or might get sorted differently, the second option may not be valid anymore.</p>
 <p>The third approach uses function <code>filter()</code> from package <code>dplyr</code>:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb98"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb98-1"><a href="#cb98-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr) <span class="co"># Data Manipulation</span></span>
-<span id="cb98-2"><a href="#cb98-2" aria-hidden="true" tabindex="-1"></a>dplyr<span class="sc">::</span><span class="fu">filter</span>(sleepdata, <span class="sc">!</span>sleepdata<span class="sc">$</span>species <span class="sc">%in%</span> exclude) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb96"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb96-1"><a href="#cb96-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr) <span class="co"># Data Manipulation</span></span>
+<span id="cb96-2"><a href="#cb96-2" aria-hidden="true" tabindex="-1"></a>dplyr<span class="sc">::</span><span class="fu">filter</span>(sleepdata, <span class="sc">!</span>sleepdata<span class="sc">$</span>species <span class="sc">%in%</span> exclude) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 59 × 11
    species             bw    brw   sws    ps    ts   mls    gt    pi   sei   odi
@@ -1015,14 +1008,14 @@ $ odi     &lt;int&gt; 3, 3, 1, 3, 4, 4, 1, 4, 1, 1, 4, 5, 2, 5, 1, 2, 2, 2, 1, 1
 10 Chimpanzee     5.22e+1  440     8.3   1.4   9.7  50     230     1     1     1
 # ℹ 49 more rows</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb100"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb100-1"><a href="#cb100-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ! makes all TRUES into FALSE --&gt; it takes the complement</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb98"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb98-1"><a href="#cb98-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ! makes all TRUES into FALSE --&gt; it takes the complement</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <hr>
 <ol start="9" type="1">
 <li><strong>Plot brain weight as a function of species. </strong></li>
 </ol>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb101"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb101-1"><a href="#cb101-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(brw <span class="sc">~</span> species, <span class="at">data =</span> sleepdata_new)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb99"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb99-1"><a href="#cb99-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(brw <span class="sc">~</span> species, <span class="at">data =</span> sleepdata_new)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -1037,17 +1030,17 @@ $ odi     &lt;int&gt; 3, 3, 1, 3, 4, 4, 1, 4, 1, 1, 4, 5, 2, 5, 1, 2, 2, 2, 1, 1
 </ol>
 <p>To find out which animals have a brain weight larger than 1 standard deviation above the mean brain weight:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb102"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb102-1"><a href="#cb102-1" aria-hidden="true" tabindex="-1"></a>sd.brw <span class="ot">&lt;-</span> <span class="fu">sd</span>(sleepdata_new<span class="sc">$</span>brw) <span class="co"># standard deviation  </span></span>
-<span id="cb102-2"><a href="#cb102-2" aria-hidden="true" tabindex="-1"></a>mean.brw <span class="ot">&lt;-</span> <span class="fu">mean</span>(sleepdata_new<span class="sc">$</span>brw) <span class="co"># mean</span></span>
-<span id="cb102-3"><a href="#cb102-3" aria-hidden="true" tabindex="-1"></a>which <span class="ot">&lt;-</span> sleepdata_new<span class="sc">$</span>brw <span class="sc">&gt;</span> (mean.brw <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">*</span> sd.brw)) <span class="co"># which are larger?</span></span>
-<span id="cb102-4"><a href="#cb102-4" aria-hidden="true" tabindex="-1"></a><span class="fu">as.character</span>(sleepdata_new<span class="sc">$</span>species[which]) <span class="co"># names of the animals with brw &gt; 1000</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb100"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb100-1"><a href="#cb100-1" aria-hidden="true" tabindex="-1"></a>sd.brw <span class="ot">&lt;-</span> <span class="fu">sd</span>(sleepdata_new<span class="sc">$</span>brw) <span class="co"># standard deviation  </span></span>
+<span id="cb100-2"><a href="#cb100-2" aria-hidden="true" tabindex="-1"></a>mean.brw <span class="ot">&lt;-</span> <span class="fu">mean</span>(sleepdata_new<span class="sc">$</span>brw) <span class="co"># mean</span></span>
+<span id="cb100-3"><a href="#cb100-3" aria-hidden="true" tabindex="-1"></a>which <span class="ot">&lt;-</span> sleepdata_new<span class="sc">$</span>brw <span class="sc">&gt;</span> (mean.brw <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">*</span> sd.brw)) <span class="co"># which are larger?</span></span>
+<span id="cb100-4"><a href="#cb100-4" aria-hidden="true" tabindex="-1"></a><span class="fu">as.character</span>(sleepdata_new<span class="sc">$</span>species[which]) <span class="co"># names of the animals with brw &gt; 1000</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "African elephant" "Asian elephant"   "Man"             </code></pre>
 </div>
 </div>
 <p>To plot these animals:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb104"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb104-1"><a href="#cb104-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(brw <span class="sc">~</span> species, <span class="at">data =</span> sleepdata_new[which, ])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb102"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb102-1"><a href="#cb102-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(brw <span class="sc">~</span> species, <span class="at">data =</span> sleepdata_new[which, ])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -1058,7 +1051,7 @@ $ odi     &lt;int&gt; 3, 3, 1, 3, 4, 4, 1, 4, 1, 1, 4, 5, 2, 5, 1, 2, 2, 2, 1, 1
 </div>
 <p>The downside is that it still prints all the animals on the x-axis. This is due to the factor labels for <code>species</code> being copied to the smaller subset of the data. Plot automatically takes over the labels. For example,</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb105"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb105-1"><a href="#cb105-1" aria-hidden="true" tabindex="-1"></a>sleepdata_new<span class="sc">$</span>species[which]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb103"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb103-1"><a href="#cb103-1" aria-hidden="true" tabindex="-1"></a>sleepdata_new<span class="sc">$</span>species[which]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] African elephant Asian elephant   Man             
 62 Levels: African elephant African giant pouched rat ... Yellow-bellied marmot</code></pre>
@@ -1066,9 +1059,9 @@ $ odi     &lt;int&gt; 3, 3, 1, 3, 4, 4, 1, 4, 1, 1, 4, 5, 2, 5, 1, 2, 2, 2, 1, 1
 </div>
 <p>returns only 3 mammals, but still has 62 factor levels. To get rid of the unused factor levels, we can use function <code>factor()</code>:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb107"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb107-1"><a href="#cb107-1" aria-hidden="true" tabindex="-1"></a>sleepdata_3mammals <span class="ot">&lt;-</span> sleepdata_new[which, ]</span>
-<span id="cb107-2"><a href="#cb107-2" aria-hidden="true" tabindex="-1"></a>sleepdata_3mammals<span class="sc">$</span>species <span class="ot">&lt;-</span> <span class="fu">factor</span>(sleepdata_3mammals<span class="sc">$</span>species)</span>
-<span id="cb107-3"><a href="#cb107-3" aria-hidden="true" tabindex="-1"></a>sleepdata_3mammals<span class="sc">$</span>species</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb105"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb105-1"><a href="#cb105-1" aria-hidden="true" tabindex="-1"></a>sleepdata_3mammals <span class="ot">&lt;-</span> sleepdata_new[which, ]</span>
+<span id="cb105-2"><a href="#cb105-2" aria-hidden="true" tabindex="-1"></a>sleepdata_3mammals<span class="sc">$</span>species <span class="ot">&lt;-</span> <span class="fu">factor</span>(sleepdata_3mammals<span class="sc">$</span>species)</span>
+<span id="cb105-3"><a href="#cb105-3" aria-hidden="true" tabindex="-1"></a>sleepdata_3mammals<span class="sc">$</span>species</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] African elephant Asian elephant   Man             
 Levels: African elephant Asian elephant Man</code></pre>
@@ -1076,7 +1069,7 @@ Levels: African elephant Asian elephant Man</code></pre>
 </div>
 <p>To plot the graph that we wanted:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb109"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb109-1"><a href="#cb109-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(brw <span class="sc">~</span> species, <span class="at">data =</span> sleepdata_3mammals)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb107"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb107-1"><a href="#cb107-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(brw <span class="sc">~</span> species, <span class="at">data =</span> sleepdata_3mammals)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">

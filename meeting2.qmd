@@ -216,7 +216,9 @@ cor_stata <- stata_data %>%
   as_factor() %>% # first make sure that factors are factors
   select(where(is.numeric)) %>% # select only numeric variables
   cor(use = "pairwise.complete.obs") # use all info from complete pairs
+```
 
+3. **What is the maximum correlation in the correlation matrix? Exclude the value `1` in your calculations.**
 # which is the maximum correlation in the correlation matrix?
 # first, set the diagonal to zero -> these values are all 1
 diag(cor_stata) <- 0
@@ -259,7 +261,7 @@ which_max
 
 ---
 
-3. **Now use a pipe to calculate the correlation for the pair (`x4`, `y4`) on the `anscombe` data set**
+4. **Now use a pipe to calculate the correlation for the pair (`x4`, `y4`) on the `anscombe` data set**
 
 Using the standard `%>%` pipe:
 ```{r}
