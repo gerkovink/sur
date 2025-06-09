@@ -629,7 +629,7 @@ zero</code></pre>
 </div>
 </div>
 <ol start="3" type="1">
-<li><strong>What is the maximum correlation in the correlation matrix? Exclude the value <code>1</code> in your calculations.</strong> # which is the maximum correlation in the correlation matrix? # first, set the diagonal to zero -&gt; these values are all 1 diag(cor_stata) &lt;- 0 cor_stata[cor_stata == 1 | cor_stata == -1] &lt;- NA # set 1 and -1 to NA, as these are not interesting # calculate the maximum correlation max_cor_value &lt;- max(cor_stata, na.rm = TRUE) # there are NAs in cor_stata which_max &lt;- which(cor_stata == max_cor_value, arr.ind = TRUE) # get the indices of rows and columns which_max</li>
+<li><strong>What is the maximum correlation in the correlation matrix? Exclude the value <code>1</code> and <code>-1</code> in your calculations.</strong> # which is the maximum correlation in the correlation matrix? # first, set the diagonal to zero -&gt; these values are all 1 diag(cor_stata) &lt;- 0 cor_stata[cor_stata == 1 | cor_stata == -1] &lt;- NA # set 1 and -1 to NA, as these are not interesting # calculate the maximum correlation max_cor_value &lt;- max(cor_stata, na.rm = TRUE) # there are NAs in cor_stata which_max &lt;- which(cor_stata == max_cor_value, arr.ind = TRUE) # get the indices of rows and columns which_max</li>
 </ol>
 <pre><code>
 We can see that the pairs `fortnight, hhid` and `CPI_2017_22, CPI_june2022` have the highest correlation of 0.9996074. 

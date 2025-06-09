@@ -218,7 +218,7 @@ cor_stata <- stata_data %>%
   cor(use = "pairwise.complete.obs") # use all info from complete pairs
 ```
 
-3. **What is the maximum correlation in the correlation matrix? Exclude the value `1` in your calculations.**
+3. **What is the maximum correlation in the correlation matrix? Exclude the value `1` and `-1` in your calculations.**
 # which is the maximum correlation in the correlation matrix?
 # first, set the diagonal to zero -> these values are all 1
 diag(cor_stata) <- 0
