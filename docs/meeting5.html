@@ -21,6 +21,40 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -193,8 +227,25 @@ ul.task-list li input[type="checkbox"] {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#practical" id="toc-practical" class="nav-link active" data-scroll-target="#practical">Practical</a>
+  <ul class="collapse">
+  <li><a href="#create-some-random-data" id="toc-create-some-random-data" class="nav-link" data-scroll-target="#create-some-random-data">Create some random data</a></li>
+  <li><a href="#your-own-function" id="toc-your-own-function" class="nav-link" data-scroll-target="#your-own-function">Your own function</a></li>
+  <li><a href="#apply-your-function" id="toc-apply-your-function" class="nav-link" data-scroll-target="#apply-your-function">Apply your function</a></li>
+  <li><a href="#map" id="toc-map" class="nav-link" data-scroll-target="#map">Map</a></li>
+  <li><a href="#continue-mapping" id="toc-continue-mapping" class="nav-link" data-scroll-target="#continue-mapping">Continue mapping</a></li>
+  <li><a href="#reduce" id="toc-reduce" class="nav-link" data-scroll-target="#reduce">Reduce</a></li>
+  <li><a href="#reduce-some-more" id="toc-reduce-some-more" class="nav-link" data-scroll-target="#reduce-some-more">Reduce some more</a></li>
+  <li><a href="#map-reduce" id="toc-map-reduce" class="nav-link" data-scroll-target="#map-reduce">Map-reduce</a></li>
+  <li><a href="#map-reduce-without-reduce" id="toc-map-reduce-without-reduce" class="nav-link" data-scroll-target="#map-reduce-without-reduce">Map-reduce without reduce</a></li>
+  </ul></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/gerkovink/sur/edit/book/meeting5.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/gerkovink/sur/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -241,11 +292,478 @@ Hoorcollege 9 juni 2025
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Functioneel programmeren is misschien wel de belangrijkste vaardigheid die een statistisch programmeur zich eigen kan maken. Soms kost het draaien van een statistisch model of een simulatiestudie enorm veel rekenkracht. Efficient programmeren is dan essentieel. Daarnaast is het handig als het rekenwerk verdeeld kan worden over verschillende streams. We gaan daarom vandaag ook aandacht besteden aan het <em>parallel computing</em> en zullen ons de <code>map-reduce</code> workflow eigen maken. De collegeslides voor vandaag kun u <a href="slides/lec-5.html">hier vinden</a></p>
+<p>Functioneel programmeren is misschien wel de belangrijkste vaardigheid die een statistisch programmeur zich eigen kan maken. Soms kost het draaien van een statistisch model of een simulatiestudie enorm veel rekenkracht. Efficient programmeren is dan essentieel. Daarnaast is het handig als het rekenwerk verdeeld kan worden over verschillende streams. We gaan daarom vandaag ook aandacht besteden aan een eenvoudige vorm van <em>parallel computing</em> en zullen ons de <code>map-reduce</code> workflow eigen maken. De collegeslides voor vandaag kun u <a href="slides/lec-5.html">hier vinden</a></p>
+</div>
+</div>
+<section id="practical" class="level1">
+<h1>Practical</h1>
+<p>I will not tell you which packages you will need for this practical. You will need to load the packages in the practical when you need them. This is to help you get used to knowing when to use which package.</p>
+<section id="create-some-random-data" class="level2">
+<h2 class="anchored" data-anchor-id="create-some-random-data">Create some random data</h2>
+<p>Draw 50 values from a standard normal distribution (i.e.&nbsp;with mean 0 and variance 1). Use the drawn values to make a tibble named <code>random_tibble</code> with 10 rows and 5 columns. Make sure to set a seed so that you can reproduce the results.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>) <span class="co"># if you want to reproduce the results</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tibble) <span class="co"># needed for tibbles</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co"># draw random numbers</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>random_data <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">50</span>, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">1</span>)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co"># create random tibble</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>random_tibble <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">V1 =</span> random_data[<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>],</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">V2 =</span> random_data[<span class="dv">11</span><span class="sc">:</span><span class="dv">20</span>],</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">V3 =</span> random_data[<span class="dv">21</span><span class="sc">:</span><span class="dv">30</span>],</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">V4 =</span> random_data[<span class="dv">31</span><span class="sc">:</span><span class="dv">40</span>],</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">V5 =</span> random_data[<span class="dv">41</span><span class="sc">:</span><span class="dv">50</span>]</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="co"># or </span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>random_tibble <span class="ot">&lt;-</span> <span class="fu">as_tibble</span>(<span class="fu">matrix</span>(random_data, <span class="at">nrow =</span> <span class="dv">10</span>, <span class="at">ncol =</span> <span class="dv">5</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: The `x` argument of `as_tibble.matrix()` must have unique column names if
+`.name_repair` is omitted as of tibble 2.0.0.
+ℹ Using compatibility `.name_repair`.</code></pre>
+</div>
+</div>
+</section>
+<section id="your-own-function" class="level2">
+<h2 class="anchored" data-anchor-id="your-own-function">Your own function</h2>
+<p>Write a function that takes a vector of numbers and returns the squares of the numbers in the vector. Test your function on the vector <code>c(1, 2, 3, 4, 5)</code>.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>squares <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  output <span class="ot">&lt;-</span> x<span class="sc">^</span><span class="dv">2</span> <span class="co"># square the numbers</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(output) <span class="co"># return the squared numbers</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Test your function</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>vector <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>)</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="fu">squares</span>(vector)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1]  1  4  9 16 25</code></pre>
+</div>
+</div>
+</section>
+<section id="apply-your-function" class="level2">
+<h2 class="anchored" data-anchor-id="apply-your-function">Apply your function</h2>
+<p>Use <code>apply()</code>, <code>lapply()</code> and <code>sapply()</code> to apply your function to the <code>random_tibble</code> data. Try all margins for <code>apply()</code> and try the defaults for <code>lapply()</code> and <code>sapply()</code>. Also try argument <code>simplify = FALSE</code> for <code>sapply()</code>.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">apply</span>(random_tibble, <span class="at">MARGIN =</span> <span class="dv">1</span>, squares) <span class="co"># apply to rows</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>        [,1]       [,2]      [,3]        [,4]       [,5]      [,6]      [,7]
+V1 0.3141330 0.05298168 2.4295716 0.004971433 0.01671532 2.9414479 0.2124437
+V2 1.4983762 0.12946599 0.1606178 0.012250664 0.30895937 3.1930586 0.2478551
+V3 1.1402475 0.04751306 1.0526851 0.531282424 0.39067409 2.8449343 0.7018871
+V4 0.1818717 0.08706718 0.8012499 0.771118422 0.67499547 0.4742254 0.3068248
+V5 0.4826178 0.04322959 1.6012279 4.704369980 1.45917219 1.2613729 0.1623162
+         [,8]       [,9]       [,10]
+V1 1.60037993 0.47176684 0.198614592
+V2 3.86758304 0.49190010 0.223531715
+V3 0.02352331 1.29535569 1.572051856
+V4 0.00383306 0.09361315 0.144758183
+V5 0.21776722 0.60834559 0.006950401</code></pre>
+</div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">apply</span>(random_tibble, <span class="at">MARGIN =</span> <span class="dv">2</span>, squares) <span class="co"># apply to columns</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>               V1         V2         V3         V4          V5
+ [1,] 0.314132950 1.49837625 1.14024747 0.18187173 0.482617787
+ [2,] 0.052981677 0.12946599 0.04751306 0.08706718 0.043229594
+ [3,] 2.429571609 0.16061776 1.05268513 0.80124995 1.601227927
+ [4,] 0.004971433 0.01225066 0.53128242 0.77111842 4.704369980
+ [5,] 0.016715318 0.30895937 0.39067409 0.67499547 1.459172189
+ [6,] 2.941447909 3.19305856 2.84493432 0.47422540 1.261372890
+ [7,] 0.212443749 0.24785510 0.70188713 0.30682477 0.162316191
+ [8,] 1.600379927 3.86758304 0.02352331 0.00383306 0.217767219
+ [9,] 0.471766840 0.49190010 1.29535569 0.09361315 0.608345586
+[10,] 0.198614592 0.22353172 1.57205186 0.14475818 0.006950401</code></pre>
+</div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">lapply</span>(random_tibble, squares) <span class="co"># apply to each column as a list</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>$V1
+ [1] 0.314132950 0.052981677 2.429571609 0.004971433 0.016715318 2.941447909
+ [7] 0.212443749 1.600379927 0.471766840 0.198614592
+
+$V2
+ [1] 1.49837625 0.12946599 0.16061776 0.01225066 0.30895937 3.19305856
+ [7] 0.24785510 3.86758304 0.49190010 0.22353172
+
+$V3
+ [1] 1.14024747 0.04751306 1.05268513 0.53128242 0.39067409 2.84493432
+ [7] 0.70188713 0.02352331 1.29535569 1.57205186
+
+$V4
+ [1] 0.18187173 0.08706718 0.80124995 0.77111842 0.67499547 0.47422540
+ [7] 0.30682477 0.00383306 0.09361315 0.14475818
+
+$V5
+ [1] 0.482617787 0.043229594 1.601227927 4.704369980 1.459172189 1.261372890
+ [7] 0.162316191 0.217767219 0.608345586 0.006950401</code></pre>
+</div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sapply</span>(random_tibble, squares) <span class="co"># return a matrix with the results</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>               V1         V2         V3         V4          V5
+ [1,] 0.314132950 1.49837625 1.14024747 0.18187173 0.482617787
+ [2,] 0.052981677 0.12946599 0.04751306 0.08706718 0.043229594
+ [3,] 2.429571609 0.16061776 1.05268513 0.80124995 1.601227927
+ [4,] 0.004971433 0.01225066 0.53128242 0.77111842 4.704369980
+ [5,] 0.016715318 0.30895937 0.39067409 0.67499547 1.459172189
+ [6,] 2.941447909 3.19305856 2.84493432 0.47422540 1.261372890
+ [7,] 0.212443749 0.24785510 0.70188713 0.30682477 0.162316191
+ [8,] 1.600379927 3.86758304 0.02352331 0.00383306 0.217767219
+ [9,] 0.471766840 0.49190010 1.29535569 0.09361315 0.608345586
+[10,] 0.198614592 0.22353172 1.57205186 0.14475818 0.006950401</code></pre>
+</div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sapply</span>(random_tibble, squares, <span class="at">simplify =</span> <span class="cn">FALSE</span>) <span class="co"># return a list with the results</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>$V1
+ [1] 0.314132950 0.052981677 2.429571609 0.004971433 0.016715318 2.941447909
+ [7] 0.212443749 1.600379927 0.471766840 0.198614592
+
+$V2
+ [1] 1.49837625 0.12946599 0.16061776 0.01225066 0.30895937 3.19305856
+ [7] 0.24785510 3.86758304 0.49190010 0.22353172
+
+$V3
+ [1] 1.14024747 0.04751306 1.05268513 0.53128242 0.39067409 2.84493432
+ [7] 0.70188713 0.02352331 1.29535569 1.57205186
+
+$V4
+ [1] 0.18187173 0.08706718 0.80124995 0.77111842 0.67499547 0.47422540
+ [7] 0.30682477 0.00383306 0.09361315 0.14475818
+
+$V5
+ [1] 0.482617787 0.043229594 1.601227927 4.704369980 1.459172189 1.261372890
+ [7] 0.162316191 0.217767219 0.608345586 0.006950401</code></pre>
+</div>
+</div>
+<p>The argument <code>simplify = FALSE</code> in <code>sapply()</code> is used to return the results as a list instead of a matrix. This is useful when the results are not of the same length or type, as it prevents coercion to a matrix. It mimics the output of <code>lapply()</code>.</p>
+</section>
+<section id="map" class="level2">
+<h2 class="anchored" data-anchor-id="map">Map</h2>
+<p>Now map your function over the <code>random_tibble</code> data using <code>map()</code>. Use <code>map_df()</code> to return a tibble with the results. Study the difference between the two function’s output.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(purrr) <span class="co"># needed for map functions</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="fu">map</span>(random_tibble, squares) <span class="co"># returns a list</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>$V1
+ [1] 0.314132950 0.052981677 2.429571609 0.004971433 0.016715318 2.941447909
+ [7] 0.212443749 1.600379927 0.471766840 0.198614592
+
+$V2
+ [1] 1.49837625 0.12946599 0.16061776 0.01225066 0.30895937 3.19305856
+ [7] 0.24785510 3.86758304 0.49190010 0.22353172
+
+$V3
+ [1] 1.14024747 0.04751306 1.05268513 0.53128242 0.39067409 2.84493432
+ [7] 0.70188713 0.02352331 1.29535569 1.57205186
+
+$V4
+ [1] 0.18187173 0.08706718 0.80124995 0.77111842 0.67499547 0.47422540
+ [7] 0.30682477 0.00383306 0.09361315 0.14475818
+
+$V5
+ [1] 0.482617787 0.043229594 1.601227927 4.704369980 1.459172189 1.261372890
+ [7] 0.162316191 0.217767219 0.608345586 0.006950401</code></pre>
+</div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">map_df</span>(random_tibble, squares) <span class="co"># returns a tibble</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 10 × 5
+        V1     V2     V3      V4      V5
+     &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;
+ 1 0.314   1.50   1.14   0.182   0.483  
+ 2 0.0530  0.129  0.0475 0.0871  0.0432 
+ 3 2.43    0.161  1.05   0.801   1.60   
+ 4 0.00497 0.0123 0.531  0.771   4.70   
+ 5 0.0167  0.309  0.391  0.675   1.46   
+ 6 2.94    3.19   2.84   0.474   1.26   
+ 7 0.212   0.248  0.702  0.307   0.162  
+ 8 1.60    3.87   0.0235 0.00383 0.218  
+ 9 0.472   0.492  1.30   0.0936  0.608  
+10 0.199   0.224  1.57   0.145   0.00695</code></pre>
+</div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># or with the pipe</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(magrittr) <span class="co"># needed for the pipe operators</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Attaching package: 'magrittr'</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following object is masked from 'package:purrr':
+
+    set_names</code></pre>
+</div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>random_tibble <span class="sc">%&gt;%</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">map</span>(squares) <span class="co"># returns a list</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>$V1
+ [1] 0.314132950 0.052981677 2.429571609 0.004971433 0.016715318 2.941447909
+ [7] 0.212443749 1.600379927 0.471766840 0.198614592
+
+$V2
+ [1] 1.49837625 0.12946599 0.16061776 0.01225066 0.30895937 3.19305856
+ [7] 0.24785510 3.86758304 0.49190010 0.22353172
+
+$V3
+ [1] 1.14024747 0.04751306 1.05268513 0.53128242 0.39067409 2.84493432
+ [7] 0.70188713 0.02352331 1.29535569 1.57205186
+
+$V4
+ [1] 0.18187173 0.08706718 0.80124995 0.77111842 0.67499547 0.47422540
+ [7] 0.30682477 0.00383306 0.09361315 0.14475818
+
+$V5
+ [1] 0.482617787 0.043229594 1.601227927 4.704369980 1.459172189 1.261372890
+ [7] 0.162316191 0.217767219 0.608345586 0.006950401</code></pre>
+</div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>random_tibble <span class="sc">%&gt;%</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">map_df</span>(squares) <span class="co"># returns a tibble</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 10 × 5
+        V1     V2     V3      V4      V5
+     &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;
+ 1 0.314   1.50   1.14   0.182   0.483  
+ 2 0.0530  0.129  0.0475 0.0871  0.0432 
+ 3 2.43    0.161  1.05   0.801   1.60   
+ 4 0.00497 0.0123 0.531  0.771   4.70   
+ 5 0.0167  0.309  0.391  0.675   1.46   
+ 6 2.94    3.19   2.84   0.474   1.26   
+ 7 0.212   0.248  0.702  0.307   0.162  
+ 8 1.60    3.87   0.0235 0.00383 0.218  
+ 9 0.472   0.492  1.30   0.0936  0.608  
+10 0.199   0.224  1.57   0.145   0.00695</code></pre>
+</div>
+</div>
+<p>With <code>map()</code> you can apply a function to each element of a list or vector, and it returns a list. With <code>map_df()</code>, the results are combined into a single data frame (or tibble), which is useful for data manipulation tasks.</p>
+</section>
+<section id="continue-mapping" class="level2">
+<h2 class="anchored" data-anchor-id="continue-mapping">Continue mapping</h2>
+<p>Now calculate the sums of squares of the columns in the data. Use the function you wrote earlier to calculate the squares of the numbers in the columns, just like in the previous exercise. Use another <code>map()</code> call to calculate the sums of squares. Again, study the difference in output.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>random_tibble <span class="sc">%&gt;%</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">map</span>(squares) <span class="sc">%&gt;%</span> <span class="co"># returns a list</span></span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">map</span>(sum) <span class="co"># returns a list with sums of squares</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>$V1
+[1] 8.243026
+
+$V2
+[1] 10.1336
+
+$V3
+[1] 9.600154
+
+$V4
+[1] 3.539557
+
+$V5
+[1] 10.54737</code></pre>
+</div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>random_tibble <span class="sc">%&gt;%</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">map_df</span>(squares) <span class="sc">%&gt;%</span> <span class="co"># returns a tibble</span></span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">map_df</span>(sum) <span class="co"># returns a vector with sums of squares</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 5
+     V1    V2    V3    V4    V5
+  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+1  8.24  10.1  9.60  3.54  10.5</code></pre>
+</div>
+</div>
+<p><code>map_df()</code> will always return a vector (if only one dimension is left) or a tibble (if two dimensions are remaining), while <code>map()</code> will always return a list.</p>
+</section>
+<section id="reduce" class="level2">
+<h2 class="anchored" data-anchor-id="reduce">Reduce</h2>
+<p>Now use <code>reduce()</code> to calculate the sum of the squares. Use the function you wrote earlier to calculate the squares of the numbers in the columns, just like in the previous exercise. Use map to calulate the squares first, and then use <code>reduce(sum)</code> to calculate the sum of the squares. What is different about the output?</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(purrr) <span class="co"># needed for reduce</span></span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>random_tibble <span class="sc">%&gt;%</span></span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">map</span>(squares) <span class="sc">%&gt;%</span> <span class="co"># returns a list</span></span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">reduce</span>(sum) <span class="co"># returns a single value, the sum of squares</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 42.06371</code></pre>
+</div>
+</div>
+<p><code>reduce()</code> is used to apply a function cumulatively to the elements of a list or vector, reducing it to a single value. In this case, it sums up the squares of the numbers in the columns of the tibble. The output is a single numeric value, which is the total sum of squares across all columns. This is different from <code>map()</code> or <code>map_df()</code>, which return lists or tibbles with the results for <strong>each</strong> column.</p>
+</section>
+<section id="reduce-some-more" class="level2">
+<h2 class="anchored" data-anchor-id="reduce-some-more">Reduce some more</h2>
+<p>Now use <code>reduce()</code> to calculate the sum of the squares of the columns in the data. Use the function you wrote earlier to calculate the squares of the numbers in the columns, just like in the previous exercise. Use map to calulate the squares first, and then use <code>reduce(</code>+<code>)</code> to sum up the squares. What is different about the output when compared to <code>reduce(sum)</code>?</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>random_tibble <span class="sc">%&gt;%</span></span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">map</span>(squares) <span class="sc">%&gt;%</span> <span class="co"># returns a list</span></span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">reduce</span>(<span class="st">`</span><span class="at">+</span><span class="st">`</span>) <span class="co"># returns a vector with sums of squares summed over the elements</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1]  3.6172462  0.3602575  6.0453524  6.0239929  2.8505164 10.7150391
+ [7]  1.6313269  5.7130866  2.9609814  2.1459067</code></pre>
+</div>
+</div>
+<p><code>reduce(sum)</code> returns a single value, the total sum of squares across all columns, while <code>reduce(</code>+<code>)</code> returns a vector with the sums of squares for each row in the data. The difference is that <code>reduce(sum)</code> applies the sum function cumulatively to all elements, while <code>reduce(</code>+<code>)</code> applies the addition operator to each element in the list, resulting in the sum of squares for every element - which is the same as the sum of square over the rows</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="co"># verify that `reduce(`+`)` returns the row sums of squares</span></span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>random_tibble <span class="sc">%&gt;%</span></span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">apply</span>(<span class="at">MARGIN =</span> <span class="dv">2</span>, <span class="at">FUN =</span> squares) <span class="sc">%&gt;%</span> <span class="co"># returns a list</span></span>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a>  rowSums <span class="co"># calculate the sums over the rows </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1]  3.6172462  0.3602575  6.0453524  6.0239929  2.8505164 10.7150391
+ [7]  1.6313269  5.7130866  2.9609814  2.1459067</code></pre>
+</div>
+</div>
+</section>
+<section id="map-reduce" class="level2">
+<h2 class="anchored" data-anchor-id="map-reduce">Map-reduce</h2>
+<p>Now create 1000 random number sets like <code>random_tibble</code> and calculate the column means for every colum. The goal is to obtain the overall simulated column means across all tibbles. Follow these steps:</p>
+<ul>
+<li>Use <code>replicate()</code> to draw the random numbers</li>
+<li>Use <code>map()</code> to create the tibbles</li>
+<li>Use <code>map()</code> to calculate the column means for every tibble</li>
+<li>Finally, use <code>reduce()</code> to calculate the overall simulated column means across all tibbles.</li>
+</ul>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>) <span class="co"># if you want to reproduce the results</span></span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a><span class="co"># create the 1000 random number sets</span></span>
+<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a>random_numbers_list <span class="ot">&lt;-</span> </span>
+<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">replicate</span>(<span class="dv">1000</span>, </span>
+<span id="cb36-6"><a href="#cb36-6" aria-hidden="true" tabindex="-1"></a>            <span class="at">expr =</span> <span class="fu">rnorm</span>(<span class="dv">50</span>, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">1</span>), </span>
+<span id="cb36-7"><a href="#cb36-7" aria-hidden="true" tabindex="-1"></a>            <span class="at">simplify =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb36-8"><a href="#cb36-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-9"><a href="#cb36-9" aria-hidden="true" tabindex="-1"></a><span class="co"># convert the list of random numbers to a list of tibbles</span></span>
+<span id="cb36-10"><a href="#cb36-10" aria-hidden="true" tabindex="-1"></a>tibbles_list <span class="ot">&lt;-</span> <span class="fu">map</span>(random_numbers_list, </span>
+<span id="cb36-11"><a href="#cb36-11" aria-hidden="true" tabindex="-1"></a>                    <span class="sc">~</span> <span class="fu">as_tibble</span>(<span class="fu">matrix</span>(.x, <span class="at">nrow =</span> <span class="dv">10</span>, <span class="at">ncol =</span> <span class="dv">5</span>)))</span>
+<span id="cb36-12"><a href="#cb36-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-13"><a href="#cb36-13" aria-hidden="true" tabindex="-1"></a><span class="co"># calculate the column means for each tibble</span></span>
+<span id="cb36-14"><a href="#cb36-14" aria-hidden="true" tabindex="-1"></a>means_list <span class="ot">&lt;-</span> <span class="fu">map</span>(tibbles_list, <span class="sc">~</span> <span class="fu">colMeans</span>(.x))</span>
+<span id="cb36-15"><a href="#cb36-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-16"><a href="#cb36-16" aria-hidden="true" tabindex="-1"></a><span class="co"># calculate the overall means across all tibbles</span></span>
+<span id="cb36-17"><a href="#cb36-17" aria-hidden="true" tabindex="-1"></a><span class="fu">reduce</span>(means_list, <span class="st">`</span><span class="at">+</span><span class="st">`</span>) <span class="sc">/</span> <span class="fu">length</span>(means_list)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>          V1           V2           V3           V4           V5 
+ 0.008846081  0.004720094 -0.004193883 -0.004779168 -0.013311323 </code></pre>
+</div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="co"># or with a pipe</span></span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>random_numbers_list <span class="sc">%&gt;%</span> </span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">map</span>(<span class="sc">~</span>.x <span class="sc">%&gt;%</span> </span>
+<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a>        <span class="fu">matrix</span>(<span class="at">nrow =</span> <span class="dv">10</span>, <span class="at">ncol =</span> <span class="dv">5</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a>        <span class="fu">set_colnames</span>(<span class="fu">c</span>(<span class="st">"V1"</span>, <span class="st">"V2"</span>, <span class="st">"V3"</span>, <span class="st">"V4"</span>, <span class="st">"V5"</span>)) <span class="sc">%&gt;%</span> <span class="co"># set column names</span></span>
+<span id="cb38-6"><a href="#cb38-6" aria-hidden="true" tabindex="-1"></a>        <span class="fu">tibble</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb38-7"><a href="#cb38-7" aria-hidden="true" tabindex="-1"></a>        <span class="fu">colMeans</span>()</span>
+<span id="cb38-8"><a href="#cb38-8" aria-hidden="true" tabindex="-1"></a>      ) <span class="sc">%&gt;%</span> <span class="co"># end of map</span></span>
+<span id="cb38-9"><a href="#cb38-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">reduce</span>(<span class="st">`</span><span class="at">+</span><span class="st">`</span>) <span class="sc">/</span> <span class="dv">1000</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>        ..V1         ..V2         ..V3         ..V4         ..V5 
+ 0.008846081  0.004720094 -0.004193883 -0.004779168 -0.013311323 </code></pre>
+</div>
+</div>
+</section>
+<section id="map-reduce-without-reduce" class="level2">
+<h2 class="anchored" data-anchor-id="map-reduce-without-reduce">Map-reduce without reduce</h2>
+<p>Now do the same thing as in the previous exercise, but with a twist: Create 1000 random number sets like <code>random_tibble</code> and calculate the column means for every colum. The goal is to obtain the overall simulated column means across all tibbles without using <code>reduce()</code>. Follow these steps:</p>
+<ul>
+<li>Use <code>replicate()</code> to draw the random numbers</li>
+<li>Use <code>map()</code> to create the tibbles</li>
+<li>Use <code>map_df()</code> to calculate the column means for every tibble presented in a tibble</li>
+<li>Finally, use <code>colMeans()</code> to calculate the overall simulated column means based on the previous step.</li>
+</ul>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>) <span class="co"># if you want to reproduce the results</span></span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a><span class="co"># create the 1000 random number sets</span></span>
+<span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a>random_numbers_list <span class="ot">&lt;-</span> </span>
+<span id="cb40-5"><a href="#cb40-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">replicate</span>(<span class="dv">1000</span>, </span>
+<span id="cb40-6"><a href="#cb40-6" aria-hidden="true" tabindex="-1"></a>            <span class="at">expr =</span> <span class="fu">rnorm</span>(<span class="dv">50</span>, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">1</span>), </span>
+<span id="cb40-7"><a href="#cb40-7" aria-hidden="true" tabindex="-1"></a>            <span class="at">simplify =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb40-8"><a href="#cb40-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-9"><a href="#cb40-9" aria-hidden="true" tabindex="-1"></a><span class="co"># convert the list of random numbers to a list of tibbles</span></span>
+<span id="cb40-10"><a href="#cb40-10" aria-hidden="true" tabindex="-1"></a>tibbles_list <span class="ot">&lt;-</span> <span class="fu">map</span>(random_numbers_list, </span>
+<span id="cb40-11"><a href="#cb40-11" aria-hidden="true" tabindex="-1"></a>                    <span class="sc">~</span> <span class="fu">as_tibble</span>(<span class="fu">matrix</span>(.x, <span class="at">nrow =</span> <span class="dv">10</span>, <span class="at">ncol =</span> <span class="dv">5</span>)))</span>
+<span id="cb40-12"><a href="#cb40-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-13"><a href="#cb40-13" aria-hidden="true" tabindex="-1"></a><span class="co"># calculate the column means for each tibble</span></span>
+<span id="cb40-14"><a href="#cb40-14" aria-hidden="true" tabindex="-1"></a>means_list <span class="ot">&lt;-</span> <span class="fu">map_df</span>(tibbles_list, <span class="sc">~</span> <span class="fu">colMeans</span>(.x))</span>
+<span id="cb40-15"><a href="#cb40-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-16"><a href="#cb40-16" aria-hidden="true" tabindex="-1"></a><span class="co"># calculate the overall means across all tibbles</span></span>
+<span id="cb40-17"><a href="#cb40-17" aria-hidden="true" tabindex="-1"></a><span class="fu">colMeans</span>(means_list)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>          V1           V2           V3           V4           V5 
+ 0.008846081  0.004720094 -0.004193883 -0.004779168 -0.013311323 </code></pre>
+</div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="co"># or with a pipe</span></span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>random_numbers_list <span class="sc">%&gt;%</span> </span>
+<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a><span class="fu">map_df</span>(<span class="sc">~</span>.x <span class="sc">%&gt;%</span> </span>
+<span id="cb42-4"><a href="#cb42-4" aria-hidden="true" tabindex="-1"></a>           <span class="fu">matrix</span>(<span class="at">nrow =</span> <span class="dv">10</span>, <span class="at">ncol =</span> <span class="dv">5</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb42-5"><a href="#cb42-5" aria-hidden="true" tabindex="-1"></a>           <span class="fu">set_colnames</span>(<span class="fu">c</span>(<span class="st">"V1"</span>, <span class="st">"V2"</span>, <span class="st">"V3"</span>, <span class="st">"V4"</span>, <span class="st">"V5"</span>)) <span class="sc">%&gt;%</span> <span class="co"># set column names</span></span>
+<span id="cb42-6"><a href="#cb42-6" aria-hidden="true" tabindex="-1"></a>           <span class="fu">tibble</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb42-7"><a href="#cb42-7" aria-hidden="true" tabindex="-1"></a>           <span class="fu">colMeans</span>()</span>
+<span id="cb42-8"><a href="#cb42-8" aria-hidden="true" tabindex="-1"></a>         ) <span class="sc">%&gt;%</span> <span class="co"># end of map</span></span>
+<span id="cb42-9"><a href="#cb42-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">colMeans</span>() <span class="co"># calculate the overall means</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>        ..V1         ..V2         ..V3         ..V4         ..V5 
+ 0.008846081  0.004720094 -0.004193883 -0.004779168 -0.013311323 </code></pre>
 </div>
 </div>
 
 
+</section>
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -685,4 +1203,4 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 
 
 
-<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions"><ul><li><a href="https://github.com/gerkovink/sur/edit/book/meeting5.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/gerkovink/sur/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div></div></footer></body></html>
+<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/gerkovink/sur/edit/book/meeting5.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/gerkovink/sur/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div></div></footer></body></html>

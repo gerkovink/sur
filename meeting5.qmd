@@ -12,11 +12,196 @@ format:
     number-sections: false
     toc: true
     toc-depth: 3
-    code_folding: hide
+    code-fold: true
 ---
 
 ::: callout-tip
 ## Hoorcollege 9 juni 2025
-Functioneel programmeren is misschien wel de belangrijkste vaardigheid die een statistisch programmeur zich eigen kan maken. Soms kost het draaien van een statistisch model of een simulatiestudie enorm veel rekenkracht. Efficient programmeren is dan essentieel. Daarnaast is het handig als het rekenwerk verdeeld kan worden over verschillende streams. We gaan daarom vandaag ook aandacht besteden aan het *parallel computing* en zullen ons de `map-reduce` workflow eigen maken. De collegeslides voor vandaag kun u [hier vinden](slides/lec-5.html)
+Functioneel programmeren is misschien wel de belangrijkste vaardigheid die een statistisch programmeur zich eigen kan maken. Soms kost het draaien van een statistisch model of een simulatiestudie enorm veel rekenkracht. Efficient programmeren is dan essentieel. Daarnaast is het handig als het rekenwerk verdeeld kan worden over verschillende streams. We gaan daarom vandaag ook aandacht besteden aan een eenvoudige vorm van *parallel computing* en zullen ons de `map-reduce` workflow eigen maken. De collegeslides voor vandaag kun u [hier vinden](slides/lec-5.html)
 :::
+
+# Practical
+I will not tell you which packages you will need for this practical. You will need to load the packages in the practical when you need them. This is to help you get used to knowing when to use which package. 
+
+## Create some random data
+Draw 50 values from a standard normal distribution (i.e. with mean 0 and variance 1). Use the drawn values to make a tibble named `random_tibble` with 10 rows and 5 columns. Make sure to set a seed so that you can reproduce the results. 
+
+```{r}
+set.seed(123) # if you want to reproduce the results
+library(tibble) # needed for tibbles
+
+# draw random numbers
+random_data <- rnorm(50, mean = 0, sd = 1)
+
+# create random tibble
+random_tibble <- tibble(
+  V1 = random_data[1:10],
+  V2 = random_data[11:20],
+  V3 = random_data[21:30],
+  V4 = random_data[31:40],
+  V5 = random_data[41:50]
+)
+
+# or 
+random_tibble <- as_tibble(matrix(random_data, nrow = 10, ncol = 5))
+```
+
+## Your own function
+Write a function that takes a vector of numbers and returns the squares of the numbers in the vector. Test your function on the vector `c(1, 2, 3, 4, 5)`.
+
+```{r}
+squares <- function(x) {
+  output <- x^2 # square the numbers
+  return(output) # return the squared numbers
+}
+# Test your function
+vector <- c(1, 2, 3, 4, 5)
+squares(vector)
+```
+
+## Apply your function
+Use `apply()`, `lapply()` and `sapply()` to apply your function to the `random_tibble` data. Try all margins for `apply()` and try the defaults for `lapply()` and `sapply()`. Also try argument `simplify = FALSE` for `sapply()`. 
+```{r}
+apply(random_tibble, MARGIN = 1, squares) # apply to rows
+apply(random_tibble, MARGIN = 2, squares) # apply to columns
+lapply(random_tibble, squares) # apply to each column as a list
+sapply(random_tibble, squares) # return a matrix with the results
+sapply(random_tibble, squares, simplify = FALSE) # return a list with the results
+```
+The argument `simplify = FALSE` in `sapply()` is used to return the results as a list instead of a matrix. This is useful when the results are not of the same length or type, as it prevents coercion to a matrix. It mimics the output of `lapply()`.
+
+## Map
+Now map your function over the `random_tibble` data using `map()`. Use `map_df()` to return a tibble with the results. Study the difference between the two function's output. 
+```{r}
+library(purrr) # needed for map functions
+map(random_tibble, squares) # returns a list
+map_df(random_tibble, squares) # returns a tibble
+
+# or with the pipe
+library(magrittr) # needed for the pipe operators
+random_tibble %>%
+  map(squares) # returns a list
+random_tibble %>%
+  map_df(squares) # returns a tibble
+```
+
+With `map()` you can apply a function to each element of a list or vector, and it returns a list. With `map_df()`, the results are combined into a single data frame (or tibble), which is useful for data manipulation tasks.
+
+## Continue mapping
+Now calculate the sums of squares of the columns in the data. Use the function you wrote earlier to calculate the squares of the numbers in the columns, just like in the previous exercise. Use another `map()` call to calculate the sums of squares. Again, study the difference in output. 
+
+```{r}
+random_tibble %>%
+  map(squares) %>% # returns a list
+  map(sum) # returns a list with sums of squares
+random_tibble %>%
+  map_df(squares) %>% # returns a tibble
+  map_df(sum) # returns a vector with sums of squares
+```
+
+`map_df()` will always return a vector (if only one dimension is left) or a tibble (if two dimensions are remaining), while `map()` will always return a list. 
+
+
+## Reduce
+Now use `reduce()` to calculate the sum of the squares. Use the function you wrote earlier to calculate the squares of the numbers in the columns, just like in the previous exercise. Use map to calulate the squares first, and then use `reduce(sum)` to calculate the sum of the squares. What is different about the output?
+```{r}
+library(purrr) # needed for reduce
+random_tibble %>%
+  map(squares) %>% # returns a list
+  reduce(sum) # returns a single value, the sum of squares
+```
+
+`reduce()` is used to apply a function cumulatively to the elements of a list or vector, reducing it to a single value. In this case, it sums up the squares of the numbers in the columns of the tibble. The output is a single numeric value, which is the total sum of squares across all columns. This is different from `map()` or `map_df()`, which return lists or tibbles with the results for **each** column.
+
+## Reduce some more
+Now use `reduce()` to calculate the sum of the squares of the columns in the data. Use the function you wrote earlier to calculate the squares of the numbers in the columns, just like in the previous exercise. Use map to calulate the squares first, and then use `reduce(`+`)` to sum up the squares. What is different about the output when compared to `reduce(sum)`?
+```{r}
+random_tibble %>%
+  map(squares) %>% # returns a list
+  reduce(`+`) # returns a vector with sums of squares summed over the elements
+```
+
+`reduce(sum)` returns a single value, the total sum of squares across all columns, while `reduce(`+`)` returns a vector with the sums of squares for each row in the data. The difference is that `reduce(sum)` applies the sum function cumulatively to all elements, while `reduce(`+`)` applies the addition operator to each element in the list, resulting in the sum of squares for every element - which is the same as the sum of square over the rows 
+```{r}
+# verify that `reduce(`+`)` returns the row sums of squares
+random_tibble %>%
+  apply(MARGIN = 2, FUN = squares) %>% # returns a list
+  rowSums # calculate the sums over the rows 
+```
+
+## Map-reduce
+Now create 1000 random number sets like `random_tibble` and calculate the column means for every colum. The goal is to obtain the overall simulated column means across all tibbles. Follow these steps:
+
+- Use `replicate()` to draw the random numbers
+- Use `map()` to create the tibbles 
+- Use `map()` to calculate the column means for every tibble
+- Finally, use `reduce()` to calculate the overall simulated column means across all tibbles. 
+
+```{r}
+set.seed(123) # if you want to reproduce the results
+
+# create the 1000 random number sets
+random_numbers_list <- 
+  replicate(1000, 
+            expr = rnorm(50, mean = 0, sd = 1), 
+            simplify = FALSE)
+
+# convert the list of random numbers to a list of tibbles
+tibbles_list <- map(random_numbers_list, 
+                    ~ as_tibble(matrix(.x, nrow = 10, ncol = 5)))
+
+# calculate the column means for each tibble
+means_list <- map(tibbles_list, ~ colMeans(.x))
+
+# calculate the overall means across all tibbles
+reduce(means_list, `+`) / length(means_list)
+
+# or with a pipe
+random_numbers_list %>% 
+  map(~.x %>% 
+        matrix(nrow = 10, ncol = 5) %>%
+        set_colnames(c("V1", "V2", "V3", "V4", "V5")) %>% # set column names
+        tibble() %>% 
+        colMeans()
+      ) %>% # end of map
+  reduce(`+`) / 1000
+```
+
+## Map-reduce without reduce
+Now do the same thing as in the previous exercise, but with a twist: Create 1000 random number sets like `random_tibble` and calculate the column means for every colum. The goal is to obtain the overall simulated column means across all tibbles without using `reduce()`. Follow these steps:
+
+- Use `replicate()` to draw the random numbers
+- Use `map()` to create the tibbles 
+- Use `map_df()` to calculate the column means for every tibble presented in a tibble
+- Finally, use `colMeans()` to calculate the overall simulated column means based on the previous step. 
+
+```{r}
+set.seed(123) # if you want to reproduce the results
+
+# create the 1000 random number sets
+random_numbers_list <- 
+  replicate(1000, 
+            expr = rnorm(50, mean = 0, sd = 1), 
+            simplify = FALSE)
+
+# convert the list of random numbers to a list of tibbles
+tibbles_list <- map(random_numbers_list, 
+                    ~ as_tibble(matrix(.x, nrow = 10, ncol = 5)))
+
+# calculate the column means for each tibble
+means_list <- map_df(tibbles_list, ~ colMeans(.x))
+
+# calculate the overall means across all tibbles
+colMeans(means_list)
+
+# or with a pipe
+random_numbers_list %>% 
+map_df(~.x %>% 
+           matrix(nrow = 10, ncol = 5) %>%
+           set_colnames(c("V1", "V2", "V3", "V4", "V5")) %>% # set column names
+           tibble() %>% 
+           colMeans()
+         ) %>% # end of map
+  colMeans() # calculate the overall means
+```
 
