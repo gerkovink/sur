@@ -141,7 +141,7 @@ plot(dens, main = "Density plot", xlab = "Height", bty = "L")
 ## Scatter plot
 ```{r, fig.align='center', dev.args=list(bg="transparent")}
 plot(x = boys$hgt, y = boys$wgt, main = "Scatter plot", 
-     xlab = "Height", ylab = "Weight", bty = "L")
+     xlab = "Height", ylab = "Weight")
 ```
 
 ## Box plot
