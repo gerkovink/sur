@@ -35,11 +35,6 @@ printAnswers <- TRUE
 
 ```
 
-
----
-
-#### Exercises
-
 ---
 
 The following packages are required for this practical:
@@ -59,19 +54,6 @@ set.seed(123)
 
 ---
 
-1. **Function `plot()` is the core plotting function in `R`. Find out more about `plot()`: Try both the help in the help-pane and `?plot` in the console. Look at the examples by running `example(plot)`.**
-
-The help tells you all about a functions arguments (the input you can specify), as well as the element the function returns to the Global Environment. There are strict rules for publishing packages in R. For your packages to appear on the Comprehensive R Archive Network (CRAN), a rigorous series of checks have to be passed. As a result, all user-level components (functions, datasets, elements) that are published, have an acompanying documentation that elaborates how the function should be used, what can be expected, or what type of information a data set contains. Help files often contain example code that can be run to demonstrate the workings. 
-
-```{r evaluate=TRUE, message=FALSE}
-?plot
-example(plot)
-```
-
-There are many more functions that can plot specific types of plots. For example, function `hist()` plots histograms, but falls back on the basic `plot()` function. Package `ggplot2` is an excellent package to use for more complex plots. Pretty much any type of plot can be made in R. All ggplot2 documentation can be found at [ggplot2.tidyverse.org](https://ggplot2.tidyverse.org/)
-
----
-
 1. **Create a scatterplot between `age` and `bmi` in the `mice::boys` data set**
 
 With the standard plotting device in `R`:
@@ -83,62 +65,41 @@ mice::boys %$% plot(bmi ~ age)
 or, with `ggplot2`:
 
 ```{r }
-p <- ggplot(mice::boys, aes(age, bmi))
-p + geom_point()
-```
-
-Package `ggplot2` offers far greater flexibility in data visualization than the standard plotting devices in `R`. However, it has its own language, which allows you to easily expand graphs with additional commands. To make these expansions or layers clearly visible, it is advisable to use the plotting language conventions. For example,
-
-```{r, eval = FALSE}
 mice::boys %>% 
   ggplot(aes(age, bmi)) +
   geom_point()
 ```
 
-would yield the same plot as 
-
-```{r, eval = FALSE}
-ggplot(mice::boys, aes(age, bmi)) + geom_point()
-```
-but the latter style may be less informative, especially if more customization takes place and if you share your code with others. 
+Package `ggplot2` offers far greater flexibility in data visualization than the standard plotting devices in `R`. However, it has its own language, which allows you to easily expand graphs with additional commands. To make these expansions or layers clearly visible, it is advisable to start with the pipe and to use a `+` to indicate each seperate *layer*.
 
 ---
 
 2. **Now recreate the plot with the following specifications:**
 
-- If `bmi < 18.5` use `color = "light blue"`
-- If `bmi > 18.5 & bmi < 25` use `color = "light green"`
-- If `bmi > 25 & bmi < 30` use `color = "orange"`
-- If `bmi > 30` use `color = "red"`
+- If `bmi < 18.5` use `color = "lightblue"` and label `underweight`
+- If `bmi > 18.5 & bmi < 25` use `color = "lightgreen"` and label `healthy`
+- If `bmi > 25 & bmi < 30` use `color = "orange"` and label `overweight`
+- If `bmi > 30` use `color = "red"` and label `obese`
 
-Hint: it may help to expand the data set with a new variable. 
+Hint: it may help to expand the data set with a new variable, for example with `mutate()` and `case_when()`. 
 
-It may be easier to create a new variable that creates the specified categories. We can use the `cut()` function to do this quickly
-
-```{r }
-boys2 <- 
-  boys %>%
-  mutate(class = cut(x = bmi, breaks = c(0, 18.5, 25, 30, Inf),
-                    labels = c("underweight",
-                               "healthy",
-                               "overweight",
-                               "obese")))
-```
-
-by specifying the boundaries of the intervals. In this case we obtain 4 intervals: `0-18.5`, `18.5-25`, `25-30` and `30-Inf`. We used the `%>%` pipe to work with `bmi` directly. Alternatively, we could have done this without a pipe:
+It may be easier to create a new variable that creates the specified categories. We can use the `case_when()` function to do this quickly with `mutate()`. I store the resulting object as `boys2`, because I will show multiple ways of creating this plot:
 
 ```{r }
-boys3 <- boys
-boys3$class <- cut(boys$bmi, c(0, 18.5, 25, 30, Inf), 
-                   labels = c("underweight",
-                              "healthy",
-                              "overweight",
-                              "obese"))
+boys2 <- boys %>% 
+  mutate(class = case_when(
+    bmi < 18.5 ~ "underweight",
+    bmi >= 18.5 & bmi < 25 ~ "healthy",
+    bmi >= 25 & bmi < 30 ~ "overweight",
+    bmi >= 30 ~ "obese"
+  ))
+glimpse(boys2) # see that class has been added
+boys2$class %>% table(useNA = "always") # see the distribution of the new class variable
 ```
 
-to obtain the same result. 
+The `boys2` data set now has a new variable `class` that contains the specified categories. We see that 21 cases have missings for `bmi` and therefore have not received a class label. 
 
-With the standard plotting device in `R` we can now specify:
+With the standard plotting device in `R` we can now use this column and specify:
 
 ```{r }
 plot(bmi ~ age, subset = class == "underweight", col = "lightblue", data = boys2, 
@@ -156,7 +117,7 @@ boys2 %>%
   geom_point(aes(age, bmi, col = class))
 ```
 
-Although the different classifications have different colours, the colours are not conform the specifications of this exercise. We can manually override this:
+Although the different classifications have different colours, the colours are by default not conform the specifications of this exercise. We can manually override this:
 
 ```{r }
 boys2 %>%
@@ -290,62 +251,6 @@ boys %>%
   filter(!is.na(area)) %>%
   ggplot(aes(age, fill = area)) +
   geom_density(alpha = .3) # some transparency
-```
-
----
-
-7. **Create a diverging bar chart for `hgt` in the `boys` data set, that displays for every `age` year that year's mean height in deviations from the overall average `hgt`**
-
-Let's not make things too complicated and just focus on `ggplot2`:
-
-```{r}
-boys %>%
-  mutate(Hgt = hgt - mean(hgt, na.rm = TRUE),
-         Age = cut(age, 0:22, labels = 0:21)) %>%
-  group_by(Age) %>%
-  summarize(Hgt = mean(Hgt, na.rm = TRUE)) %>% 
-  mutate(Diff = cut(Hgt, c(-Inf, 0, Inf),
-                    labels = c("Below Average", "Above Average"))) %>%
-  ggplot(aes(x = Age, y = Hgt, fill = Diff)) + 
-  geom_bar(stat = "identity") +
-  coord_flip()
-```
-
-We can clearly see that the average height in the group is reached just before age 7. 
-
-The `group_by()` and `summarize()` function are advanced `dplyr` functions used to return the `mean()` of deviation `Hgt` for every group in `Age`. For example, if we would like the mean and sd of height `hgt` for every region `reg` in the `boys` data, we could call:
-
-```{r}
-boys %>%
-  group_by(reg) %>% 
-  summarize(mean_hgt = mean(hgt, na.rm = TRUE), 
-            sd_hgt   = sd(hgt, na.rm = TRUE))
-```
-
-The `na.rm` argument ensures that the mean and sd of only the observed values in each category are used.
-
----
-
-8. **Bonus: Change the overall appearance of the plot you have created for exercise 7 using an available theme. Customize the theme (using theme()) in any way you like.**
-
-For example: 
-
-```{r}
-boys %>%
-  mutate(Hgt = hgt - mean(hgt, na.rm = TRUE),
-         Age = cut(age, 0:22, labels = 0:21)) %>%
-  group_by(Age) %>%
-  summarize(Hgt = mean(Hgt, na.rm = TRUE)) %>% 
-  mutate(Diff = cut(Hgt, c(-Inf, 0, Inf),
-                    labels = c("Below Average", "Above Average"))) %>%
-  ggplot(aes(x = Age, y = Hgt, fill = Diff)) + 
-  geom_bar(stat = "identity") +
-  coord_flip() + 
-  theme_classic() +
-  theme(panel.grid.major = element_line(colour = "darkgreen"), 
-        legend.position = "bottom",
-        legend.box.background = element_rect(),
-        legend.title = element_text(face = "bold")) 
 ```
 
 ---

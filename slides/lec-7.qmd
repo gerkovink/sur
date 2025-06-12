@@ -54,6 +54,27 @@ Gisteren hebben we deze onderwerpen behandeld:
 - Ontbrekende waarden identificeren
 - Synthetische imputaties maken
 
+```{r echo=FALSE}
+library(mice)
+library(magrittr)
+library(dplyr)
+```
+
+## Some addition
+I've showed you how to draw a *bootstrap* sample from a dataset in the following way:
+```{r eval = FALSE}
+which_rows <- sample(1:nrow(mice::boys), size = 100, replace = TRUE)
+mice::boys[which_rows, ]
+```
+But, there is a much easier way:
+```{r}
+mice::boys %>% 
+  slice_sample(n = 100, replace = TRUE) %>% 
+  glimpse()
+```
+
+
+
 ## Today
 Vandaag behandelen we de volgende onderwerpen:
 
