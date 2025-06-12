@@ -54,7 +54,7 @@ set.seed(123)
 
 ---
 
-1. **Create a scatterplot between `age` and `bmi` in the `mice::boys` data set**
+1. **Create a scatterplot between `age` (x-axis) and `bmi` (y-axis) in the `mice::boys` data set**
 
 With the standard plotting device in `R`:
 
@@ -66,7 +66,7 @@ or, with `ggplot2`:
 
 ```{r }
 mice::boys %>% 
-  ggplot(aes(age, bmi)) +
+  ggplot(aes(x = age, y = bmi)) +
   geom_point()
 ```
 
@@ -93,7 +93,7 @@ boys2 <- boys %>%
     bmi >= 25 & bmi < 30 ~ "overweight",
     bmi >= 30 ~ "obese"
   ))
-glimpse(boys2) # see that class has been added
+boys2 %>% glimpse() # see that class has been added
 boys2$class %>% table(useNA = "always") # see the distribution of the new class variable
 ```
 
@@ -114,7 +114,7 @@ and with `ggplot2` we can call
 ```{r }
 boys2 %>%
   ggplot() +
-  geom_point(aes(age, bmi, col = class))
+  geom_point(aes(x = age, y = bmi, col = class))
 ```
 
 Although the different classifications have different colours, the colours are by default not conform the specifications of this exercise. We can manually override this:
@@ -122,25 +122,31 @@ Although the different classifications have different colours, the colours are b
 ```{r }
 boys2 %>%
   ggplot() +
-  geom_point(aes(age, bmi, col = class)) +
-  scale_color_manual(values = c("lightblue", "lightgreen", "orange", "red"))
+  geom_point(aes(x = age, y = bmi, col = class)) +
+  scale_color_manual(values = c("lightblue", 
+                                "lightgreen", 
+                                "orange", 
+                                "red"))
 ```
 
 Because there are missing values, `ggplot2` displays a warning message. If we would like to not consider the missing values when plotting, we can simply exclude the `NA`s by using a `filter()`:
 
-```{r }
+```{r}
 boys2 %>% 
   filter(!is.na(class)) %>%
   ggplot() +
-  geom_point(aes(age, bmi, col = class)) +
-  scale_color_manual(values = c("lightblue", "lightgreen", "orange", "red"))
+  geom_point(aes(x = age, y = bmi, col = class)) +
+  scale_color_manual(values = c("lightblue", 
+                                "lightgreen", 
+                                "orange", 
+                                "red"))
 ```
 
 Specifying a filter on the feature `class` is sufficient: age has no missings and the missings in `class` directly correspond to missing values on `bmi`. Filtering on `bmi` would therefore yield an identical plot.
 
 ---
 
-3. **Create a histogram for `age` in the `boys` data set**
+3. **Create a histogram for `age` in the `boys` data set. If you use the `hist()` function, play around with the `breaks` argument. If you use `geom_histogram()`, play around with the `binwidth` argument. **
 
 With the standard plotting device in `R`:
 
@@ -166,7 +172,7 @@ With `ggplot2`:
 ```{r }
 boys %>%
   ggplot() + 
-  geom_histogram(aes(age), binwidth = .4)
+  geom_histogram(aes(x = age), binwidth = .4)
 ```
 
 Please note that the plots from `geom_histogram()` and `hist` use different calculations for the bars (bins) and hence may look slightly different.
@@ -206,7 +212,7 @@ With `ggplot2`:
 
 ```{r }
 boys %>%
-  ggplot(aes(reg, hgt)) +
+  ggplot(aes(x = reg, y = hgt)) +
   geom_boxplot()
 
 # This does not work!
@@ -247,10 +253,13 @@ With `ggplot2` everything looks much nicer:
 
 ```{r }
 boys %>%
-  mutate(area = ifelse(reg == "city", "city", "rural")) %>%
+  mutate(area = ifelse(test = reg == "city", 
+                       yes = "city", 
+                       no = "rural")) %>%
   filter(!is.na(area)) %>%
-  ggplot(aes(age, fill = area)) +
-  geom_density(alpha = .3) # some transparency
+  ggplot(aes(x = age, 
+             fill = area)) +
+  geom_density(alpha = .3) # not necessary, but nicer with some transparency
 ```
 
 ---

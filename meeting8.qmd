@@ -2,9 +2,7 @@
 
 ::: callout-tip
 ## Hoorcollege 13 juni 2025
-Vandaag gaan we leren wat het is om een echte ontwikkelaar in `R` te zijn. We zullen aandacht besteden aan het maken van ons eigen `R` package en we gaan dit package ook zelf *publiceren* op een repository en archiveren met een DOI, een zogenaamde *persistent identifier*. Dit maakt het mogelijk om overal ter wereld samen te werken aan dezelfde `R` code op ieder moment in het heden en verleden. We zullen tijdens dit hoorcollege ook een aantal *tools* bespreken die het leven van een ontwikkelaar makkelijker maken. We zullen ook aandacht besteden aan de *ethiek* van softwareontwikkeling. We zullen ook veel aandacht besteden aan alles wat er komt kijken wanneer we met elkaar dezelfde *taal* willen spreken. De collegeslides voor vandaag kunt u [hier vinden](slides/lec-8.html)
-
-Een opname van het `R`-package maken en publiceren, kunt u [hier vinden](https://www.dropbox.com/scl/fi/hscfsrh30slk23k7z6d1d/wk6_recording.mp4?rlkey=yhy7wt8ldfmsybbb3000z1hl0&dl=0) (download voor de gehele (1h+) recording)
+Vandaag gaan we leren wat het is om een echte ontwikkelaar in `R` te zijn. We zullen aandacht besteden aan het maken van ons eigen `R` package. Dit maakt het mogelijk om overal ter wereld samen te werken aan dezelfde `R` code op ieder moment in het heden en verleden. We zullen tijdens dit hoorcollege ook een aantal *tools* bespreken die het leven van een ontwikkelaar makkelijker maken. De collegeslides voor vandaag kunt u [hier vinden](slides/lec-8.html)
 :::
 
 ---
@@ -28,48 +26,10 @@ format:
     toc-depth: 3
 ---
 
-::: callout-note
-## Voorbereiding
-:::
 
-## `R`-packages
-It is much easier to create, manage and co-develop an R-package when you incorporate it into a distributed version control system like [Git](https://git-scm.com). The extension to a software development hosting service like [GitHub](https://github.com) is then a natural one. Although there are other procedures, devops systems and hosting services that may lend itself for package development, we outline the workflow with `Git` and `GitHub`. We also assume that you have [`RStudio`](https://posit.co/products/open-source/rstudio/) installed. 
+# Practical
 
-#### Recap on `Git`
-`Git` is a free and open source version control system for text files. It can handle extensive change logging for you, no matter the size of the project. `Git` is fast and efficient, but its effectiveness depends also on the frequency you instruct it to log your project's changes. 
-
-You can see `Git` as a blank canvas that starts at a certain point in time. Every time you (or others) instruct `Git` to log any changes that have been made, `Git` adds the changes that are made to this canvas. We call the changes to the canvas [`commits`](https://help.github.com/articles/github-glossary/#commit). With every `commit` an extensive log is created that includes at least the following information:
-
-- the changes made
-- who made the changes
-- metadata
-- a small piece of text that describe the changes made
-
-The difference between two commits - or the changes between them - are called [`diffs`](https://help.github.com/articles/github-glossary/#diff). 
-
-If you'd like to know much more about `Git`, [this online book](https://git-scm.com/book/en/v2) is a very good resource. If you'd like to practice with the command line interface [use this webpage](https://learngitbranching.js.org) for a quick course. [This book](https://happygitwithr.com) covers pretty much everything you need to marry `Git` and `R`. 
-
-#### Why GitHub
-`GitHub` is the social and user interface to `Git` that allows you to work in [repositories](https://help.github.com/articles/github-glossary/#repository). These repositories can be seen as project folders in which you publish your work, but you can also use them as test sites for development, testing, etcetera. There is a distinction between [private repositories](https://help.github.com/articles/github-glossary/#private-repository) (only for you and those you grant access) and public repositories (visible for everyone). 
-
-Your public repositories can be viewed and [forked](https://help.github.com/articles/github-glossary/#fork) by everyone. `Forking` is when other people create a copy of your repository on their own account. This allows them to work on a repository without affecting the `master`. You can also do this yourself, but then the process is called [`branching`](https://help.github.com/articles/github-glossary/#branch) instead of forking. If you create a copy of a repository that is offline, the process is called [`cloning`](https://help.github.com/articles/github-glossary/#clone). 
-
-`GitHub`'s ability to branch, fork and clone is very useful as it allows other people and yourself to experiment on (the code in) a repository before any definitive changes are [`merged`](https://help.github.com/articles/github-glossary/#merge) with the `master`. If you're working in a forked repository, you can submit a [`pull request`](https://help.github.com/articles/github-glossary/#pull-request) to the repository collaborators to accept (or reject) any suggested changes. 
-
-For now, this may be confusing, but I hope you recognize the benefits `GitHub` can have on the process of development and bug-fixing. For example, the most up-to-date version of the `mice` package in `R` can be directly installed from the `mice` repository with the following code:
-
-```{r eval=FALSE}
-install.packages("devtools")
-devtools::install_github(repo = "stefvanbuuren/mice")
-```
-
-You can see that this process requires package `devtools` that expands the `R` functionality with essential development tools. Loading packages in `R` directly from their respective `GitHub` repositories, allows you to obtain the latest - often improved and less buggy - iteration of that software even before it is published on [`CRAN`](https://cran.r-project.org). 
-
-
-#### Install `RStudio`
-Install `RStudio` from [Posit's website](https://posit.co/products/open-source/rstudio/). The free edition will suffice. 
-
-### Some R-code
+## Some R-code
 In order to demonstrate the creation of an R-package, we will identify some odd behaviour by `R`:
 ```{r}
 #| warning: false
@@ -98,7 +58,7 @@ c(0.49, 1.49, 2.49, 3.49) %>% rounder()
 ```
 
 ## Create `R`-package `roundR`
-The goal of this document is to create the code for the `rounder()` function into a stand-alone `R`-package with its referenceable [Digital Object Identifier](https://www.doi.org)
+The goal of this document is to create the code for the `rounder()` function into a stand-alone `R`-package/
 
 ### Steps in creating an `R`-package
 
@@ -466,136 +426,10 @@ test_that("rounder works", {
 
 Fortunately, our test all passed. Now rerun the `R CMD check`. If all is well you'll receive confirmation of a successful check.
 
-#### Publishing to GitHub
-
-**This section assumes that you are logged into your GitHub account. If you have trouble realizing this, [GitHub has a great step-by-step walkthrough](https://docs.github.com/en/desktop/installing-and-configuring-github-desktop/installing-and-authenticating-to-github-desktop)**. 
-
-Let's publish our `R`-package to `GitHub`. To do so, we need to perform two steps. First, we must log (commit) our changes to the `Git` distributed version control system. This stores the file changes to our own machine. Next we must link our local `Git` to a remote online repository on `GitHub`. Luckily, with `GitHub Desktop`, we can perform all these steps in a single window interface. 
-
-Let's start by adding our `R`-package to `GitHub desktop`. Remember that we already started the package in `RStudio` as a `Git` repository, so we only have to point `GitHub desktop` to the correct directory.
-<center>
-![](images/mt6/addgitrepo.gif){width=90%}
-</center>
-
-Next, we commit the changes. This means that we save the state of files for a moment in time, so that we can always revert to that state and see how the files changed with respect to the previous state. 
-<center>
-![](images/mt6/commit.gif){width=90%}
-</center>
-Naturally, you would not only do this at the start (when `RStudio` created the `Git` repository) and end (when we have a working package), but at regular and informative intervals. For example, when you add a function, a test, a help file, a license, etcetera. 
-
-Now that we have commited our package, we can publish it on `GitHub`.
-<center>
-![](images/mt6/publish_gh.gif){width=90%}
-</center>
-
-Try your online `GitHub` repositories at [https://github.com](https://github.com). You will see your package there and that the license is automatically recognized. You will also see that you are in the `main` branch. By default, that will be the live version of your package. Now that your package is live, it would be nice to add a `Readme` file that informs visitors to your repository. But we will extend our workflow with a good behaviour: not working in the `main` branch. We would not want to accidentally overwrite or break the functionality of our package, just because we were working in the same branch. So let's add a `Readme` to a new `development` branch.
-<center>
-![](images/mt6/addreadme.gif){width=90%}
-</center>
-
-When we commit the new `Readme` file to the `development` branch, a new window opens to propose the `pull request` (PR). The PR is nothing more than a request to the package developers to pull your proposed changes into (usually) the `main` branch of the software. 
-Since we are the developers, we have to both create and accept the PR. 
-<center>
-![](images/mt6/openpr.gif){width=90%}
-</center>
-
-It is good procedure to write an informative PR message, usually outlining the nature and rationale of the changes. I also demonstrate how to accept a PR, thereby approving the changes per file (only one now) and signing it with my initials. I cannot formally *approve* my own PR, since that would leave great opportunity for subjectivity or error. Proper procedure would be to have someone else check and approve your changes. 
-
-<center>
-![](images/mt6/pullrequest.gif){width=90%}
-</center>
-
-When you go back to `GitHub desktop` and `fetch` the changes on teh remote (that would be GitHub online), you will see that you have now access to the `readme` file and the `development` branch. 
-
-#### Registering a `DOI`
-Now that we have a proper and open source package online and the world as our user base, it would be wise to allow for proper referencing of our package.
-
-`GitHub` and `Zenodo` have paired to facilitate this procedure. If you link your `Zenodo` account to `GitHub`, [as outlined here](https://docs.github.com/en/repositories/archiving-a-github-repository/referencing-and-citing-content), you only have to click, copy and paste to fully make your `GitHub` repo citeable. 
-
-<center>
-![](images/mt6/doi.gif){width=90%}
-</center>
-
-
-
-#### Add citation
-`Zenodo` prepares the repository citation for us. We can simply grab the info, change our personal information and submit it to `GitHub`. 
-
-<center>
-![](images/mt6/citation.gif){width=90%}
-</center>
-
-The final step before we would put our package *out there* is to notify how users can refer to our package. Run the following code:
-```{r eval = FALSE}
-usethis::use_citation()
-```
-which will create the necessary citation files for modification
-```{r eval = FALSE}
-✔ Creating 'inst/'
-✔ Writing 'inst/CITATION'
-• Modify 'inst/CITATION'
-```
-
-We can now simply grab the text and/or `bibtex` citation from `GitHub` and paste it into the `CITATION` file. The citation info cf. `R`-packages could be:
-```{r eval=FALSE}
-citHeader("To cite roundR in publications use:")
-
-citEntry(
-  entry    = "Manual",
-  title    = "gerkovink/roundR: Version 0.2.0 - First release",
-  author   = "Gerko Vink and Hanne Oberman",
-  year     = "2023",
-  doi      = "10.5281/zenodo.7668889",
-  url      = "github.com/gerkovink/roundR",
-  textVersion = paste(
-"Vink, G and Oberman, H.I. (2023). gerkovink/roundR: Version 0.2.0 - First release (Version v0.2.0) [Computer software]. https://doi.org/10.5281/zenodo.7668889"
-  )
-)
-```
-
-Modify this to your name and paste it into the `CITATION` file.
-
-<center>
-![](images/mt6/use_citation.gif){width=90%}
-</center>
-
-## Installing your own package from GitHub
-Go to `GitHub desktop`, and commit and push the changes to `GitHub`. Then run the following code block:
-```{r}
-#| eval: false
-
-devtools::install_github("gerkovink/roundR")
-```
-where you replace `"gerkovink/roundR"` with your `GitHub` handle and repository name. 
-
-<center>
-![](images/mt6/install_github.gif){width=90%}
-</center>
-
-## Advanced topics
-
-::: columns
-::: {.column width="30%"}
-![](images/mt6/hex.png){width=90%}
-:::
-
-::: {.column width="70%"}
-
-Potential next steps include:
-
-- Creating package documentation (e.g. vignettes)
-- Creating a hex logo (e.g. with [`hexmake`](https://connect.thinkr.fr/hexmake/))
-- Creating a package website (e.g. with [`pkgdown`](https://pkgdown.r-lib.org/))
-- Checking the FAIR-ness of your package (e.g. with [`howfairis`](https://pypi.org/project/howfairis/), or [BadgeApp](https://bestpractices.coreinfrastructure.org/en))
-- Checking the code coverage of your package (e.g. with [Codecov](https://about.codecov.io/))
-- Maintaining the package (e.g. with [GitHub issues](https://docs.github.com/en/issues/tracking-your-work-with-issues))
-- Maintaining contributions (e.g. with [a code of conduct](https://docs.github.com/en/communities/setting-up-your-project-for-healthy-contributions/adding-a-code-of-conduct-to-your-project))
-
-:::
-:::
-
-
+## Install your own package
+We can now install our own package. To do so, we can click the install button in the build pane.
 
 ## Other useful sources
+If you'd like to know more about building `R` packages, the following book is a wonderful resource for further study beyond teh scope of this course. 
 
 - [The `R Packages` book by Hadley Wickham and Jenny Bryan](https://r-pkgs.org)
