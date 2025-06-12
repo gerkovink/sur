@@ -116,7 +116,7 @@ imp <- mice(nhanes, seed = 123, print = FALSE)
 # or 
 
 set.seed(123)
-imp <- mice(nhanes, seed = 123, print = FALSE)
+imp <- mice(nhanes, print = FALSE)
 ```
 where `123` is some arbitrary number that you can choose yourself. Rerunning this command will always yields the same imputed values.
 
