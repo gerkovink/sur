@@ -25,7 +25,7 @@ format:
     number-sections: false
     toc: true
     toc-depth: 3
-    code-fold: false
+    code-fold: true
 ---
 
 The aim of this guide is to make you familiar with [mice](https://github.com/amices/mice) in `R` and to enhance your understanding of multiple imputation, in general. You will learn how to perform and inspect multiple imputations and how to pool the results of analyses performed on multiply-imputed data, how to approach different types of data and how to avoid some of the pitfalls many data scientists may fall into. The main objective is to increase your knowledge and understanding on applications of multiple imputation. 

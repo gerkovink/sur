@@ -18,7 +18,7 @@ format:
     number-sections: false
     toc: true
     toc-depth: 3
-    code-fold: true
+    code-fold: false
 --- 
 
 ::: callout-tip
@@ -34,8 +34,6 @@ Aan het bovenstaande adage zullen we vandaag veel aandacht besteden. We duiken i
 printAnswers <- TRUE
 
 ```
-
----
 
 The following packages are required for this practical:
 
@@ -64,7 +62,7 @@ mice::boys %$% plot(bmi ~ age)
 
 or, with `ggplot2`:
 
-```{r }
+```{r warning = FALSE}
 mice::boys %>% 
   ggplot(aes(x = age, y = bmi)) +
   geom_point()
